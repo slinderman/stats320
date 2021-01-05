@@ -1,10 +1,10 @@
-figure.figsize : 16, 12
+figure.figsize : 12, 9
 figure.autolayout : True
-font.size : 30
+font.size : 24
 xtick.labelsize : small
 ytick.labelsize : small
 legend.fontsize : small
 axes.spines.top : False
 axes.spines.right : False
-xtick.major.size : 10
-ytick.major.size : 10
+xtick.major.size : 8
+ytick.major.size : 8
