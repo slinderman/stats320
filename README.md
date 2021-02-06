@@ -1,2 +1,2 @@
-# stats320
-Helper files for STATS320: Statistical Methods for Neural Data Analysis
+# STATS320: Statistical Methods for Neural Data Analysis
+Stanford University, Winter 2021
