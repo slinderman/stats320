@@ -10,7 +10,7 @@ With modern high-density electrodes and optical imaging techniques, neuroscienti
 
 ## Schedule
 _Unit I: Extracting biological signals from raw data_
-| Date        | Topic      | Topic |
+| Date        |            | Topic |
 | ----------- | ---------- | ----- |
 | Mon, Jan 11 | Lecture 1  | Course Overview |
 | Wed, Jan 13 | Lecture 2  | Basic spike sorting |
@@ -24,7 +24,7 @@ _Unit I: Extracting biological signals from raw data_
 | Mon, Feb 1  | Lecture 6  | Markerless pose tracking |
 
 _Unit II: Encoding and decoding models for neural data_
-| Date        | Topic      | Topic |
+| Date        |            | Topic |
 | ----------- | ---------- | ----- |
 | Wed, Feb 3  | Lecture 7  | Encoding and decoding |
 | Fri, Feb 5  | Lab 4      | Markerless animal pose tracking with CNNs |
@@ -36,7 +36,7 @@ _Unit II: Encoding and decoding models for neural data_
 | Fri, Feb 19 | Lab 6      | Decoding movement from neural data |
 
 _Unit III: Unsupervised models of neural and behavioral data_
-| Date        | Topic      | Topic |
+| Date        |            | Topic |
 | ----------- | ---------- | ----- |
 | Mon, Feb 22 | Lecture 11 | Unsupervised  modeling and Expectation Maximization|
 | Wed, Feb 24 | Lecture 12 | EM Hidden Markov models |
