@@ -9,8 +9,7 @@ With modern high-density electrodes and optical imaging techniques, neuroscienti
 
 
 ## Schedule
-_Unit I: Extracting biological signals from raw data_
-| Date        |            | Topic |
+| _Unit I: Extracting biological signals from raw data_ |
 | ----------- | ---------- | ----- |
 | Mon, Jan 11 | Lecture 1  | Course Overview |
 | Wed, Jan 13 | Lecture 2  | Basic spike sorting |
