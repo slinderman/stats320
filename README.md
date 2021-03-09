@@ -48,6 +48,8 @@ _Unit III: Unsupervised models of neural and behavioral data_
 | Wed, Mar 10 | Lecture 16 | Next generation statistical neuroscience |
 
 _Final Projects_
+| Date        | Type       | Topic |
+| ----------- | ---------- | ----- |
 | Fri, Mar 12 | Projects   | Work on final projects |
 | Mon, Mar 15 | Projects   | Work on final projects |
 | Wed, Mar 17 | Presentations | Project poster session |
