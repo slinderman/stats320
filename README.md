@@ -54,10 +54,3 @@ _Final Projects_
 | Mon, Mar 15 | Projects   | Work on final projects |
 | Wed, Mar 17 | Presentations | Project poster session |
 | Fri, Mar 19 | Presentations | Project poster session |
-
-
-
-## Assignments:
-Weekly in-class labs, which will require some out-of-class work to complete
-1 final project proposal
-1 final project report (with code)
