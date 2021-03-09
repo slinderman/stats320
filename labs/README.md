@@ -12,4 +12,4 @@ https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/<lab
 If you find issues with the labs, please open Github issues or pull requests to fix them!
 
 ## Credits
-Thank you to Han Wu and Jaime Roquero, the TAs for STATS220/320 (Winter 2021), who helped debug these labs!
+Thank you to Han Wu and Jaime Roquero Gimenez, the TAs for STATS220/320 (Winter 2021), who helped debug these labs!
