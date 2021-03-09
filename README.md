@@ -14,29 +14,29 @@ _Unit I: Extracting biological signals from raw data_
 | Wed, Jan 13 | Lecture 2  | Basic spike sorting |
 | Fri, Jan 15 | Lab 1      | A simple spike sorting algorithm |
 | Mon, Jan 18 | MLK Day    | |
-| Wed, Jan 20 | Lecture 3  | A more modern spike sorting algorithm |
+| Wed, Jan 20 | Lecture 3  | Spike sorting by deconvolution |
 | Fri, Jan 22 | Lab 2      | Spike sorting via conv. matrix factorization |
 | Mon, Jan 25 | Lecture 4  | Demixing and deconvolving calcium imaging |
-| Wed, Jan 27 | Lecture 5  | L0 deconvolution via changepoint models |
+| Wed, Jan 27 | Lecture 5  | Deconvolution with a point process prior |
 | Fri, Jan 29 | Lab 3      | Calcium deconvolution via constrained NMF |
+| Mon, Feb 1  | Lecture 6  | Markerless pose tracking |
 
 _Unit II: Encoding and decoding models for neural data_
-| Mon, Feb 1  | Lecture 6  | Pose tracking in behavioral videos |
-| Wed, Feb 3  | Lecture 7  | Encoding neural spikes with Poisson GLMs |
+| Wed, Feb 3  | Lecture 7  | Encoding and decoding |
 | Fri, Feb 5  | Lab 4      | Markerless animal pose tracking with CNNs |
-| Mon, Feb 8  | Lecture 8  | Deep convolutional encoding models |
-| Wed, Feb 10 | Lecture 9  | Decoding movement with Bayesian decoders |
+| Mon, Feb 8  | Lecture 8  | Encoding models of retinal ganglion cells |
+| Wed, Feb 10 | Lecture 9  | Encoding models of retinal ganglion cells II |
 | Fri, Feb 12 | Lab 5      | Deep encoding models of retinal spike trains |
 | Mon, Feb 15 | President’s Day | |
-| Wed, Feb 17 | Lecture 10 | Decoding as structured prediction |
+| Wed, Feb 17 | Lecture 10 | Decoding neural spike trains |
 | Fri, Feb 19 | Lab 6      | Decoding movement from neural data |
 
 _Unit III: Unsupervised models of neural and behavioral data_
-| Mon, Feb 22 | Lecture 11 | Latent variable models and the EM algorithm |
-| Wed, Feb 24 | Lecture 12 | Hidden Markov models |
+| Mon, Feb 22 | Lecture 11 | Unsupervised  modeling and Expectation Maximization|
+| Wed, Feb 24 | Lecture 12 | EM Hidden Markov models |
 | Fri, Feb 26 | Lab 7      | Autoregressive HMMs for animal movements |
 | Mon, Mar 1  | Lecture 13 | Switching linear dynamical systems |
-| Wed, Mar 3  | Lecture 14 | Variational Expectation Maximization |
+| Wed, Mar 3  | Lecture 14 | Variational EM for SLDS|
 | Fri, Mar 5  | Lab 8      | Switching LDS model of neural data |
 | Mon, Mar 8  | Lecture 15 | Stochastic RNNs and LFADS |
 | Wed, Mar 10 | Lecture 16 | Next generation statistical neuroscience |
