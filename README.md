@@ -58,7 +58,7 @@ _Unit III: Unsupervised models of neural and behavioral data_
 | Wed, Mar 3  | Lecture 14 | [Variational EM for SLDS](https://github.com/slinderman/stats320/blob/main/lectures/lecture14.pdf) |
 | Fri, Mar 5  | Lab 8      | [Switching LDS model of neural data](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_8_Latent_Variable_Models,_Variational_EM,_and_Worm_Brains.ipynb) |
 | Mon, Mar 8  | Lecture 15 | [Stochastic RNNs and LFADS](https://github.com/slinderman/stats320/blob/main/lectures/lecture15.pdf) |
-| Wed, Mar 10 | Lecture 16 | Next generation statistical neuroscience |
+| Wed, Mar 10 | Lecture 16 | [Looking forward](https://github.com/slinderman/stats320/blob/main/lectures/lecture16.pdf) |
 
 _Final Projects_
 | Date        | Type       | Topic |
