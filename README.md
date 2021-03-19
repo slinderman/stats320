@@ -15,7 +15,7 @@ The course is organized around eight coding labs. Each lab develops a minimal im
 3. [CNMF: Calcium deconvolution via constrained NMF](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_3_Calcium_demixing_and_deconvolution.ipynb)
 4. [DeepLabCut: Markerless pose tracking with CNNs](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_4_Markerless_pose_tracking.ipynb)
 5. [DeepRetina: Deep encoding models of retinal spike trains](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_5_Encoding_models_of_retinal_ganglion_cells.ipynb)
-6. [Bayesian Decoders: Decoding movement from neural data](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_6_Decoding_movement_from_motor_cortex_recordings.ipynb)
+6. [Kalman Smoothers: Decoding movement from neural data](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_6_Decoding_movement_from_motor_cortex_recordings.ipynb)
 7. [MoSeq: Autoregressive HMMs for animal movements](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_7_Autoregressive_Hidden_Markov_Models_of_Behavior.ipynb)
 8. [SLDS: Switching LDS model of neural data](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_8_Latent_Variable_Models,_Variational_EM,_and_Worm_Brains.ipynb)
 
