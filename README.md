@@ -1,6 +1,6 @@
 # STATS320: Machine Learning Methods for Neural Data Analysis
 Cross-listed as NBIO220 and CS339N <br>
-Instructor: Prof. Scott Linderman <br>
+Instructor: Scott Linderman <br>
 Winter Quarter, 2021 <br>
 Stanford University
 
