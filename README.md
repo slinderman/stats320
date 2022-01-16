@@ -10,14 +10,14 @@ With modern high-density electrodes and optical imaging techniques, neuroscienti
 ## Labs
 The course is organized around eight coding labs. Each lab develops a minimal implementation of a state-of-the-art method from scratch in a self-contained Google Colab notebook. These are widely used techniques for analyzing neural and behavioral data, and through the labs you'll get a deep understanding of how these methods work under the hood:
 
-1. [A simple spike sorting algorithm](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_1_Spike_Sorting.ipynb) [[Solutions (upon request)]](https://colab.research.google.com/drive/1Z5lEWvCaN2ny-haB_czs8izprrzYRMnx?usp=sharing)
-2. [Kilosort: Spike sorting by Deconvolution](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_2_Spike_Sorting_with_Deconvolution.ipynb) [[Solutions (upon request)]](https://colab.research.google.com/drive/1ejD-NL-cjdjGS4woCknqZAo4gBG2q8xo?usp=sharing)
-3. [CNMF: Calcium deconvolution via constrained NMF](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_3_Calcium_demixing_and_deconvolution.ipynb) [[Solutions (upon request)]](https://colab.research.google.com/drive/1QiiEr-NnGlsUmgbulRum86_2ZL6pOTPG?usp=sharing)
-4. [DeepLabCut: Markerless pose tracking with CNNs](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_4_Markerless_pose_tracking.ipynb) [[Solutions (upon request)]](https://colab.research.google.com/drive/1j5GcNmPZhjyKioB4mN--N9RspmESXxgb?usp=sharing)
-5. [DeepRetina: Deep encoding models of retinal spike trains](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_5_Encoding_models_of_retinal_ganglion_cells.ipynb) [[Solutions (upon request)]](https://colab.research.google.com/drive/1Pdw-1TiCQuGDUr_mCzMDj9Q1mF7sYRoS?usp=sharing)
-6. [Kalman Smoothers: Decoding movement from neural data](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_6_Decoding_movement_from_motor_cortex_recordings.ipynb) [[Solutions (upon request)]](https://colab.research.google.com/drive/1OE1hKHwuUrnfBkILnFsgIdFCZK0q8viM?usp=sharing)
-7. [MoSeq: Autoregressive HMMs for animal movements](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_7_Autoregressive_Hidden_Markov_Models_of_Behavior.ipynb) [[Solutions (upon request)]](https://colab.research.google.com/drive/1tAlnda5nSR2KdCakRRp7I1fcdBdYEFS1?usp=sharing)
-8. [SLDS: Switching LDS model of neural data](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_8_Latent_Variable_Models,_Variational_EM,_and_Worm_Brains.ipynb) [[Solutions (upon request)]](https://colab.research.google.com/drive/1NORGTLRu9i9fmMQpxeK7--WsPk4y-boD?usp=sharing)
+1. [A simple spike sorting algorithm](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_1_Spike_Sorting.ipynb)
+2. [Kilosort: Spike sorting by Deconvolution](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_2_Spike_Sorting_with_Deconvolution.ipynb)
+3. [CNMF: Calcium deconvolution via constrained NMF](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_3_Calcium_demixing_and_deconvolution.ipynb)
+4. [DeepLabCut: Markerless pose tracking with CNNs](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_4_Markerless_pose_tracking.ipynb)
+5. [DeepRetina: Deep encoding models of retinal spike trains](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_5_Encoding_models_of_retinal_ganglion_cells.ipynb)
+6. [Kalman Smoothers: Decoding movement from neural data](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_6_Decoding_movement_from_motor_cortex_recordings.ipynb)
+7. [MoSeq: Autoregressive HMMs for animal movements](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_7_Autoregressive_Hidden_Markov_Models_of_Behavior.ipynb)
+8. [SLDS: Switching LDS model of neural data](https://colab.research.google.com/github/slinderman/stats320/blob/main/labs/Lab_8_Latent_Variable_Models,_Variational_EM,_and_Worm_Brains.ipynb)
 
 ## Schedule
 The lectures develop the theory behind the methods developed in lab. I've organized the course into three units: signal extraction, encoding and decoding, and unsupervised modeling of neural and behavioral data. At the end, you'll work on a final project in which you will use, explore, or extend the techniques studied in class.
