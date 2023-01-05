@@ -1,0 +1,9 @@
+# In _config.yml
+title: Machine Learning Methods for Neural Data Analysis
+author: Scott Linderman
+execute:
+  execute_notebooks: force
+only_build_toc_files: true
+# Add a bibtex file so that we can create citations
+bibtex_bibfiles:
+  - references.bib
