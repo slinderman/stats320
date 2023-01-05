@@ -1,0 +1,645 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction &#8212; Machine Learning Methods for Neural Data Analysis</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="#">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning Methods for Neural Data Analysis</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/index.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#course-description">
+   Course Description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logistics">
+   Logistics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#schedule">
+   Schedule
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unit-i-extracting-biological-signals-from-raw-data">
+     Unit I: Extracting biological signals from raw data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unit-ii-encoding-and-decoding-models-for-neural-data">
+     Unit II: Encoding and decoding models for neural data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unit-iii-unsupervised-models-of-neural-and-behavioral-data">
+     Unit III: Unsupervised models of neural and behavioral data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#labs">
+   Labs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#final-project">
+   Final project
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#grading">
+   Grading
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#course-description">
+   Course Description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logistics">
+   Logistics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#schedule">
+   Schedule
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unit-i-extracting-biological-signals-from-raw-data">
+     Unit I: Extracting biological signals from raw data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unit-ii-encoding-and-decoding-models-for-neural-data">
+     Unit II: Encoding and decoding models for neural data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unit-iii-unsupervised-models-of-neural-and-behavioral-data">
+     Unit III: Unsupervised models of neural and behavioral data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#labs">
+   Labs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#final-project">
+   Final project
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#grading">
+   Grading
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
+<p><strong>Welcome to STATS320!</strong></p>
+<p><em>This course is cross-listed as STATS220, NBIO220 and CS339N. They are all the same. Enroll in the version that is best for your degree requirements.</em></p>
+<p><strong>Instructor:</strong> Scott Linderman <br>
+<strong>TAs:</strong> Sifan Liu and Ying Jin <br>
+Winter Quarter, 2022-23 <br>
+Stanford University</p>
+<section id="course-description">
+<h2>Course Description<a class="headerlink" href="#course-description" title="Permalink to this headline">#</a></h2>
+<p>With modern high-density electrodes and optical imaging techniques, neuroscientists routinely measure the activity of hundreds, if not thousands, of cells simultaneously.  Coupled with high-resolution behavioral measurements, these datasets offer unprecedented opportunities to learn how neural circuits function.  This course will study statistical machine learning methods for analysing such datasets, including: spike sorting and calcium deconvolution techniques for extracting relevant signals from raw data; markerless tracking methods for estimating animal pose in behavioral videos; state space models for analysis of high-dimensional neural and behavioral time-series; point process models of neural spike trains; and deep learning methods for neural encoding and decoding. We will develop the theory behind these models and algorithms and then apply them to real datasets in the in-class coding labs and final project.</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">#</a></h2>
+<p>You should be comfortable with basic probability (STATS 116) as well as multivariate calculus and linear algebra. This course will emphasize implementing models and algorithms in Python, so coding proficiency is important. We will have a coding primer in the first week to help get you up to speed if you’re coming from R or Matlab.</p>
+</section>
+<section id="logistics">
+<h2>Logistics<a class="headerlink" href="#logistics" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><strong>Time:</strong> MWF 11:30am-12:20pm</p></li>
+<li><p><strong>Location:</strong> 380-380Y</p></li>
+<li><p><strong>Grading:</strong> Credit or letter grade</p></li>
+<li><p><strong>Components:</strong> Lectures on Mon/Wed, in-class labs on Fri</p></li>
+<li><p><strong>Office Hours:</strong> Scott (1:30-2:30pm Wed)</p></li>
+<li><p>This course will have a <strong>final project, not an exam</strong></p></li>
+</ul>
+</section>
+<section id="schedule">
+<h2>Schedule<a class="headerlink" href="#schedule" title="Permalink to this headline">#</a></h2>
+<p>The lectures develop the theory behind the methods developed in lab. I’ve organized the course into three units: signal extraction, encoding and decoding, and unsupervised modeling. At the end, you’ll work on a final project in which you will use, explore, or extend the techniques studied in class.</p>
+<section id="unit-i-extracting-biological-signals-from-raw-data">
+<h3>Unit I: Extracting biological signals from raw data<a class="headerlink" href="#unit-i-extracting-biological-signals-from-raw-data" title="Permalink to this headline">#</a></h3>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Date</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Topic</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mon, Jan 9</p></td>
+<td><p>Lecture 1</p></td>
+<td><p><a class="reference download internal" download="" href="_downloads/0c0ddcc02a457265092b646cdd27f3b7/lecture01.pdf"><code class="xref download docutils literal notranslate"><span class="pre">Course</span> <span class="pre">Overview</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Wed, Jan 11</p></td>
+<td><p>Lecture 2</p></td>
+<td><p>Intro to probabilistic modeling <!-- joint distributions, regression, mixtures, matrix factorization, MAP estimation --></p></td>
+</tr>
+<tr class="row-even"><td><p>Fri, Jan 13</p></td>
+<td><p>Lecture 3</p></td>
+<td><p>Spike sorting I  <!-- Lab 0: Python and PyTorch primer --></p></td>
+</tr>
+<tr class="row-odd"><td><p>Mon, Jan 16</p></td>
+<td><p>MLK Day</p></td>
+<td><p><em>No class</em></p></td>
+</tr>
+<tr class="row-even"><td><p>Wed, Jan 18</p></td>
+<td><p>Lecture 4</p></td>
+<td><p>Spike sorting II</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fri, Jan 20</p></td>
+<td><p>Lab 1</p></td>
+<td><p>Kilosort from scratch</p></td>
+</tr>
+<tr class="row-even"><td><p>Mon, Jan 23</p></td>
+<td><p>Lecture 5</p></td>
+<td><p>Demixing and deconvolving calcium imaging data I</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wed, Jan 25</p></td>
+<td><p>Lecture 6</p></td>
+<td><p>Demixing and deconvolving calcium imaging data II <!-- what to do here? --></p></td>
+</tr>
+<tr class="row-even"><td><p>Fri, Jan 27</p></td>
+<td><p>Lab 2</p></td>
+<td><p>CaImAn from scratch</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mon, Jan 30</p></td>
+<td><p>Lecture 7</p></td>
+<td><p>Markerless pose tracking</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="unit-ii-encoding-and-decoding-models-for-neural-data">
+<h3>Unit II: Encoding and decoding models for neural data<a class="headerlink" href="#unit-ii-encoding-and-decoding-models-for-neural-data" title="Permalink to this headline">#</a></h3>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Date</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Topic</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Wed, Feb 1</p></td>
+<td><p>Lecture 8</p></td>
+<td><p>Encoding and decoding neural spike trains</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fri, Feb 3</p></td>
+<td><p>Lab 3</p></td>
+<td><p>DeepLabCut from scratch</p></td>
+</tr>
+<tr class="row-even"><td><p>Mon, Feb 6</p></td>
+<td><p>Lecture 9</p></td>
+<td><p>Encoding models of retinal ganglion cells</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wed, Feb 8</p></td>
+<td><p>Lecture 10</p></td>
+<td><p>Encoding models of retinal ganglion cells II</p></td>
+</tr>
+<tr class="row-even"><td><p>Fri, Feb 10</p></td>
+<td><p>Lab 4</p></td>
+<td><p>DeepRetina from scratch</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mon, Feb 13</p></td>
+<td><p>Lecture 11</p></td>
+<td><p>Bayesian decoding of neural spike trains</p></td>
+</tr>
+<tr class="row-even"><td><p>Wed, Feb 15</p></td>
+<td><p>Lecture 12</p></td>
+<td><p>Unsupervised modeling with latent variable models</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fri, Feb 17</p></td>
+<td><p>Lab 5</p></td>
+<td><p>Decoding movement from neural data</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="unit-iii-unsupervised-models-of-neural-and-behavioral-data">
+<h3>Unit III: Unsupervised models of neural and behavioral data<a class="headerlink" href="#unit-iii-unsupervised-models-of-neural-and-behavioral-data" title="Permalink to this headline">#</a></h3>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Date</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Topic</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mon, Feb 20</p></td>
+<td><p>Pres. Day</p></td>
+<td><p><em>No class</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>Wed, Feb 22</p></td>
+<td><p>Lecture 13</p></td>
+<td><p>Hidden Markov models (HMMs)</p></td>
+</tr>
+<tr class="row-even"><td><p>Fri, Feb 24</p></td>
+<td><p>Lab 6</p></td>
+<td><p>MoSeq from scratch</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mon, Feb 27</p></td>
+<td><p>Lecture 14</p></td>
+<td><p>Poisson linear dynamical systems</p></td>
+</tr>
+<tr class="row-even"><td><p>Wed, Mar 1</p></td>
+<td><p>Lecture 15</p></td>
+<td><p>Switching linear dynamical systems (SLDS)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fri, Mar 3</p></td>
+<td><p>Lab 7 (not graded)</p></td>
+<td><p>SLDS from scratch</p></td>
+</tr>
+<tr class="row-even"><td><p>Mon, Mar 6</p></td>
+<td><p>Lecture 16</p></td>
+<td><p>Variational Autoencoders (VAEs)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wed, Mar 8</p></td>
+<td><p>Lecture 17</p></td>
+<td><p>Sequential VAEs</p></td>
+</tr>
+<tr class="row-even"><td><p>Fri, Mar 10</p></td>
+<td><p>Lab 8 (not graded)</p></td>
+<td><p>LFADS from scratch</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mon, Mar 13</p></td>
+<td><p>Guest Lec.</p></td>
+<td><p><em>TBD</em>  <!-- Cosyne --></p></td>
+</tr>
+<tr class="row-even"><td><p>Wed, Mar 15</p></td>
+<td><p>Lecture 19</p></td>
+<td><p>Current research</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fri, Mar 17</p></td>
+<td><p>Presentations</p></td>
+<td><p>Project presentations (ideally 11:20-1:20pm, with lunch provided)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="labs">
+<h2>Labs<a class="headerlink" href="#labs" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>You will work start the labs in class on Fridays, so attendance is required. (If you are sick or have a one-time conflict, please let me know as soon as possible.)</p></li>
+<li><p>You will be automatically assigned to a team of 3 students.</p></li>
+<li><p>The labs will probably take more than one class period to complete. You should find time to work with your teammates outside of class to finish them.</p></li>
+<li><p>The labs are due the following Thursday night at 11:59pm.</p></li>
+<li><p>Lab reports will be submitted via GradeScope.</p></li>
+</ul>
+</section>
+<section id="final-project">
+<h2>Final project<a class="headerlink" href="#final-project" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>You will work on the final project in teams of 2-3 people.</p></li>
+<li><p>You must use real neural or behavioral data. We will provide links to suggested datasets, or if you are an experimentalist, you can use your own!</p></li>
+<li><p>The final report will be due <strong>Friday, Mar 24 at 11:30am.</strong></p></li>
+</ul>
+</section>
+<section id="grading">
+<h2>Grading<a class="headerlink" href="#grading" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>First 6 labs: 10% each, total 60%</p></li>
+<li><p>Final project presentation: 10%</p></li>
+<li><p>Final project report: 20%</p></li>
+<li><p>Participation: 5%</p></li>
+</ul>
+<p><em>Note: We will work on Labs 7 and 8 in class, but they will not be graded. That way you can focus on final proejcts in March. Your attendance on those days will count toward the class participation grade.</em></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Scott Linderman<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
