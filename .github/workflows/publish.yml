@@ -21,7 +21,6 @@ jobs:
       - name: Build the documentation with Sphinx
         run: |
           jupyter-book build .
-	  
       - name: Publish the documentation
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
