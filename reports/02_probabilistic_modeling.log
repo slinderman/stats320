@@ -37,11 +37,13 @@ _ = plt.legend()
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[1], line 1[0m
-[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m
+Cell [0;32mIn[1], line 3[0m
+[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m
 [1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtorch[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdistributions[39;00m [38;5;28;01mimport[39;00m Poisson
-[1;32m      3[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[0;32m----> 3[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[1;32m      5[0m [38;5;66;03m# Construct a Poisson distribution with rate 5.0 and draw 1000 samples[39;00m
+[1;32m      6[0m rate [38;5;241m=[39m [38;5;241m5.0[39m
 
-[0;31mModuleNotFoundError[0m: No module named 'torch'
-ModuleNotFoundError: No module named 'torch'
+[0;31mModuleNotFoundError[0m: No module named 'matplotlib'
+ModuleNotFoundError: No module named 'matplotlib'
 
