@@ -31,7 +31,7 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 | Date        | Type       | Topic |
 | ----------- | ---------- | ----- |
 | Mon, Jan 9  | Lecture 1  | {Download}`Course Overview<lectures/lecture01.pdf>`
-| Wed, Jan 11 | Lecture 2  | Intro to probabilistic modeling <!-- joint distributions, regression, mixtures, matrix factorization, MAP estimation -->
+| Wed, Jan 11 | Lecture 2  | [Probabilistic modeling](lectures/02_probabilistic_modeling)
 | Fri, Jan 13 | Lecture 3  | Spike sorting I  <!-- Lab 0: Python and PyTorch primer -->
 | Mon, Jan 16 | MLK Day    | _No class_
 | Wed, Jan 18 | Lecture 4  | Spike sorting II
@@ -65,7 +65,7 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 | Mon, Mar 6  | Lecture 16 | Variational Autoencoders (VAEs)
 | Wed, Mar 8  | Lecture 17 | Sequential VAEs
 | Fri, Mar 10 | Lab 8 (not graded) | LFADS from scratch
-| Mon, Mar 13 | Guest Lec. | _TBD_  <!-- Cosyne -->
+| Mon, Mar 13 | Guest Lec. | [Russ Poldrack](https://poldrack.github.io/) (topic TBD)
 | Wed, Mar 15 | Lecture 19 | Current research
 | Fri, Mar 17 | Presentations | Project presentations (ideally 11:20-1:20pm, with lunch provided)
 

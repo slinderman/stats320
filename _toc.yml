@@ -1,2 +1,4 @@
 format: jb-book
 root: index
+chapters:
+- file: lectures/02_probabilistic_modeling.ipynb
