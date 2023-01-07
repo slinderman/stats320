@@ -1,0 +1,1025 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Probabilistic Modeling &#8212; Machine Learning Methods for Neural Data Analysis</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Introduction" href="../index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning Methods for Neural Data Analysis</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Probabilistic Modeling
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/lectures/02_probabilistic_modeling.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/lectures/02_probabilistic_modeling.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-example">
+   Simple example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-from-a-poisson-distribution">
+   Sampling from a Poisson distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-a-poisson-distribution">
+   Fitting a Poisson distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-for-the-mle">
+   Solving for the MLE
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-a-prior-distribution">
+   Adding a prior distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-from-a-gamma-distribution">
+   Sampling from a gamma distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-a-poisson-distribution-with-a-gamma-prior">
+   Fitting a Poisson distribution with a gamma prior
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-inference">
+   Bayesian inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-a-posteriori-inference">
+   Maximum
+   <em>
+    a posteriori
+   </em>
+   inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conjugate-priors">
+   Conjugate priors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-for-the-map-estimate">
+   Solving for the MAP estimate
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-estimation-in-our-simulated-example">
+   MAP estimation in our simulated example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mixture-models-and-latent-variables">
+   Mixture models and latent variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-a-poisson-mixture-model">
+   Sampling a Poisson mixture model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-a-mixture-model-by-coordinate-ascent">
+   Fitting a mixture model by coordinate ascent
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Probabilistic Modeling</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-example">
+   Simple example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-from-a-poisson-distribution">
+   Sampling from a Poisson distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-a-poisson-distribution">
+   Fitting a Poisson distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-for-the-mle">
+   Solving for the MLE
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-a-prior-distribution">
+   Adding a prior distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-from-a-gamma-distribution">
+   Sampling from a gamma distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-a-poisson-distribution-with-a-gamma-prior">
+   Fitting a Poisson distribution with a gamma prior
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-inference">
+   Bayesian inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-a-posteriori-inference">
+   Maximum
+   <em>
+    a posteriori
+   </em>
+   inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conjugate-priors">
+   Conjugate priors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-for-the-map-estimate">
+   Solving for the MAP estimate
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-estimation-in-our-simulated-example">
+   MAP estimation in our simulated example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mixture-models-and-latent-variables">
+   Mixture models and latent variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-a-poisson-mixture-model">
+   Sampling a Poisson mixture model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-a-mixture-model-by-coordinate-ascent">
+   Fitting a mixture model by coordinate ascent
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="probabilistic-modeling">
+<h1>Probabilistic Modeling<a class="headerlink" href="#probabilistic-modeling" title="Permalink to this headline">#</a></h1>
+<p>Probabilistic models are distributions over data.
+The shape of the distribution is determine by model <strong>parameters</strong>.
+Our goal to <strong>estimate</strong> or <strong>infer</strong> those parameters from observed data.</p>
+<p>As the course goes on, we will encounter more and more complex datasets, and we will construct more and more sophisticated models.
+However, our models will still be composed of just a handful of basic building blocks, and our central goal of parameter estimation and inference remains the same.</p>
+<section id="simple-example">
+<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline">#</a></h2>
+<p>For example, let <span class="math notranslate nohighlight">\(x_t \in \mathbb{N}_0\)</span> denote the number of spikes a neuron fires in time bin <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<div class="admonition-notation admonition">
+<p class="admonition-title">Notation</p>
+<p><span class="math notranslate nohighlight">\(x_t \in \mathbb{N}_0\)</span> means that the variable <span class="math notranslate nohighlight">\(x_t\)</span> is in (<span class="math notranslate nohighlight">\(\in\)</span>) the set <span class="math notranslate nohighlight">\(\mathbb{N}_0\)</span>, which is shorthand for the non-negative integers,</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{N}_0 = \{0,1,2,\ldots\}.\]</div>
+</div>
+<p>One of the simplest (and yet surprisingly not bad) models of neural spike counts is the <a class="reference external" href="https://en.wikipedia.org/wiki/Poisson_distribution"><strong>Poisson distribution</strong></a> with rate <span class="math notranslate nohighlight">\(\lambda\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[x_t \sim \mathrm{Pois}(\lambda).\]</div>
+<p>The Poisson distribution has a simple <strong>probability mass function (pmf)</strong>,</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Pois}(x_t; \lambda) = \frac{1}{x_t!} \lambda^{x_t} e^{-\lambda}.\]</div>
+<p>For Poisson random variables, the <strong>mean</strong>, aka <strong>expected value</strong>, <span class="math notranslate nohighlight">\(\mathbb{E}[x_t]\)</span>, and <strong>variance</strong>, <span class="math notranslate nohighlight">\(\mathbb{V}[x_t]\)</span>, are both equal to <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<div class="admonition-notation admonition">
+<p class="admonition-title">Notation</p>
+<p>The first line says that the spike count <span class="math notranslate nohighlight">\(x_t\)</span> is a <strong>random variable</strong> whose distribution is (<span class="math notranslate nohighlight">\(\sim\)</span>) Poisson with rate <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<p>In the second line, <span class="math notranslate nohighlight">\(\mathrm{Pois}(x_t; \lambda)\)</span> refers to the pmf of the Poisson distribution evaluated at the point <span class="math notranslate nohighlight">\(x_t\)</span>. The notation can be a little confusing at first, but it’s a standard convention.</p>
+</div>
+</section>
+<section id="sampling-from-a-poisson-distribution">
+<h2>Sampling from a Poisson distribution<a class="headerlink" href="#sampling-from-a-poisson-distribution" title="Permalink to this headline">#</a></h2>
+<p>Expand the code below to see how to sample a Poisson distribution using the <code class="docutils literal notranslate"><span class="pre">torch.distributions.Poisson</span></code> object in <a class="reference external" href="https://pytorch.org/docs/stable/">PyTorch</a>. The code plots the empirical distribution of 1000 independent samples from the Poisson distribution alongside the Poisson pmf.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.distributions</span> <span class="kn">import</span> <span class="n">Poisson</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Construct a Poisson distribution with rate 5.0 and draw 1000 samples</span>
+<span class="n">rate</span> <span class="o">=</span> <span class="mf">5.0</span>
+<span class="n">pois</span> <span class="o">=</span> <span class="n">Poisson</span><span class="p">(</span><span class="n">rate</span><span class="p">)</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="n">pois</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">sample_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,))</span>
+
+<span class="c1"># Plot a histogram of the samples and overlay the pmf</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;samples&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span> <span class="o">+</span> <span class="mf">.5</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">pois</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">bins</span><span class="p">)),</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;pmf&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;p(x)&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">torch</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">torch.distributions</span> <span class="kn">import</span> <span class="n">Poisson</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fitting-a-poisson-distribution">
+<h2>Fitting a Poisson distribution<a class="headerlink" href="#fitting-a-poisson-distribution" title="Permalink to this headline">#</a></h2>
+<p>Now suppose you observe the empirical spike counts sampled above (i.e. the blue histogram) and you want to estimate the rate <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{x} = (x_1, \ldots, x_T)\)</span> denote the vector of spike counts.</p>
+<p>Since the simulated spike counts are <strong>independent</strong> random variables, their <strong>joint probability</strong> is,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+p(\mathbf{x}; \lambda) 
+&amp;= \prod_{t=1}^T p(x_t; \lambda) \\
+&amp;= \prod_{t=1}^T \mathrm{Pois}(x_t; \lambda) \\
+&amp;= \prod_{t=1}^T \frac{1}{x_t!} \lambda^{x_t} e^{-\lambda}.
+\end{align*}
+\end{split}\]</div>
+<p>We want to find the rate that maximizes this probability,</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda_{\mathsf{MLE}} = \text{arg max} \; p(\mathbf{x}; \lambda).
+\]</div>
+<p>This is called <strong>maximum likelihood estimation</strong>, and <span class="math notranslate nohighlight">\(\lambda_{\mathsf{MLE}}\)</span> is called the <strong>maximum likelihood estimate (MLE)</strong>.</p>
+</section>
+<section id="solving-for-the-mle">
+<h2>Solving for the MLE<a class="headerlink" href="#solving-for-the-mle" title="Permalink to this headline">#</a></h2>
+<p>In this simple model, we can derive a closed form expression for the MLE.</p>
+<p>First, note that maximizing <span class="math notranslate nohighlight">\(p(\mathbf{x}; \lambda)\)</span> is the same as maximizing <span class="math notranslate nohighlight">\(\log p(\mathbf{x}; \lambda)\)</span>, since the log is a concave function.</p>
+<p>Taking logs of both sides, we find</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\log p(\mathbf{x}; \lambda) 
+&amp;= \sum_{t=1}^T - \log x_t! + x_t \log \lambda -\lambda.
+\end{align*}
+\]</div>
+<p>To maximize with respect to <span class="math notranslate nohighlight">\(\lambda\)</span>, we simply take the derivative, set it to zero, and solve for <span class="math notranslate nohighlight">\(\lambda\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\frac{\mathrm{d}}{\mathrm{d} \lambda} \log p(\mathbf{x}; \lambda) 
+&amp;= \sum_{t=1}^T \left( \frac{x_t}{\lambda} - 1 \right) \\
+&amp;= \frac{1}{\lambda} \left( \sum_{t=1}^T x_t \right) - T
+\end{align*}
+\end{split}\]</div>
+<p>Setting to zero and solving yields,</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda_{\mathsf{MLE}} = \frac{1}{T} \sum_{t=1}^T x_t.
+\]</div>
+<p>In other words, the MLE is just the mean of the empirical spike counts, which seems sensible!</p>
+</section>
+<section id="adding-a-prior-distribution">
+<h2>Adding a prior distribution<a class="headerlink" href="#adding-a-prior-distribution" title="Permalink to this headline">#</a></h2>
+<p>Maximum likelihood estimation finds the rate that maximizes the probability of the observed spike counts, but it doesn’t take into account any prior information.</p>
+<p>For example, this may not be the first neuron you’ve ever encountered. Maybe, based on your experience, you have a sense for the distribution of neural firing rates. That knowledge can be encoded in a <strong>prior distribution</strong>.</p>
+<p>One common choice of prior on rates is the <a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_distribution"><strong>gamma distribution</strong></a>,</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda \sim \mathrm{Ga}(\alpha, \beta).
+\]</div>
+<p>The gamma distribution has <strong>support</strong> for <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}_+\)</span> (the non-negative real numbers), and it is governed by two parameters:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span>, the <strong>shape</strong> or <strong>concentration</strong> parameter, and</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span>, the <strong>inverse scale</strong> or <strong>rate</strong> parameter.</p></li>
+</ul>
+<p>It’s <strong>probability density function (pdf)</strong> is,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{Ga}(\lambda; \alpha, \beta) = \frac{\beta^\alpha}{\Gamma(\alpha)} \lambda^{\alpha - 1} e^{-\beta \lambda}.
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Gamma(\cdot)\)</span> denotes the gamma function.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">PDFs vs PMFs</p>
+<p>Since the gamma distribution has <em>continuous</em> support over the non-negative reals as opposed to <em>discrete</em> support over, say, the non-negative integers, it has a probability <em>density</em> function rather than a probability <em>mass</em> function.</p>
+<p>Technically, the probability that <span class="math notranslate nohighlight">\(\lambda\)</span> falls in a subset of <span class="math notranslate nohighlight">\(\mathbb{R}_+\)</span>, like the interval <span class="math notranslate nohighlight">\([a, b)\)</span>, is the integral of the probability density function,</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr(\lambda \in [a, b)) = \int_a^b \mathrm{Ga}(\lambda; \alpha, \beta) \, \mathrm{d} \lambda.
+\]</div>
+</div>
+</section>
+<section id="sampling-from-a-gamma-distribution">
+<h2>Sampling from a gamma distribution<a class="headerlink" href="#sampling-from-a-gamma-distribution" title="Permalink to this headline">#</a></h2>
+<p>Expand the code below to see how to sample a gamma distribution using the <a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#gamma"><code class="docutils literal notranslate"><span class="pre">torch.distributions.Gamma</span></code></a> object. The code plots the empirical distribution of 1000 independent samples from the gamma distribution, binned into 25 evenly sized bins. It overlays the gamma pdf for comparison.</p>
+<p>In words, we might say this particular gamma distribution conveys a prior belief that</p>
+<blockquote>
+<div><p><em>Firing rates are usually around 10 spikes/time bin with standard deviation of around 3 spikes/time bin.</em></p>
+</div></blockquote>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.distributions</span> <span class="kn">import</span> <span class="n">Gamma</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Construct a gamma distribution </span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mf">10.0</span><span class="o">/</span><span class="mf">10.0</span>
+<span class="n">gam</span> <span class="o">=</span> <span class="n">Gamma</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+<span class="n">lambdas</span> <span class="o">=</span> <span class="n">gam</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">sample_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,))</span>
+
+<span class="c1"># Plot a histogram of the samples and overlay the pmf</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">lambdas</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;samples&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">gam</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">grid</span><span class="p">)),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$p(\lambda)$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_probabilistic_modeling_8_0.png" src="../_images/02_probabilistic_modeling_8_0.png" />
+</div>
+</div>
+</section>
+<section id="fitting-a-poisson-distribution-with-a-gamma-prior">
+<h2>Fitting a Poisson distribution with a gamma prior<a class="headerlink" href="#fitting-a-poisson-distribution-with-a-gamma-prior" title="Permalink to this headline">#</a></h2>
+<p>When we add in the prior distribution on <span class="math notranslate nohighlight">\(\lambda\)</span>, it becomes a random variable too. Now we have to consider the <strong>joint distribution</strong> of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\lambda\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+p(\mathbf{x}, \lambda) 
+&amp;= p(\mathbf{x} \mid \lambda) \, p(\lambda) \\
+&amp;= \left[ \prod_{t=1}^T \mathrm{Pois}(x_t \mid \lambda) \right] \, \mathrm{Ga}(\lambda; \alpha, \beta) 
+\end{align*}
+\end{split}\]</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>We dropped the dependence on the parameters of the gamma prior, <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>. Technically, we should write <span class="math notranslate nohighlight">\(p(\mathbf{x}, \lambda; \alpha, \beta)\)</span>, but that gets cumbersome.</p>
+</div>
+<div class="admonition-the-product-rule-the-sum-rule-and-bayes-rule admonition">
+<p class="admonition-title">The Product Rule, the Sum Rule, and Bayes’ Rule</p>
+<p>In the first line we applied the <strong>product rule</strong> of probability, which says that we can rewrite a joint distribution as a product of a <strong>marginal distribution</strong> and a <strong>conditional distribution</strong></p>
+<div class="math notranslate nohighlight">
+\[
+p(x, y) = p(x) \, p(y \mid x).
+\]</div>
+<p>The order doesn’t matter; we could alternatively write,</p>
+<div class="math notranslate nohighlight">
+\[
+p(x, y) = p(y) p(x \mid y).
+\]</div>
+<p>The marginal distributions <span class="math notranslate nohighlight">\(p(x)\)</span> and <span class="math notranslate nohighlight">\(p(y)\)</span> are obtained via the <strong>sum rule</strong>,</p>
+<div class="math notranslate nohighlight">
+\[
+p(x) = \sum_{y \in \mathcal{Y}} p(x, y)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span> is the support of the random variable <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>Finally, putting both together, we obtain <strong>Bayes’ rule</strong>,</p>
+<div class="math notranslate nohighlight">
+\[
+p(x \mid y) = \frac{p(x, y)}{p(y)} = \frac{p(y \mid x) \, p(x)}{p(y)}.
+\]</div>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Bars vs semicolons</p>
+<p>Why do we sometimes use bars (<span class="math notranslate nohighlight">\(\mid\)</span>) and other times semicolons (;)?
+Technically, we use the bar when we are writing a <strong>conditional distribution</strong> of one random variable given another, like <span class="math notranslate nohighlight">\(p(x \mid y)\)</span> in Bayes’ rule above. When we simply want to write a function that depends on some parameters, we use a semicolon, like <span class="math notranslate nohighlight">\(p(x; \theta)\)</span>.</p>
+<p>So why did we switch from writing <span class="math notranslate nohighlight">\(p(\mathbf{x}; \lambda)\)</span> to <span class="math notranslate nohighlight">\(p(\mathbf{x} \mid \lambda)\)</span>? Because when we placed a prior on <span class="math notranslate nohighlight">\(\lambda\)</span>, we switched from treating <span class="math notranslate nohighlight">\(\lambda\)</span> as a parameter to instead thinking of it as a random variable. It’s a technical distinction, but we’ll try to be precise!</p>
+</div>
+</section>
+<section id="bayesian-inference">
+<h2>Bayesian inference<a class="headerlink" href="#bayesian-inference" title="Permalink to this headline">#</a></h2>
+<p>What does it mean to “fit” the rate of a Poisson distribution under a gamma prior? Formally, we perform <strong>Bayesian inference</strong>.</p>
+<p>We want to compute the <strong>posterior distribution</strong> of the rate <span class="math notranslate nohighlight">\(\lambda\)</span> <em>given</em> the observed spike counts <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (and the prior parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>, which are assumed fixed),</p>
+<div class="math notranslate nohighlight">
+\[
+p(\lambda \mid \mathbf{x}).
+\]</div>
+<p>By Bayes’ rule (see box above), the posterior distribution is equal to the ratio of the <strong>joint distribution</strong> over the <strong>marginal distribution</strong>,</p>
+<div class="math notranslate nohighlight">
+\[
+p(\lambda \mid \mathbf{x}) = \frac{p(\mathbf{x}, \lambda)}{p(\mathbf{x})}.
+\]</div>
+<p>Note that the denominator (the marginal distribution) does not depend on <span class="math notranslate nohighlight">\(\lambda\)</span>, so the posterior is proportional to the joint,</p>
+<div class="math notranslate nohighlight">
+\[
+p(\lambda \mid \mathbf{x}) \propto p(\mathbf{x}, \lambda).
+\]</div>
+</section>
+<section id="maximum-a-posteriori-inference">
+<h2>Maximum <em>a posteriori</em> inference<a class="headerlink" href="#maximum-a-posteriori-inference" title="Permalink to this headline">#</a></h2>
+<p>A simple summary of the posterior distribution is its <strong>mode</strong> — the point(s) where the pdf is maximized,</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda_{\mathsf{MAP}} = \text{arg max} \; p(\lambda \mid \mathbf{x}).
+\]</div>
+<p>or equivalently,</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda_{\mathsf{MAP}} = \text{arg max} \; p(\lambda, \mathbf{x}).
+\]</div>
+<p>since the posterior is proportional to the joint.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>True Bayesians cringe at MAP estimation! <em>How can a single point (the mode) summarize an entire distribution!?</em> It can’t, but we’ll use it for now and be better Bayesians later in the course.</p>
+</div>
+</section>
+<section id="conjugate-priors">
+<h2>Conjugate priors<a class="headerlink" href="#conjugate-priors" title="Permalink to this headline">#</a></h2>
+<p>Now let’s go back and expand the Poisson pmf and the gamma pdf in the joint distribution,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+p(\lambda \mid \mathbf{x}) &amp; \propto p(\mathbf{x}, \lambda) \\
+&amp;= \left[ \prod_{t=1}^T \mathrm{Pois}(x_t \mid \lambda) \right] \, \mathrm{Ga}(\lambda; \alpha, \beta) \\
+&amp;= \left[ \prod_{t=1}^T \frac{1}{x_t!} \lambda^{x_t} e^{-\lambda} \right] \, \frac{\beta^\alpha}{\Gamma(\alpha)} \lambda^{\alpha - 1} e^{-\beta \lambda}
+\end{align*}
+\end{split}\]</div>
+<p>Many of these terms can be combined! After simplifying,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+p(\lambda \mid \mathbf{x}) 
+&amp; \propto p(\mathbf{x}, \lambda) \\
+&amp;= C \lambda^{\alpha' - 1} e^{-\beta' \lambda} \\
+&amp;\propto \mathrm{Ga}(\lambda \mid \alpha', \beta')
+\end{align*}
+\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\alpha' &amp;= \alpha + \sum_{t=1}^T x_t \\
+\beta' &amp;= \beta + T
+\end{align*}
+\end{split}\]</div>
+<p>and <span class="math notranslate nohighlight">\(C\)</span> is a constant with respect to <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<p>Thus, the posterior distribution is a gamma distribution, just like the prior! For this reason, we say the gamma is a <a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_prior"><strong>conjugate prior</strong></a> for the rate of the Poisson distribution.</p>
+</section>
+<section id="solving-for-the-map-estimate">
+<h2>Solving for the MAP estimate<a class="headerlink" href="#solving-for-the-map-estimate" title="Permalink to this headline">#</a></h2>
+<p>How do we solve for the MAP estimate, <span class="math notranslate nohighlight">\(\lambda_{\mathsf{MAP}} = \text{arg max} \; p(\lambda \mid \mathbf{x})\)</span>?</p>
+<p>Now that you know the posterior is a gamma distribution, you can expand its pdf, take the log, take the derivative wrt <span class="math notranslate nohighlight">\(\lambda\)</span>, set it to zero and solve.</p>
+<p>Or you can just go to the Wikipedia page on the <a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_distribution">gamma distribution</a> and see that its mode is</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda_{\mathsf{MAP}} = \frac{\alpha' - 1}{\beta'} = \frac{\alpha + \sum_{t=1}^T x_t}{\beta + T}
+\]</div>
+<p>for <span class="math notranslate nohighlight">\(\alpha' \geq 1\)</span>, and 0 otherwise.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Uninformative priors</p>
+<p>When does the MAP estimate coincide with the MLE? Intuitively, that happens when the prior probability is flat, or <strong>uninformative</strong>. Unfortunately, it’s impossible to have a flat prior over the entire set of non-negative reals since the pdf has to integrate to one. However, we obtain an uninformative gamma prior in the limit that <span class="math notranslate nohighlight">\(\alpha \to 1\)</span> and <span class="math notranslate nohighlight">\(\beta \to 0\)</span>. In that limit, <span class="math notranslate nohighlight">\(\alpha' \to \sum_t x_t\)</span> and <span class="math notranslate nohighlight">\(\beta' \to T\)</span> so that <span class="math notranslate nohighlight">\(\lambda_{\mathsf{MAP}} \to \frac{1}{T} \sum_t x_t = \lambda_{\mathsf{MLE}}\)</span>.</p>
+</div>
+</section>
+<section id="map-estimation-in-our-simulated-example">
+<h2>MAP estimation in our simulated example<a class="headerlink" href="#map-estimation-in-our-simulated-example" title="Permalink to this headline">#</a></h2>
+<p>Take the simulated data from above. What is the MAP estimate of the rate given the observed spike counts and the prior, and how does it compare to the MLE? We have…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha_post</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">xs</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">beta_post</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+
+<span class="n">lambda_mle</span> <span class="o">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+<span class="n">lambda_map</span> <span class="o">=</span> <span class="p">(</span><span class="n">alpha_post</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">beta_post</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MLE:&quot;</span><span class="p">,</span> <span class="n">lambda_mle</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MAP:&quot;</span><span class="p">,</span> <span class="n">lambda_map</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: tensor(5.0480)
+MAP: tensor(5.0519)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-questions admonition">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>Why is the MAP estimate slightly higher than the MLE?</p></li>
+<li><p>What if you make <span class="math notranslate nohighlight">\(T\)</span> smaller? Change the code above to sample <span class="math notranslate nohighlight">\(20\)</span> spike counts instead of 1000. How does that change the MAP/MLE difference?</p></li>
+</ul>
+</div>
+</section>
+<section id="mixture-models-and-latent-variables">
+<h2>Mixture models and latent variables<a class="headerlink" href="#mixture-models-and-latent-variables" title="Permalink to this headline">#</a></h2>
+<p>We’ve already gotten a lot of mileage out of this simple Poisson example! However, real data will rarely be so simple. One way to build richer models is by introducing <strong>latent variables</strong>.</p>
+<p>For example, suppose that at each time bin <span class="math notranslate nohighlight">\(t\)</span>, the neuron can either be in an <em>up</em> state with a high firing rate, or a <em>down</em> state with low firing rate.</p>
+<p>Let <span class="math notranslate nohighlight">\(z_t \in \{0,1\}\)</span> be a latent variable (something we don’t explicitly observe) that denotes which state the neuron in is at that time, with 1 meaning <em>up</em> and 0 meaning <em>down</em>. Likewise, let <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\lambda_0\)</span> denote the corresponding firing rates, with <span class="math notranslate nohighlight">\(\lambda_1 &gt; \lambda_0\)</span>.</p>
+<p>We will place gamma priors the firing rates, <span class="math notranslate nohighlight">\(\lambda_1 \sim \mathrm{Ga}(\alpha, \beta)\)</span> and <span class="math notranslate nohighlight">\(\lambda_0 \sim \mathrm{Ga}(\alpha, \beta)\)</span>. (We could get fancy here, but let’s keep it simple for now.)</p>
+<p>Finally, assume that the latent variables are equally probable and independent across time. Formally, we can write that as a categorical distribution with equal probabilities for both states,</p>
+<div class="math notranslate nohighlight">
+\[
+z_t \sim \mathrm{Cat}([\tfrac{1}{2}, \tfrac{1}{2}]).
+\]</div>
+<p>The resulting model is called a <strong>mixture model</strong> because the marginal distribution, <span class="math notranslate nohighlight">\(p(x_t \mid \boldsymbol{\lambda})\)</span> where <span class="math notranslate nohighlight">\(\boldsymbol{\lambda} = (\lambda_0, \lambda_1)\)</span>, is a mixture of two Poisson distributions,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+p(x_t \mid \boldsymbol{\lambda}) 
+&amp;= \sum_{z_t \in \{0,1\}} p(x_t, z_t \mid \boldsymbol{\lambda}) \\
+&amp;= \sum_{z_t \in \{0,1\}} p(x_t \mid z_t, \boldsymbol{\lambda}) \, p(z_t) \\
+&amp;= \frac{1}{2} \mathrm{Pois}(x_t \mid \lambda_0) + \frac{1}{2} \mathrm{Pois}(x_t \mid \lambda_1) 
+\end{align*}
+\end{split}\]</div>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>What probability rule did we use to get this marginal distribution?</p>
+</div>
+</section>
+<section id="sampling-a-poisson-mixture-model">
+<h2>Sampling a Poisson mixture model<a class="headerlink" href="#sampling-a-poisson-mixture-model" title="Permalink to this headline">#</a></h2>
+<p>Let’s draw samples from the mixture model, like we did above for the single Poisson distribution.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.distributions</span> <span class="kn">import</span> <span class="n">Poisson</span><span class="p">,</span> <span class="n">Categorical</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Construct a Poisson mixture model with down rate 1.0 and up rate 10.0</span>
+<span class="n">rates</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">])</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">Categorical</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]))</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># Sample the states from the categorical distribution</span>
+<span class="n">zs</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">sample_shape</span><span class="o">=</span><span class="p">(</span><span class="n">T</span><span class="p">,))</span>
+
+<span class="c1"># Sample the spike counts from a Poisson distribution </span>
+<span class="c1"># using the rate for the corresponding state.</span>
+<span class="c1"># Note: this uses PyTorch&#39;s broadcasting semantics.</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="n">Poisson</span><span class="p">(</span><span class="n">rates</span><span class="p">[</span><span class="n">zs</span><span class="p">])</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+
+<span class="c1"># Compute the mixture probability at a range of bins</span>
+<span class="n">bins</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> 
+<span class="n">up_pmf</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">Poisson</span><span class="p">(</span><span class="n">rates</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">bins</span><span class="p">))</span>
+<span class="n">down_pmf</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">Poisson</span><span class="p">(</span><span class="n">rates</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">bins</span><span class="p">))</span>
+<span class="n">mixture_pmf</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">up_pmf</span> <span class="o">+</span> <span class="n">down_pmf</span><span class="p">)</span>
+
+<span class="c1"># Plot a histogram of the samples and overlay the pmf</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;samples&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">mixture_pmf</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;pmf&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;p(x)&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_probabilistic_modeling_19_0.png" src="../_images/02_probabilistic_modeling_19_0.png" />
+</div>
+</div>
+<p>With this model, we can capture <strong>multimodal</strong> firing rate distributions.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">The <code class="docutils literal notranslate"><span class="pre">MixtureSameFamily</span></code> class</p>
+<p>We manually sampled the mixture distribution by first sampling the <code class="docutils literal notranslate"><span class="pre">Categorical</span></code> and then the <code class="docutils literal notranslate"><span class="pre">Poisson</span></code>. PyTorch also provides a <a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#mixturesamefamily"><code class="docutils literal notranslate"><span class="pre">MixtureSameFamily</span></code></a> class to do this in one step.</p>
+</div>
+</section>
+<section id="fitting-a-mixture-model-by-coordinate-ascent">
+<h2>Fitting a mixture model by coordinate ascent<a class="headerlink" href="#fitting-a-mixture-model-by-coordinate-ascent" title="Permalink to this headline">#</a></h2>
+<p>Conceptually, fitting the mixture model is no different than fitting the the simple Poisson model above.</p>
+<p>We will perform MAP estimation to find,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\mathbf{z}_{\mathsf{MAP}}, \boldsymbol{\lambda}_{\mathsf{MAP}}
+= \text{arg max} \; p(\mathbf{z}, \boldsymbol{\lambda} \mid \mathbf{x})
+\end{align*}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{z} = (z_1, \ldots, z_T)\)</span>. Again, this is equivalent to maximizing the joint probability.</p>
+<p>Expanding the joint distribution over spike counts, latent variables, and rates,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+p(\mathbf{x}, \mathbf{z}, \boldsymbol{\lambda})
+&amp;= \left[ \prod_{t=1}^T p(x_t \mid z_t, \boldsymbol{\lambda}) \, p(z_t) \right]
+p(\boldsymbol{\lambda})  \\
+&amp;= \left[ \prod_{t=1}^T \mathrm{Po}(x_t \mid \lambda_{z_t}) \times \frac{1}{2} \right] \, \mathrm{Ga}(\lambda_0; \alpha, \beta) \, \mathrm{Ga}(\lambda_1; \alpha, \beta)
+\end{align*}
+\end{split}\]</div>
+<p>Our strategy for maximizing this objective is to iteratively maximize with respect to one variable at a time, holding the rest fixed. This is called <strong>coordinate ascent</strong>.</p>
+<p>Fixing the rates, the most likely state at time <span class="math notranslate nohighlight">\(t\)</span> is,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+z_t = 
+\begin{cases} 
+1 &amp; \text{if } \; \mathrm{Po}(x_t \mid \lambda_1) \geq \mathrm{Po}(x_t \mid \lambda_0) \\
+0 &amp; \text{otherwise}
+\end{cases}
+\end{split}\]</div>
+<p>Fixing the states, the most likely rates are
+$<span class="math notranslate nohighlight">\(
+\begin{align*}
+\lambda_k &amp;= \frac{\alpha_k' -1}{\beta_k'} \\
+\alpha_k' &amp;= \alpha + \sum_{t=1}^T x_t \, \mathbb{I}[z_t = k] \\
+\beta_k' &amp;= \beta + \sum_{t=1}^T \mathbb{I}[z_t = k]
+\end{align*}
+\)</span>$</p>
+<p>for <span class="math notranslate nohighlight">\(k \in \{0, 1\}\)</span>.</p>
+<div class="admonition-notation admonition">
+<p class="admonition-title">Notation</p>
+<p>The indicator function <span class="math notranslate nohighlight">\(\mathbb{I}[y]\)</span> equals 1 if the predicate <span class="math notranslate nohighlight">\(y\)</span> is true; otherwise it equals zero.</p>
+</div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Derive these coordinate updates!</p>
+<p>How would they change if the state were not equally probable <em>a priori</em>? That is, what if instead</p>
+<div class="math notranslate nohighlight">
+\[
+z_t \sim \mathrm{Cat}([\pi_0, \pi_1])
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\pi_0\)</span> and <span class="math notranslate nohighlight">\(\pi_1\)</span> are the probabilities of down and up states, respectively?</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Connection to K-Means</p>
+<p>You may have encountered the K-Means clustering algorithm in other courses. In K-Means, you alternate between assining datapoints to the closest cluster and then updating the cluster centroids to the mean of their assigned datapoints.</p>
+<p>Our coordinate ascent algorithm is very closely related! You can think of K-Means as coordinate ascent in a Gaussian mixture model with identity covariance and uninformative priors. That will make more sense in later weeks when we introduce the Gaussian distribution.</p>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
+<p>This chapter introduced the basics of probabilistic modeling:</p>
+<ul class="simple">
+<li><p>We encountered 3 common distributions: Poisson, gamma, and categorical.</p></li>
+<li><p>We learned how to construct joint distributions using the product rule, how to compute marginal distributions with the sum rule, and how to find the posterior distribution with Bayes’ rule.</p></li>
+<li><p>We learned about maximum likelihood estimation (MLE) and maximum <em>a posteriori</em> (MAP) estimation.</p></li>
+<li><p>We encountered conjugate priors where the posterior distribution is in the same family, making calculations particularly simple.</p></li>
+<li><p>Finally, we learned how to construct more flexible models by introducing latent variables, and how to perform MAP estimation in those models using coordinate ascent.</p></li>
+</ul>
+<p>Next time, we’ll apply these concepts to our first real neural data analysis problem: spike sorting electrophysiological recordings.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../index.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Scott Linderman<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
