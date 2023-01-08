@@ -502,14 +502,7 @@ Our goal to <strong>estimate</strong> or <strong>infer</strong> those parameters
 However, our models will still be composed of just a handful of basic building blocks, and our central goal of parameter estimation and inference remains the same.</p>
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline">#</a></h2>
-<p>For example, let <span class="math notranslate nohighlight">\(x_t \in \mathbb{N}_0\)</span> denote the number of spikes a neuron fires in time bin <span class="math notranslate nohighlight">\(t\)</span>.</p>
-<div class="admonition-notation admonition">
-<p class="admonition-title">Notation</p>
-<p><span class="math notranslate nohighlight">\(x_t \in \mathbb{N}_0\)</span> means that the variable <span class="math notranslate nohighlight">\(x_t\)</span> is in (<span class="math notranslate nohighlight">\(\in\)</span>) the set <span class="math notranslate nohighlight">\(\mathbb{N}_0\)</span>, which is shorthand for the non-negative integers,</p>
-<div class="math notranslate nohighlight">
-\[\mathbb{N}_0 = \{0,1,2,\ldots\}.\]</div>
-</div>
-<p>One of the simplest (and yet surprisingly not bad) models of neural spike counts is the <a class="reference external" href="https://en.wikipedia.org/wiki/Poisson_distribution"><strong>Poisson distribution</strong></a> with rate <span class="math notranslate nohighlight">\(\lambda\)</span>,</p>
+<p>For example, let <span class="math notranslate nohighlight">\(x_t \in \mathbb{N}_0\)</span> denote the number of spikes a neuron fires in time bin <span class="math notranslate nohighlight">\(t\)</span>. One of the simplest (and yet surprisingly not bad) models of neural spike counts is the <a class="reference external" href="https://en.wikipedia.org/wiki/Poisson_distribution"><strong>Poisson distribution</strong></a> with rate <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}_+\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[x_t \sim \mathrm{Pois}(\lambda).\]</div>
 <p>The Poisson distribution has a simple <strong>probability mass function (pmf)</strong>,</p>
@@ -518,8 +511,15 @@ However, our models will still be composed of just a handful of basic building b
 <p>For Poisson random variables, the <strong>mean</strong>, aka <strong>expected value</strong>, <span class="math notranslate nohighlight">\(\mathbb{E}[x_t]\)</span>, and <strong>variance</strong>, <span class="math notranslate nohighlight">\(\mathbb{V}[x_t]\)</span>, are both equal to <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
 <div class="admonition-notation admonition">
 <p class="admonition-title">Notation</p>
-<p>The first line says that the spike count <span class="math notranslate nohighlight">\(x_t\)</span> is a <strong>random variable</strong> whose distribution is (<span class="math notranslate nohighlight">\(\sim\)</span>) Poisson with rate <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
-<p>In the second line, <span class="math notranslate nohighlight">\(\mathrm{Pois}(x_t; \lambda)\)</span> refers to the pmf of the Poisson distribution evaluated at the point <span class="math notranslate nohighlight">\(x_t\)</span>. The notation can be a little confusing at first, but it’s a standard convention.</p>
+<p><span class="math notranslate nohighlight">\(x_t \in \mathbb{N}_0\)</span> means that the variable <span class="math notranslate nohighlight">\(x_t\)</span> is in (<span class="math notranslate nohighlight">\(\in\)</span>) the set <span class="math notranslate nohighlight">\(\mathbb{N}_0\)</span>, which is shorthand for the non-negative integers,</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{N}_0 = \{0,1,2,\ldots\}.\]</div>
+<p><span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}_+\)</span> means that the rate <span class="math notranslate nohighlight">\(\lambda\)</span> is a non-negative real number.</p>
+</div>
+<div class="admonition-notation admonition">
+<p class="admonition-title">Notation</p>
+<p>The first equation says that the spike count <span class="math notranslate nohighlight">\(x_t\)</span> is a <strong>random variable</strong> whose distribution is (<span class="math notranslate nohighlight">\(\sim\)</span>) Poisson with rate <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<p>In the second equation, <span class="math notranslate nohighlight">\(\mathrm{Pois}(x_t; \lambda)\)</span> refers to the pmf of the Poisson distribution evaluated at the point <span class="math notranslate nohighlight">\(x_t\)</span>. The notation can be a little confusing at first, but it’s a standard convention.</p>
 </div>
 </section>
 <section id="sampling-from-a-poisson-distribution">
@@ -555,7 +555,7 @@ However, our models will still be composed of just a handful of basic building b
 <h2>Fitting a Poisson distribution<a class="headerlink" href="#fitting-a-poisson-distribution" title="Permalink to this headline">#</a></h2>
 <p>Now suppose you observe the empirical spike counts sampled above (i.e. the blue histogram) and you want to estimate the rate <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{x} = (x_1, \ldots, x_T)\)</span> denote the vector of spike counts.</p>
-<p>Since the simulated spike counts are <strong>independent</strong> random variables, their <strong>joint probability</strong> is,</p>
+<p>Since the simulated spike counts are <strong>independent</strong> random variables, their <strong>joint probability</strong> is a product of Poisson pmf’s,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
@@ -609,7 +609,7 @@ p(\mathbf{x}; \lambda)
 \[
 \lambda \sim \mathrm{Ga}(\alpha, \beta).
 \]</div>
-<p>The gamma distribution has <strong>support</strong> for <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}_+\)</span> (the non-negative real numbers), and it is governed by two parameters:</p>
+<p>The gamma distribution has <strong>support</strong> for <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}_+\)</span>, and it is governed by two parameters:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\alpha\)</span>, the <strong>shape</strong> or <strong>concentration</strong> parameter, and</p></li>
 <li><p><span class="math notranslate nohighlight">\(\beta\)</span>, the <strong>inverse scale</strong> or <strong>rate</strong> parameter.</p></li>
@@ -787,7 +787,7 @@ p(\lambda \mid \mathbf{x})
 <p>Or you can just go to the Wikipedia page on the <a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_distribution">gamma distribution</a> and see that its mode is</p>
 <div class="math notranslate nohighlight">
 \[
-\lambda_{\mathsf{MAP}} = \frac{\alpha' - 1}{\beta'} = \frac{\alpha + \sum_{t=1}^T x_t}{\beta + T}
+\lambda_{\mathsf{MAP}} = \frac{\alpha' - 1}{\beta'} = \frac{\alpha - 1 + \sum_{t=1}^T x_t}{\beta + T}
 \]</div>
 <p>for <span class="math notranslate nohighlight">\(\alpha' \geq 1\)</span>, and 0 otherwise.</p>
 <div class="dropdown admonition">
@@ -812,8 +812,8 @@ p(\lambda \mid \mathbf{x})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: tensor(4.9490)
-MAP: tensor(4.9530)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: tensor(4.9670)
+MAP: tensor(4.9710)
 </pre></div>
 </div>
 </div>
@@ -829,7 +829,7 @@ MAP: tensor(4.9530)
 <section id="mixture-models-and-latent-variables">
 <h2>Mixture models and latent variables<a class="headerlink" href="#mixture-models-and-latent-variables" title="Permalink to this headline">#</a></h2>
 <figure class="align-default" id="up-down">
-<a class="reference internal image-reference" href="../_images/up_down.png"><img alt="../_images/up_down.png" src="../_images/up_down.png" style="width: 600px;" /></a>
+<img alt="../_images/up_down.png" src="../_images/up_down.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 1 </span><span class="caption-text">Example of a mixture model with a latent variable <span class="math notranslate nohighlight">\(z_t\)</span> specifying whether the neuron is in the up or down state.</span><a class="headerlink" href="#up-down" title="Permalink to this image">#</a></p>
 </figcaption>
