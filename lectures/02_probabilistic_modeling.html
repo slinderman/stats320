@@ -527,18 +527,7 @@ However, our models will still be composed of just a handful of basic building b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">torch</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">torch.distributions</span> <span class="kn">import</span> <span class="n">Poisson</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Construct a Poisson distribution with rate 5.0 and draw 1000 samples</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">rate</span> <span class="o">=</span> <span class="mf">5.0</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
-</pre></div>
-</div>
+<img alt="../_images/02_probabilistic_modeling_3_0.png" src="../_images/02_probabilistic_modeling_3_0.png" />
 </div>
 </div>
 </section>
@@ -803,8 +792,8 @@ p(\lambda \mid \mathbf{x})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: tensor(5.0480)
-MAP: tensor(5.0519)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: tensor(4.9660)
+MAP: tensor(4.9700)
 </pre></div>
 </div>
 </div>
