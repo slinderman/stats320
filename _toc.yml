@@ -1,4 +1,8 @@
 format: jb-book
 root: index
+
 chapters:
 - file: lectures/02_probabilistic_modeling.ipynb
+- file: lectures/03_neurobio.ipynb
+- file: lectures/04_simple_spike_sorting.ipynb
+- file: lectures/99_references.md
