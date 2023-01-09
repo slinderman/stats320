@@ -1,0 +1,561 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Basic Neurobiology &#8212; Machine Learning Methods for Neural Data Analysis</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Simple Spike Sorting" href="04_simple_spike_sorting.html" />
+    <link rel="prev" title="Probabilistic Modeling" href="02_probabilistic_modeling.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning Methods for Neural Data Analysis</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_probabilistic_modeling.html">
+   Probabilistic Modeling
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Basic Neurobiology
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_simple_spike_sorting.html">
+   Simple Spike Sorting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="99_references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/lectures/03_neurobio.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/lectures/03_neurobio.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anatomy-of-a-neuron">
+   Anatomy of a neuron
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ions-and-concentration-gradients">
+   Ions and concentration gradients
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#action-potentials">
+   Action potentials
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-compartment-models">
+   Multi-compartment models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extracellular-voltage-recordings">
+   Extracellular voltage recordings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neuropixels">
+   Neuropixels
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-reading">
+   Further reading
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Basic Neurobiology</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anatomy-of-a-neuron">
+   Anatomy of a neuron
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ions-and-concentration-gradients">
+   Ions and concentration gradients
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#action-potentials">
+   Action potentials
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-compartment-models">
+   Multi-compartment models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extracellular-voltage-recordings">
+   Extracellular voltage recordings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neuropixels">
+   Neuropixels
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-reading">
+   Further reading
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="basic-neurobiology">
+<h1>Basic Neurobiology<a class="headerlink" href="#basic-neurobiology" title="Permalink to this headline">#</a></h1>
+<p>Now that we know some fundamentals of probabilistic modeling and inference, let’s learn a little bit about neurobiology.</p>
+<section id="anatomy-of-a-neuron">
+<h2>Anatomy of a neuron<a class="headerlink" href="#anatomy-of-a-neuron" title="Permalink to this headline">#</a></h2>
+<figure class="align-default" id="anatomy-neuron">
+<img alt="https://cdn.kastatic.org/ka-perseus-images/794448cebf7ff22ca9f1953ec1ad2b53e88c0c50.svg" src="https://cdn.kastatic.org/ka-perseus-images/794448cebf7ff22ca9f1953ec1ad2b53e88c0c50.svg" /><figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Anatomy of a neuron. (From <a class="reference external" href="https://www.khanacademy.org/test-prep/mcat/organ-systems/neuron-membrane-potentials/a/neuron-action-potentials-the-creation-of-a-brain-signal">Khan Academy</a>.)</span><a class="headerlink" href="#anatomy-neuron" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Neurons are cells too! They have the usual list of cell parts — a cell body, nucleus, etc. — but they also have a few unique parts that allow them to communicate with one another:</p>
+<ul class="simple">
+<li><p><strong>dendrites</strong>: receive input from other neurons</p></li>
+<li><p><strong>axons</strong>: propagate electrical activity long distances</p></li>
+<li><p><strong>axon terminals</strong>: send signals to other neurons</p></li>
+<li><p><strong>myelin sheath</strong>: speeds signal propagation along an axon</p></li>
+</ul>
+</section>
+<section id="ions-and-concentration-gradients">
+<h2>Ions and concentration gradients<a class="headerlink" href="#ions-and-concentration-gradients" title="Permalink to this headline">#</a></h2>
+<figure class="align-default" id="concentration-gradients">
+<img alt="https://cdn.kastatic.org/ka-perseus-images/087b8560145dd1d187c42f83581bdfa59a70530c.svg" src="https://cdn.kastatic.org/ka-perseus-images/087b8560145dd1d187c42f83581bdfa59a70530c.svg" /><figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">The difference in ion concentration inside the cell versus outside gives neurons an electrical charge. (From <a class="reference external" href="https://www.khanacademy.org/test-prep/mcat/organ-systems/neuron-membrane-potentials/a/neuron-action-potentials-the-creation-of-a-brain-signal">Khan Academy</a>.)</span><a class="headerlink" href="#concentration-gradients" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Neurons are electrically excitable cells that contain an ionic soup of charged atoms like sodium, potassium, and calcium, which together maintain a difference in electrical potential between the inside and the outside of the cell membrane <span id="id1">[<a class="reference internal" href="99_references.html#id4" title="Liqun Luo. Principles of Neurobiology. Garland Science, 2020.">Luo, 2020</a>]</span>.</p>
+</section>
+<section id="action-potentials">
+<h2>Action potentials<a class="headerlink" href="#action-potentials" title="Permalink to this headline">#</a></h2>
+<figure class="align-default" id="action-potential">
+<img alt="../_images/action_potential.png" src="../_images/action_potential.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Voltage-gated ion channels open and close to produce a brief spike in voltage called an action potential. (Adapted from <a class="reference external" href="https://en.wikipedia.org/wiki/Action_potential">Wikipedia</a>.)</span><a class="headerlink" href="#action-potential" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In most neurons, the cell membrane is littered with voltage-gated ion channels. If the membrane potential is excited above a certain threshold, some channels start to open, initiating an <strong>action potential</strong>. As described in the seminal work of <span id="id2">[<a class="reference internal" href="99_references.html#id5" title="Alan L Hodgkin and Andrew F Huxley. A quantitative description of membrane current and its application to conduction and excitation in nerve. The Journal of Physiology, 117(4):500, 1952.">Hodgkin and Huxley, 1952</a>]</span>, positively charged sodium ions are first to rush into the cell, causing a further increase in membrane potential and leading more channels to open. The upswing in membrane potential eventually causes a reversal in cell polarity and the inactivation of sodium channels. At the same time, potassium channels open, allowing an efflux of positively charged potassium ions. Together, these halt the rising membrane potential and drive it back down toward its resting state. This brief action potential, or <strong>spike</strong>, takes place in just a few milliseconds.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PSRhGgPhoOA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</section>
+<section id="multi-compartment-models">
+<h2>Multi-compartment models<a class="headerlink" href="#multi-compartment-models" title="Permalink to this headline">#</a></h2>
+<p>Of course, this <a class="reference external" href="https://en.wikipedia.org/wiki/Spherical_cow">spherical cow</a> model of a neuron is not a faithful representation of biology. Neurons have a complex anatomy of axons, cell bodies, dendrites, etc., as we saw above. However, this simple model is not a bad approximation for a single <strong>compartment</strong> of a cell, like a short stretch of axon. A more realistic model of a neuron is a network of compartments, each with its own ion channels, connected via passive cables.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KJrFpPO82z4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</section>
+<section id="extracellular-voltage-recordings">
+<h2>Extracellular voltage recordings<a class="headerlink" href="#extracellular-voltage-recordings" title="Permalink to this headline">#</a></h2>
+<p>The models above simulate how the <strong>membrane potential</strong> changes over time during an action potential to produce the characteristic spike shape. However, when we insert an electrode into the brain and measure voltage, we are typically recording the voltage at a location <em>outside</em> the cell in the <em>extracellular milieu</em>.</p>
+<figure class="align-default" id="eap">
+<img alt="../_images/eap.png" src="../_images/eap.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Simulated extracellular action potential recordings from <span id="id3">Gold <em>et al.</em> [<a class="reference internal" href="99_references.html#id8" title="Carl Gold, Darrell A Henze, Christof Koch, and Gyorgy Buzsaki. On the origin of the extracellular action potential waveform: a modeling study. Journal of neurophysiology, 95(5):3113–3128, 2006.">2006</a>]</span>.</span><a class="headerlink" href="#eap" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Inside the cell, the membrane potential spikes by 50-100 mV during an action potential. Outside the cell, the measured <strong>extracellular action potential (EAP)</strong> is roughly proportional to the total current in nearby compartments of the cell. The EAP typically shows a <strong>triphasic</strong> response with a sharp <em>negative</em> deflection of 50-100 <span class="math notranslate nohighlight">\(\mu\)</span>V (three orders of magnitude smaller in magnitude). The amplitude falls off with distance from the cell.</p>
+</section>
+<section id="neuropixels">
+<h2>Neuropixels<a class="headerlink" href="#neuropixels" title="Permalink to this headline">#</a></h2>
+<figure class="align-default" id="id5">
+<img alt="../_images/neuropixels.png" src="../_images/neuropixels.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">a-c: Schematic of a Neuropixels probe. d. 200 ms window of the voltage time
+series illustrating several spikes.  Insets show the waveforms of
+spikes from neurons near the top and bottom of the probe.
+e. The location of the probe with brain regions superimposed.
+f. Image showing the implant. g. Firing rate (summed over all neurons)
+detected vs days since implantation.
+(Adapted from fig. 1 and 4 of <span id="id4">[<a class="reference internal" href="99_references.html#id6" title="James J Jun, Nicholas A Steinmetz, Joshua H Siegle, Daniel J Denman, Marius Bauza, Brian Barbarits, Albert K Lee, Costas A Anastassiou, Alexandru Andrei, Çağatay Aydın, Mladen Barbic, Timothy J Blanche, Vincent Bonin, João Couto, Barundeb Dutta, Sergey L Gratiy, Diego A Gutnisky, Michael Häusser, Bill Karsh, Peter Ledochowitsch, Carolina Mora Lopez, Catalin Mitelut, Silke Musa, Michael Okun, Marius Pachitariu, Jan Putzeys, P Dylan Rich, Cyrille Rossant, Wei-Lung Sun, Karel Svoboda, Matteo Carandini, Kenneth D Harris, Christof Koch, John O'Keefe, and Timothy D Harris. Fully integrated silicon probes for high-density recording of neural activity. Nature, 551(7679):232–236, November 2017.">Jun <em>et al.</em>, 2017</a>]</span>.)</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>A fundamental challenge of computational neuroscience is understanding how information is encoded in patterns of coordinated spiking activity across neural circuits. To meet this challenge, we need to be able to record the spiking activity of large populations of neurons. Modern electrodes allow us to do just that. For example, Neuropixels probes <span id="id6">[<a class="reference internal" href="99_references.html#id6" title="James J Jun, Nicholas A Steinmetz, Joshua H Siegle, Daniel J Denman, Marius Bauza, Brian Barbarits, Albert K Lee, Costas A Anastassiou, Alexandru Andrei, Çağatay Aydın, Mladen Barbic, Timothy J Blanche, Vincent Bonin, João Couto, Barundeb Dutta, Sergey L Gratiy, Diego A Gutnisky, Michael Häusser, Bill Karsh, Peter Ledochowitsch, Carolina Mora Lopez, Catalin Mitelut, Silke Musa, Michael Okun, Marius Pachitariu, Jan Putzeys, P Dylan Rich, Cyrille Rossant, Wei-Lung Sun, Karel Svoboda, Matteo Carandini, Kenneth D Harris, Christof Koch, John O'Keefe, and Timothy D Harris. Fully integrated silicon probes for high-density recording of neural activity. Nature, 551(7679):232–236, November 2017.">Jun <em>et al.</em>, 2017</a>, <a class="reference internal" href="99_references.html#id7" title="Nicholas A Steinmetz, Cagatay Aydin, Anna Lebedeva, Michael Okun, Marius Pachitariu, Marius Bauza, Maxime Beau, Jai Bhagat, Claudia Böhm, Martijn Broux, and others. Neuropixels 2.0: A miniaturized high-density probe for stable, long-term brain recordings. Science, 372(6539):eabf4588, 2021.">Steinmetz <em>et al.</em>, 2021</a>]</span>, shown in <a class="reference internal" href="#id5"><span class="std std-numref">Fig. 6</span></a>a-c, have hundreds of recording sites, or “channels.” The probe is inserted into an animal’s brain by surgically removing part of the skull to gain access to neural tissue (<a class="reference internal" href="#id5"><span class="std std-numref">Fig. 6</span></a>f). Once inserted, the probe can record time series of electrical potentials (voltages) at up to 30 kHz across <span class="math notranslate nohighlight">\(\approx\)</span>300 channels simultaneously (<a class="reference internal" href="#id5"><span class="std std-numref">Fig. 6</span></a>d). Neuropixels span multiple brain regions in a rodent (<a class="reference internal" href="#id5"><span class="std std-numref">Fig. 6</span></a>e) and are stable over months of recording (<a class="reference internal" href="#id5"><span class="std std-numref">Fig. 6</span></a>g). They have quickly become a popular tool for measuring brain activity.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
+<p>This was an admittedly brisk tour through the basics of neurobiology, but it will suffice for our discussion of spike sorting in the next chapter. We introduced</p>
+<ul class="simple">
+<li><p>The basic parts of a neuron (dendrites, cell body, axons, etc.)</p></li>
+<li><p>How differences in ion concentration inside vs outside the cell give rise to a difference in electrical potential</p></li>
+<li><p>How voltage-gated ion channels in the cell membrane open and close to alter relative ion concentrations, and hence the voltage across the cell membrane</p></li>
+<li><p>These ion channels determine a nonlinear dynamical system called the Hodgkin-Huxley model, which models how action potentials, aka “spikes,” are generated</p></li>
+<li><p>Action potentials look nearly inverted in extracellular recordings, like those measured with Neuropixels probes.</p></li>
+</ul>
+</section>
+<section id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">#</a></h2>
+<p>If you want to learn more, I recommend:</p>
+<ul class="simple">
+<li><p>The first few chapters of <span id="id7">[<a class="reference internal" href="99_references.html#id4" title="Liqun Luo. Principles of Neurobiology. Garland Science, 2020.">Luo, 2020</a>]</span> (Prof. Luo is a professor in the Stanford Biology department and he teaches an excellent class on neurobiology!)</p></li>
+<li><p>The first few chapters of <span id="id8">[<a class="reference internal" href="99_references.html#id11" title="Peter Dayan and Laurence F Abbott. Theoretical Neuroscience: Computational and Mathematical Modeling of Neural Systems. MIT press, 2005.">Dayan and Abbott, 2005</a>]</span> are a good primer for those coming from math, physics, and more computational disciplines.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="02_probabilistic_modeling.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Probabilistic Modeling</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="04_simple_spike_sorting.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Simple Spike Sorting</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Scott Linderman<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

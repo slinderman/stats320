@@ -54,6 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic Neurobiology" href="03_neurobio.html" />
     <link rel="prev" title="Introduction" href="../index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -113,6 +114,21 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Probabilistic Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_neurobio.html">
+   Basic Neurobiology
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_simple_spike_sorting.html">
+   Simple Spike Sorting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="99_references.html">
+   References
   </a>
  </li>
 </ul>
@@ -365,11 +381,6 @@ title="Print to PDF"
    Further Reading
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
- </li>
 </ul>
 
     </nav>
@@ -478,11 +489,6 @@ title="Print to PDF"
    Further Reading
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
- </li>
 </ul>
 
                         </nav>
@@ -500,6 +506,7 @@ The shape of the distribution is determine by model <strong>parameters</strong>.
 Our goal to <strong>estimate</strong> or <strong>infer</strong> those parameters from observed data.</p>
 <p>As the course goes on, we will encounter more and more complex datasets, and we will construct more and more sophisticated models.
 However, our models will still be composed of just a handful of basic building blocks, and our central goal of parameter estimation and inference remains the same.</p>
+<p>Slides for this chapter can be downloaded <a class="reference download internal" download="" href="../_downloads/5dd281d54149572dad40c5c89b45b45f/lecture02.pdf"><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a>.</p>
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline">#</a></h2>
 <p>For example, let <span class="math notranslate nohighlight">\(x_t \in \mathbb{N}_0\)</span> denote the number of spikes a neuron fires in time bin <span class="math notranslate nohighlight">\(t\)</span>. One of the simplest (and yet surprisingly not bad) models of neural spike counts is the <a class="reference external" href="https://en.wikipedia.org/wiki/Poisson_distribution"><strong>Poisson distribution</strong></a> with rate <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}_+\)</span>,</p>
@@ -547,7 +554,7 @@ However, our models will still be composed of just a handful of basic building b
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_probabilistic_modeling_3_0.png" src="../_images/02_probabilistic_modeling_3_0.png" />
+<img alt="../_images/02_probabilistic_modeling_4_0.png" src="../_images/02_probabilistic_modeling_4_0.png" />
 </div>
 </div>
 </section>
@@ -661,7 +668,7 @@ p(\mathbf{x}; \lambda)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_probabilistic_modeling_8_0.png" src="../_images/02_probabilistic_modeling_8_0.png" />
+<img alt="../_images/02_probabilistic_modeling_9_0.png" src="../_images/02_probabilistic_modeling_9_0.png" />
 </div>
 </div>
 </section>
@@ -812,8 +819,8 @@ p(\lambda \mid \mathbf{x})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: tensor(4.9670)
-MAP: tensor(4.9710)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: tensor(5.0160)
+MAP: tensor(5.0200)
 </pre></div>
 </div>
 </div>
@@ -896,7 +903,7 @@ p(x_t \mid \boldsymbol{\lambda})
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_probabilistic_modeling_19_0.png" src="../_images/02_probabilistic_modeling_19_0.png" />
+<img alt="../_images/02_probabilistic_modeling_20_0.png" src="../_images/02_probabilistic_modeling_20_0.png" />
 </div>
 </div>
 <p>With this model, we can capture <strong>multimodal</strong> firing rate distributions.</p>
@@ -983,22 +990,9 @@ z_t \sim \mathrm{Cat}([\pi_0, \pi_1])
 <h2>Further Reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">#</a></h2>
 <p>There are many great references on probabilistic modeling. I like:</p>
 <ul class="simple">
-<li><p>Ch 2.1 and 2.2 of <span id="id1">[<a class="reference internal" href="#id4" title="Kevin P. Murphy. Probabilistic Machine Learning: Advanced Topics. MIT Press, 2023. URL: http://probml.github.io/book2.">Murphy, 2023</a>]</span></p></li>
-<li><p>Ch 1.2 of <span id="id2">[<a class="reference internal" href="#id5" title="Christopher M Bishop. Pattern Recognition and Machine Learning. Springer, 2006. URL: https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf.">Bishop, 2006</a>]</span></p></li>
+<li><p>Ch 2.1 and 2.2 of <span id="id1">[<a class="reference internal" href="99_references.html#id2" title="Kevin P. Murphy. Probabilistic Machine Learning: Advanced Topics. MIT Press, 2023. URL: http://probml.github.io/book2.">Murphy, 2023</a>]</span></p></li>
+<li><p>Ch 1.2 of <span id="id2">[<a class="reference internal" href="99_references.html#id3" title="Christopher M Bishop. Pattern Recognition and Machine Learning. Springer, 2006. URL: https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf.">Bishop, 2006</a>]</span></p></li>
 </ul>
-</section>
-<section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
-<div class="docutils container" id="id3">
-<dl class="citation">
-<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id2">Bis06</a></span></dt>
-<dd><p>Christopher M Bishop. <em>Pattern Recognition and Machine Learning</em>. Springer, 2006. URL: <a class="reference external" href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf">https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf</a>.</p>
-</dd>
-<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">Mur23</a></span></dt>
-<dd><p>Kevin P. Murphy. <em>Probabilistic Machine Learning: Advanced Topics</em>. MIT Press, 2023. URL: <a class="reference external" href="http://probml.github.io/book2">http://probml.github.io/book2</a>.</p>
-</dd>
-</dl>
-</div>
 </section>
 </section>
 
@@ -1035,6 +1029,13 @@ z_t \sim \mathrm{Cat}([\pi_0, \pi_1])
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Introduction</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="03_neurobio.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Basic Neurobiology</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

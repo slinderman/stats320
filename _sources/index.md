@@ -30,9 +30,9 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 ### Unit I: Extracting biological signals from raw data
 | Date        | Type       | Topic |
 | ----------- | ---------- | ----- |
-| Mon, Jan 9  | Lecture 1  | {Download}`Course Overview<lectures/lecture01.pdf>`
+| Mon, Jan 9  | Lecture 1  | {Download}`Course Overview<lectures/pdf/lecture01.pdf>`
 | Wed, Jan 11 | Lecture 2  | [Probabilistic modeling](lectures/02_probabilistic_modeling)
-| Fri, Jan 13 | Lecture 3  | Spike sorting I  <!-- Lab 0: Python and PyTorch primer -->
+| Fri, Jan 13 | Lecture 3  | [Basic neurobio](lectures/03_neurobio) and [Simple spike sorting](lectures/04_simple_spike_sorting.ipynb)  <!-- Lab 0: Python and PyTorch primer -->
 | Mon, Jan 16 | MLK Day    | _No class_
 | Wed, Jan 18 | Lecture 4  | Spike sorting II
 | Fri, Jan 20 | Lab 1      | Kilosort from scratch
