@@ -110,7 +110,12 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Notes
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Probabilistic Modeling
@@ -129,6 +134,18 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="99_references.html">
    References
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Labs
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/00_pytorch_primer.html">
+   Lab 0: PyTorch Primer
   </a>
  </li>
 </ul>
@@ -190,19 +207,19 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/lectures/02_probabilistic_modeling.ipynb"
+        <a href="https://colab.research.google.com/github/slinderman/stats320/blob/winter2023/lectures/02_probabilistic_modeling.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
-title="Launch on Binder"
+title="Launch on Colab"
 >
   
 
 <span class="headerbtn__icon-container">
   
-    <img src="../_static/images/logo_binder.svg">
+    <img src="../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Binder</span>
+<span class="headerbtn__text-container">Colab</span>
 </a>
 
       </li>
@@ -819,8 +836,8 @@ p(\lambda \mid \mathbf{x})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: tensor(4.8400)
-MAP: tensor(4.8442)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: tensor(4.9920)
+MAP: tensor(4.9960)
 </pre></div>
 </div>
 </div>
