@@ -14,3 +14,12 @@ sphinx:
   config:
     bibtex_reference_style: author_year
 
+# Information about where the book exists on the web
+repository:
+  url                       : https://github.com/slinderman/stats320  # Online location of your book
+  branch                    : winter2023  # Which branch of the repository should be used when creating links (optional)
+
+launch_buttons:
+  binderhub_url: ""
+  colab_url: "https://colab.research.google.com"
+
