@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Lab 0: PyTorch Primer" href="../labs/00_pytorch_primer.html" />
-    <link rel="prev" title="Simple Spike Sorting" href="04_simple_spike_sorting.html" />
+    <link rel="prev" title="Spike Sorting by Deconvolution" href="05_deconv_spike_sorting.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -127,6 +127,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="04_simple_spike_sorting.html">
    Simple Spike Sorting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_deconv_spike_sorting.html">
+   Spike Sorting by Deconvolution
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -290,8 +295,14 @@ title="Print to PDF"
 <dt class="label" id="id15"><span class="brackets">BNJ03</span></dt>
 <dd><p>David M Blei, Andrew Y Ng, and Michael I Jordan. Latent Dirichlet allocation. <em>Journal of machine Learning research</em>, 3(Jan):993–1022, 2003.</p>
 </dd>
+<dt class="label" id="id21"><span class="brackets">CMB+17</span></dt>
+<dd><p>Jason E Chung, Jeremy F Magland, Alex H Barnett, Vanessa M Tolosa, Angela C Tooker, Kye Y Lee, Kedar G Shah, Sarah H Felix, Loren M Frank, and Leslie F Greengard. A fully automated approach to spike sorting. <em>Neuron</em>, 95(6):1381–1394, 2017.</p>
+</dd>
 <dt class="label" id="id11"><span class="brackets">DA05</span></dt>
 <dd><p>Peter Dayan and Laurence F Abbott. <em>Theoretical Neuroscience: Computational and Mathematical Modeling of Neural Systems</em>. MIT press, 2005.</p>
+</dd>
+<dt class="label" id="id22"><span class="brackets">DLK+15</span></dt>
+<dd><p>Xinyi Deng, Daniel F Liu, Kenneth Kay, Loren M Frank, and Uri T Eden. Clusterless decoding of position from multiunit activity using a marked point process filter. <em>Neural computation</em>, 27(7):1438–1460, 2015.</p>
 </dd>
 <dt class="label" id="id9"><span class="brackets">DLJ08</span></dt>
 <dd><p>Chris HQ Ding, Tao Li, and Michael I Jordan. Convex and semi-nonnegative matrix factorizations. <em>IEEE transactions on pattern analysis and machine intelligence</em>, 32(1):45–55, 2008.</p>
@@ -314,6 +325,9 @@ title="Print to PDF"
 <dt class="label" id="id14"><span class="brackets">LS99</span></dt>
 <dd><p>Daniel D Lee and H Sebastian Seung. Learning the parts of objects by non-negative matrix factorization. <em>Nature</em>, 401(6755):788–791, 1999.</p>
 </dd>
+<dt class="label" id="id20"><span class="brackets">LMS+20</span></dt>
+<dd><p>JinHyung Lee, Catalin Mitelut, Hooshmand Shokri, Ian Kinsella, Nishchal Dethe, Shenghao Wu, Kevin Li, Eduardo B Reyes, Denis Turcu, Eleanor Batty, and others. YASS: Yet another spike sorter applied to large-scale multi-electrode array recordings in primate retina. <em>bioRxiv</em>, 2020.</p>
+</dd>
 <dt class="label" id="id4"><span class="brackets">Luo20</span></dt>
 <dd><p>Liqun Luo. <em>Principles of Neurobiology</em>. Garland Science, 2020.</p>
 </dd>
@@ -323,6 +337,12 @@ title="Print to PDF"
 <dt class="label" id="id2"><span class="brackets">Mur23</span></dt>
 <dd><p>Kevin P. Murphy. <em>Probabilistic Machine Learning: Advanced Topics</em>. MIT Press, 2023. URL: <a class="reference external" href="http://probml.github.io/book2">http://probml.github.io/book2</a>.</p>
 </dd>
+<dt class="label" id="id19"><span class="brackets">PSS23</span></dt>
+<dd><p>Marius Pachitariu, Shashwat Sridhar, and Carsen Stringer. Solving the spike sorting problem with kilosort. <em>bioRxiv</em>, 2023.</p>
+</dd>
+<dt class="label" id="id18"><span class="brackets">PSK+16</span></dt>
+<dd><p>Marius Pachitariu, Nicholas Steinmetz, Shabnam Kadir, Matteo Carandini, and others. Kilosort: realtime spike-sorting for extracellular electrophysiology with hundreds of channels. <em>BioRxiv</em>, pages 061481, 2016.</p>
+</dd>
 <dt class="label" id="id17"><span class="brackets">RG99</span></dt>
 <dd><p>Sam Roweis and Zoubin Ghahramani. A unifying review of linear Gaussian models. <em>Neural computation</em>, 11(2):305–345, 1999.</p>
 </dd>
@@ -331,6 +351,9 @@ title="Print to PDF"
 </dd>
 <dt class="label" id="id13"><span class="brackets">TB99</span></dt>
 <dd><p>Michael E Tipping and Christopher M Bishop. Probabilistic principal component analysis. <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em>, 61(3):611–622, 1999.</p>
+</dd>
+<dt class="label" id="id23"><span class="brackets">TSL+19</span></dt>
+<dd><p>Eric M Trautmann, Sergey D Stavisky, Subhaneil Lahiri, Katherine C Ames, Matthew T Kaufman, Daniel J O’Shea, Saurabh Vyas, Xulu Sun, Stephen I Ryu, Surya Ganguli, and others. Accurate estimation of neural population dynamics without spike sorting. <em>Neuron</em>, 103(2):292–308, 2019.</p>
 </dd>
 </dl>
 </div>
@@ -363,11 +386,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="04_simple_spike_sorting.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="05_deconv_spike_sorting.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Simple Spike Sorting</p>
+            <p class="prev-next-title">Spike Sorting by Deconvolution</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../labs/00_pytorch_primer.html" title="next page">

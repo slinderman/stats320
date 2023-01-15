@@ -1,0 +1,966 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Spike Sorting by Deconvolution &#8212; Machine Learning Methods for Neural Data Analysis</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="References" href="99_references.html" />
+    <link rel="prev" title="Simple Spike Sorting" href="04_simple_spike_sorting.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning Methods for Neural Data Analysis</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Notes
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_probabilistic_modeling.html">
+   Probabilistic Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_neurobio.html">
+   Basic Neurobiology
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_simple_spike_sorting.html">
+   Simple Spike Sorting
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Spike Sorting by Deconvolution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="99_references.html">
+   References
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Labs
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/00_pytorch_primer.html">
+   Lab 0: PyTorch Primer
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/slinderman/stats320/blob/winter2023/lectures/05_deconv_spike_sorting.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/lectures/05_deconv_spike_sorting.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolutional-model">
+   Convolutional model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolution-and-cross-correlation">
+   Convolution and cross-correlation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scale-invariance-through-the-waveform-prior">
+   Scale invariance through the waveform prior
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-frobenius-norm-and-the-svd">
+   The Frobenius norm and the SVD
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constraining-the-rank-of-of-the-waveform-matrices">
+   Constraining the rank of of the waveform matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-a-posteriori-map-estimation">
+   Maximum
+   <em>
+    a posteriori
+   </em>
+   (MAP) estimation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimizing-the-amplitudes">
+   Optimizing the amplitudes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-linear-term">
+     The linear term
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-quadratic-term">
+     The quadratic term
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finishing-the-optimization">
+     Finishing the optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimizing-the-waveforms">
+   Optimizing the waveforms
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solving-the-optimization">
+     Solving the optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-efficient-computation">
+   More efficient computation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preprocessing">
+   Preprocessing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#post-processing">
+   Post processing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-reading">
+   Further reading
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Spike Sorting by Deconvolution</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolutional-model">
+   Convolutional model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolution-and-cross-correlation">
+   Convolution and cross-correlation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scale-invariance-through-the-waveform-prior">
+   Scale invariance through the waveform prior
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-frobenius-norm-and-the-svd">
+   The Frobenius norm and the SVD
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constraining-the-rank-of-of-the-waveform-matrices">
+   Constraining the rank of of the waveform matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-a-posteriori-map-estimation">
+   Maximum
+   <em>
+    a posteriori
+   </em>
+   (MAP) estimation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimizing-the-amplitudes">
+   Optimizing the amplitudes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-linear-term">
+     The linear term
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-quadratic-term">
+     The quadratic term
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finishing-the-optimization">
+     Finishing the optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimizing-the-waveforms">
+   Optimizing the waveforms
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solving-the-optimization">
+     Solving the optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-efficient-computation">
+   More efficient computation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preprocessing">
+   Preprocessing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#post-processing">
+   Post processing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-reading">
+   Further reading
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="spike-sorting-by-deconvolution">
+<h1>Spike Sorting by Deconvolution<a class="headerlink" href="#spike-sorting-by-deconvolution" title="Permalink to this headline">#</a></h1>
+<p>The last chapter framed spike sorting as a matrix factorization problem — specifically, a <em>semi-nonnegative matrix factorization (semi-NMF)</em> problem.  However, that model only makes sense under the simplifying assumption that the raw voltage is downsampled to <span class="math notranslate nohighlight">\(\sim\)</span> 500Hz.
+Otherwise, spike waveforms would be spread over many time bins.</p>
+<p>In this chapter we’ll relax that assumption and develop a more realistic model using <em>convolutional</em> matrix factorization. This model is inspired by Kilosort, a state-of-the-art spike sorting algorithm <span id="id1">[<a class="reference internal" href="99_references.html#id19" title="Marius Pachitariu, Shashwat Sridhar, and Carsen Stringer. Solving the spike sorting problem with kilosort. bioRxiv, 2023.">Pachitariu <em>et al.</em>, 2023</a>]</span>.</p>
+<section id="convolutional-model">
+<h2>Convolutional model<a class="headerlink" href="#convolutional-model" title="Permalink to this headline">#</a></h2>
+<p>Like before, let <span class="math notranslate nohighlight">\(x_{c,t}\)</span> denote the voltage on channel <span class="math notranslate nohighlight">\(c\)</span> and time sample <span class="math notranslate nohighlight">\(t\)</span>, but now consider the data at its native resolution of around 30 kHz (i.e. voltage is sampled every <span class="math notranslate nohighlight">\(\sim 0.03\)</span> ms. At this sampling frequency, a spike waveform typically at least 60-90 time steps.</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{W}_k \in \mathbb{R}^{C \times D}\)</span> denote a <strong>waveform</strong>. In this model, it is a <strong>matrix</strong> for each neuron, where <span class="math notranslate nohighlight">\(D\)</span> denotes the number of time steps that a spike waveform persists in the voltage recording.</p>
+<p>Let <span class="math notranslate nohighlight">\(w_{k,c,d}\)</span> denote the entries of waveform <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span>, and let <span class="math notranslate nohighlight">\(\mathbf{W} = \{\mathbf{W}_k\}_{k=1}^K\)</span> be shorthand for the set of waveforms for all <span class="math notranslate nohighlight">\(K\)</span> neurons. Let <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}_+^{T \times K}\)</span> denote the matrix of spike amplitudes, as before. Now, <span class="math notranslate nohighlight">\(a_{k,t} = 1\)</span> denotes the <strong>start</strong> of a unit-amplitude spike with waveform <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>The new model’s likelihood is,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+p(\mathbf{X} \mid \mathbf{W}, \mathbf{A})
+&amp;= \prod_{c=1}^C \prod_{t=1}^T \mathcal{N} \left( x_{c,t} \, \bigg| \, \sum_{k=1}^K \sum_{d=1}^D a_{k, t-d} \, w_{k,c,d}, \sigma^2 \right) \\
+&amp;= \prod_{c=1}^C \prod_{t=1}^T \mathcal{N} \left( x_{c,t} \, \bigg| \, \sum_{k=1}^K [\mathbf{a}_{k} \circledast \mathbf{w}_{k,c}]_t, \sigma^2 \right) \\
+&amp;= \prod_{t=1}^T \mathcal{N} \left( \mathbf{x}_{t} \, \bigg| \, \sum_{k=1}^K [\mathbf{a}_{k} \circledast \mathbf{W}_{k}]_{:,t}, \sigma^2 \mathbf{I} \right)
+\end{align*}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\circledast\)</span> denotes the discrete time <strong>convolution</strong>.</p>
+</section>
+<section id="convolution-and-cross-correlation">
+<h2>Convolution and cross-correlation<a class="headerlink" href="#convolution-and-cross-correlation" title="Permalink to this headline">#</a></h2>
+<p>The discrete time <strong>convolution</strong> of a signal <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with a filter <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+[\mathbf{x} \circledast \mathbf{f}]_t = \sum_{d = -\infty}^{\infty} x_{t - d} f_d.
+\]</div>
+<p>Of course, in practice we’re dealing with finite-length vectors <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^T\)</span> and filters <span class="math notranslate nohighlight">\(\mathbf{f} \in \mathbb{R}^D\)</span>, so we need to decide how to deal with boundary effects. One possibility is to pad <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with <span class="math notranslate nohighlight">\(D-1\)</span> zeros; another is to return only the “valid” section of the convolution. Yet another is to assume the signal is periodic, so that the convolution wraps around when the index <span class="math notranslate nohighlight">\(t-d\)</span> is negative. That is called a <strong>circular convolution</strong>.</p>
+<p>The <strong>cross-correlation</strong> is</p>
+<div class="math notranslate nohighlight">
+\[
+[\mathbf{x} \star f]_t = \sum_{d = -\infty}^{\infty} x_{t + d} f_d.
+\]</div>
+<p>Thus, convolution is equivalent to cross-correlation with a reversed filter <span class="math notranslate nohighlight">\(\overleftarrow{f}_{\!\!d} = [f_D, \ldots, f_1]\)</span>.</p>
+<p>Unfortunately, the definition of cross-correlation is not unique; our definition consistent with Numpy’s <code class="docutils literal notranslate"><span class="pre">correlate</span></code> function, but it’s what <a class="reference external" href="https://en.wikipedia.org/wiki/Cross-correlation">Wikipedia</a> would call <span class="math notranslate nohighlight">\([f \star x]_t\)</span> instead (note the order is swapped).</p>
+<p>To make matters more confusing, the “convolution” operation performed by most neural network libraries is actually a cross-correlation (with Wikipedia’s semantics).</p>
+<p>Since cross-correlations (convolutions in machine learning parlance) are such fundamental building blocks of modern neural networks, libraries like PyTorch have flexible APIs for performing a variety of types of convolutions. For example, with <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.functional.conv1d.html"><code class="docutils literal notranslate"><span class="pre">torch.nn.functional.conv1d</span></code></a> you can cross-correlate a bank of 1D signal <span class="math notranslate nohighlight">\(\mathbf{X} \in \mathbb{R}^{C \times T}\)</span> with a bank of filters <span class="math notranslate nohighlight">\(\mathbf{F} \in \mathbb{R}^{C \times D}\)</span> by varying the number of <code class="docutils literal notranslate"><span class="pre">in_channels</span></code> and <code class="docutils literal notranslate"><span class="pre">out_channels</span></code>.</p>
+<div class="admonition-notation admonition">
+<p class="admonition-title">Notation</p>
+<p>The notation for convolutions with multiple input/output channels is less standardized. We will let <span class="math notranslate nohighlight">\(\mathbf{Y} = \mathbf{x} \star \mathbf{F}\)</span> denote the cross-correlation of a signal <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^T\)</span> with a bank of filters <span class="math notranslate nohighlight">\(\mathbf{F} \in \mathbb{R}^{C \times D}\)</span>, which yields a bank of outputs <span class="math notranslate nohighlight">\(\mathbf{Y} \in \mathbb{R}^{C \times T'}\)</span> (the length depends on the padding strategy).</p>
+</div>
+</section>
+<section id="scale-invariance-through-the-waveform-prior">
+<h2>Scale invariance through the waveform prior<a class="headerlink" href="#scale-invariance-through-the-waveform-prior" title="Permalink to this headline">#</a></h2>
+<p>Just like before, there is a scale invariance between <span class="math notranslate nohighlight">\(\mathbf{a}_k\)</span> and <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span>. Last chapter, we placed constrained the waveform vector <span class="math notranslate nohighlight">\(\mathbf{w}_k \in \mathbb{R}^C\)</span> to have unit <em>Euclidean</em> (<span class="math notranslate nohighlight">\(\ell_2\)</span>) norm. Now that the waveforms are matrices <span class="math notranslate nohighlight">\(\mathbf{W}_k \in \mathbb{R}^{C \times D}\)</span>, the natural generalization is to constrain the <em>Frobenius</em> norm of the waveforms,</p>
+<div class="math notranslate nohighlight">
+\[
+\|\mathbf{W}_k\|_{\mathrm{F}} = 1.
+\]</div>
+</section>
+<section id="the-frobenius-norm-and-the-svd">
+<h2>The Frobenius norm and the SVD<a class="headerlink" href="#the-frobenius-norm-and-the-svd" title="Permalink to this headline">#</a></h2>
+<p>The Frobenius norm can be rewritten in many ways.</p>
+<ol>
+<li><p>It is equal to the Euclidean (<span class="math notranslate nohighlight">\(\ell_2\)</span>) norm of the <em>vectorized</em> matrix,</p>
+<div class="math notranslate nohighlight">
+\[
+    \|\mathbf{W}_k\|_{\mathrm{F}} = \|\mathrm{vec}(\mathbf{W}_k)\|_2
+    \]</div>
+</li>
+<li><p>It is the norm induced by the <em>Frobenius inner product</em> of a matrix with itself,</p>
+<div class="math notranslate nohighlight">
+\[
+    \|\mathbf{W}_k\|_{\mathrm{F}} = \sqrt{\langle \mathbf{W}_k, \mathbf{W}_k \rangle_{\mathrm{F}} }
+    \]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+    \langle \mathbf{A}, \mathbf{B} \rangle_{\mathrm{F}} = \mathrm{Tr}(\mathbf{A}^\top \mathbf{B})
+    \]</div>
+</li>
+<li><p>It is the Euclidean norm of the vector of singular values of the matrix. Let <span class="math notranslate nohighlight">\(\mathbf{W}_k = \mathbf{U}_k \mathbf{S}_k \mathbf{V}_k^\top\)</span> where <span class="math notranslate nohighlight">\(\mathbf{U}_k\)</span> and <span class="math notranslate nohighlight">\(\mathbf{V}_k\)</span> are semi-orthogonal matrices, and where <span class="math notranslate nohighlight">\(\mathbf{S}_k = \mathrm{diag}(\mathbf{s}_k)\)</span> is the diagonal matrix of singular values, <span class="math notranslate nohighlight">\(\mathbf{s}_k = (s_{k,1}, \ldots, s_{k,R})\)</span>. Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{align*}
+    \|\mathbf{W}_k\|_{\mathrm{F}} 
+    &amp;= \sqrt{\mathrm{Tr}(\mathbf{W}_k^\top \mathbf{W}_k)} \\
+    &amp;= \sqrt{\mathrm{Tr}(\mathbf{V}_k \mathbf{S}_k \mathbf{U}_k^\top \mathbf{U}_k \mathbf{S}_k \mathbf{V}_k^\top)} \\
+    &amp;= \sqrt{\mathrm{Tr}(\mathbf{V}_k^\top \mathbf{V}_k \mathbf{S}_k \mathbf{U}_k^\top \mathbf{U}_k \mathbf{S}_k )} \\
+    &amp;= \sqrt{\mathrm{Tr}(\mathbf{S}_k^2)} \\
+    &amp;= \|\mathbf{s}_k\|_2.
+    \end{align*}
+    \end{split}\]</div>
+</li>
+</ol>
+<div class="admonition-singular-value-decomposition-svd admonition">
+<p class="admonition-title">Singular Value Decomposition (SVD)</p>
+<p>Recall that the (compact) <a class="reference external" href="https://en.wikipedia.org/wiki/Singular_value_decomposition"><strong>singular value decomposition (SVD)</strong></a> of a real valued matrix <span class="math notranslate nohighlight">\(\mathbf{W} \in \mathbb{R}^{C \times D}\)</span> is a factorization of the form,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{W} = \mathbf{U} \mathbf{S} \mathbf{V}^\top
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{U} \in \mathbb{R}^{C \times R}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{V} \in \mathbb{R}^{D \times R}\)</span> with <span class="math notranslate nohighlight">\(R \leq \min\{C, D\}\)</span> are real semi-orthogonal matrices (<span class="math notranslate nohighlight">\(\mathbf{U}^\top \mathbf{U} = \mathbf{I}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{V}^\top \mathbf{V} = \mathbf{I}\)</span>). The diagonal matrix <span class="math notranslate nohighlight">\(\mathbf{S} = \mathrm{diag}(\mathbf{s})\)</span> contains the <strong>singular values</strong> <span class="math notranslate nohighlight">\(\mathbf{s} = (s_1, \ldots, s_R)\)</span>. The number of nonzero singular values <span class="math notranslate nohighlight">\(R\)</span> is the <strong>rank</strong> of the matrix <span class="math notranslate nohighlight">\(\mathbf{W}\)</span>.</p>
+<p>Equivalently, the SVD can be written as a sum of outer products,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{W} = \sum_{r=1}^R s_r \mathbf{u}_r \mathbf{v}_r^\top.
+\]</div>
+</div>
+</section>
+<section id="constraining-the-rank-of-of-the-waveform-matrices">
+<h2>Constraining the rank of of the waveform matrices<a class="headerlink" href="#constraining-the-rank-of-of-the-waveform-matrices" title="Permalink to this headline">#</a></h2>
+<p>Thinking of the Frobenius norm constraint in terms of a constraint on the singular values leads to a natural extension. Rather than just constraining the norm, <em>constrain the rank</em> of the waveform matrices as well.</p>
+<p>There are at least two reasons why this is sensible:</p>
+<ol>
+<li><p>Manually identified spike waveforms are well approximated as outer product of a <strong>spatial footprint</strong> <span class="math notranslate nohighlight">\(\mathbf{u}_k \in \mathbb{S}_{C-1}\)</span> and a <strong>temporal profile</strong> <span class="math notranslate nohighlight">\(\mathbf{v}_k \in \mathbb{S}_{D-1}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathbf{W}_k \approx \mathbf{u}_k \mathbf{v}_k^\top.
+    \]</div>
+<p><em>Note that this is a rank <span class="math notranslate nohighlight">\(R=1\)</span> matrix.</em></p>
+</li>
+<li><p>Constraining the waveform rank can dramatically reduce the number of free parameters, which is good from a statistical estimation standpoint. For example, if we constrain the wave forms to be rank 1 then the waveforms have only <span class="math notranslate nohighlight">\(\mathcal{O}(C + D)\)</span> free parameters in contrast to <span class="math notranslate nohighlight">\(\mathcal{O}(CD)\)</span> free parameters in the full-rank model.</p>
+<div class="tip admonition">
+<p class="admonition-title">Exercise</p>
+<p>I used big-O notation because the norm constraints remove additional degrees of freedom. How many degrees of freedom do the rank-1 and full rank models truly have?</p>
+</div>
+</li>
+</ol>
+<p>We will constrain the waveforms to be rank <span class="math notranslate nohighlight">\(R\)</span> via a uniform prior</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{W}_k \sim \mathrm{Unif}(\mathbb{S}_R^{C,D})\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{S}_R^{C,D} = \left\{\mathbf{W}: \mathbf{W} \in \mathbb{R}^{C \times D}, \mathrm{rank}(\mathbf{W}) = R, \|\mathbf{W}\|_{\mathrm{F}} = 1 \right\}
+\]</div>
+<p>is the set of unit-norm, rank-<span class="math notranslate nohighlight">\(R\)</span> matrices in <span class="math notranslate nohighlight">\(\mathbb{R}^{C \times D}\)</span>.</p>
+<p>When <span class="math notranslate nohighlight">\(R=1\)</span>, these matrices can be expressed as <span class="math notranslate nohighlight">\(\mathbf{W}_k = \mathbf{u}_k \mathbf{v}_k^\top\)</span>, where  <span class="math notranslate nohighlight">\(\mathbf{u}_k \in \mathbb{S}_{C-1}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v}_k \in \mathbb{S}_{D-1}\)</span>.</p>
+<p>We will use the same exponential prior on the amplitudes as in the previous chapter.</p>
+</section>
+<section id="maximum-a-posteriori-map-estimation">
+<h2>Maximum <em>a posteriori</em> (MAP) estimation<a class="headerlink" href="#maximum-a-posteriori-map-estimation" title="Permalink to this headline">#</a></h2>
+<p>Like before, we will fit the model by using coordinate ascent to maximize the posterior probability, which is proportional to the joint probability. Again, that will entail updating the amplitudes given the waveforms, and then the waveforms given the amplitudes. When updating the parameters for neuron <span class="math notranslate nohighlight">\(k\)</span>, the solutions will depend on the residual,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{R} = \mathbf{X} - \sum_{j \neq k} \mathbf{a}_j \circledast \mathbf{W}_j.
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{R} \in \mathbb{R}^{C \times T}\)</span> has columns <span class="math notranslate nohighlight">\(\mathbf{r}_{t}\)</span> and entries <span class="math notranslate nohighlight">\(r_{c,t}\)</span>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Technically, we should refer to the residual matrix as <span class="math notranslate nohighlight">\(\mathbf{R}_k\)</span> since it is the residual when updating that neuron, but the notation gets a bit cumbersome, and it will be clear from context.</p>
+</div>
+</section>
+<section id="optimizing-the-amplitudes">
+<h2>Optimizing the amplitudes<a class="headerlink" href="#optimizing-the-amplitudes" title="Permalink to this headline">#</a></h2>
+<p>As a function of the waveform <span class="math notranslate nohighlight">\(\mathbf{a}_k\)</span> for neuron <span class="math notranslate nohighlight">\(k\)</span>, the log joint probability is,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\log p(\mathbf{X}, \mathbf{A}, \mathbf{W})
+&amp;= \sum_{t=1}^T \sum_{c=1}^C \log \mathcal{N}\left(\mathbf{r}_{c,t} \,\bigg|\, [\mathbf{a}_k \circledast \mathbf{w}_{k,c}]_{t}, \sigma^2 \right) + \sum_{t=1}^T \mathrm{Exp}(a_{k,t}; \lambda) \\
+&amp;= -\frac{1}{2\sigma^2} \| \mathbf{R} - \mathbf{a}_k \circledast \mathbf{W}_k \|_{\mathrm{F}}^2 - \sum_{t=1}^T \lambda a_{k,t} \\
+&amp;= \underbrace{-\frac{1}{2\sigma^2} \| \mathbf{a}_k \circledast \mathbf{W}_k \|_{\mathrm{F}}^2}_{\mathcal{L}_2(\mathbf{a}_k)} + \underbrace{\frac{1}{\sigma^2} \langle \mathbf{R}, \mathbf{a}_k \circledast \mathbf{W}_k \rangle_{\mathrm{F}}}_{\mathcal{L}_1(\mathbf{a}_k)} - \sum_{t=1}^T \lambda a_{k,t}.
+\end{align*}
+\end{split}\]</div>
+<section id="the-linear-term">
+<h3>The linear term<a class="headerlink" href="#the-linear-term" title="Permalink to this headline">#</a></h3>
+<p>Lets start by unpacking the linear term,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\mathcal{L}_1(\mathbf{a}_k) 
+&amp;= \frac{1}{\sigma^2} \langle \mathbf{R}, \mathbf{a}_k \circledast \mathbf{W}_k \rangle \\
+&amp;= \frac{1}{\sigma^2} \sum_{t=1}^T \sum_{c=1}^C r_{c,t} [\mathbf{a}_k \circledast \mathbf{w}_{k,c}]_t \\
+&amp;= \frac{1}{\sigma^2} \sum_{t=1}^T \sum_{c=1}^C \sum_{d=1}^D a_{k,t-d} r_{c,t} w_{k,c,d} \\
+&amp;= \frac{1}{\sigma^2} \sum_{t=1}^T a_{k,t} \sum_{c=1}^C \sum_{d=1}^D r_{c,t+d} w_{k,c,d} \\
+&amp;= \frac{1}{\sigma^2} \sum_{t=1}^T a_{k,t} [\mathbf{R} \star \mathbf{W}_k]_t
+\end{align*}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{R} \star \mathbf{W}_k\)</span> denotes a <strong>2D cross-correlation</strong>, which maps <span class="math notranslate nohighlight">\(\mathbb{R}^{C \times T} \times \mathbb{R}^{C \times D} \mapsto \mathbb{R}^{T}\)</span> (with appropriate padding).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this particular case the “signal” <span class="math notranslate nohighlight">\(\mathbf{R} \in \mathbb{R}^{C \times T}\)</span> and the “filter” <span class="math notranslate nohighlight">\(\mathbf{W}_k \in \mathbb{R}^{C \times D}\)</span> have the same number of rows. We can implement this 2D cross-correlation using PyTorch’s 1-D convolutions by taking advantage of the in- and out-channels, as we’ll see in lab.</p>
+</div>
+</section>
+<section id="the-quadratic-term">
+<h3>The quadratic term<a class="headerlink" href="#the-quadratic-term" title="Permalink to this headline">#</a></h3>
+<p>Now unpack the quadratic term,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\mathcal{L}_2(\mathbf{a}_k)
+&amp;= -\frac{1}{2\sigma^2} \| \mathbf{a}_k \circledast \mathbf{W}_k \|_{\mathrm{F}}^2 \\
+&amp;= -\frac{1}{2\sigma^2} \sum_{c=1}^C \sum_{t=1}^T [\mathbf{a}_k \circledast \mathbf{w}_{k,c}]_{t}^2 \\
+&amp;= -\frac{1}{2\sigma^2} \sum_{c=1}^C \sum_{t=1}^T \left[\sum_{d=1}^D a_{k,t-d} w_{k,c,d} \right]^2 \\
+&amp;= -\frac{1}{2\sigma^2} \sum_{c=1}^C \sum_{t=1}^T \left[\sum_{d=1}^D a_{k,t-d}^2 w_{k,c,d}^2  + 2 \sum_{d=1}^D \sum_{d'=1}^{d-1} a_{k,t-d} a_{k,t-d'} w_{k,c,d} w_{k,c,d'} \right] \\
+\end{align*}
+\end{split}\]</div>
+<p>The second term has <strong>interactions</strong> between <span class="math notranslate nohighlight">\(a_{k,t}\)</span> and <span class="math notranslate nohighlight">\(a_{k,t'}\)</span> whenever <span class="math notranslate nohighlight">\(|t-t'|&lt;D\)</span>, which makes the coordinate ascent update for the vector <span class="math notranslate nohighlight">\(\mathbf{a}_k\)</span> hard!</p>
+<p>However, remember that the waveform width <span class="math notranslate nohighlight">\(D\)</span> is roughly the duration of one spike. Thus, it is highly unlikely for two spikes to occur within <span class="math notranslate nohighlight">\(D\)</span> timesteps of each other. We will <strong>assume that the nonzero entries in <span class="math notranslate nohighlight">\(\mathbf{a}_k\)</span> are separated by at least <span class="math notranslate nohighlight">\(D\)</span> timesteps.</strong></p>
+<p>Under this assumption, the quadratic term reduces to,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\mathcal{L}_2(\mathbf{a}_k)
+&amp;= -\frac{1}{2\sigma^2} \sum_{c=1}^C \sum_{t=1}^T \sum_{d=1}^D a_{k,t-d}^2 w_{k,c,d}^2\\
+&amp;= -\frac{1}{2\sigma^2} \sum_{c=1}^C \sum_{t=1}^T \sum_{d=1}^D a_{k,t}^2 w_{k,c,d}^2\\
+&amp;= -\frac{1}{2\sigma^2} \sum_{t=1}^T a_{k,t}^2 \|\mathbf{W}_k\|_{\mathrm{F}}^2 \\
+&amp;= -\frac{1}{2\sigma^2} \sum_{t=1}^T a_{k,t}^2,
+\end{align*}
+\end{split}\]</div>
+<p>just like in the previous chapter.</p>
+</section>
+<section id="finishing-the-optimization">
+<h3>Finishing the optimization<a class="headerlink" href="#finishing-the-optimization" title="Permalink to this headline">#</a></h3>
+<p>We have once again reduced the coordinate update for the amplitudes to solving a bunch of independent, scalar, quadratic optimization problems subject to non-negativity constraints. For <span class="math notranslate nohighlight">\(a_{k,t}\)</span>, the problem reduces to,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+a_{k,t}^\star &amp;= \text{arg} \, \max_{a_{k,t} \in \mathbb{R}_+} \; f(a_{k,t}) = -\frac{\alpha}{2} a_{k,t}^2 + \beta a_{k,t} 
+\end{align*}
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\alpha &amp;= \frac{1}{\sigma^2} \\
+\beta &amp;= \frac{[\mathbf{R} \star \mathbf{W}]_t}{\sigma^2} - \lambda.
+\end{align*}
+\end{split}\]</div>
+<p>The solution is,</p>
+<div class="math notranslate nohighlight">
+\[
+a_{k,t}^\star = \max \left\{ 0, \, [\mathbf{R} \star \mathbf{W}]_t - \lambda \sigma^2 \right\}.
+\]</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that this solution does not guarantee that the resulting nonzero amplitudes will be separated by at least <span class="math notranslate nohighlight">\(D\)</span> time steps! In practice, we can enforce this constraint via the following heuristic: after solving for the optimal amplitudes, use the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks.html"><code class="docutils literal notranslate"><span class="pre">scipy.signal.find_peaks</span></code></a> function to keep only a subset of nonzero amplitudes that are separated by a distance of <span class="math notranslate nohighlight">\(D\)</span>.</p>
+</div>
+</section>
+</section>
+<section id="optimizing-the-waveforms">
+<h2>Optimizing the waveforms<a class="headerlink" href="#optimizing-the-waveforms" title="Permalink to this headline">#</a></h2>
+<p>As a function of the waveform <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span> for neuron <span class="math notranslate nohighlight">\(k\)</span>, the log joint probability is,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\log p(\mathbf{X}, \mathbf{A}, \mathbf{W})
+&amp;= \frac{1}{\sigma^2} \langle \mathbf{R}, \mathbf{a}_k \circledast \mathbf{W}_k \rangle_{\mathrm{F}} + c'
+\end{align*}
+\]</div>
+<p>We can simplify this expression a bit by introducing notation for <em>windows</em> of the residual matrix. Let,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{R}_{t} = 
+\begin{bmatrix}
+r_{1,t} &amp; \ldots &amp; r_{1,t+D} \\
+\vdots    &amp;        &amp; \vdots \\
+r_{C,t} &amp; \ldots &amp; r_{C,t+D}
+\end{bmatrix}.
+\end{split}\]</div>
+<p>(In code, this is a slice of the residual matrix <code class="docutils literal notranslate"><span class="pre">R[:,t:t+D]</span></code>.)</p>
+<p>Once again assuming that the nonzero amplitudes are separated by at least <span class="math notranslate nohighlight">\(D\)</span> time steps, the log probability above simplifies to,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\log p(\mathbf{X}, \mathbf{A}, \mathbf{W})
+&amp;= \frac{1}{2\sigma^2} \sum_{t=1}^T  \langle a_{k,t} \mathbf{R}_t, \mathbf{W}_k \rangle + c' \\
+&amp;= \frac{1}{2\sigma^2} \left \langle \sum_{t=1}^T  a_{k,t} \mathbf{R}_t, \mathbf{W}_k \right \rangle + c' 
+\end{align*}
+\end{split}\]</div>
+<p>This is analogous to the norm-constrained optimization problem for vector waveforms from the previous chapter!</p>
+<section id="solving-the-optimization">
+<h3>Solving the optimization<a class="headerlink" href="#solving-the-optimization" title="Permalink to this headline">#</a></h3>
+<p>We want to maximize this log joint probability over the space of low-rank, unit-norm matrices <span class="math notranslate nohighlight">\(\mathbb{S}_R^{C,D}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{W}_k^\star = \text{arg} \, \max_{\mathbf{W}_k \in \mathbb{S}_R^{C,D}} \left \langle \sum_{t=1}^T a_{k,t} \mathbf{R}_t, \mathbf{W}_k \right \rangle
+\]</div>
+<p>Such optimization problems come up frequently with dealing with low-rank approximations.</p>
+<p>Recall that when we had vector waveforms in the previous chapter, the solution was to set the waveform proportional to the weighted sum of residuals (the other vector in the inner product). Here, the solution is to set the waveform matrix “proportional to” the weighted sum of residual matrices by taking its SVD and renormaling the singular values.</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{U} \mathbf{S} \mathbf{V}^\top\)</span> where <span class="math notranslate nohighlight">\(\mathbf{S} = \mathrm{diag}(\mathbf{s})\)</span> be the SVD of the matrix <span class="math notranslate nohighlight">\(\sum_{t=1}^T a_{k,t} \mathbf{R}_t\)</span>. Furthermore, assume the singular values <span class="math notranslate nohighlight">\(\mathbf{s}= (s_1, \ldots, s_{\min \{C,D\}})\)</span> are sorted in <em>descending</em> order. The optimal waveform update is,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{W}_k^\star = \sum_{r=1}^R \bar{s}_r \mathbf{u}_r \mathbf{v}_r^\top
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{s}_r = \frac{s_r}{\sqrt{\sum_{r'=1}^R s_{r'}^2}}.
+\]</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Deriving the solution</p>
+<p>To check this solution, consider a general low-rank approximation problem,</p>
+<div class="math notranslate nohighlight">
+\[
+\text{arg} \, \max_{\mathbf{W} \in \mathbb{S}_R^{C,D}} \; f(\mathbf{W}) = \left \langle \mathbf{C}, \mathbf{W} \right \rangle.
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{U} \mathbf{S} \mathbf{V}^\top\)</span> be the SVD of <span class="math notranslate nohighlight">\(\mathbf{C}\)</span>, as above, and let <span class="math notranslate nohighlight">\(\tilde{\mathbf{U}} \tilde{\mathbf{S}} \tilde{\mathbf{V}}^\top\)</span> be the SVD of <span class="math notranslate nohighlight">\(\mathbf{W}\)</span>. By constraint, <span class="math notranslate nohighlight">\(\tilde{\mathbf{S}}\)</span> can have only <span class="math notranslate nohighlight">\(R\)</span> nonzero singular values.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+f(\mathbf{W}) 
+&amp;= \mathrm{Tr}(\mathbf{W}^\top \mathbf{C}) \\
+&amp;= \mathrm{Tr}(\tilde{\mathbf{V}} \tilde{\mathbf{S}} \tilde{\mathbf{U}}^\top \mathbf{U} \mathbf{S} \mathbf{V}^\top) \\
+&amp;= \mathrm{Tr}(\mathbf{V}^\top \tilde{\mathbf{V}} \tilde{\mathbf{S}} \tilde{\mathbf{U}}^\top \mathbf{U} \mathbf{S}) \\
+&amp;= \sum_{r=1}^R \sum_{m=1}^{\min\{C,D\}} \tilde{s}_r s_m \tilde{\mathbf{u}}_r^\top \mathbf{u}_m \tilde{\mathbf{v}}_r^\top \mathbf{v}_m.
+\end{align*}
+\end{split}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\mathbf{U}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{V}\)</span>, <span class="math notranslate nohighlight">\(\tilde{\mathbf{U}}\)</span>, and <span class="math notranslate nohighlight">\(\tilde{\mathbf{V}}\)</span> are all semi-orthogonal matrices, the inner products <span class="math notranslate nohighlight">\(\tilde{\mathbf{u}}_r^\top \mathbf{u}_m\)</span> and <span class="math notranslate nohighlight">\(\tilde{\mathbf{v}}_r^\top \mathbf{v}_m\)</span> can be at most one, and that is achieved when <span class="math notranslate nohighlight">\(\tilde{\mathbf{u}}_r = \mathbf{u}_m\)</span>.</p>
+<p>The objective is maximized when <span class="math notranslate nohighlight">\(\tilde{\mathbf{u}}_r = \mathbf{u}_r\)</span> and <span class="math notranslate nohighlight">\(\tilde{\mathbf{v}}_r = \mathbf{v}_r\)</span> for <span class="math notranslate nohighlight">\(r=1,\ldots,R\)</span>. With these left and right singular vectors, the objective is,</p>
+<div class="math notranslate nohighlight">
+\[
+f(\mathbf{W}) = \sum_{r=1}^R s_r \tilde{s}_r = \langle \mathbf{s}_{:R}, \tilde{\mathbf{s}} \rangle.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\tilde{\mathbf{s}}\)</span> is constrained to be unit-norm, this is maximized when</p>
+<div class="math notranslate nohighlight">
+\[
+\tilde{\mathbf{s}} = \frac{\mathbf{s}_{:R}}{\|\mathbf{s}_{:R}\|_2}.
+\]</div>
+</div>
+</section>
+</section>
+<section id="more-efficient-computation">
+<h2>More efficient computation<a class="headerlink" href="#more-efficient-computation" title="Permalink to this headline">#</a></h2>
+<p>Recall that a key term in the amplitude updates was the cross-correlation of the residual and the waveforms. We can compute that more efficiently by leveraging the fact that the waveforms are low rank,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+[\mathbf{R} \star \mathbf{W}_k]_t 
+&amp;= \sum_{c=1}^C \sum_{d=1}^D r_{c,t+d} w_{k,c,d} \\
+&amp;= \sum_{d=1}^D \mathbf{r}_{t+d}^\top \mathbf{w}_{k,:,d} \\
+&amp;= \sum_{d=1}^D \mathbf{r}_{t+d}^\top \mathbf{U}_k \mathbf{S}_k \mathbf{v}_{k,:,d} \\
+&amp;= \sum_{d=1}^D (\mathbf{U}_k^\top \mathbf{r}_{t+d})^\top [\mathbf{S}_k \mathbf{V}_k^\top]_{:,d} \\
+&amp;= [(\mathbf{U}_k^\top \mathbf{R}) \star (\mathbf{S}_k \mathbf{V}_k^\top)]_t
+\end{align*}
+\end{split}\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\mathbf{U}_k^\top \mathbf{r}_t\)</span> is a projection of the residual onto the <span class="math notranslate nohighlight">\(R\)</span>-dimensional subspace spanned by the columns of <span class="math notranslate nohighlight">\(\mathbf{U}_k\)</span>. This equality shows that we can perform the cross-correlation between residual and waveform in this lower dimensional space instead.
+In particular, when <span class="math notranslate nohighlight">\(R=1\)</span>, it reduces to a 1-dimensional cross-correlation of the projected residual <span class="math notranslate nohighlight">\(\mathbf{u}_k^\top \mathbf{R}\)</span> and the waveform’s temporal profile <span class="math notranslate nohighlight">\(\mathbf{v}_k\)</span>. This can yield a huge performance boost!</p>
+</section>
+<section id="preprocessing">
+<h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">#</a></h2>
+<p>In practice, the raw voltage recordings are lightly preprocessed to create the matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>.</p>
+<ol class="simple">
+<li><p>Sometimes electrical recordings have artifacts from the environment in which the recording is performed or from nearby electronics. One step toward reducing these artifacts is <strong>common average referencing</strong>, where we first subtract the mean across time, then subtract the median across channels.</p></li>
+<li><p>Spikes and the resulting EAPs are only a few milliseconds long. Real voltage recordings also have slower signals like local field potentials (LFPs), which have time scales of 3ms to 500ms. Since we are interested in spikes, we typically bandpass filter each channel <span class="math notranslate nohighlight">\(\mathbf{x}_{c} = (x_{c,1}, \ldots, x_{c,T})\)</span> to focus on content in the [300 Hz, 2000 Hz] frequency range; i.e. signals that vary over 0.5 to 3 ms.</p></li>
+<li><p>In many recordings, especially those from freely moving animals, the electrode may move slightly over time. This movement results in <strong>drift</strong> of the spike waveforms. State-of-the-art spike sorting software like Kilosort <span id="id2">[<a class="reference internal" href="99_references.html#id19" title="Marius Pachitariu, Shashwat Sridhar, and Carsen Stringer. Solving the spike sorting problem with kilosort. bioRxiv, 2023.">Pachitariu <em>et al.</em>, 2023</a>]</span> tries to correct for drift in preprocessing.</p></li>
+<li><p>Since the channels are so closely spaced, noise tends to be correlated across channels. Since the noise is assumed to be conditionally independent in the convolutional semi-NMF model described above, it is common to <strong>whiten</strong> the data before analysis. After bandpass filtering, the data should be mean zero. Thus, the empirical covariance is <span class="math notranslate nohighlight">\(\hat{\mathbf{C}} = \frac{1}{T} \sum_{t=1}^T \mathbf{x}_t \mathbf{x}_t^\top\)</span>. Whiten the data by left-multiplying by the <strong>inverse square root</strong> of the covariance matrix, <span class="math notranslate nohighlight">\(\mathbf{X} \leftarrow \hat{\mathbf{C}}^{-\frac{1}{2}} \mathbf{X}\)</span>.</p></li>
+<li><p>The MAP estimation problem is nonconvex, and the solution found by coordinate ascent will depend on the initialization procedure. There is no right answer for how to initialize the templates. An approach used by Kilosort (which this chapter is based on) is to initialize with a library of “universal” templates.</p></li>
+</ol>
+</section>
+<section id="post-processing">
+<h2>Post processing<a class="headerlink" href="#post-processing" title="Permalink to this headline">#</a></h2>
+<p>The waveforms extracted by convolutional semi-NMF usually still need a bit of post-processing. For example, sometimes the model finds two waveforms for the same neuron. Alternatively, it may assign two neurons to the same waveform if their spike timing is highly correlated.</p>
+<p>These types of errors can be addressed with a post-processing step to split or merge clusters. This step is not unique to spike sorting — it’s a common postprocessing step in many unsupervised clustering analyses. For spike sorting, we can bring extra domain knowledge to bear on the problem. For example, we expect the spatial footprints to be localized, and we expect the temporal profiles to have a single downward deflection. Modern libraries incorporate checks like these into the postprocessing steps.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
+<p>This chapter extended the previous one by allowing waveforms that extend in time. The generalized model is a form of <strong>convolutional semi-NMF</strong>. Along the way, we picked up some new skills:</p>
+<ul class="simple">
+<li><p><strong>Convolution and Cross-Correlation:</strong> the building blocks of many machine learning models, and we’ll return to them multiple times in this course.</p></li>
+<li><p><strong>Frobenius norm and inner product</strong>: basic tools for dealing with matrix-valued variables</p></li>
+<li><p><strong>Singular value decomposition</strong>: a crucial matrix factorization with lots of applications in low-rank approximation.</p></li>
+<li><p><strong>More MAP estimation!</strong> by now, you’re quite familiar with framing estimation problems as maximizing the log probability and then deriving coordinate ascent algorithms. Here, the coordinate updates were particularl interesting, as they involved making some simplifying assumptions and optimizing over manifolds of low-rank matrices.</p></li>
+</ul>
+<p>Next time, we’ll consider an analogous problem for working with calcium imaging data. Many of the models and tools we’ve developed will transfer.</p>
+</section>
+<section id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">#</a></h2>
+<p>The algorithm presented in this chapter is similar to Kilosort <span id="id3">[<a class="reference internal" href="99_references.html#id18" title="Marius Pachitariu, Nicholas Steinmetz, Shabnam Kadir, Matteo Carandini, and others. Kilosort: realtime spike-sorting for extracellular electrophysiology with hundreds of channels. BioRxiv, pages 061481, 2016.">Pachitariu <em>et al.</em>, 2016</a>, <a class="reference internal" href="99_references.html#id7" title="Nicholas A Steinmetz, Cagatay Aydin, Anna Lebedeva, Michael Okun, Marius Pachitariu, Marius Bauza, Maxime Beau, Jai Bhagat, Claudia Böhm, Martijn Broux, and others. Neuropixels 2.0: A miniaturized high-density probe for stable, long-term brain recordings. Science, 372(6539):eabf4588, 2021.">Steinmetz <em>et al.</em>, 2021</a>]</span>. The exact algorithms employed by Kilosort change from version to version, but the convolutional generative model is central. Complete details of Kilosort and the differences from one version to the next can be found in <span id="id4">Pachitariu <em>et al.</em> [<a class="reference internal" href="99_references.html#id19" title="Marius Pachitariu, Shashwat Sridhar, and Carsen Stringer. Solving the spike sorting problem with kilosort. bioRxiv, 2023.">2023</a>]</span>.</p>
+<p>Of course, there are other spike sorting algorithms and implementations as well, like YASS <span id="id5">[<a class="reference internal" href="99_references.html#id20" title="JinHyung Lee, Catalin Mitelut, Hooshmand Shokri, Ian Kinsella, Nishchal Dethe, Shenghao Wu, Kevin Li, Eduardo B Reyes, Denis Turcu, Eleanor Batty, and others. YASS: Yet another spike sorter applied to large-scale multi-electrode array recordings in primate retina. bioRxiv, 2020.">Lee <em>et al.</em>, 2020</a>]</span> and MountainSort <span id="id6">[<a class="reference internal" href="99_references.html#id21" title="Jason E Chung, Jeremy F Magland, Alex H Barnett, Vanessa M Tolosa, Angela C Tooker, Kye Y Lee, Kedar G Shah, Sarah H Felix, Loren M Frank, and Leslie F Greengard. A fully automated approach to spike sorting. Neuron, 95(6):1381–1394, 2017.">Chung <em>et al.</em>, 2017</a>]</span>. Each has its own unique aspects, and it is interesting to compare and contrast different methods. For Neuropixels users, Kilosort appears to be the go-to method.</p>
+<p>Is spike sorting really necessary though? For some questions of interest, like population decoding or state space analysis, it may not be. For example, <span id="id7">Deng <em>et al.</em> [<a class="reference internal" href="99_references.html#id22" title="Xinyi Deng, Daniel F Liu, Kenneth Kay, Loren M Frank, and Uri T Eden. Clusterless decoding of position from multiunit activity using a marked point process filter. Neural computation, 27(7):1438–1460, 2015.">2015</a>]</span> showed improved performance using a “clusterless” decoding approach that uses extracted spike waveforms but does not try to assign them neuron labels. Similarly, <span id="id8">Trautmann <em>et al.</em> [<a class="reference internal" href="99_references.html#id23" title="Eric M Trautmann, Sergey D Stavisky, Subhaneil Lahiri, Katherine C Ames, Matthew T Kaufman, Daniel J O’Shea, Saurabh Vyas, Xulu Sun, Stephen I Ryu, Surya Ganguli, and others. Accurate estimation of neural population dynamics without spike sorting. Neuron, 103(2):292–308, 2019.">2019</a>]</span> showed that you can identify low dimensional states and dynamics from electrophysiological recordings without spike sorting. However, if your scientific objectives involve understanding individual neurons’ coding properties, then spike sorting is a necessary step.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="04_simple_spike_sorting.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Simple Spike Sorting</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="99_references.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">References</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Scott Linderman<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
