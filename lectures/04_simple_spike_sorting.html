@@ -137,6 +137,11 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="06_calcium_imaging.html">
+   Demixing Calcium Imaging Data
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="99_references.html">
    References
   </a>
@@ -496,11 +501,11 @@ title="Print to PDF"
 </div></blockquote>
 <section id="a-simple-probabilistic-model">
 <h2>A simple probabilistic model<a class="headerlink" href="#a-simple-probabilistic-model" title="Permalink to this headline">#</a></h2>
-<p>I know we just picked on spherical cows, but there really is value in starting with simplified models. To get started on spike sorting, let’s consider a zoomed out view of a Neuropixels recording, like that shown in <a class="reference internal" href="03_neurobio.html#id5"><span class="std std-numref">Fig. 6</span></a>d. Specifically, let’s imagine downsampling the 30 kHz time series to 500 Hz. Then we can represent the multi-channel voltage recording as a matrix <span class="math notranslate nohighlight">\(\mathbf{X} \in \mathbb{R}^{C \times T}\)</span> where:</p>
+<p>I know we just picked on spherical cows, but there really is value in starting with simplified models. To get started on spike sorting, let’s consider a zoomed out view of a Neuropixels recording, like that shown in <a class="reference internal" href="03_neurobio.html#id5"><span class="std std-numref">Fig. 6</span></a>d. Specifically, let’s imagine downsampling the 30 kHz time series to 500 Hz. Then we can represent the multi-channel voltage recording as a matrix <span class="math notranslate nohighlight">\(\mathbf{X} \in \mathbb{R}^{N \times T}\)</span> where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(C\)</span> is the number of channels</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span> is the number of channels</p></li>
 <li><p><span class="math notranslate nohighlight">\(T\)</span> is the number of 2 ms time bins</p></li>
-<li><p><span class="math notranslate nohighlight">\(x_{c,t}\)</span> is the average voltage on channel <span class="math notranslate nohighlight">\(c\)</span> during time bin <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{n,t}\)</span> is the average voltage on channel <span class="math notranslate nohighlight">\(n\)</span> during time bin <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 </ul>
 <p>At this temporal resolution, each spike is typically contained within a single time bin.</p>
 </section>
@@ -508,10 +513,10 @@ title="Print to PDF"
 <h2>Assumptions<a class="headerlink" href="#assumptions" title="Permalink to this headline">#</a></h2>
 <p>To model this data, we will make a few assumptions:</p>
 <ol class="simple">
-<li><p>Assume there are <span class="math notranslate nohighlight">\(K\)</span> neurons in the vicinity of the probe. When the <span class="math notranslate nohighlight">\(k\)</span>-th neuron spikes, its EAP produces a signature <strong>waveform</strong> on the channels. We model the waveform as a vector, <span class="math notranslate nohighlight">\(\mathbf{w}_k = (w_{k,1}, \ldots, w_{k,C}) \in \mathbb{R}^C\)</span>, where <span class="math notranslate nohighlight">\(w_{k,c}\)</span> represents the average magnitude of the EAP produced on channel <span class="math notranslate nohighlight">\(c\)</span> each time neuron <span class="math notranslate nohighlight">\(k\)</span> spikes.</p></li>
+<li><p>Assume there are <span class="math notranslate nohighlight">\(K\)</span> neurons in the vicinity of the probe. When the <span class="math notranslate nohighlight">\(k\)</span>-th neuron spikes, its EAP produces a signature <strong>waveform</strong> on the channels. We model the waveform as a vector, <span class="math notranslate nohighlight">\(\mathbf{w}_k = (w_{k,1}, \ldots, w_{k,N}) \in \mathbb{R}^N\)</span>, where <span class="math notranslate nohighlight">\(w_{k,n}\)</span> represents the average magnitude of the EAP produced on channel <span class="math notranslate nohighlight">\(n\)</span> each time neuron <span class="math notranslate nohighlight">\(k\)</span> spikes.</p></li>
 <li><p>Let <span class="math notranslate nohighlight">\(\mathbf{a}_k = (a_{k,1}, \ldots, a_{k,T}) \in \mathbb{R}_+^T\)</span> denote the time series of spike <strong>amplitudes</strong> for neuron <span class="math notranslate nohighlight">\(k\)</span>. Since neurons spike only a few times a second, the amplitude is typically zero, but when the neuron does spike it has a positive amplitude.</p></li>
 <li><p>If two neurons fire at the same, their waveforms add together in the measured voltage.</p></li>
-<li><p>The voltage recordings are noisy, so in addition to the spike waveforms we also have independent Gaussian noise <span class="math notranslate nohighlight">\(\epsilon_{c,t} \in \mathcal{N}(0, \sigma^2)\)</span> for each channel <span class="math notranslate nohighlight">\(c\)</span> and time bin <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>The voltage recordings are noisy, so in addition to the spike waveforms we also have independent Gaussian noise <span class="math notranslate nohighlight">\(\epsilon_{n,t} \in \mathcal{N}(0, \sigma^2)\)</span> for each channel <span class="math notranslate nohighlight">\(n\)</span> and time bin <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 </ol>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -542,7 +547,7 @@ x \sim \mathcal{N}(\mu, \sigma^2) \Rightarrow ax + b \sim \mathcal{N}(a \mu + b,
 <p>With these assumptions, we model the measured voltage as a sum of spike waveforms, weighted by the amplitudes, with Gaussian noise:</p>
 <div class="math notranslate nohighlight">
 \[
-x_{c,t} \sim \mathcal{N} \left( \sum_{k=1}^K w_{k,c} a_{k,t}, \sigma^2 \right).
+x_{n,t} \sim \mathcal{N} \left( \sum_{k=1}^K w_{k,n} a_{k,t}, \sigma^2 \right).
 \]</div>
 </section>
 <section id="matrix-factorization-perspective">
@@ -557,7 +562,7 @@ x_{c,t} \sim \mathcal{N} \left( \sum_{k=1}^K w_{k,c} a_{k,t}, \sigma^2 \right).
 \mathbf{w}_1 &amp; \ldots &amp; \mathbf{w}_K \\
 | &amp; &amp; | 
 \end{bmatrix}
-\in \mathbb{R}^{C \times K},
+\in \mathbb{R}^{N \times K},
 &amp;
 \mathbf{A} &amp;= 
 \begin{bmatrix}
@@ -568,7 +573,7 @@ x_{c,t} \sim \mathcal{N} \left( \sum_{k=1}^K w_{k,c} a_{k,t}, \sigma^2 \right).
 \in \mathbb{R}^{T \times K}.
 \end{align*}
 \end{split}\]</div>
-<p>and let <span class="math notranslate nohighlight">\(\mathbf{E} \in \mathbb{R}^{C \times T}\)</span> denote the noise matrix with entries <span class="math notranslate nohighlight">\(\epsilon_{c,t}\)</span>.</p>
+<p>and let <span class="math notranslate nohighlight">\(\mathbf{E} \in \mathbb{R}^{N \times T}\)</span> denote the noise matrix with entries <span class="math notranslate nohighlight">\(\epsilon_{n,t}\)</span>.</p>
 <p>Our model is that <span class="math notranslate nohighlight">\(\mathbf{X} = \mathbf{W} \mathbf{A}^\top + \mathbf{E}\)</span>.
 That is, the matrix of voltage measurements is the outer product of the waveforms and the amplitudes.</p>
 <p>This is called a <strong>matrix factorization</strong> model, since the data matrix is modeled as the outer product of two factors (plus noise). In particular, since the amplitudes are constrained to be non-negative and the waveforms are unconstrained, this is a <strong>semi-non-negative</strong> matrix factorization model <span id="id1">[<a class="reference internal" href="99_references.html#id9" title="Chris HQ Ding, Tao Li, and Michael I Jordan. Convex and semi-nonnegative matrix factorizations. IEEE transactions on pattern analysis and machine intelligence, 32(1):45–55, 2008.">Ding <em>et al.</em>, 2008</a>]</span>.</p>
@@ -579,16 +584,16 @@ That is, the matrix of voltage measurements is the outer product of the waveform
 <p>We can remove this degree of freedom by constraining the weights to be unit norm; i.e. enforce <span class="math notranslate nohighlight">\(\|\mathbf{w}_k\| = 1\)</span> for all <span class="math notranslate nohighlight">\(k\)</span>. One way to do this is by giving the waveforms a uniform prior on the unit sphere,</p>
 <div class="math notranslate nohighlight">
 \[
-\mathbf{w}_k \sim \mathrm{Unif}(\mathbb{S}_{C-1}).
+\mathbf{w}_k \sim \mathrm{Unif}(\mathbb{S}_{N-1}).
 \]</div>
 <div class="admonition-notation admonition">
 <p class="admonition-title">Notation</p>
-<p>We denote the unit hypersphere in <span class="math notranslate nohighlight">\(C\)</span> dimensions by</p>
+<p>We denote the unit hypersphere in <span class="math notranslate nohighlight">\(N\)</span> dimensions by</p>
 <div class="math notranslate nohighlight">
 \[
-\mathbb{S}_{C-1} = \left\{ \mathbf{u}: \mathbf{u} \in \mathbb{R}^C \text{ and } \|\mathbf{u}\|_2 = 1 \right\}
+\mathbb{S}_{N-1} = \left\{ \mathbf{u}: \mathbf{u} \in \mathbb{R}^N \text{ and } \|\mathbf{u}\|_2 = 1 \right\}
 \]</div>
-<p>It is a (<span class="math notranslate nohighlight">\(C-1\)</span>)-dimensional manifold embedded in <span class="math notranslate nohighlight">\(\mathbb{R}^C\)</span>.</p>
+<p>It is a (<span class="math notranslate nohighlight">\(N-1\)</span>)-dimensional manifold embedded in <span class="math notranslate nohighlight">\(\mathbb{R}^N\)</span>.</p>
 </div>
 <div class="admonition-the-uniform-distribution admonition">
 <p class="admonition-title">The uniform distribution</p>
@@ -640,8 +645,8 @@ x \sim \mathrm{Exp}(\lambda)
 \begin{align*}
 p(\mathbf{X}, \mathbf{W}, \mathbf{A}) 
 &amp;= p(\mathbf{X} \mid \mathbf{W}, \mathbf{A}) \, p(\mathbf{W}) \, p(\mathbf{A}) \\
-&amp;= \left[ \prod_{c=1}^C \prod_{t=1}^T \mathcal{N} \left(x_{c,t} \mid \sum_{k=1}^K w_{k,c} a_{k,t}, \sigma^2 \right) \right] \\
-&amp;\qquad \times \left[ \prod_{k=1}^K \mathrm{Unif}(\mathbf{w}_k; \mathbb{S}_{C-1}) \right] 
+&amp;= \left[ \prod_{n=1}^N \prod_{t=1}^T \mathcal{N} \left(x_{n,t} \mid \sum_{k=1}^K w_{k,n} a_{k,t}, \sigma^2 \right) \right] \\
+&amp;\qquad \times \left[ \prod_{k=1}^K \mathrm{Unif}(\mathbf{w}_k; \mathbb{S}_{N-1}) \right] 
 \times \left[ \prod_{k=1}^K \prod_{t=1}^T \mathrm{Exp}(a_{k,t}; \lambda) \right].
 \end{align*}
 \end{split}\]</div>
@@ -670,24 +675,24 @@ p(\mathbf{X}, \mathbf{W}, \mathbf{A})
 \[\begin{split}
 \begin{align*}
 \log p(\mathbf{X}, \mathbf{W}, \mathbf{A}) 
-&amp;= \sum_{c=1}^C \sum_{t=1}^T \log \mathcal{N}\left(x_{c,t} \mid \sum_{k=1}^K w_{k,c} a_{k,t}, \sigma^2 \right) + \log \mathbb{I}[\mathbf{w}_k \in \mathbb{S}_{C-1}] + c' \\
-&amp;= -\frac{1}{2\sigma^2} \sum_{c=1}^C \sum_{t=1}^T \left(x_{c,t} - \sum_{k=1}^K w_{k,c} a_{k,t}\right)^2 + \log \mathbb{I}[\mathbf{w}_k \in \mathbb{S}_{C-1}] + c'' \\
-&amp;= -\frac{1}{2\sigma^2} \sum_{c=1}^C \sum_{t=1}^T \left(r_{c,t} - w_{k,c} a_{k,t} \right)^2 + \log \mathbb{I}[\mathbf{w}_k \in \mathbb{S}_{C-1}] + c'' \\
+&amp;= \sum_{n=1}^N \sum_{t=1}^T \log \mathcal{N}\left(x_{n,t} \mid \sum_{k=1}^K w_{k,n} a_{k,t}, \sigma^2 \right) + c \\
+&amp;= -\frac{1}{2\sigma^2} \sum_{n=1}^N \sum_{t=1}^T \left(x_{n,t} - \sum_{k=1}^K w_{k,n} a_{k,t}\right)^2 + c' \\
+&amp;= -\frac{1}{2\sigma^2} \sum_{n=1}^N \sum_{t=1}^T \left(r_{n,t} - w_{k,n} a_{k,t} \right)^2 + c' \\
 \end{align*}
 \end{split}\]</div>
 <p>where</p>
 <div class="math notranslate nohighlight">
 \[
-r_{c,t} = x_{c,t} - \sum_{j \neq k} w_{j,c} a_{j,c}
+r_{n,t} = x_{n,t} - \sum_{j \neq k} w_{j,n} a_{j,t}
 \]</div>
-<p>is the <strong>residual</strong>, and <span class="math notranslate nohighlight">\(c'\)</span> and <span class="math notranslate nohighlight">\(c''\)</span> are constants wrt <span class="math notranslate nohighlight">\(\mathbf{w}_k\)</span>.</p>
-<p>The solution will become more clear if we write it in vector form. Let <span class="math notranslate nohighlight">\(\mathbf{r}_t = (r_{1,t}, \ldots, r_{C,t})\)</span> denote the vector of residuals. Then we can get rid of the sum over channels and write the log joint probability as,</p>
+<p>is the <strong>residual</strong>, and <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(c'\)</span> are constants wrt <span class="math notranslate nohighlight">\(\mathbf{w}_k\)</span>.</p>
+<p>The solution will become more clear if we write it in vector form. Let <span class="math notranslate nohighlight">\(\mathbf{r}_t = (r_{1,t}, \ldots, r_{n,t})\)</span> denote the vector of residuals. Then we can get rid of the sum over channels and write the log joint probability as,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
 \log p(\mathbf{X}, \mathbf{W}, \mathbf{A}) 
-&amp;=  -\frac{1}{2\sigma^2} \sum_{t=1}^T (\mathbf{r}_{t} - \mathbf{w}_{k} a_{k,t})^\top (\mathbf{r}_{t} - \mathbf{w}_{k} a_{k,t}) + \log \mathbb{I}[\mathbf{w}_k \in \mathbb{S}_{C-1}] + c'' \\
-&amp;= \sum_{t=1}^T \mathcal{N}(\mathbf{r}_t; \mathbf{w}_k a_{k,t}, \sigma^2 \mathbf{I}) + \log \mathbb{I}[\mathbf{w}_k \in \mathbb{S}_{C-1}] + c'' \\
+&amp;=  -\frac{1}{2\sigma^2} \sum_{t=1}^T (\mathbf{r}_{t} - \mathbf{w}_{k} a_{k,t})^\top (\mathbf{r}_{t} - \mathbf{w}_{k} a_{k,t}) + c' \\
+&amp;= \sum_{t=1}^T \mathcal{N}(\mathbf{r}_t; \mathbf{w}_k a_{k,t}, \sigma^2 \mathbf{I}) + c' \\
 \end{align*}
 \end{split}\]</div>
 <p>where we have taken this opportunity to introduce the multivariate normal distribution.</p>
@@ -724,21 +729,21 @@ r_{c,t} = x_{c,t} - \sum_{j \neq k} w_{j,c} a_{j,c}
 \[
 \begin{align*}
 \log p(\mathbf{X}, \mathbf{W}, \mathbf{A}) 
-&amp;= \frac{1}{\sigma^2} \sum_{t=1}^T \left(\mathbf{r}_{t}^\top \mathbf{w}_{k} a_{k,t} - \frac{a_{k,t}^2}{2} \mathbf{w}_k^\top \mathbf{w}_k \right) + \log \mathbb{I}[\mathbf{w}_k \in \mathbb{S}_{C-1}] + c''
+&amp;= \frac{1}{\sigma^2} \sum_{t=1}^T \left(\mathbf{r}_{t}^\top \mathbf{w}_{k} a_{k,t} - \frac{a_{k,t}^2}{2} \mathbf{w}_k^\top \mathbf{w}_k \right) + c''
 \end{align*}
 \]</div>
-<p>The log-indicator simply captures that this is a constrained optimization problem: <span class="math notranslate nohighlight">\(\mathbf{w}_k\)</span> must be a normalized vector, otherwise this term is negative infinity. Note that <span class="math notranslate nohighlight">\(\mathbf{w}_k^\top \mathbf{w}_k = 1\)</span> for all <span class="math notranslate nohighlight">\(\mathbf{w}_k \in \mathbb{S}_{C-1}\)</span>, so the second term in parentheses is actually a constant for all valid <span class="math notranslate nohighlight">\(\mathbf{w}_k\)</span>.</p>
+<p>Remember this is a constrained optimization problem: <span class="math notranslate nohighlight">\(\mathbf{w}_k\)</span> must be a normalized vector. Note that <span class="math notranslate nohighlight">\(\mathbf{w}_k^\top \mathbf{w}_k = 1\)</span> for all <span class="math notranslate nohighlight">\(\mathbf{w}_k \in \mathbb{S}_{N-1}\)</span>, so the second term in parentheses is actually a constant for all valid <span class="math notranslate nohighlight">\(\mathbf{w}_k\)</span>.</p>
 <p>Thus, maximizing with respect to <span class="math notranslate nohighlight">\(\mathbf{w}_k\)</span> amounts to solving the following constrained optimization problem,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
 \mathbf{w}_k^\star 
-&amp;= \text{arg}\, \max_{\mathbf{w}_{k}  \in \mathbb{S}_{C-1}}  \left( \sum_{t=1}^T a_{k,t} \mathbf{r}_{t} \right)^\top \mathbf{w}_{k} \\
-&amp;= \text{arg}\, \max_{\mathbf{w}_{k}  \in \mathbb{S}_{C-1}}  \left\langle \sum_{t=1}^T a_{k,t} \mathbf{r}_t, \, \mathbf{w}_{k} \right \rangle \\
-&amp;= \text{arg}\, \max_{\mathbf{w}_{k}  \in \mathbb{S}_{C-1}}  \left\langle \mathbf{R} \mathbf{a}_k, \, \mathbf{w}_{k} \right \rangle
+&amp;= \text{arg}\, \max_{\mathbf{w}_{k}  \in \mathbb{S}_{N-1}}  \left( \sum_{t=1}^T a_{k,t} \mathbf{r}_{t} \right)^\top \mathbf{w}_{k} \\
+&amp;= \text{arg}\, \max_{\mathbf{w}_{k}  \in \mathbb{S}_{N-1}}  \left\langle \sum_{t=1}^T a_{k,t} \mathbf{r}_t, \, \mathbf{w}_{k} \right \rangle \\
+&amp;= \text{arg}\, \max_{\mathbf{w}_{k}  \in \mathbb{S}_{N-1}}  \left\langle \mathbf{R} \mathbf{a}_k, \, \mathbf{w}_{k} \right \rangle
 \end{align*}
 \end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mathbf{R} \in \mathbb{R}^{C \times T}\)</span> is the matrix of residuals with columns <span class="math notranslate nohighlight">\([\mathbf{r}_1, \ldots, \mathbf{r}_T]\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{R} \in \mathbb{R}^{N \times T}\)</span> is the matrix of residuals with columns <span class="math notranslate nohighlight">\([\mathbf{r}_1, \ldots, \mathbf{r}_T]\)</span>.</p>
 <p>Maximing this linear objective subject to a unit norm constraint has a well known solution — make <span class="math notranslate nohighlight">\(\mathbf{w}_k\)</span> parallel to the other vector in the inner product:</p>
 <div class="math notranslate nohighlight">
 \[
