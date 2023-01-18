@@ -37,7 +37,7 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 | Wed, Jan 11 | Lecture 2  | [Probabilistic modeling](lectures/02_probabilistic_modeling)
 | Fri, Jan 13 | Lecture 3  | [Basic neurobiology](lectures/03_neurobio) and [Simple spike sorting](lectures/04_simple_spike_sorting.ipynb). <br> _Lab 0: Python and PyTorch primer_ released (it will not be graded)
 | Mon, Jan 16 | MLK Day    | _No class_
-| Wed, Jan 18 | Lecture 4  | [Spike sorting by deconvolution](lectures/05_deconv_spike_sorting.ipynb)
+| Wed, Jan 18 | Lecture 4  | [Spike sorting by deconvolution](lectures/05_deconv_spike_sorting.ipynb) {Download}`[slides]<lectures/pdf/lecture04.pdf>`
 | Fri, Jan 20 | Lab 1      | Kilosort from scratch
 | Mon, Jan 23 | Lecture 5  | Finishing [spike sorting](lectures/05_deconv_spike_sorting.ipynb) and starting [calcium deconvolution](lectures/06_calcium_imaging.ipynb)
 | Wed, Jan 25 | Lecture 6  | [Demixing and deconvolving calcium imaging data](lectures/06_calcium_imaging.ipynb)
