@@ -39,8 +39,8 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 | Mon, Jan 16 | MLK Day    | _No class_
 | Wed, Jan 18 | Lecture 4  | [Spike sorting by deconvolution](lectures/05_deconv_spike_sorting.ipynb)
 | Fri, Jan 20 | Lab 1      | Kilosort from scratch
-| Mon, Jan 23 | Lecture 5  | Demixing and deconvolving calcium imaging data I
-| Wed, Jan 25 | Lecture 6  | Demixing and deconvolving calcium imaging data II <!-- what to do here? -->
+| Mon, Jan 23 | Lecture 5  | Finishing [spike sorting](lectures/05_deconv_spike_sorting.ipynb) and starting [calcium deconvolution](lectures/06_calcium_imaging.ipynb)
+| Wed, Jan 25 | Lecture 6  | [Demixing and deconvolving calcium imaging data](lectures/06_calcium_imaging.ipynb)
 | Fri, Jan 27 | Lab 2      | CaImAn from scratch
 | Mon, Jan 30 | Lecture 7  | Markerless pose tracking
 
