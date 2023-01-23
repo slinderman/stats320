@@ -33,14 +33,14 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 ### Unit I: Extracting biological signals from raw data
 | Date        | Type       | Topic |
 | ----------- | ---------- | ----- |
-| Mon, Jan 9  | Lecture 1  | {Download}`Course Overview<lectures/pdf/lecture01.pdf>`
+| Mon, Jan 9  | Lecture 1  | Course overview {Download}`[slides]<lectures/pdf/lecture01.pdf>`
 | Wed, Jan 11 | Lecture 2  | [Probabilistic modeling](lectures/02_probabilistic_modeling)
-| Fri, Jan 13 | Lecture 3  | [Basic neurobiology](lectures/03_neurobio) and [Simple spike sorting](lectures/04_simple_spike_sorting.ipynb). <br> _Lab 0: Python and PyTorch primer_ released (it will not be graded)
+| Fri, Jan 13 | Lecture 3 <br> **Lab 0**  | [Basic neurobiology](lectures/03_neurobio)  <br> [**Python and PyTorch primer**](labs/00_pytorch_primer.ipynb) (not graded)
 | Mon, Jan 16 | MLK Day    | _No class_
-| Wed, Jan 18 | Lecture 4  | [Spike sorting by deconvolution](lectures/05_deconv_spike_sorting.ipynb) {Download}`[slides]<lectures/pdf/lecture04.pdf>`
-| Fri, Jan 20 | Lab 1      | Kilosort from scratch
-| Mon, Jan 23 | Lecture 5  | Finishing [spike sorting](lectures/05_deconv_spike_sorting.ipynb) and starting [calcium deconvolution](lectures/06_calcium_imaging.ipynb)
-| Wed, Jan 25 | Lecture 6  | [Demixing and deconvolving calcium imaging data](lectures/06_calcium_imaging.ipynb)
+| Wed, Jan 18 | Lecture 4  | [Simple spike sorting](lectures/04_simple_spike_sorting.ipynb) {Download}`[slides]<lectures/pdf/04_spike_sorting.pdf>`
+| Fri, Jan 20 | **Lab 1**      | [**Spike sorting**](labs/01_spike_sorting.ipynb)
+| Mon, Jan 23 | Lecture 5  | [Spike sorting by deconvolution](lectures/05_deconv_spike_sorting.ipynb) {Download}`[slides]<lectures/pdf/05_spike_sorting_deconv.pdf>`
+| Wed, Jan 25 | Lecture 6  | [Demixing and deconvolving calcium imaging data](lectures/06_calcium_imaging.ipynb) {Download}`[slides]<lectures/pdf/06_calcium_imaging.pdf>`
 | Fri, Jan 27 | Lab 2      | CaImAn from scratch
 | Mon, Jan 30 | Lecture 7  | Markerless pose tracking
 
