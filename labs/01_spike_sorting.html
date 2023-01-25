@@ -1710,14 +1710,14 @@ where <span class="math notranslate nohighlight">\(\mathbf{R} \in \mathbb{R}^{N 
 <section id="problem-3a-write-helper-functions-to-up-down-date-the-residual">
 <h2>Problem 3a: Write helper functions to up/down-date the residual<a class="headerlink" href="#problem-3a-write-helper-functions-to-up-down-date-the-residual" title="Permalink to this headline">#</a></h2>
 <p>Each iteration of <code class="docutils literal notranslate"><span class="pre">map_estimate</span></code> updates one neuron at a time. We can save a lot of computation by just adding and subtracting that neuron’s convolved template from the residual at the start and end of the iteration. Moreover, we can perform that convolution more efficiently by working directly with the factors of the template.</p>
-<p>Let <span class="math notranslate nohighlight">\(\mathbf{W}_k = \mathbf{U}_k \tilde{\mathbf{V}}_k^\top\)</span> where <span class="math notranslate nohighlight">\(\tilde{\mathbf{V}}_k^\top = \mathrm{diag}(\mathbf{s}_k) \mathbf{V}_k^\top \in {N \times D}\)</span> denotes the weighted temporal factors of neuron <span class="math notranslate nohighlight">\(k\)</span>’s template. We can use this factorization to implement the convolution as,</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{W}_k = \mathbf{U}_k \tilde{\mathbf{V}}_k^\top\)</span> where <span class="math notranslate nohighlight">\(\tilde{\mathbf{V}}_k^\top = \mathrm{diag}(\mathbf{s}_k) \mathbf{V}_k^\top \in {R \times D}\)</span> denotes the weighted temporal factors of neuron <span class="math notranslate nohighlight">\(k\)</span>’s template. We can use this factorization to implement the convolution as,</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{align}
 \mathbf{a}_k \circledast \mathbf{W}_k = \mathbf{U}_k (\mathbf{a}_k \circledast \tilde{\mathbf{V}}_k^\top)
 \end{align}
 \]</div>
-<p>In code, we’ll let <code class="docutils literal notranslate"><span class="pre">footprints</span></code> denote the tensor of spatial factors. It is of shape <span class="math notranslate nohighlight">\(K \times N \times R\)</span> where <span class="math notranslate nohighlight">\(R\)</span> is the rank, so <code class="docutils literal notranslate"><span class="pre">U[k]</span></code> corresponds to <span class="math notranslate nohighlight">\(U_k\)</span> in our equations above. Likewise, let <code class="docutils literal notranslate"><span class="pre">profiles</span></code> denote the tensor of weighted temporal factors.  It is of shape <span class="math notranslate nohighlight">\(K \times R \times D\)</span> so that <code class="docutils literal notranslate"><span class="pre">profiles[k]</span></code> corresponds to <span class="math notranslate nohighlight">\(\tilde{\mathbf{V}}_k^\top\)</span>.</p>
+<p>In code, we’ll let <code class="docutils literal notranslate"><span class="pre">footprints</span></code> denote the tensor of spatial factors. It is of shape <span class="math notranslate nohighlight">\(K \times N \times R\)</span> where <span class="math notranslate nohighlight">\(R\)</span> is the rank, so <code class="docutils literal notranslate"><span class="pre">footprints[k]</span></code> corresponds to <span class="math notranslate nohighlight">\(U_k\)</span> in our equations above. Likewise, let <code class="docutils literal notranslate"><span class="pre">profiles</span></code> denote the tensor of weighted temporal factors.  It is of shape <span class="math notranslate nohighlight">\(K \times R \times D\)</span> so that <code class="docutils literal notranslate"><span class="pre">profiles[k]</span></code> corresponds to <span class="math notranslate nohighlight">\(\tilde{\mathbf{V}}_k^\top\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">update_residual</span><span class="p">(</span><span class="n">neuron</span><span class="p">,</span> <span class="n">footprints</span><span class="p">,</span> <span class="n">profiles</span><span class="p">,</span> <span class="n">amplitudes</span><span class="p">,</span> <span class="n">residual</span><span class="p">):</span>
@@ -1847,7 +1847,7 @@ where <span class="math notranslate nohighlight">\(\mathbf{R} \in \mathbb{R}^{N 
     <span class="c1"># Truncate the SVD and normalize the singular values</span>
     
     <span class="c1"># Truncate, weight, and transpose the factors as appropriate</span>
-    <span class="c1"># new_footprints = ...</span>
+    <span class="c1"># new_footprint = ...</span>
     <span class="c1"># new_profile = ...</span>
     <span class="c1">#</span>
     <span class="c1">###</span>
