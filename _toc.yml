@@ -15,3 +15,4 @@ parts:
     chapters:
     - file: labs/00_pytorch_primer.ipynb
     - file: labs/01_spike_sorting.ipynb
+    - file: labs/02_calcium_imaging.ipynb
