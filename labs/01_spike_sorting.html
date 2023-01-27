@@ -54,6 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lab 2: Calcium demixing and deconvolution" href="02_calcium_imaging.html" />
     <link rel="prev" title="Lab 0: PyTorch Primer" href="00_pytorch_primer.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -160,6 +161,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Lab 1: Spike Sorting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_calcium_imaging.html">
+   Lab 2: Calcium demixing and deconvolution
   </a>
  </li>
 </ul>
@@ -436,12 +442,12 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#part-3-now-do-it-more-efficiently">
    Part 3: Now do it more efficiently
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#problem-3a-write-helper-functions-to-up-down-date-the-residual">
-   Problem 3a: Write helper functions to up/down-date the residual
-  </a>
   <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-3a-write-helper-functions-to-up-down-date-the-residual">
+     Problem 3a: Write helper functions to up/down-date the residual
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#problem-3b-update-the-amplitudes-using-a-fast-score-calculation">
      Problem 3b: Update the amplitudes using a fast score calculation
@@ -655,12 +661,12 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#part-3-now-do-it-more-efficiently">
    Part 3: Now do it more efficiently
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#problem-3a-write-helper-functions-to-up-down-date-the-residual">
-   Problem 3a: Write helper functions to up/down-date the residual
-  </a>
   <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-3a-write-helper-functions-to-up-down-date-the-residual">
+     Problem 3a: Write helper functions to up/down-date the residual
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#problem-3b-update-the-amplitudes-using-a-fast-score-calculation">
      Problem 3b: Update the amplitudes using a fast score calculation
@@ -1487,11 +1493,14 @@ x_{b,n,t} = \sum_{k = 1}^{K} \sum_{d=1}^D a_{b,k,t+d-1} w_{n,k,d}.
 </section>
 <section id="problem-2e-update-the-templates">
 <h3>Problem 2e: Update the templates<a class="headerlink" href="#problem-2e-update-the-templates" title="Permalink to this headline">#</a></h3>
-<p>Our last step is to update the template for a given neuron by projecting the <em>target</em> <span class="math notranslate nohighlight">\(\overline{\mathbf{R}} \in \mathbb{R}^{N \times D}\)</span>. The target is the sum of scaled residuals at the times of spikes in the amplitudes:
+<p>Our last step is to update the template for a given neuron by projecting the <em>target</em> <span class="math notranslate nohighlight">\(\overline{\mathbf{R}} \in \mathbb{R}^{N \times D}\)</span>. The target is the sum of scaled residuals at the times of spikes in the amplitudes:</p>
+<div class="math notranslate nohighlight">
+\[
 \begin{align}
-\overline{\mathbf{R}} = \sum_t a_{k,t} \mathbf{R}_{:,t:t+D}.
+    \overline{\mathbf{R}} = \sum_t a_{k,t} \mathbf{R}_{:,t:t+D}.
 \end{align}
-where <span class="math notranslate nohighlight">\(\mathbf{R} \in \mathbb{R}^{N \times T}\)</span> denotes the residual for neuron <span class="math notranslate nohighlight">\(n\)</span>.</p>
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{R} \in \mathbb{R}^{N \times T}\)</span> denotes the residual for neuron <span class="math notranslate nohighlight">\(n\)</span>.</p>
 <p>To get the template, project <span class="math notranslate nohighlight">\(\overline{\mathbf{R}}\)</span> onto <span class="math notranslate nohighlight">\(\mathcal{S}_K^{(N,D)}\)</span>, the set of rank-<span class="math notranslate nohighlight">\(K\)</span>, unit-norm, <span class="math notranslate nohighlight">\(N \times D\)</span> matrices, using the SVD.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1706,9 +1715,8 @@ where <span class="math notranslate nohighlight">\(\mathbf{R} \in \mathbb{R}^{N 
 <section id="part-3-now-do-it-more-efficiently">
 <h2>Part 3: Now do it more efficiently<a class="headerlink" href="#part-3-now-do-it-more-efficiently" title="Permalink to this headline">#</a></h2>
 <p>Our code above was not optimized for efficiency. For example, we kept recomputing the residual, which incurred costly convolutions. Likewise, we naively cross-correlated the residual with the templates, without leveraging the fact that the templates are low rank. In this section you’ll go back and address these shortcomings.</p>
-</section>
 <section id="problem-3a-write-helper-functions-to-up-down-date-the-residual">
-<h2>Problem 3a: Write helper functions to up/down-date the residual<a class="headerlink" href="#problem-3a-write-helper-functions-to-up-down-date-the-residual" title="Permalink to this headline">#</a></h2>
+<h3>Problem 3a: Write helper functions to up/down-date the residual<a class="headerlink" href="#problem-3a-write-helper-functions-to-up-down-date-the-residual" title="Permalink to this headline">#</a></h3>
 <p>Each iteration of <code class="docutils literal notranslate"><span class="pre">map_estimate</span></code> updates one neuron at a time. We can save a lot of computation by just adding and subtracting that neuron’s convolved template from the residual at the start and end of the iteration. Moreover, we can perform that convolution more efficiently by working directly with the factors of the template.</p>
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{W}_k = \mathbf{U}_k \tilde{\mathbf{V}}_k^\top\)</span> where <span class="math notranslate nohighlight">\(\tilde{\mathbf{V}}_k^\top = \mathrm{diag}(\mathbf{s}_k) \mathbf{V}_k^\top \in {R \times D}\)</span> denotes the weighted temporal factors of neuron <span class="math notranslate nohighlight">\(k\)</span>’s template. We can use this factorization to implement the convolution as,</p>
 <div class="math notranslate nohighlight">
@@ -1759,6 +1767,7 @@ where <span class="math notranslate nohighlight">\(\mathbf{R} \in \mathbb{R}^{N 
 </div>
 </div>
 </div>
+</section>
 <section id="problem-3b-update-the-amplitudes-using-a-fast-score-calculation">
 <h3>Problem 3b: Update the amplitudes using a fast score calculation<a class="headerlink" href="#problem-3b-update-the-amplitudes-using-a-fast-score-calculation" title="Permalink to this headline">#</a></h3>
 <p>In the course notes, we showed that the score—the cross correlation of the residual and a template— can be computed more efficiently by projecting the residual on the spatial factors of the template and then convolving with the weighted temporal factors. In math,</p>
@@ -2236,6 +2245,13 @@ p(a_{k,t}) \propto \mathbb{I}[a_{k,t} \geq 0] \, \mathcal{N}(a_{k,t}; \mu, \nu^2
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Lab 0: PyTorch Primer</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="02_calcium_imaging.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lab 2: Calcium demixing and deconvolution</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
