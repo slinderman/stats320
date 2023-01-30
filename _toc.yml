@@ -9,6 +9,7 @@ parts:
     - file: lectures/04_simple_spike_sorting.ipynb
     - file: lectures/05_deconv_spike_sorting.ipynb
     - file: lectures/06_calcium_imaging.ipynb
+    - file: lectures/07_pose_tracking.ipynb
     - file: lectures/99_references.md
 
   - caption: Labs

@@ -38,11 +38,11 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 | Fri, Jan 13 | Lecture 3 <br> **Lab 0**  | [Basic neurobiology](lectures/03_neurobio)  <br> [**Python and PyTorch primer**](labs/00_pytorch_primer.ipynb) (not graded)
 | Mon, Jan 16 | MLK Day    | _No class_
 | Wed, Jan 18 | Lecture 4  | [Simple spike sorting](lectures/04_simple_spike_sorting.ipynb) {Download}`[slides]<lectures/pdf/04_spike_sorting.pdf>`
-| Fri, Jan 20 | **Lab 1**      | [**Spike sorting**](labs/01_spike_sorting.ipynb)
+| Fri, Jan 20 | **Lab 1**  | [**Spike sorting**](labs/01_spike_sorting.ipynb)
 | Mon, Jan 23 | Lecture 5  | [Spike sorting by deconvolution](lectures/05_deconv_spike_sorting.ipynb) {Download}`[slides]<lectures/pdf/05_spike_sorting_deconv.pdf>`
 | Wed, Jan 25 | Lecture 6  | [Demixing and deconvolving calcium imaging data](lectures/06_calcium_imaging.ipynb) {Download}`[slides]<lectures/pdf/06_calcium_imaging.pdf>`
-| Fri, Jan 27 | Lab 2      | CaImAn from scratch
-| Mon, Jan 30 | Lecture 7  | Markerless pose tracking
+| Fri, Jan 27 | **Lab 2**  | [**Calcium deconvolution**](labs/02_calcium_imaging.ipynb)
+| Mon, Jan 30 | Lecture 7  | [Markerless pose tracking](lectures/07_pose_tracking.ipynb) {Download}`[slides]<lectures/pdf/07_pose_tracking.pdf>`
 
 ### Unit II: Encoding and decoding models for neural data
 | Date        | Type       | Topic |
