@@ -1,0 +1,841 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Markerless Pose Tracking &#8212; Machine Learning Methods for Neural Data Analysis</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="References" href="99_references.html" />
+    <link rel="prev" title="Demixing Calcium Imaging Data" href="06_calcium_imaging.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning Methods for Neural Data Analysis</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Notes
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_probabilistic_modeling.html">
+   Probabilistic Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_neurobio.html">
+   Basic Neurobiology
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_simple_spike_sorting.html">
+   Simple Spike Sorting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_deconv_spike_sorting.html">
+   Spike Sorting by Deconvolution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_calcium_imaging.html">
+   Demixing Calcium Imaging Data
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Markerless Pose Tracking
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="99_references.html">
+   References
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Labs
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/00_pytorch_primer.html">
+   Lab 0: PyTorch Primer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/01_spike_sorting.html">
+   Lab 1: Spike Sorting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/02_calcium_imaging.html">
+   Lab 2: Calcium Deconvolution
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/slinderman/stats320/blob/winter2023/lectures/07_pose_tracking.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/lectures/07_pose_tracking.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#supervised-learning">
+   Supervised learning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logistic-regression">
+   Logistic regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimization">
+   Optimization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setup">
+     Setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-gradient-with-respect-to-the-weights">
+     The gradient with respect to the weights
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-negative-log-likelihood-is-convex">
+     The negative log likelihood is convex
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gradient-descent">
+     Gradient descent
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#newton-s-method">
+     Newton’s method
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iteratively-reweighted-least-squares-irls">
+     Iteratively reweighted least squares (IRLS)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computational-complexity">
+     Computational complexity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scaling-up">
+     Scaling up
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pose-tracking-by-convolution">
+   Pose tracking by convolution
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convolutional-neural-networks">
+     Convolutional neural networks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-up">
+   Next Up
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Markerless Pose Tracking</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#supervised-learning">
+   Supervised learning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logistic-regression">
+   Logistic regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimization">
+   Optimization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setup">
+     Setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-gradient-with-respect-to-the-weights">
+     The gradient with respect to the weights
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-negative-log-likelihood-is-convex">
+     The negative log likelihood is convex
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gradient-descent">
+     Gradient descent
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#newton-s-method">
+     Newton’s method
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iteratively-reweighted-least-squares-irls">
+     Iteratively reweighted least squares (IRLS)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computational-complexity">
+     Computational complexity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scaling-up">
+     Scaling up
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pose-tracking-by-convolution">
+   Pose tracking by convolution
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convolutional-neural-networks">
+     Convolutional neural networks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-up">
+   Next Up
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="markerless-pose-tracking">
+<h1>Markerless Pose Tracking<a class="headerlink" href="#markerless-pose-tracking" title="Permalink to this headline">#</a></h1>
+<p>We’ve talked a lot about extracting neural signals from ephys and ophys measurements, but what comes next? One of the fundamental goals of systems neuroscience is to understand the relationship between neural activity and behavioral outputs. To that end, we need to quantify  and model not only neural activity but animals’ behavior as well.</p>
+<p>The study of natural behavior is called <strong>ethology</strong> <span id="id1">[<a class="reference internal" href="99_references.html#id31" title="N Tinbergen. On aims and methods of ethology. Z. Tierpsychol., 20(4):410–433, 1963.">Tinbergen, 1963</a>]</span>. With advances in deep learning, the field is undergoing a computational revival <span id="id2">[<a class="reference internal" href="99_references.html#id33" title="David J Anderson and Pietro Perona. Toward a science of computational ethology. Neuron, 84(1):18–31, October 2014.">Anderson and Perona, 2014</a>]</span>. The once tedious process of labeling video data to track body posture and annotate behaviors has been largely automated by machine learning methods, which are well-suited to the task <span id="id3">[<a class="reference internal" href="99_references.html#id38" title="Praneet C Bala, Benjamin R Eisenreich, Seng Bum Michael Yoo, Benjamin Y Hayden, Hyun Soo Park, and Jan Zimmermann. Automated markerless pose estimation in freely moving macaques with OpenMonkeyStudio. Nat. Commun., 11(1):4560, September 2020.">Bala <em>et al.</em>, 2020</a>, <a class="reference internal" href="99_references.html#id40" title="Kristin Branson, Alice A Robie, John Bender, Pietro Perona, and Michael H Dickinson. High-throughput ethomics in large groups of drosophila. Nat. Methods, 6(6):451–457, June 2009.">Branson <em>et al.</em>, 2009</a>, <a class="reference internal" href="99_references.html#id36" title="Jacob M Graving, Daniel Chae, Hemal Naik, Liang Li, Benjamin Koger, Blair R Costelloe, and Iain D Couzin. DeepPoseKit, a software toolkit for fast and robust animal pose estimation using deep learning. Elife, October 2019.">Graving <em>et al.</em>, 2019</a>, <a class="reference internal" href="99_references.html#id39" title="Ana S Machado, Dana M Darmohray, João Fayad, Hugo G Marques, and Megan R Carey. A quantitative framework for whole-body coordination reveals specific deficits in freely walking ataxic mice. Elife, October 2015.">Machado <em>et al.</em>, 2015</a>, <a class="reference internal" href="99_references.html#id34" title="Alexander Mathis, Pranav Mamidanna, Kevin M Cury, Taiga Abe, Venkatesh N Murthy, Mackenzie Weygandt Mathis, and Matthias Bethge. DeepLabCut: markerless pose estimation of user-defined body parts with deep learning. Nat. Neurosci., 21(9):1281–1289, August 2018.">Mathis <em>et al.</em>, 2018</a>, <a class="reference internal" href="99_references.html#id35" title="Talmo D Pereira, Nathaniel Tabris, Arie Matsliah, David M Turner, Junyu Li, Shruthi Ravindranath, Eleni S Papadoyannis, Edna Normand, David S Deutsch, Z Yan Wang, and others. SLEAP: A deep learning system for multi-animal pose tracking. Nature methods, 19(4):486–495, 2022.">Pereira <em>et al.</em>, 2022</a>, <a class="reference internal" href="99_references.html#id37" title="Anqi Wu, Estefany Kelly Buchanan, Matthew Whiteway, Michael Schartner, Guido Meijer, Jean-Paul Noel, Erica Rodriguez, Claire Everett, Amy Norovich, Evan Schaffer, and Others. Deep graph pose: a semi-supervised deep graphical model for improved animal pose tracking. Adv. Neural Inf. Process. Syst., 2020.">Wu <em>et al.</em>, 2020</a>]</span>. At the intersection of computational neuroscience and computational ethology is the (predictably named) emerging field of <strong>computational neuroethology</strong> <span id="id4">[<a class="reference internal" href="99_references.html#id32" title="Sandeep Robert Datta, David J Anderson, Kristin Branson, Pietro Perona, and Andrew Leifer. Computational neuroethology: a call to action. Neuron, 104(1):11–24, October 2019.">Datta <em>et al.</em>, 2019</a>]</span>.</p>
+<p>This chapter develops the basic methods underlying most markerless pose tracking systems.  There are a few key ideas. First, we can cast pose tracking — i.e. the task of labeling keypoints of interest in video frames, like an animals paws, snout, and tail, and tracking them over time — as a <strong>supervised learning</strong> problem. Given a few labeled frames, we can train a classifier to predict the keypoint locations in new frames.  Second, such classifiers require surprisingly few training examples, particularly when they are given features from networks that have been pre-trained on similar tasks. For example, deep neural networks trained for image classification on very large datasets like ImageNet may not immediately solve pose tracking problems, but the features they’ve learned for classifying cats and dogs may still be useful for tracking paws and snouts.  Using a neural network trained on one task to jump-start a model for a similar task is called <strong>transfer learning</strong>.</p>
+<p>We’ll start with a simple logistic regression model for pose tracking and show how it can be implemented with a convolutional neural network (CNN). Then we’ll show how the same ideas can be generalized to pre-trained CNNs for image classification, like very deep residual networks <span id="id5">[<a class="reference internal" href="99_references.html#id41" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition, 770–778. openaccess.thecvf.com, 2016.">He <em>et al.</em>, 2016</a>]</span>.</p>
+<section id="supervised-learning">
+<h2>Supervised learning<a class="headerlink" href="#supervised-learning" title="Permalink to this headline">#</a></h2>
+<p>In supervised learning problems, our data consists of a set of tuples <span class="math notranslate nohighlight">\(\{(\mathbf{x}_n, y_n)\}_{n=1}^N\)</span> where <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span> are the <strong>inputs</strong> and <span class="math notranslate nohighlight">\(y_n\)</span> are the <strong>outputs</strong>. Contrast this with the spike sorting and calcium deconvolution problems, which we framed as unsupervised matrix factorization problems.</p>
+<p>A simple way to frame the pose tracking problem as a supervised learning problem is to chop each image frame into <strong>patches</strong> and then assign each patch a binary <strong>label</strong> to indicate whether or not the patch contains a specific key point (e.g. “left paw”). Then we can train a binary <strong>classifier</strong> to predict the labels given the image patches. Of course, we usually want to track multiple key points at once, and we could simply train separate classifiers for each one. Ideally, the trained classifiers will <strong>generalize</strong> to new image patches from new video frames, giving us predictions about which patches contain which keypoints. Then, in post-processing, we can determine the most likely configuration of key points in future frames, using the classifiers’ predictions.</p>
+<figure class="align-default" id="paw-track">
+<img alt="../_images/paw_classifier.png" src="../_images/paw_classifier.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">A simple way to do pose tracking is to carve each video frame into small patches and label them as positive or negative examples of a key point. Then train a classifier to predict the label for new patches.
+This figure was adapted from fig. 1B of <span id="id6">Machado <em>et al.</em> [<a class="reference internal" href="99_references.html#id39" title="Ana S Machado, Dana M Darmohray, João Fayad, Hugo G Marques, and Megan R Carey. A quantitative framework for whole-body coordination reveals specific deficits in freely walking ataxic mice. Elife, October 2015.">2015</a>]</span></span><a class="headerlink" href="#paw-track" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="logistic-regression">
+<h2>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{x}_n \in \mathbb{R}^P\)</span> be the <span class="math notranslate nohighlight">\(n\)</span>-th image patch, flattened into a vector of <span class="math notranslate nohighlight">\(P\)</span> pixels. Let <span class="math notranslate nohighlight">\(y_n \in \{0,1\}\)</span> be a binary label specifying whether the key point of interest is present in that frame.</p>
+<p>In <strong>logistic regression</strong>, we model the conditional distribution of the label given the image as,</p>
+<div class="math notranslate nohighlight">
+\[
+p(y_n \mid \mathbf{x}_n) = \mathrm{Bern}\big( \sigma(\mathbf{w}^\top \mathbf{x}_n) \big)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{w} \in \mathbb{R}^P\)</span> are the <strong>weights</strong> for each pixel, and <span class="math notranslate nohighlight">\(\sigma: \mathbb{R} \mapsto (0, 1)\)</span> is the <strong>logistic function</strong></p>
+<div class="admonition-the-bernoulli-distribution admonition">
+<p class="admonition-title">The Bernoulli distribution</p>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Bernoulli_distribution"><strong>Bernoulli distribution</strong></a> is a distribution over binary variables <span class="math notranslate nohighlight">\(y \in \{0,1\}\)</span> with probability <span class="math notranslate nohighlight">\(p \in [0,1]\)</span>. Its pmf can be written as,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{Bern}(y; p) = p^{y} \, (1-p)^{(1-y)}
+\]</div>
+</div>
+<div class="admonition-the-logistic-sigmoid-function admonition">
+<p class="admonition-title">The logistic (sigmoid) function</p>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Sigmoid_function"><strong>logistic (aka sigmoid) function</strong></a> is a map from the reals to the interval <span class="math notranslate nohighlight">\((0,1)\)</span>. It is defined as,</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma(a) = \frac{1}{1 + e^{-a}} = \frac{e^a}{1 + e^a}
+\]</div>
+<p>It asymptotes at <span class="math notranslate nohighlight">\(\lim_{a \to -\infty} \sigma(a) = 0\)</span> and <span class="math notranslate nohighlight">\(\lim_{a \to \infty} \sigma(a) = 1\)</span>.  It is plotted below.</p>
+<p>Interestingly, the logistic function is symmetric in that,</p>
+<div class="math notranslate nohighlight">
+\[
+1 - \sigma(a) = \frac{1}{1+e^a} = \sigma(-a).
+\]</div>
+<p>Its derivative is,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\sigma'(a) = \frac{e^a}{(1+e^a)^2} = \left( \frac{e^a}{1+e^a}\right) \left( \frac{1}{1+e^a}\right) = \sigma(a) \sigma(-a).
+\end{align*}
+\]</div>
+<p>The derivative is positive (i.e., the logistic function is monotonically increasing) and attains its maximum at <span class="math notranslate nohighlight">\(\sigma'(0) = \tfrac{1}{4}\)</span>.</p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">aa</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">aa</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">aa</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s2">&quot;True&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$a$&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\sigma(a)$&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/07_pose_tracking_5_0.png" src="../_images/07_pose_tracking_5_0.png" />
+</div>
+</div>
+</section>
+<section id="optimization">
+<h2>Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">#</a></h2>
+<p>Our goal is to estimate the weights <span class="math notranslate nohighlight">\(\mathbf{w}_{\mathsf{MLE}}\)</span> that maximize the log likelihood of the training data, or equivalently minimize the negative log likelihood. Unlike most of the problems we’ve encountered thus far, we won’t have a closed form solution for the weights, even if we try to do coordinate ascent. Instead we’ll have to turn to more general optimization strategies like gradient descent and Newton’s method. This is a good opportunity to introduce a few of these tools and some of the key concepts.</p>
+<section id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{X} \in \mathbb{R}^{N \times P}\)</span> denote the matrix of inputs (with rows <span class="math notranslate nohighlight">\(\mathbf{x}_n^\top\)</span>) and <span class="math notranslate nohighlight">\(\mathbf{y} = (y_1, \ldots, y_N) \in \{0,1\}^N\)</span> denote the vector of output labels. The <strong>negative</strong> log likelihood is,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\mathcal{L}(\mathbf{w}) &amp;= -\log p(\mathbf{y} \mid \mathbf{w}, \mathbf{X}) \\
+&amp;= -\sum_{n=1}^N \log p(y_n \mid \mathbf{w}, \mathbf{x}_n) \\
+&amp;= -\sum_{n=1}^N \log \mathrm{Bern}(y_n; \sigma(\mathbf{w}^\top \mathbf{x}_n)) \\
+&amp;= -\sum_{n=1}^N \left(y_n \mathbf{w}^\top \mathbf{x}_n - \log(1 + e^{\mathbf{w}^\top \mathbf{x}_n}) \right)
+\end{align*}
+\end{split}\]</div>
+</section>
+<section id="the-gradient-with-respect-to-the-weights">
+<h3>The gradient with respect to the weights<a class="headerlink" href="#the-gradient-with-respect-to-the-weights" title="Permalink to this headline">#</a></h3>
+<p>The gradient with respect to <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\nabla \mathcal{L}(\mathbf{w}) 
+&amp;= -\sum_{n=1}^N \left( y_n \mathbf{x}_n - \frac{e^{\mathbf{w}^\top \mathbf{x}_n}}{1 + e^{\mathbf{w}^\top \mathbf{x}_n}} \mathbf{x}_n\right) \\
+&amp;= -\sum_{n=1}^N \big(y_n - \sigma(\mathbf{w}^\top \mathbf{x}_n)\big) \, \mathbf{x}_n
+\end{align*}
+\end{split}\]</div>
+<p>Unfortunately, this is a nonlinear function of <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> (due to the logistic function), and when we set to zero and try to solve for the weights, we find there is no closed-form solution.</p>
+</section>
+<section id="the-negative-log-likelihood-is-convex">
+<h3>The negative log likelihood is convex<a class="headerlink" href="#the-negative-log-likelihood-is-convex" title="Permalink to this headline">#</a></h3>
+<p>While there may not be a closed-form solution, the problem is not necessarily all that hard to solve. It turns out the negative log likelihood is a <strong>convex function</strong> of the weights — i.e., it looks like an upward facing bowl — so we can solve it with off-the-shelf optimization tools.</p>
+<p>To show that the objective function is convex, it suffices to show that it is twice-differentiable and its <a class="reference external" href="https://en.wikipedia.org/wiki/Hessian_matrix"><strong>Hessian</strong></a> (the matrix of second-order partial derivatives) is positive semi-definite (has eigenvalues <span class="math notranslate nohighlight">\(\geq 0\)</span>).</p>
+<p>The Hessian of the negative log likelihood is,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\nabla^2 \mathcal{L}(\mathbf{w})
+&amp;= \sum_{n=1}^N \sigma'(\mathbf{w}^\top \mathbf{x}_n) \mathbf{x}_n \mathbf{x}_n^\top 
+\end{align*}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma'(\mathbf{w}^\top \mathbf{x}_n)\)</span> is the derivative of the logistic function (see above) evaluated at <span class="math notranslate nohighlight">\(\mathbf{w}^\top \mathbf{x}_n\)</span>.</p>
+<p>Since this a sum of outer products (<span class="math notranslate nohighlight">\(\mathbf{x}_n \mathbf{x}_n^\top\)</span>) with positive coefficients (<span class="math notranslate nohighlight">\(\sigma(\mathbf{w}^\top \mathbf{x}_n)\)</span>), the Hessian is positive semi-definite.</p>
+<div class="tip admonition">
+<p class="admonition-title">Matrix derivatives</p>
+<p>It takes some practice to become familiar with the rules of matrix calculus. I recommend the first chapters of <a class="reference external" href="https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf">The Matrix Cookbook</a> <span id="id7">[<a class="reference internal" href="99_references.html#id42" title="Kaare Brandt Petersen, Michael Syskind Pedersen, and others. The matrix cookbook. Technical University of Denmark, 7(15):510, 2008. URL: https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf.">Petersen <em>et al.</em>, 2008</a>]</span> for an introduction.</p>
+</div>
+</section>
+<section id="gradient-descent">
+<h3>Gradient descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">#</a></h3>
+<p>Since the the negative log likelihood is convex (equivalently, the log likelihood is concave), we have a host of tools at our disposal for maximum likelihood estimation. We don’t need CVXPy to solve this problem (like we did for the previous chapter). Here, we can simply perform <strong>gradient descent</strong>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{w}_0\)</span> denote our initial setting of the weights. Gradient descent is an iterative algorithm that produces a sequence of weights <span class="math notranslate nohighlight">\(\mathbf{w}_0, \mathbf{w}_1, \ldots\)</span> that (under certain conditions) converges to a local optimum of the objective. Since the objective is convex, all local optima are global optima. The idea is straightforward, on each iteration we update the weights by taking a step in the direction of the gradient,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\mathbf{w}_{i+1} &amp;= \mathbf{w}_i - \alpha_i \nabla \mathcal{L}(\mathbf{w}_i)
+\end{align*}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_i \in \mathbb{R}_+\)</span> is the <strong>learning rate</strong> (aka step size) on iteration <span class="math notranslate nohighlight">\(i\)</span>, and <span class="math notranslate nohighlight">\(\nabla \mathcal{L}(\mathbf{w}_i)\)</span> is the gradient of the objective evaluated at the current weights <span class="math notranslate nohighlight">\(\mathbf{w}_i\)</span>.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Convergence of gradient descent</p>
+<p>When <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> is convex and <span class="math notranslate nohighlight">\(\nabla \mathcal{L}\)</span> is <a class="reference external" href="https://en.wikipedia.org/wiki/Lipschitz_continuity"><strong>Lipschitz continuous</strong></a>, and when the learning rates satisfy certain conditions (e.g., they are set by a <a class="reference external" href="https://en.wikipedia.org/wiki/Backtracking_line_search"><strong>backtracking line search</strong></a>), then gradient descent will converge to a local optimum. When the objective is convex, all local optima are global optima, so then gradient descent is guaranteed to find a global solution.</p>
+</div>
+</section>
+<section id="newton-s-method">
+<h3>Newton’s method<a class="headerlink" href="#newton-s-method" title="Permalink to this headline">#</a></h3>
+<p>Gradient descent uses first-order information (i.e., the gradient of the objective at the current weights) to determine the descent direction. We can obtain faster convergence rates using <strong>second-order</strong> information (i.e., the Hessian of the objective).</p>
+<p>The idea is to minimize a quadratic approximation of the objective given by a Taylor approximation around the current weights,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\mathcal{L}(\mathbf{w}) 
+&amp;\approx \mathcal{L}(\mathbf{w}_i) + (\mathbf{w} - \mathbf{w}_i)^\top \nabla \mathcal{L}(\mathbf{w}_i) 
++ \frac{1}{2} (\mathbf{w} - \mathbf{w}_i)^\top \nabla^2 \mathcal{L}(\mathbf{w}_i) (\mathbf{w} - \mathbf{w}_i).
+\end{align*}
+\]</div>
+<p>The minimum of this quadratic approximation has a closed form solution,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{w}_{i+1} = \mathbf{w}_i + \nabla^2 \mathcal{L}(\mathbf{w}_i)^{-1} \nabla \mathcal{L}(\mathbf{w}_i).
+\]</div>
+<p>Here, the descent direction is given by the inverse-Hessian times the gradient, <span class="math notranslate nohighlight">\(\nabla^2 \mathcal{L}(\mathbf{w}_i)^{-1} \nabla \mathcal{L}(\mathbf{w}_i)\)</span>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that Newton’s method assumes that the Hessian is invertible, which is almost surely the case for logistic regression with many data points. We can ensure invertibility by adding a multivariate normal prior on the weights, as we will introduce below.</p>
+</div>
+<p>Newton’s method can be unstable in practice. A simple fix is to use the same descent direction, but that to vary the step size <span class="math notranslate nohighlight">\(\alpha_i\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{w}_{i+1} = \mathbf{w}_i + \alpha_i \nabla^2 \mathcal{L}(\mathbf{w}_i)^{-1} \nabla \mathcal{L}(\mathbf{w}_i).
+\]</div>
+<p>For example, the step-size can be set to <span class="math notranslate nohighlight">\(\alpha_i &lt; 1\)</span> to implement <em>damped</em> Newton’s method, or it can be determined by a backtracking line search.</p>
+</section>
+<section id="iteratively-reweighted-least-squares-irls">
+<h3>Iteratively reweighted least squares (IRLS)<a class="headerlink" href="#iteratively-reweighted-least-squares-irls" title="Permalink to this headline">#</a></h3>
+<p>The weight updates simplify nicely when we substitute in the form of the gradient and Hessian for logistic regression. Note that they can be written in matrix form as,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\nabla \mathcal{L}(\mathbf{w}) &amp;= -\mathbf{X}^\top \big(\mathbf{y} - \sigma(\mathbf{X} \mathbf{w}) \big) \\
+\nabla^2 \mathcal{L}(\mathbf{w}) &amp;= \mathbf{X}^\top \mathbf{S} \mathbf{X}
+\end{align*}
+\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{S} = \mathrm{diag}\left([\sigma'(\mathbf{w}^\top \mathbf{x}_1), \ldots, \sigma'(\mathbf{w}^\top \mathbf{x}_N)] \right)
+\]</div>
+<p>is a diagonal <strong>scaling (aka weighting) matrix</strong>. Note that the scale factors are all positive since <span class="math notranslate nohighlight">\(\sigma'(a) &gt; 0\)</span>.</p>
+<p>Substituting these forms in and rearranging yield,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\mathbf{w}_{i+1} 
+&amp;= \mathbf{w}_i + \big(\mathbf{X}^\top \mathbf{S} \mathbf{X}\big)^{-1} \mathbf{X}^\top \big( \mathbf{y} - \sigma(\mathbf{X} \mathbf{w}) \big) \\
+&amp;= \big(\mathbf{X}^\top \mathbf{S} \mathbf{X}\big)^{-1} \mathbf{X}^\top \mathbf{S} \tilde{\mathbf{y}},
+\end{align*} 
+\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\tilde{\mathbf{y}} = \mathbf{X} \mathbf{w}_i + \mathbf{S}^{-1} \big(\mathbf{y} - \sigma(\mathbf{X} \mathbf{w}_i) \big).
+\]</div>
+<p>In other words, the standard Newton method update can be viewed as the solution to a <a class="reference external" href="https://en.wikipedia.org/wiki/Weighted_least_squares"><strong>weighted least squares</strong></a> problem with weights <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> and targets <span class="math notranslate nohighlight">\(\tilde{\mathbf{y}}\)</span> that depend on the current weights <span class="math notranslate nohighlight">\(\mathbf{w}_i\)</span>. Viewed this way, we see that Newton’s method for logistic regression is equivalent to an algorithm called <a class="reference external" href="https://en.wikipedia.org/wiki/Iteratively_reweighted_least_squares"><strong>iteratively reweighted least squares (IRLS)</strong></a>.</p>
+</section>
+<section id="computational-complexity">
+<h3>Computational complexity<a class="headerlink" href="#computational-complexity" title="Permalink to this headline">#</a></h3>
+<div class="tip admonition">
+<p class="admonition-title">Exercise</p>
+<p>Show that the computational complexity of gradient descent is <span class="math notranslate nohighlight">\(\mathcal{O}(NP)\)</span> whereas the complexity of Newton’s method is <span class="math notranslate nohighlight">\(\mathcal{O}(NP^2 + P^3)\)</span>.</p>
+</div>
+</section>
+<section id="scaling-up">
+<h3>Scaling up<a class="headerlink" href="#scaling-up" title="Permalink to this headline">#</a></h3>
+<p>Though it converges faster, Newton’s method quickly becomes intractable for large <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(P\)</span>. For large <span class="math notranslate nohighlight">\(N\)</span>, even gradient descent becomes costly. There are a few ways to speed up computation:</p>
+<ul class="simple">
+<li><p><strong>Quasi-Newton methods</strong> like <a class="reference external" href="https://en.wikipedia.org/wiki/BFGS_method"><strong>BFGS</strong></a> replace the exact Hessian with an approximation and side-step the explicit matrix inversion.</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent"><strong>Stochastic gradient descent (SGD)</strong></a> uses subsets of data (a.k.a. <em>minibatches</em>) to approximate the gradient. Under fairly general conditions, it converges to a local optimum.</p></li>
+<li><p><strong>Momentum</strong> is often used in conjunction with SGD to keep the descent direction from changing too rapidly. This can address some of the limitations of regular gradient descent as well, e.g., where the updates overshoot in poorly conditioned problems. Related methods like Nesterov’s accelerated gradient (see <span id="id8">Sutskever <em>et al.</em> [<a class="reference internal" href="99_references.html#id43" title="Ilya Sutskever, James Martens, George Dahl, and Geoffrey Hinton. On the importance of initialization and momentum in deep learning. In International conference on machine learning, 1139–1147. PMLR, 2013.">2013</a>]</span>) can achieve second-order convergence rates using first-order information (under certain conditions).</p></li>
+<li><p>Still, SGD (with momentum) requires <strong>setting a learning rate</strong>. Modern machine learning packages like <a class="reference external" href="https://pytorch.org/docs/stable/optim.html"><code class="docutils literal notranslate"><span class="pre">torch.optim</span></code></a> implement a number of optimizers that automatically tune the learning rates, like <strong>AdaGrad</strong> <span id="id9">[<a class="reference internal" href="99_references.html#id44" title="John Duchi, Elad Hazan, and Yoram Singer. Adaptive subgradient methods for online learning and stochastic optimization. Journal of Machine Learning Research, 2011.">Duchi <em>et al.</em>, 2011</a>]</span>, <strong>RMSProp</strong> <span id="id10">[<a class="reference internal" href="99_references.html#id46" title="Geoffrey Hinton, Nitish Srivasta, and Kevin Swerskey. Neural networks for machine learning lecture 6a. 2014. URL: https://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf.">Hinton <em>et al.</em>, 2014</a>]</span>, and <strong>Adam</strong> <span id="id11">[<a class="reference internal" href="99_references.html#id45" title="Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.">Kingma and Ba, 2014</a>]</span>.</p></li>
+</ul>
+</section>
+</section>
+<section id="pose-tracking-by-convolution">
+<h2>Pose tracking by convolution<a class="headerlink" href="#pose-tracking-by-convolution" title="Permalink to this headline">#</a></h2>
+<p>Remember we started by treating each data point as patch <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span> and a binary label <span class="math notranslate nohighlight">\(y_n\)</span> specifying whether a specific key point (e.g. “left paw”) is present. Of course, in practice we want to classify all the patches in an image in parallel, and we want to predict more than one type of key point.</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{X}_n \in \mathbb{R}^{P_H \times P_W}\)</span> denote the <span class="math notranslate nohighlight">\(n\)</span>-th image and <span class="math notranslate nohighlight">\(\mathbf{Y}_{n,k} \in \{0,1\}^{P_H \times P_W}\)</span> denote the binary mask of where in the <span class="math notranslate nohighlight">\(k\)</span>-th key point is in the <span class="math notranslate nohighlight">\(n\)</span>-th image. Both are <span class="math notranslate nohighlight">\(P_H\)</span> pixels in height and <span class="math notranslate nohighlight">\(P_W\)</span> pixels wide. Assume the patches are <span class="math notranslate nohighlight">\(P_h \times P_w\)</span> in size, with <span class="math notranslate nohighlight">\(P_h &lt; P_H\)</span> and <span class="math notranslate nohighlight">\(P_w &lt; P_W\)</span>.  Finally, ket <span class="math notranslate nohighlight">\(\mathbf{W}_k \in \mathbb{R}^{P_h \times P_w}\)</span> denote the weights for the <span class="math notranslate nohighlight">\(k\)</span>-th key point.</p>
+<p>We can think of each image as having <span class="math notranslate nohighlight">\(P_H \cdot P_W\)</span> patches and corresponding labels, one centered on each pixel. In our simple logistic regression model, each patch’s label is modeled as a conditionally independent Bernoulli random variable,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+p(\mathbf{Y} \mid \mathbf{X}, \mathbf{W}) 
+&amp;= \prod_{n=1}^N \prod_{k=1}^K \prod_{i=1}^{P_H} \prod_{j=1}^{P_W} \mathrm{Bern}(y_{n,k,i,j}; \sigma(a_{n,k,i,j}))
+\end{align*}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(a_{n,k,i,j} \in \mathbb{R}\)</span> is the <strong>activation</strong> for that specific image, key point, and pixel. The activations are given by a <strong>2D cross-correlation</strong>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+a_{n,k,i,j} 
+&amp;= \sum_{d=1}^{P_h} \sum_{d'=1}^{P_w} w_{k,d,d'} x_{n,i+d-\frac{P_h}{2},j+d'-\frac{P_w}{2}} \\
+&amp;= [\mathbf{X_n} \star \mathbf{W}_k]_{i,j}.
+\end{align*}
+\end{split}\]</div>
+<p>In fact, the activations for an entire batch of <span class="math notranslate nohighlight">\(N\)</span> images and <span class="math notranslate nohighlight">\(K\)</span> key points (i.e., output channels) can be computed in a single call to <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.functional.conv2d.html"><code class="docutils literal notranslate"><span class="pre">F.conv2d</span></code></a>, with the appropriate padding. In lab, we’ll make use of the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html"><code class="docutils literal notranslate"><span class="pre">torch.nn.Conv2d</span></code></a> class, which encapsulates the weights of a 2D convolution layer and makes it easy to train such models.</p>
+<section id="convolutional-neural-networks">
+<h3>Convolutional neural networks<a class="headerlink" href="#convolutional-neural-networks" title="Permalink to this headline">#</a></h3>
+<p>Framed this way, we can view the logistic regression model as a <strong>one-layer convolutional neural network (CNN)</strong>. This view also suggests an obvious direction for improvement. The activations of the logistic regression model are <strong>linear functions</strong> of the pixels. In practice, a good key point detector may need <strong>nonlinear features</strong> of the images. Moreover, the features necessary to predict one keypoint (e.g., the left paw) may be similar to those needed for another (e.g., the right).</p>
+<p>Convolutional neural networks allow both nonlinear feature learning and feature sharing between outputs. The idea is straightforward: stack multiple convolutional layers on top of each other, feeding the output of one as the input to the next.</p>
+<p><strong>Residual networks (ResNets)</strong> enable very deep CNNs to be stably trained by adding <strong>skip connections</strong> whereby the input is fed straight to the output of a layer, thereby allowing the convolution to capture the difference (i.e., residual) between the input and output.</p>
+<p>These notes will not comprehensively cover CNNs and ResNets. Instead, please consult the many great online resources, like <span id="id12">Goodfellow <em>et al.</em> [<a class="reference internal" href="99_references.html#id47" title="Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep Learning. MIT Press, 2016. http://www.deeplearningbook.org.">2016</a>]</span> and the PyTorch <a class="reference external" href="https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html">tutorials</a>.</p>
+</section>
+</section>
+<section id="next-up">
+<h2>Next Up<a class="headerlink" href="#next-up" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Transfer Learning</p></li>
+<li><p>Structured priors</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="06_calcium_imaging.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Demixing Calcium Imaging Data</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="99_references.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">References</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Scott Linderman<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
