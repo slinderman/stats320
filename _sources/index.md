@@ -22,7 +22,7 @@ You should be comfortable with basic probability (STATS 116) as well as multivar
 - **Components:** Lectures on Mon/Wed, in-class labs on Fri
 - **Office Hours:**
     - Sifan: 6:00-7:30pm Tues, Sequoia Hall, Room 207
-    - Scott: 1:30-2:30pm Wed, Wu Tsai Neurosciences Institute, Room M252G
+    - Scott: 1:30-2:30pm Wed, Wu Tsai Neurosciences Institute, 2nd floor by the NeuroTheory center
     - Ying: 11:00-12:30pm Thurs, Sequoia Hall, Room 207
 - This course will have a **final project, not an exam**
 

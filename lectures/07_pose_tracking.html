@@ -392,8 +392,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pose-tracking-by-convolution">
-   Pose tracking by convolution
+  <a class="reference internal nav-link" href="#pose-tracking-with-convolutional-neural-networks-cnns">
+   Pose tracking with convolutional neural networks (CNNs)
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -401,12 +401,41 @@ title="Print to PDF"
      Convolutional neural networks
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#working-with-minimal-labeled-data">
+     Working with minimal labeled data.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-learning">
+     Transfer learning
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#next-up">
-   Next Up
+  <a class="reference internal nav-link" href="#structured-prediction">
+   Structured prediction
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-triangulation">
+     3D Triangulation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#further-reading">
+     Further reading
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -485,8 +514,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pose-tracking-by-convolution">
-   Pose tracking by convolution
+  <a class="reference internal nav-link" href="#pose-tracking-with-convolutional-neural-networks-cnns">
+   Pose tracking with convolutional neural networks (CNNs)
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -494,12 +523,41 @@ title="Print to PDF"
      Convolutional neural networks
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#working-with-minimal-labeled-data">
+     Working with minimal labeled data.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-learning">
+     Transfer learning
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#next-up">
-   Next Up
+  <a class="reference internal nav-link" href="#structured-prediction">
+   Structured prediction
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-triangulation">
+     3D Triangulation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#further-reading">
+     Further reading
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -733,8 +791,8 @@ p(y_n \mid \mathbf{x}_n) = \mathrm{Bern}\big( \sigma(\mathbf{w}^\top \mathbf{x}_
 </ul>
 </section>
 </section>
-<section id="pose-tracking-by-convolution">
-<h2>Pose tracking by convolution<a class="headerlink" href="#pose-tracking-by-convolution" title="Permalink to this headline">#</a></h2>
+<section id="pose-tracking-with-convolutional-neural-networks-cnns">
+<h2>Pose tracking with convolutional neural networks (CNNs)<a class="headerlink" href="#pose-tracking-with-convolutional-neural-networks-cnns" title="Permalink to this headline">#</a></h2>
 <p>Remember we started by treating each data point as patch <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span> and a binary label <span class="math notranslate nohighlight">\(y_n\)</span> specifying whether a specific key point (e.g. “left paw”) is present. Of course, in practice we want to classify all the patches in an image in parallel, and we want to predict more than one type of key point.</p>
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{X}_n \in \mathbb{R}^{P_H \times P_W}\)</span> denote the <span class="math notranslate nohighlight">\(n\)</span>-th image and <span class="math notranslate nohighlight">\(\mathbf{Y}_{n,k} \in \{0,1\}^{P_H \times P_W}\)</span> denote the binary mask of where in the <span class="math notranslate nohighlight">\(k\)</span>-th key point is in the <span class="math notranslate nohighlight">\(n\)</span>-th image. Both are <span class="math notranslate nohighlight">\(P_H\)</span> pixels in height and <span class="math notranslate nohighlight">\(P_W\)</span> pixels wide. Assume the patches are <span class="math notranslate nohighlight">\(P_h \times P_w\)</span> in size, with <span class="math notranslate nohighlight">\(P_h &lt; P_H\)</span> and <span class="math notranslate nohighlight">\(P_w &lt; P_W\)</span>.  Finally, ket <span class="math notranslate nohighlight">\(\mathbf{W}_k \in \mathbb{R}^{P_h \times P_w}\)</span> denote the weights for the <span class="math notranslate nohighlight">\(k\)</span>-th key point.</p>
 <p>We can think of each image as having <span class="math notranslate nohighlight">\(P_H \cdot P_W\)</span> patches and corresponding labels, one centered on each pixel. In our simple logistic regression model, each patch’s label is modeled as a conditionally independent Bernoulli random variable,</p>
@@ -762,13 +820,72 @@ a_{n,k,i,j}
 <p><strong>Residual networks (ResNets)</strong> enable very deep CNNs to be stably trained by adding <strong>skip connections</strong> whereby the input is fed straight to the output of a layer, thereby allowing the convolution to capture the difference (i.e., residual) between the input and output.</p>
 <p>These notes will not comprehensively cover CNNs and ResNets. Instead, please consult the many great online resources, like <span id="id12">Goodfellow <em>et al.</em> [<a class="reference internal" href="99_references.html#id47" title="Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep Learning. MIT Press, 2016. http://www.deeplearningbook.org.">2016</a>]</span> and the PyTorch <a class="reference external" href="https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html">tutorials</a>.</p>
 </section>
+<section id="working-with-minimal-labeled-data">
+<h3>Working with minimal labeled data.<a class="headerlink" href="#working-with-minimal-labeled-data" title="Permalink to this headline">#</a></h3>
+<p>While deep neural networks like CNNs and ResNets have the capacity to learn nonlinear mappings from images to key point predictions, they also have many free parameters to train.</p>
+<p>For modern machine learning tasks and benchmarks, these models are trained on millions of labeled images, like the ImageNet dataset for image classification.</p>
+<p>Unfortunately, we don’t (yet) have comparable datasets of labeled images of animals in the lab (however, see <span id="id13">Marshall <em>et al.</em> [<a class="reference internal" href="99_references.html#id48" title="Jesse D Marshall, Diego E Aldarondo, Timothy W Dunn, William L Wang, Gordon J Berman, and Bence P Ölveczky. Continuous whole-body 3d kinematic recordings across the rodent behavioral repertoire. Neuron, 109(3):420–437, 2021.">2021</a>]</span>) Moreover, environments change from one lab to the next, making it challenging to collect one dataset that covers all the bases.</p>
+<p>Ideally, we would like to train a pose tracking model for a specific lab environment using minimal labeled data.</p>
+<p>Modern methods for markerless animal pose tracking take two approaches:</p>
+<ol class="simple">
+<li><p>Use a <strong>lightweight architecture</strong> with fewer free parameters, like the modular UNet in SLEAP <span id="id14">[<a class="reference internal" href="99_references.html#id35" title="Talmo D Pereira, Nathaniel Tabris, Arie Matsliah, David M Turner, Junyu Li, Shruthi Ravindranath, Eleni S Papadoyannis, Edna Normand, David S Deutsch, Z Yan Wang, and others. SLEAP: A deep learning system for multi-animal pose tracking. Nature methods, 19(4):486–495, 2022.">Pereira <em>et al.</em>, 2022</a>]</span></p></li>
+<li><p>Use <strong>transfer learning</strong> to adapt the weights of a pre-trained network to the problem of animal pose tracking <span id="id15">[<a class="reference internal" href="99_references.html#id34" title="Alexander Mathis, Pranav Mamidanna, Kevin M Cury, Taiga Abe, Venkatesh N Murthy, Mackenzie Weygandt Mathis, and Matthias Bethge. DeepLabCut: markerless pose estimation of user-defined body parts with deep learning. Nat. Neurosci., 21(9):1281–1289, August 2018.">Mathis <em>et al.</em>, 2018</a>]</span>.</p></li>
+</ol>
 </section>
-<section id="next-up">
-<h2>Next Up<a class="headerlink" href="#next-up" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Transfer Learning</p></li>
-<li><p>Structured priors</p></li>
-</ul>
+<section id="transfer-learning">
+<h3>Transfer learning<a class="headerlink" href="#transfer-learning" title="Permalink to this headline">#</a></h3>
+<p><strong>Transfer learning</strong> is when you take a model trained for one task (e.g. a ResNet trained for image classification with ImageNet) and adapt it to another task (e.g. classifying key points in behavioral video). If the tasks are similar enough, then it may require new minimal training data to adapt the pre-trained network.</p>
+<p>For example, DeepLabCut <span id="id16">[<a class="reference internal" href="99_references.html#id34" title="Alexander Mathis, Pranav Mamidanna, Kevin M Cury, Taiga Abe, Venkatesh N Murthy, Mackenzie Weygandt Mathis, and Matthias Bethge. DeepLabCut: markerless pose estimation of user-defined body parts with deep learning. Nat. Neurosci., 21(9):1281–1289, August 2018.">Mathis <em>et al.</em>, 2018</a>]</span> originally converted a ResNet-50 (a very deep CNN) trained on ImageNet by rerouting the output of a middle layer to make predictions about key point locations in animal videos.
+We can think of the activations at the middle layer as a highly nonlinear <strong>feature bank</strong> that represents the original image in a form that may be more amenable to key point prediction with simple models.</p>
+<p>Finally, using a small number (100s) of hand-labeled video frames, DLC can train the mapping from intermediate features to key point predictions. It can also <strong>fine-tune</strong> the weights of the ResNet to obtain very good accuracy in key point prediction.</p>
+<p>There are, of course, many details and design questions to answer. Which layer of the ResNet do you reroute? How complex is the mapping from features to predictions? How big should you make the prediction targets? We will work through these concerns in Lab 3.</p>
+</section>
+</section>
+<section id="structured-prediction">
+<h2>Structured prediction<a class="headerlink" href="#structured-prediction" title="Permalink to this headline">#</a></h2>
+<p>The output of these CNNs is a map of key point probabilities for each image, key point, and pixel. However, the key points are obviously not independent — knowing where the left elbow is tells you a lot about where the left shoulder is likely to be found. Ideally, we would like to make a unified prediction about the collection of key point locations.</p>
+<p>One way to tackle this problem is with <strong>structured prediction</strong> <span id="id17">[<a class="reference internal" href="99_references.html#id49" title="Pedro F Felzenszwalb and Daniel P Huttenlocher. Pictorial structures for object recognition. International journal of computer vision, 61:55–79, 2005.">Felzenszwalb and Huttenlocher, 2005</a>, <a class="reference internal" href="99_references.html#id50" title="Eldar Insafutdinov, Leonid Pishchulin, Bjoern Andres, Mykhaylo Andriluka, and Bernt Schiele. Deepercut: A deeper, stronger, and faster multi-person pose estimation model. In Computer Vision–ECCV 2016: 14th European Conference, Amsterdam, The Netherlands, October 11-14, 2016, Proceedings, Part VI 14, 34–50. Springer, 2016.">Insafutdinov <em>et al.</em>, 2016</a>]</span>. Let <span class="math notranslate nohighlight">\(\ell_{n,k} \in [0,P_h] \times [0,P_w]\)</span> be a random variable denoting the location of key point <span class="math notranslate nohighlight">\(k\)</span> in image <span class="math notranslate nohighlight">\(n\)</span> (in pixel coordinates). We can represent a joint distribution over the collection of key points <span class="math notranslate nohighlight">\(\boldsymbol{\ell}_n = (\ell_{n,1}, \ldots, \ell_{n,K})\)</span> as a <strong>factor graph</strong>,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+p(\boldsymbol{\ell}_n) &amp;\propto 
+\prod_{k=1}^K e^{f_k(\ell_{n,k}; \mathbf{x}_n)} 
+\prod_{i=1}^K \prod_{j=1}^K e^{g_{ij}(\ell_{n,i}, \ell_{n,j})},
+\end{align*}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(f_k\)</span> are called <strong>unary potentials</strong> and <span class="math notranslate nohighlight">\(g_{ij}\)</span> are called <strong>pairwise potentials</strong>. The unary potentials are functions that specify how likely key point <span class="math notranslate nohighlight">\(k\)</span> is to be found at a location <span class="math notranslate nohighlight">\(\ell_{n,k}\)</span> given the observed image <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span>; the pairwise potentials specify how likely the joint configuration of <span class="math notranslate nohighlight">\((\ell_{n,i}, \ell_{n,j})\)</span> is. For example, the pairwise potentials could rule out configurations in which the left elbow is meters away from the left shoulder.</p>
+<p>Note that this joint distribution is <strong>unnomrmalized</strong>. That isn’t a problem for maximuim a posteriori (MAP) estimation of the key point locations, but it does make learning the parameters of the potential functions a bit harder. We’ll come back to this later in the course.</p>
+<section id="d-triangulation">
+<h3>3D Triangulation<a class="headerlink" href="#d-triangulation" title="Permalink to this headline">#</a></h3>
+<p>Finally, we have so far focused on finding key points in 2D images, but there is growing interest in tracking 3D pose from multiple camera views.</p>
+<p>One way to solve this problem is by training a CNN that synthesizes multiple 2D views into a 3D representation <span id="id18">[<a class="reference internal" href="99_references.html#id51" title="Timothy W Dunn, Jesse D Marshall, Kyle S Severson, Diego E Aldarondo, David GC Hildebrand, Selmaan N Chettih, William L Wang, Amanda J Gellis, David E Carlson, Dmitriy Aronov, and others. Geometric deep learning enables 3d kinematic profiling across species and environments. Nature methods, 18(5):564–573, 2021.">Dunn <em>et al.</em>, 2021</a>]</span>. Another is to use <strong>triangulation</strong> to infer a 3D key point location from multiple 2D views <span id="id19">[<a class="reference internal" href="99_references.html#id52" title="Pierre Karashchuk, Katie L Rupp, Evyn S Dickinson, Sarah Walling-Bell, Elischa Sanders, Eiman Azim, Bingni W Brunton, and John C Tuthill. Anipose: a toolkit for robust markerless 3d pose estimation. Cell reports, 36(13):109730, 2021.">Karashchuk <em>et al.</em>, 2021</a>, <a class="reference internal" href="99_references.html#id53" title="Tanmay Nath, Alexander Mathis, An Chi Chen, Amir Patel, Matthias Bethge, and Mackenzie Weygandt Mathis. Using deeplabcut for 3d markerless pose estimation across species and behaviors. Nature protocols, 14(7):2152–2176, 2019.">Nath <em>et al.</em>, 2019</a>, <a class="reference internal" href="99_references.html#id54" title="Libby Zhang, Tim Dunn, Jesse Marshall, Bence Olveczky, and Scott Linderman. Animal pose estimation from video data with a hierarchical von Mises-Fisher-Gaussian model. In International Conference on Artificial Intelligence and Statistics, 2800–2808. PMLR, 2021.">Zhang <em>et al.</em>, 2021</a>]</span>.</p>
+<figure class="align-default" id="triangulation">
+<img alt="../_images/triangulation.png" src="../_images/triangulation.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Projective geometry makes far away objects appear smaller. Image modified from <a class="reference external" href="https://en.wikipedia.org/wiki/Triangulation_(computer_vision)">Wikipedia</a>.</span><a class="headerlink" href="#triangulation" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>GIMBAL <span id="id20">[<a class="reference internal" href="99_references.html#id54" title="Libby Zhang, Tim Dunn, Jesse Marshall, Bence Olveczky, and Scott Linderman. Animal pose estimation from video data with a hierarchical von Mises-Fisher-Gaussian model. In International Conference on Artificial Intelligence and Statistics, 2800–2808. PMLR, 2021.">Zhang <em>et al.</em>, 2021</a>]</span> combines structured prediction and triangulation to infer 3D pose from multiple 2D key point estimates. Changing notation slightly, let <span class="math notranslate nohighlight">\(\mathbf{y}_{c,k} \in \mathbb{R}^2\)</span> denote the estimated location of key point <span class="math notranslate nohighlight">\(k\)</span> in the coordinates of camera <span class="math notranslate nohighlight">\(c\)</span>, and let <span class="math notranslate nohighlight">\(\mathbf{x}_k \in \mathbb{R}^3\)</span> denote the 3D location in “world coordinates.” <a class="reference external" href="https://en.wikipedia.org/wiki/Projective_geometry"><strong>Projective geometry</strong></a> tells how to map 3D locations to 2D images,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{y}_{c,k} \approx \frac{1}{w} \begin{bmatrix} u \\ v \end{bmatrix} 
+\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} u \\ v \\ w \end{bmatrix} = \mathbf{A}_c \mathbf{x}_k + \mathbf{b}_c
+\end{split}\]</div>
+<p>are the 3D coordinates after affine transformation (parameterized by <span class="math notranslate nohighlight">\(\mathbf{A}_c\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}_c\)</span>) into the frame of camera <span class="math notranslate nohighlight">\(c\)</span>. Note that the transformation is <strong>nonlinear</strong> due to the scaling by <span class="math notranslate nohighlight">\(w^{-1}\)</span>.</p>
+<p>GIMBAL combines this nonlinear camera model with a structured prior distribution on 3D key point locations <span class="math notranslate nohighlight">\(\mathbf{x} = (\mathbf{x}_1, \ldots, \mathbf{x}_K)\)</span> obtained from a hierarchical von Mises-Fisher-Gaussian distribution.</p>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
+<p>This chapter introduced the basics of modern animal pose tracking methods using supervised learning, deep convolutional neural networks, transfer learning, and structured prediction. Many of these techniques will reappear later in the course as we talk about encoding and decoding neural spike trains. In lab, you will practice implementing these techniques and building a simple pose tracker.</p>
+<section id="further-reading">
+<h3>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">#</a></h3>
+<p>As always, there is much more to say on each of the topics covered in this chapter. There is growing work on <strong>semi-supervised</strong> pose tracking to leverage the wealth of unlabeled image frames <span id="id21">[<a class="reference internal" href="99_references.html#id56" title="Matthew R Whiteway, Dan Biderman, Yoni Friedman, Mario Dipoppa, E Kelly Buchanan, Anqi Wu, John Zhou, Niccolò Bonacchi, Nathaniel J Miska, Jean-Paul Noel, and others. Partitioning variability in animal behavioral videos using semi-supervised variational autoencoders. PLoS computational biology, 17(9):e1009439, 2021.">Whiteway <em>et al.</em>, 2021</a>, <a class="reference internal" href="99_references.html#id55" title="Anqi Wu, Estefany Kelly Buchanan, Matthew Whiteway, Michael Schartner, Guido Meijer, Jean-Paul Noel, Erica Rodriguez, Claire Everett, Amy Norovich, Evan Schaffer, and others. Deep Graph Pose: a semi-supervised deep graphical model for improved animal pose tracking. Advances in Neural Information Processing Systems, 33:6040–6052, 2020.">Wu <em>et al.</em>, 2020</a>]</span>. There is still work to be done on multi-animal pose tracking <span id="id22">[<a class="reference internal" href="99_references.html#id57" title="Jessy Lauer, Mu Zhou, Shaokai Ye, William Menegas, Steffen Schneider, Tanmay Nath, Mohammed Mostafizur Rahman, Valentina Di Santo, Daniel Soberanes, Guoping Feng, and others. Multi-animal pose estimation, identification and tracking with deeplabcut. Nature Methods, 19(4):496–504, 2022.">Lauer <em>et al.</em>, 2022</a>, <a class="reference internal" href="99_references.html#id35" title="Talmo D Pereira, Nathaniel Tabris, Arie Matsliah, David M Turner, Junyu Li, Shruthi Ravindranath, Eleni S Papadoyannis, Edna Normand, David S Deutsch, Z Yan Wang, and others. SLEAP: A deep learning system for multi-animal pose tracking. Nature methods, 19(4):486–495, 2022.">Pereira <em>et al.</em>, 2022</a>]</span>, and recent machine learning challenges like <a class="reference external" href="https://sites.google.com/view/mabe22/home">MABe</a> have sought to make progress on these problems. Finally, experimentalists are starting to use these kinds of techniques for <strong>real-time</strong> pose tracking to guide closed-loop optogenetic stimulation of neural circuits <span id="id23">[<a class="reference internal" href="99_references.html#id58" title="Jeffrey E Markowitz, Winthrop F Gillis, Maya Jay, Jeffrey Wood, Ryley W Harris, Robert Cieszkowski, Rebecca Scott, David Brann, Dorothy Koveal, Tomasz Kula, and others. Spontaneous behaviour is structured by reinforcement without explicit reward. Nature, pages 1–10, 2023.">Markowitz <em>et al.</em>, 2023</a>]</span>. While there is still room for methodological improvement, these methods have already transformed the landscape of systems neuroscience.</p>
+</section>
 </section>
 </section>
 
