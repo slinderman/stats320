@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Lab 3: Markerless pose tracking &#8212; Machine Learning Methods for Neural Data Analysis</title>
+    <title>Lab 3: Markerless Pose Tracking &#8212; Machine Learning Methods for Neural Data Analysis</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -174,7 +174,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Lab 3: Markerless pose tracking
+   Lab 3: Markerless Pose Tracking
   </a>
  </li>
 </ul>
@@ -527,7 +527,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Lab 3: Markerless pose tracking</h1>
+                <h1>Lab 3: Markerless Pose Tracking</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -728,7 +728,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="lab-3-markerless-pose-tracking">
-<h1>Lab 3: Markerless pose tracking<a class="headerlink" href="#lab-3-markerless-pose-tracking" title="Permalink to this headline">#</a></h1>
+<h1>Lab 3: Markerless Pose Tracking<a class="headerlink" href="#lab-3-markerless-pose-tracking" title="Permalink to this headline">#</a></h1>
 <p><strong>STATS320: Machine Learning Methods for Neural Data Analysis</strong></p>
 <p><em>Stanford University. Winter, 2023.</em></p>
 <hr class="docutils" />
@@ -1482,25 +1482,21 @@ title="Print to PDF"
 <p>The “basic” model treats keypoint estimation as a logistic regression problem. We convolve the image with weights to obtain the log-odds (aka <em>logits</em>) of keypoint <span class="math notranslate nohighlight">\(k\)</span> for image <span class="math notranslate nohighlight">\(n\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
-\begin{align*}
-\mathbf{A}_{n,k} &amp;= (\mathbf{X}_n \star \mathbf{W}_k) + b_k.
-\end{align*}
+\mathbf{A}_{n,k} = (\mathbf{X}_n \star \mathbf{W}_k) + b_k.
 \]</div>
 <p>Note that <span class="math notranslate nohighlight">\(\mathbf{A}_{n,k}  \in \mathbb{R}^{P_H \times P_W}\)</span> is the same shape as the input image.  Its entries specify the log-odds of keypoint <span class="math notranslate nohighlight">\(k\)</span> being found at each pixel.
 Finally, map the logits through a logistic function to get probabilities, and plug them into the Bernoulli likelihood function,</p>
 <div class="math notranslate nohighlight">
 \[
-\begin{align*}
-p(\mathbf{Y}_{n,k} \mid \mathbf{X}_n, \mathbf{W}_k, b_k) &amp;= \prod_{i=1}^{P_H} \prod_{j=1}^{P_W} \mathrm{Bern}(y_{nkij} \mid \sigma(a_{nkij})).
-\end{align*}
+p(\mathbf{Y}_{n,k} \mid \mathbf{X}_n, \mathbf{W}_k, b_k) = \prod_{i=1}^{P_H} \prod_{j=1}^{P_W} \mathrm{Bern}(y_{nkij} \mid \sigma(a_{nkij})).
 \]</div>
 <p>We’ll maximize the (log) likelihood of a image as a function of <span class="math notranslate nohighlight">\(\mathbf{W}_k, b_k\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align*}
+\begin{aligned}
 \mathcal{L}(\mathbf{W}_k, b_k) &amp;= \sum_{n=1}^N \sum_{i=1}^{P_H} \sum_{j=1}^{P_W} \log \mathrm{Bern}(y_{nkij} \mid \sigma(a_{nkij})) \\
 &amp;= \sum_{n=1}^N \sum_{i=1}^{P_H} \sum_{j=1}^{P_W} y_{nkij} a_{nkij} - \log (1 + \exp \{a_{nkij}\}) 
-\end{align*}
+\end{aligned}
 \end{split}\]</div>
 <p>as we derived in class.</p>
 <p>In practice, we’ll actually minimize the negative average log likelihood via stochastic gradient descent by grabbing one image at a time, evaluating the loss function for that image, taking the gradient of the loss (automatically), and updating our weights by taking a step in the direction of the gradient.</p>
@@ -1656,16 +1652,12 @@ A few practical issues should be mentioned:</p>
 <p>The log likelihood contains terms of the form,</p>
 <div class="math notranslate nohighlight">
 \[
-\begin{align*}
 \log (1 + e^a) 
-\end{align*}
 \]</div>
 <p>Show that this is equivalent to,</p>
 <div class="math notranslate nohighlight">
 \[
-\begin{align*}
 m + \log (e^{-m} + e^{a - m}) 
-\end{align*}
 \]</div>
 <p>for any <span class="math notranslate nohighlight">\(m \in \mathbb{R}\)</span>.</p>
 <p>Set <span class="math notranslate nohighlight">\(m = \max \{0, a\}\)</span>. Why does this lead to a more numerically stable computation?</p>
@@ -1677,9 +1669,7 @@ m + \log (e^{-m} + e^{a - m})
 <p>Implement the <code class="docutils literal notranslate"><span class="pre">bernoulli_loss</span></code> function below. It should return the average negative log likelihood over all keypoints and pixels. I.e.</p>
 <div class="math notranslate nohighlight">
 \[
-\begin{align*}
 -\frac{1}{K P_H P_W} \sum_{k=1}^K \mathcal{L}(\mathbf{W}_k, b_k).
-\end{align*}
 \]</div>
 <p>Use the log-sum-exp trick derived above to implement this function.</p>
 <p><em>Note: PyTorch implements this loss function as <code class="docutils literal notranslate"><span class="pre">F.binary_cross_entropy_with_logits</span></code>. You may use that function to check your answers, but in this problem we want you to implement the calculation from scratch.</em></p>
