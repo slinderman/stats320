@@ -6,6 +6,7 @@ execute:
   exclude_patterns:
     - '01_spike_sorting.ipynb'
     - '02_calcium_imaging.ipynb'
+    - '03_pose_tracking.ipynb'
 only_build_toc_files: true
 
 # Add a bibtex file so that we can create citations
