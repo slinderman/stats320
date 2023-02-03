@@ -4,6 +4,7 @@ author: Scott Linderman
 execute:
   execute_notebooks: force
   exclude_patterns:
+    - '00_pytorch_primer.ipynb'
     - '01_spike_sorting.ipynb'
     - '02_calcium_imaging.ipynb'
     - '03_pose_tracking.ipynb'
