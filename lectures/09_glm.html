@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Generalized Linear Models &#8212; Machine Learning Methods for Neural Data Analysis</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="References" href="99_references.html" />
+    <link rel="prev" title="Summary Statistics" href="08_summary_stats.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning Methods for Neural Data Analysis</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Labs
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/00_pytorch_primer.html">
+   Lab 0: PyTorch Primer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/01_spike_sorting.html">
+   Lab 1: Spike Sorting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/02_calcium_imaging.html">
+   Lab 2: Calcium Deconvolution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/03_pose_tracking.html">
+   Lab 3: Markerless Pose Tracking
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_probabilistic_modeling.html">
+   Probabilistic Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_neurobio.html">
+   Basic Neurobiology
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Unit I: Signal Extraction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_simple_spike_sorting.html">
+   Simple Spike Sorting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_deconv_spike_sorting.html">
+   Spike Sorting by Deconvolution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_calcium_imaging.html">
+   Demixing Calcium Imaging Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_pose_tracking.html">
+   Markerless Pose Tracking
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Unit II: Encoding &amp; Decoding
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_summary_stats.html">
+   Summary Statistics
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Generalized Linear Models
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="99_references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/slinderman/stats320/blob/winter2023/lectures/09_glm.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/lectures/09_glm.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-nonlinear-poisson-lnp-models">
+   Linear Nonlinear Poisson (LNP) models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#incorporating-spike-history">
+   Incorporating spike history
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-neuronal-spike-train-models">
+   Multi-neuronal spike train models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basis-function-encodings">
+   Basis function encodings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generalized-linear-models-glms">
+   Generalized linear models (GLMs)
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Generalized Linear Models</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-nonlinear-poisson-lnp-models">
+   Linear Nonlinear Poisson (LNP) models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#incorporating-spike-history">
+   Incorporating spike history
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-neuronal-spike-train-models">
+   Multi-neuronal spike train models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basis-function-encodings">
+   Basis function encodings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generalized-linear-models-glms">
+   Generalized linear models (GLMs)
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="generalized-linear-models">
+<h1>Generalized Linear Models<a class="headerlink" href="#generalized-linear-models" title="Permalink to this headline">#</a></h1>
+<p>Now that we have a better sense for neural spike traints, let’s build probablistic models that predict neural responses to sensory stimuli or other covariates. These are called <strong>encoding models</strong>, and ideally, these models will recapitulate summary statistics of interest.</p>
+<section id="linear-nonlinear-poisson-lnp-models">
+<h2>Linear Nonlinear Poisson (LNP) models<a class="headerlink" href="#linear-nonlinear-poisson-lnp-models" title="Permalink to this headline">#</a></h2>
+<p>First, consider a single neuron. Let <span class="math notranslate nohighlight">\(y_{t} \in \mathbb{N}_0\)</span> denote the number of spikes it fires in the <span class="math notranslate nohighlight">\(t\)</span>-th time bin. (As before, assume time bins are length <span class="math notranslate nohighlight">\(\Delta\)</span>, typically 5-100 ms.) Let <span class="math notranslate nohighlight">\(\mathbf{x}_t\)</span> denote the covariates at time <span class="math notranslate nohighlight">\(t\)</span>. For example, the covariates may be features of a sensory stimulus at time bin <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>A common modeling assumption in neuroscience is that neural spike counts are <strong>conditionally Poisson</strong></p>
+<div class="math notranslate nohighlight">
+\[
+y_{t} \sim \mathrm{Po}(\lambda(\mathbf{x}_{1:t}) \cdot \Delta),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{x}_{1:t} = (\mathbf{x}_1, \ldots, \mathbf{x}_t)\)</span> is the stimulus up to and including time <span class="math notranslate nohighlight">\(t\)</span>, and where <span class="math notranslate nohighlight">\(\lambda(\mathbf{x}_{1:t})\)</span> is a conditional <strong>firing rate</strong> that depends on the stimuli.</p>
+<p>As written above, the firing rate <span class="math notranslate nohighlight">\(\lambda\)</span> looks like a rather complex function… it takes in an arbitrarily long stimulus history and outputs a non-negative scalar. We will make a few simplifying assumptions in order to construct our first model.</p>
+<ol class="simple">
+<li><p>Assume that <span class="math notranslate nohighlight">\(\lambda\)</span> only depends on a finite set of <strong>features</strong> of the stimulus history, <span class="math notranslate nohighlight">\(\boldsymbol{\phi}_t = (\phi_1(\mathbf{x}_{1:t}), \ldots, \phi_{D}(\mathbf{x}_{1:t}))^\top \in \mathbb{R}^D\)</span>. For example, the features may be the most recent <span class="math notranslate nohighlight">\(D\)</span> frames of the stimulus, corresponding to <span class="math notranslate nohighlight">\(\phi_d(\mathbf{x}_{1:t}) = \mathbf{x}_{t-d}\)</span>.</p></li>
+<li><p>Assume that <span class="math notranslate nohighlight">\(\lambda\)</span> only depends on <strong>linear projections</strong> of the features, <span class="math notranslate nohighlight">\(\mathbf{w}^\top \boldsymbol{\phi}_t \in \mathbb{R}\)</span>, for some weights <span class="math notranslate nohighlight">\(\mathbf{w} \in \mathbb{R}^D\)</span>. We will call <span class="math notranslate nohighlight">\(\mathbf{w}^\top \boldsymbol{\phi}_t\)</span> the <strong>activation</strong> at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>Finally, assume that <span class="math notranslate nohighlight">\(\lambda\)</span> maps the activation through a <strong>rectifying nonlinearity</strong>, <span class="math notranslate nohighlight">\(f: \mathbb{R} \mapsto \mathbb{R}_+\)</span>, to obtain a non-negative firing rate.</p></li>
+</ol>
+<p>Altogether, these assumptions imply a <strong>linear nonlinear Poisson (LNP)</strong> model,</p>
+<div class="math notranslate nohighlight">
+\[
+y_t \sim \mathrm{Po}(f(\mathbf{w}^\top \boldsymbol{\phi}_t) \cdot \Delta)
+\]</div>
+<p>Typical choices of rectifying nonlinearity are the exponential function, <span class="math notranslate nohighlight">\(f(a) = e^a\)</span>, and the softplus function, <span class="math notranslate nohighlight">\(f(a) = \log (1+e^a)\)</span>.</p>
+</section>
+<section id="incorporating-spike-history">
+<h2>Incorporating spike history<a class="headerlink" href="#incorporating-spike-history" title="Permalink to this headline">#</a></h2>
+<p>The model above treats the spike counts <span class="math notranslate nohighlight">\(y_t\)</span> and <span class="math notranslate nohighlight">\(y_{t'}\)</span> as <strong>conditionally independent</strong> given the stimulus. However, we know this assumption is invalid due to neurons’ refractory period: after a neuron spikes, it cannot spike for at least a few milliseconds. For small time bins, these dependencies matter.</p>
+<p>A simple way to address this model misspecification is to allow the firing rate to depend on both the stimulus and the <strong>spike history</strong>, <span class="math notranslate nohighlight">\(\lambda(\mathbf{x}_{1:t}, \mathbf{y}_{1:t-1})\)</span>. We can do so by including the spike history in the features,</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\phi}_t = \left(\phi_1(\mathbf{x}_{1:t}, \mathbf{y}_{1:t-1}), \ldots, \phi_D(\mathbf{x}_{1:t}, \mathbf{y}_{1:t-1}) \right)^\top.
+\]</div>
+<p>This way, some of our features can capture the stimulus, and others can capture recent spike history. For example, one of our features might be <span class="math notranslate nohighlight">\(\phi_d(\mathbf{x}_{1:t}, \mathbf{y}_{1:t-1}) = y_{t-d}\)</span>. In the language of statistical time series models, these spike history terms make this an <strong>autoregressive (AR) model</strong>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Exercise</p>
+<p>Suppose our features were <span class="math notranslate nohighlight">\(\phi_d(\mathbf{x}_{1:t}, \mathbf{y}_{1:t-1}) = y_{t-d}\)</span> for <span class="math notranslate nohighlight">\(d=1,\ldots,D\)</span>. If neurons have a refractory period that prevents firing in two adjacent time bins, what would you expect the best-fitting weights <span class="math notranslate nohighlight">\(\mathbf{w} \in \mathbb{R}^D\)</span> to look like?</p>
+</div>
+</section>
+<section id="multi-neuronal-spike-train-models">
+<h2>Multi-neuronal spike train models<a class="headerlink" href="#multi-neuronal-spike-train-models" title="Permalink to this headline">#</a></h2>
+<p>So far, we’ve considered models for a single neuron. In practice, we will often record from many neurons simultaneously, and we would like our models to capture correlations between neurons.</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{y}_t = (y_{t,1}, \ldots, y_{t,N})^\top \in \mathbb{N}_0^N\)</span> denote the vector of spike counts from <span class="math notranslate nohighlight">\(N\)</span> neurons in time bin <span class="math notranslate nohighlight">\(t\)</span>. We can generalize the LNP model above as,</p>
+<div class="math notranslate nohighlight">
+\[
+y_{t,n} \sim \mathrm{Po}(f(\mathbf{w}_n^\top \boldsymbol{\phi}_t) \cdot \Delta)
+\]</div>
+<p>where the weights <span class="math notranslate nohighlight">\(\mathbf{w}_n \in \mathbb{R}^D\)</span> are specific to neuron <span class="math notranslate nohighlight">\(n\)</span>, and where <span class="math notranslate nohighlight">\(\boldsymbol{\phi}_t \in \mathbb{R}^D\)</span> now includes features of the stimulus as well as the spike history of <em>all neurons</em>.</p>
+<p>For example, we might have,</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\phi}_t = (\mathbf{x}_t,\ldots,\mathbf{x}_{t-L}, y_{t-1,1}, \ldots, y_{t-L,1}, \ldots, y_{t-1,N}, \ldots, y_{t-L,N}, 1)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(L\)</span> is the maximum lag of stimulus and spike history to be considered. The final 1 in <span class="math notranslate nohighlight">\(\boldsymbol{\phi}_t\)</span> is a <strong>bias</strong> term that allows the model to learn a baseline firing rate.</p>
+<p>The entries of <span class="math notranslate nohighlight">\(\mathbf{w}_n\)</span> associated with the features <span class="math notranslate nohighlight">\((y_{t-1,m}, \ldots, y_{t-L,m})^\top\)</span> can be thought of as <strong>coupling filters</strong>, which model how spikes on neuron <span class="math notranslate nohighlight">\(m\)</span> influence the future firing rate of neuron <span class="math notranslate nohighlight">\(n\)</span>.</p>
+</section>
+<section id="basis-function-encodings">
+<h2>Basis function encodings<a class="headerlink" href="#basis-function-encodings" title="Permalink to this headline">#</a></h2>
+<p>The model above has <span class="math notranslate nohighlight">\(\mathcal{O}(N^2 L)\)</span> weights for the coupling filters. For small bin sizes, <span class="math notranslate nohighlight">\(L\)</span> may need to include dozens of past time bins to capture all the pairwise interactions. However, these coupling filters are often approximately smooth functions of the time lag. One way to cut down on parameters and capture this smoothness is to use a <strong>basis function representation</strong>. For example, one of the features can be,</p>
+<div class="math notranslate nohighlight">
+\[
+\phi_{m,b}(\mathbf{x}_{1:t}, \mathbf{y}_{1:t-1}) = \sum_{\ell=1}^L y_{t-\ell,m} e^{-\frac{1}{2 \sigma^2}(\ell - \mu_b)^2}.
+\]</div>
+<p>This is a <strong>radial basis function</strong> encoding of the spike history of neuron <span class="math notranslate nohighlight">\(m\)</span>. It is a weighted sum of past spiking, where the weights are a squared exponential (aka Gaussian) kernel centered on delay <span class="math notranslate nohighlight">\(\mu_b\)</span>. We can use <span class="math notranslate nohighlight">\(B &lt; L\)</span> basis functions to summarize the spike history over the last <span class="math notranslate nohighlight">\(L\)</span> time bins.</p>
+<div class="tip admonition">
+<p class="admonition-title">Exercise</p>
+<p>Show that the feature above can be written as a convolution of the spike history with a squared exponential kernel.</p>
+</div>
+</section>
+<section id="generalized-linear-models-glms">
+<h2>Generalized linear models (GLMs)<a class="headerlink" href="#generalized-linear-models-glms" title="Permalink to this headline">#</a></h2>
+<p>The model described above, with stimulus features, spike history terms, and basis function encodings, is what neuroscientists often call “the” generalized linear model (GLM), after <span id="id1">Pillow <em>et al.</em> [<a class="reference internal" href="99_references.html#id59" title="Jonathan W Pillow, Jonathon Shlens, Liam Paninski, Alexander Sher, Alan M Litke, EJ Chichilnisky, and Eero P Simoncelli. Spatio-temporal correlations and visual signalling in a complete neuronal population. Nature, 454(7207):995–999, 2008.">2008</a>]</span>. Of course, in statistics we know that this model is just one instance of a broad family of GLMs, which are characterized by linear projections of covariates, nonlinear link functions, and exponential family conditional distributions <span id="id2">[<a class="reference internal" href="99_references.html#id63" title="Peter McCullagh and John Nelder. Generalized linear models. Routledge, 1983.">McCullagh and Nelder, 1983</a>]</span>. In fact, we have already encountered one GLM in this course: the logistic regression model from <a class="reference internal" href="07_pose_tracking.html"><span class="doc std std-doc">Unit 1</span></a>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="08_summary_stats.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Summary Statistics</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="99_references.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">References</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Scott Linderman<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
