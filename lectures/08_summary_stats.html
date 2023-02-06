@@ -1,0 +1,614 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Summary Statistics &#8212; Machine Learning Methods for Neural Data Analysis</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="References" href="99_references.html" />
+    <link rel="prev" title="Markerless Pose Tracking" href="07_pose_tracking.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning Methods for Neural Data Analysis</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Labs
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/00_pytorch_primer.html">
+   Lab 0: PyTorch Primer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/01_spike_sorting.html">
+   Lab 1: Spike Sorting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/02_calcium_imaging.html">
+   Lab 2: Calcium Deconvolution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/03_pose_tracking.html">
+   Lab 3: Markerless Pose Tracking
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_probabilistic_modeling.html">
+   Probabilistic Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_neurobio.html">
+   Basic Neurobiology
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Unit I: Signal Extraction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_simple_spike_sorting.html">
+   Simple Spike Sorting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_deconv_spike_sorting.html">
+   Spike Sorting by Deconvolution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_calcium_imaging.html">
+   Demixing Calcium Imaging Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_pose_tracking.html">
+   Markerless Pose Tracking
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Unit II: Encoding &amp; Decoding
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Summary Statistics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="99_references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/slinderman/stats320/blob/winter2023/lectures/08_summary_stats.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/lectures/08_summary_stats.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#peri-stimulus-time-histogram">
+   Peri-stimulus time histogram
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spike-triggered-average-sta">
+   Spike-Triggered  Average (STA)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fano-factor">
+   Fano factor
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cross-correlation-function">
+   Cross-correlation function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Summary Statistics</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#peri-stimulus-time-histogram">
+   Peri-stimulus time histogram
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spike-triggered-average-sta">
+   Spike-Triggered  Average (STA)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fano-factor">
+   Fano factor
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cross-correlation-function">
+   Cross-correlation function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="summary-statistics">
+<h1>Summary Statistics<a class="headerlink" href="#summary-statistics" title="Permalink to this headline">#</a></h1>
+<p>You’ve got spikes… Now what? Unit I was all about extracting signals of interest from neural and behavioral measurements. Unit II is about modeling those signals to discover principles of neural computation.</p>
+<p>A first step toward this lofty goal is to understand what makes neurons spike. <strong>Encoding models</strong> predict when neurons will fire in response to sensory stimuli or behavioral covariates. An accurate encoding model can shed light on which features of sensory inputs a neuron is most responsive or “tuned” to. A good model can reveal how tuning properties vary across a population of neurons, or how those properties change from one population to the next.</p>
+<p>Before diving into models, though, we’ll start by discussing simple <strong>summary statistics</strong> of neural spike trains. We are often interested in the relationship between sensory inputs and neural activity. Spike triggered averages (STAs) and peri-stimulus time histograms (PSTHs) are useful summaries of these relationships. Likewise, when we are interested in the relationships between neural responses, cross-correlation functions offer simple summaries of multi-neuronal measurements. These statistics offer not only a high-level summary of neural activity, they also offer a means for checking the encoding models we’ll build later. A good model should recapitulate these basic statistics of the data.</p>
+<!-- , like peri-stimulus time histograms, spike triggered averages, and cross-correlation functions. 
+2. **Generalized linear models** to predict spikes as a function of sensory inputs, behavioral covariates, and previous spiking activity.
+3. **Poisson processes**, a continuous-time stochastic process model for neural spike trains.
+
+In lab, we will construct and fit encoding models for **retinal ganglion cells**, following {cite:t}`pillow2008spatio` and {cite:t}`mcintosh2016deep`. --><section id="peri-stimulus-time-histogram">
+<h2>Peri-stimulus time histogram<a class="headerlink" href="#peri-stimulus-time-histogram" title="Permalink to this headline">#</a></h2>
+<p>We will start with a discrete time formulation with equally spaced time bins of width <span class="math notranslate nohighlight">\(\Delta\)</span>.
+Let,</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{x}_t\)</span> denote a stimulus (e.g. a sensory input) at time bin <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{y}_t = (y_{t,1}, \ldots, y_{t,N})\)</span> with each <span class="math notranslate nohighlight">\(y_{t,n} \in \mathbb{N}_0\)</span> denote the number of spikes fired in time bin <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+</ul>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p>We typically take <span class="math notranslate nohighlight">\(\Delta\)</span> to be relatively small, on the order of 5 ms to 100 ms. With <span class="math notranslate nohighlight">\(\Delta = 5\)</span> ms, you would not expect to see more than one spike per time bin. For larger bin sizes, you could see multiple spikes.</p>
+</div>
+<p>A <strong>peri-stimulus time histogram (PSTH)</strong> is a simple summary statistic of the relationship between <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. For simplicity, suppose the stimulus is binary so that <span class="math notranslate nohighlight">\(x_t \in \{0,1\}\)</span>. The PSTH is an estimate of the conditional mean of <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> at an offset from when <span class="math notranslate nohighlight">\(x = 1\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+    \boldsymbol{\rho}_d 
+    &amp;= \frac{\sum_{t=1}^T \mathbf{y}_{t+d} \, \mathbb{I}[x_t = 1]}{\sum_{t=1}^T \mathbb{I}[x_t = 1]} 
+    \approx \mathbb{E}[\mathbf{y}_{t+d} \mid x_t = 1].
+\end{aligned}
+\]</div>
+<p>for <span class="math notranslate nohighlight">\(d\in \{-D, \ldots, D\}\)</span>.</p>
+<p>Of course, typical stimuli are not binary. However, we can always define an <em>event</em> <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> (in the probabilistic sense of a subset of the stimulus space) and define the PSTH as <span class="math notranslate nohighlight">\(\boldsymbol{\rho}_d \approx \mathbb{E}[\mathbf{y}_{t+d} \mid \mathbf{x}_t \in \mathcal{A}]\)</span>.</p>
+</section>
+<section id="spike-triggered-average-sta">
+<h2>Spike-Triggered  Average (STA)<a class="headerlink" href="#spike-triggered-average-sta" title="Permalink to this headline">#</a></h2>
+<p>The <strong>spike-triggered average (STA)</strong> is simply the conditional expectation in the other direction,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+    \mathbf{s}_{n,d} 
+    &amp;= \frac{\sum_{t=1}^T \mathbf{x}_{t+d} \, \mathbb{I}[y_{t,n} = 1]}{\sum_{t=1}^T \mathbb{I}[y_{t,n} = 1]} 
+    \approx \mathbb{E}[\mathbf{x}_{t+d} \mid y_{t,n} = 1].
+\end{aligned}
+\]</div>
+<p>It tells you what, on average, the stimulus looks like when neuron <span class="math notranslate nohighlight">\(n\)</span> spikes.</p>
+</section>
+<section id="fano-factor">
+<h2>Fano factor<a class="headerlink" href="#fano-factor" title="Permalink to this headline">#</a></h2>
+<p>The PSTH and STA are first moments — conditional <em>means</em>. Spike counts are variable though. The same stimulus might elicit different numbers of spikes on different trials. Second moments tell you the variance of those responses.</p>
+<p>The <strong>Fano factor</strong> is a summary statistic that measures the <strong>dispersion</strong> of spike counts,</p>
+<div class="math notranslate nohighlight">
+\[
+F_n = \frac{\mathbb{V}[y_{t,n}]}{\mathbb{E}[y_{t,n}]}
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(F_n &lt; 1\)</span>, the counts are under-dispersed, and if <span class="math notranslate nohighlight">\(F_n &gt; 1\)</span> the counts are over-dispersed. When the spike counts follow a Poisson distribution, they have unit dispersion and <span class="math notranslate nohighlight">\(F_n = 1\)</span>.</p>
+<p>Note that the distribution of spike counts will typically vary with the stimulus, so the Fano factor (and dispersion) should really be calculated conditionally on <span class="math notranslate nohighlight">\(\mathbf{x}_t\)</span>. <span id="id1">Goris <em>et al.</em> [<a class="reference internal" href="99_references.html#id61" title="Robbe LT Goris, J Anthony Movshon, and Eero P Simoncelli. Partitioning neuronal variability. Nature neuroscience, 17(6):858–865, 2014.">2014</a>]</span> modeled the stimulus-dependent Fano factor with a generalized linear model (see below), and found that spike counts were increasingly overdispersed as they progressed through the hierarchy of visual brain areas. <span id="id2">Charles <em>et al.</em> [<a class="reference internal" href="99_references.html#id62" title="Adam S Charles, Mijung Park, J Patrick Weller, Gregory D Horwitz, and Jonathan W Pillow. Dethroning the Fano factor: A flexible, model-based approach to partitioning neural variability. Neural computation, 30(4):1012–1045, 2018.">2018</a>]</span> further generalized their approach is an attempt to “dethrone” the Fano factor.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Other measures of dispersion</p>
+<p>The Fano factor is only one measure of the dispersion of a random variable. Another is the <strong>coefficient of variation</strong>,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{CV}_n = \frac{\sqrt{\mathbb{V}[y_{t,n}]}}{\mathbb{E}[y_{t,n}]},
+\]</div>
+<p>which is the ratio of the standard deviation to the mean. It turns out that in <strong>renewal processes</strong>, there is a relationship between the Fano factor of the spike counts and the coefficient of variation of the inter-spike intervals.</p>
+</div>
+</section>
+<section id="cross-correlation-function">
+<h2>Cross-correlation function<a class="headerlink" href="#cross-correlation-function" title="Permalink to this headline">#</a></h2>
+<p>Another second-order statistic of interest is the <strong>cross-correlation function (CCF)</strong> between a pair of neurons <span class="math notranslate nohighlight">\((i, j)\)</span> for varying delays <span class="math notranslate nohighlight">\(d\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}\left[ \left(\frac{y_{t,i} - \mu_i}{\sigma_i} \right) \left(\frac{y_{t+d,j} - \mu_j}{\sigma_j} \right) \right],
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu_i = \mathbb{E}[y_{t,i}]\)</span> is the mean and <span class="math notranslate nohighlight">\(\sigma_i = \sqrt{\mathbb{V}[y_{t,i}]}\)</span> is the standard deviation of spike counts on neuron <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>The cross-correlation function tells us how often neuron <span class="math notranslate nohighlight">\(j\)</span> spikes <span class="math notranslate nohighlight">\(d\)</span> time-steps before or after neuron <span class="math notranslate nohighlight">\(i\)</span>. We often visualize the CCF is a matrix of subplots,</p>
+<figure class="align-default" id="ccf">
+<img alt="../_images/ccf.jpg" src="../_images/ccf.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">A matrix of subplots showing the cross-correlation function for pairs of retinal ganglion cells. This figure is adapted from <span id="id3">Pillow <em>et al.</em> [<a class="reference internal" href="99_references.html#id59" title="Jonathan W Pillow, Jonathon Shlens, Liam Paninski, Alexander Sher, Alan M Litke, EJ Chichilnisky, and Eero P Simoncelli. Spatio-temporal correlations and visual signalling in a complete neuronal population. Nature, 454(7207):995–999, 2008.">2008</a>]</span>.</span><a class="headerlink" href="#ccf" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="tip admonition">
+<p class="admonition-title">Exercise</p>
+<p>How does the cross-correlation function defined above relate to the cross correlation operation (aka convolution in deep learning) used in <a class="reference internal" href="05_deconv_spike_sorting.html"><span class="doc std std-doc">Unit I</span></a>?</p>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
+<p>Summary statistics like PSTHs, STAs, Fano factors, and CCFs offer a high-level summary of neural spike trains. They can already shed insight into how neural populations encode information about external stimuli. Next, we will talk about simple models for predicting neural spike trains.</p>
+<!-- $$
+\begin{aligned}
+y_{n,t} &\sim \mathrm{Po}(\lambda \Delta)  \\
+\Pr(y_{n,t}=1) &= \lambda \Delta e^{- \lambda \Delta} \approx \lambda \Delta (1 - \lambda \Delta) \\ 
+&= \lambda \Delta - (\lambda \Delta)^2 \\
+&= \lambda \Delta + o(\Delta)
+\end{aligned}
+$$
+
+since $\lim_{\Delta \to 0} (\lambda \Delta)^2 / \Delta = \lim_{\Delta \to 0} \lambda^2 \Delta = 0$  --></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="07_pose_tracking.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Markerless Pose Tracking</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="99_references.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">References</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Scott Linderman<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
