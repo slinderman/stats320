@@ -24,6 +24,7 @@ parts:
   - caption: "Unit II: Encoding & Decoding"
     chapters:
     - file: lectures/08_summary_stats.ipynb
+    - file: lectures/09_glm.ipynb
 
   - caption: References
     chapters:
