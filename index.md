@@ -49,7 +49,7 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 ### Unit II: Encoding and decoding models for neural data
 | Date        | Type       | Topic |
 | ----------- | ---------- | ----- |
-| Mon, Feb 6  | Lecture 9  | Encoding models of neural spike trains
+| Mon, Feb 6  | Lecture 9  | [Summary statistics](lectures/08_summary_stats.ipynb) and [GLMs](lectures/09_glm.ipynb) {Download}`[slides]<lectures/pdf/08_encoding.pdf>`
 | Wed, Feb 8  | Lecture 10 | Encoding models of neural spike trains
 | Fri, Feb 10 | Lab 4      | DeepRetina from scratch
 | Mon, Feb 13 | Lecture 11 | Bayesian decoding of neural spike trains
