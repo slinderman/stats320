@@ -395,6 +395,38 @@ title="Print to PDF"
    Generalized linear models (GLMs)
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-likelihood-estimation-mle">
+   Maximum likelihood estimation (MLE)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gradients-and-hessians">
+     Gradients and Hessians
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exponential-family-distributions">
+   Exponential family distributions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exponential-family-glms">
+   Exponential family GLMs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradients-for-canonical-exponential-family-glms">
+   Gradients for canonical exponential family GLMs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#glms-in-neuroscience">
+   GLMs in neuroscience
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -437,6 +469,38 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#generalized-linear-models-glms">
    Generalized linear models (GLMs)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-likelihood-estimation-mle">
+   Maximum likelihood estimation (MLE)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gradients-and-hessians">
+     Gradients and Hessians
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exponential-family-distributions">
+   Exponential family distributions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exponential-family-glms">
+   Exponential family GLMs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradients-for-canonical-exponential-family-glms">
+   Gradients for canonical exponential family GLMs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#glms-in-neuroscience">
+   GLMs in neuroscience
   </a>
  </li>
 </ul>
@@ -522,6 +586,174 @@ y_{t,n} \sim \mathrm{Po}(f(\mathbf{w}_n^\top \boldsymbol{\phi}_t) \cdot \Delta)
 <h2>Generalized linear models (GLMs)<a class="headerlink" href="#generalized-linear-models-glms" title="Permalink to this headline">#</a></h2>
 <p>The model described above, with stimulus features, spike history terms, and basis function encodings, is what neuroscientists often call “the” generalized linear model (GLM), after <span id="id1">Pillow <em>et al.</em> [<a class="reference internal" href="99_references.html#id59" title="Jonathan W Pillow, Jonathon Shlens, Liam Paninski, Alexander Sher, Alan M Litke, EJ Chichilnisky, and Eero P Simoncelli. Spatio-temporal correlations and visual signalling in a complete neuronal population. Nature, 454(7207):995–999, 2008.">2008</a>]</span>. Of course, in statistics we know that this model is just one instance of a broad family of GLMs, which are characterized by linear projections of covariates, nonlinear link functions, and exponential family conditional distributions <span id="id2">[<a class="reference internal" href="99_references.html#id63" title="Peter McCullagh and John Nelder. Generalized linear models. Routledge, 1983.">McCullagh and Nelder, 1983</a>]</span>. In fact, we have already encountered one GLM in this course: the logistic regression model from <a class="reference internal" href="07_pose_tracking.html"><span class="doc std std-doc">Unit 1</span></a>.</p>
 </section>
+<section id="maximum-likelihood-estimation-mle">
+<h2>Maximum likelihood estimation (MLE)<a class="headerlink" href="#maximum-likelihood-estimation-mle" title="Permalink to this headline">#</a></h2>
+<p>As with logistic regression, the GLMs constructed above won’t have closed form solutions for the MLE. However, they will be amenable to the optimization methods discussed previously: (stochastic) gradient descent, Newton’s method, etc.</p>
+<p>Let’s follow the same recipe as before to compute the gradient of the negative log likelihood of a GLM with an exponential nonlinearity,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathcal{L}(\mathbf{w}) 
+&amp;= - \log p(\mathbf{y} \mid \mathbf{x}, \mathbf{w}) \\
+&amp;= -\sum_{t=1}^T \sum_{n=1}^N \log \mathrm{Po}(y_{t,n} \mid e^{\mathbf{w}_n^\top \boldsymbol{\phi}_t} \cdot \Delta) \\
+&amp;= -\sum_{t=1}^T \sum_{n=1}^N \left( -\log y_{t,n}! + y_{t,n} \mathbf{w}_n^\top \boldsymbol{\phi}_t  + y_{t,n} \log \Delta - e^{\mathbf{w}_n^\top \boldsymbol{\phi}_t} \cdot \Delta \right)  \\
+&amp;= -\sum_{t=1}^T \sum_{n=1}^N \left(y_{t,n} \mathbf{w}_n^\top \boldsymbol{\phi}_t - e^{\mathbf{w}_n^\top \boldsymbol{\phi}_t} \cdot \Delta \right)  + c
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(c\)</span> is constant wrt <span class="math notranslate nohighlight">\(\mathbf{w}_n\)</span>.</p>
+<div class="admonition-separability admonition">
+<p class="admonition-title">Separability</p>
+<p>The loss function is a sum over neurons, and that the weights for neuron <span class="math notranslate nohighlight">\(n\)</span> do not interact with those of other neurons <span class="math notranslate nohighlight">\(m\)</span>. That means we can write the objective function as,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(\mathbf{w}) = \sum_{n=1}^N \mathcal{L}_n(\mathbf{w}_n),
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}_n(\mathbf{w}_n) = - \left(y_{t,n} \mathbf{w}_n^\top \boldsymbol{\phi}_t - e^{\mathbf{w}_n^\top \boldsymbol{\phi}_t} \cdot \Delta \right).
+\]</div>
+<p>We can optimize the weights for each neuron separately. (And in parallel, if you like!)</p>
+</div>
+<section id="gradients-and-hessians">
+<h3>Gradients and Hessians<a class="headerlink" href="#gradients-and-hessians" title="Permalink to this headline">#</a></h3>
+<p>Now take the gradient wrt the weights of neuron <span class="math notranslate nohighlight">\(n\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\nabla_{\mathbf{w}_n} \mathcal{L}_n(\mathbf{w}_n) 
+&amp;= -\sum_{t=1}^T (y_{t,n} - e^{\mathbf{w}_n^\top \boldsymbol{\phi}_t} \cdot \Delta) \boldsymbol{\phi}_t \\
+&amp;= -\sum_{t=1}^T (y_{t,n} - \mathbb{E}[y_{t,n} \mid \mathbf{w}_n] ) \boldsymbol{\phi}_t 
+\end{aligned}
+\end{split}\]</div>
+<p>The gradient takes an intuitive form: it is a sum of the feature vectors, <span class="math notranslate nohighlight">\(\boldsymbol{\phi}_t\)</span>, weighted by the <strong>error</strong> <span class="math notranslate nohighlight">\((y_{t,n} - \mathbb{E}[y_{t,n} \mid \mathbf{w}_n])\)</span>. Recall that we found the same simple form  for the gradient of the logistic regression model. We’ll show that this form is characteristic of a special family of GLMs in just a second.</p>
+<p>First, note that the negative log likelihood is again a convex function. We can see that from the Hessian,</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla_{\mathbf{w}_n}^2 \mathcal{L}_n(\mathbf{w}_n) 
+= \sum_{t=1}^T (e^{\mathbf{w}_n^\top \boldsymbol{\phi}_t} \cdot \Delta) \, \boldsymbol{\phi}_t \boldsymbol{\phi}_t^\top.
+\]</div>
+<p>Since this is a weighted sum of outer products with positive weights, the Hessian is positive semi-definite (PSD) and the negative log likelihood is convex. Convexity implies that gradient descent and other optimization methods will (under weak conditions) find a global optimum.</p>
+</section>
+</section>
+<section id="exponential-family-distributions">
+<h2>Exponential family distributions<a class="headerlink" href="#exponential-family-distributions" title="Permalink to this headline">#</a></h2>
+<p>The reason why the Poisson GLM and logistic regression had such nice mathematical forms is because they are both <strong>exponential family</strong> GLMs. Exponential family distributions have densities of the form,</p>
+<div class="math notranslate nohighlight">
+\[
+p(y; \theta) = h(y) \exp \left\{ \langle t(y), \theta \rangle - A(\theta) \right\}
+\]</div>
+<p>where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\theta\)</span> is the <strong>natural parameter</strong> of the distribution</p></li>
+<li><p><span class="math notranslate nohighlight">\(t(y)\)</span> is a <strong>sufficient statistic</strong> of the data</p></li>
+<li><p><span class="math notranslate nohighlight">\(h(y)\)</span> is the <strong>base measure</strong>, which we won’t worry too much about</p></li>
+<li><p><span class="math notranslate nohighlight">\(A(\theta)\)</span> is the <strong>log normalizer</strong>, which ensures the density integrates to one.</p></li>
+</ul>
+<p>In order for the density to integrate to one, the log normalizer must be,</p>
+<div class="math notranslate nohighlight">
+\[
+A(\theta) = \log \int h(y) \exp \left\{ \langle t(y), \theta \rangle \right\} \, \mathrm{d} y
+\]</div>
+<p>Many of the distributions we’ve encountered thus far are exponential family distributions: Poisson, Bernoulli, Gaussian, gamma, etc.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>The Poisson distribution can be written in exponential family form by rearranging its pmf to,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathrm{Po}(y; \lambda) 
+&amp;= \frac{1}{y!} \lambda^y e^{-\lambda} \\
+&amp;= \frac{1}{y!} \exp \left\{ y \log \lambda - \lambda \right\} \\
+&amp;= \frac{1}{y!} \exp \left\{ y \theta - e^\theta \right\} \\
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(t(y) = y\)</span> is the sufficient statistic, <span class="math notranslate nohighlight">\(\theta = \log \lambda\)</span> is the natural parameter, <span class="math notranslate nohighlight">\(e^\theta\)</span> is the log normalizer, and <span class="math notranslate nohighlight">\(h(y) = 1/y!\)</span> is the base measure.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Exercise</p>
+<p>Write the Bernoulli pmf,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{Bern}(y; p) = p^y (1-p)^{1-y},
+\]</div>
+<p>in exponential family form. What is the natural parameter, the sufficient statistic, the base measure, and the log normalizer?</p>
+</div>
+</section>
+<section id="exponential-family-glms">
+<h2>Exponential family GLMs<a class="headerlink" href="#exponential-family-glms" title="Permalink to this headline">#</a></h2>
+<p>An exponential family GLM is one in which the observation distribution is an exponential family and the natural parameter is a linear-nonlinear function of the features,</p>
+<div class="math notranslate nohighlight">
+\[
+\theta = g(\mathbf{w}^\top \boldsymbol{\phi}),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(g: \mathbb{R} \mapsto \mathbb{R}\)</span> is a monotonically increasing function.</p>
+<!-- The canonical choice is to make $g$ the identity function.
+
+Buf if we make $g$ the identiy function, then we simply have a linear model. Where did the _generalized_ (i.e., nonlinear) part go? Note that the model is linear in the **natural parameters** $\theta$ of the distribution, whereas the Poisson GLM and logistic regression were defined in terms of the **mean parameters**. -->
+<p>Note that this model is defined in terms of the natural parameters <span class="math notranslate nohighlight">\(\theta\)</span> rather than the mean parameters <span class="math notranslate nohighlight">\(\mathbb{E}[t(y) \mid \theta]\)</span> (which for a Poisson distribution is simply <span class="math notranslate nohighlight">\(\mathbb{E}[y \mid \theta]\)</span>).  How do the natural and mean parameters relate to one another? Through the gradient of the log normalizer,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+A'(\theta) &amp;\triangleq \frac{\mathrm{d}}{\mathrm{d} \theta} A(\theta) \\
+&amp;= \frac{\mathrm{d}}{\mathrm{d} \theta} \log \int h(y) \exp \left\{ \langle t(y), \theta \rangle\right\} \, \mathrm{d}y \\
+&amp;= \frac{\int t(y)  h(y) \exp \left\{ \langle t(y), \theta \rangle\right\} \, \mathrm{d}y}{\int h(y) \exp \left\{ \langle t(y), \theta \rangle\right\} \, \mathrm{d}y} \\
+&amp;= \int t(y)  h(y) \exp \left\{ \langle t(y), \theta \rangle - A(\theta) \right\} \, \mathrm{d}y \\
+&amp;= \mathbb{E}[t(y) \mid \theta]
+\end{aligned}
+\end{split}\]</div>
+<p>In short, <em>gradients of the log normalizer yield expected sufficient statistics!</em></p>
+<!-- When the sufficient statistics are linearly independent, the exponential family is said to be **minimal**, and there is a 1:1 mapping between the natural and mean parameters. That is, in a minimal exponential family, the gradient of the log normalizer is invertible. -->
+<p>Now let’s write the GLM in terms of the mapping to the mean parameters,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+\mathbb{E}[t(y) \mid \mathbf{w}, \boldsymbol{\phi}]
+= A'(\theta) 
+= f(\mathbf{w}^\top \boldsymbol{\phi})
+\end{aligned}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(f(a) = A'(g(a))\)</span> is the <strong>mean function</strong>. The <strong>canonical mean function</strong> is obtained by setting <span class="math notranslate nohighlight">\(g\)</span> to the identity function, so that <span class="math notranslate nohighlight">\(f\)</span> is simply the gradient of the log normalizer.</p>
+<p>For example, in the Poisson distribution, the sufficient statistic is <span class="math notranslate nohighlight">\(t(y) = y\)</span>, and the log normalizer is <span class="math notranslate nohighlight">\(A(\theta) = e^\theta\)</span>. The derivative of the log normalizer is also <span class="math notranslate nohighlight">\(A'(\theta) = e^\theta\)</span>, so the canonical Poisson GLM is,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[y \mid \mathbf{w}, \boldsymbol{\phi}] = e^{\mathbf{w}^\top \boldsymbol{\phi}_t},
+\]</div>
+<p>just like we had above! (Note: the equivalence is exact when bin size is <span class="math notranslate nohighlight">\(\Delta = 1\)</span>; the scaling factor doesn’t change the story much.)</p>
+<!-- For example, in the Poisson GLM described above, we modeled the Poisson mean as $\lambda = e^{\mathbf{w}^\top \boldsymbol{\phi}}$. (Assume a bin size of $\Delta = 1$ for simplicity.) To put this in exponential family form, we need the natural parameter  -->
+</section>
+<section id="gradients-for-canonical-exponential-family-glms">
+<h2>Gradients for canonical exponential family GLMs<a class="headerlink" href="#gradients-for-canonical-exponential-family-glms" title="Permalink to this headline">#</a></h2>
+<p>Now consider the negative log likelihood in a canonical exponential family GLM,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathcal{L}(\mathbf{w})
+&amp;= - \sum_{i=1}^T \log p(y_i \mid \mathbf{w}, \boldsymbol{\phi}_i) \\
+&amp;= - \sum_{i=1}^T \langle t(y_i), \mathbf{w}^\top \boldsymbol{\phi}_i \rangle - A(\mathbf{w}^\top \boldsymbol{\phi}_i) + c
+\end{aligned}
+\end{split}\]</div>
+<p>The gradient is,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\nabla \mathcal{L}(\mathbf{w})
+&amp;= - \sum_{i=1}^T (t(y_i) - A'(\mathbf{w}^\top \boldsymbol{\phi}_i)) \, \boldsymbol{\phi}_i \\
+&amp;= - \sum_{i=1}^T (t(y_i) - \mathbb{E}[t(y_i) \mid \mathbf{w}, \boldsymbol{\phi}_i]) \, \boldsymbol{\phi}_i.
+\end{aligned}
+\end{split}\]</div>
+<p>Thus, we see that the simple form of the gradient — a sum of features weighted by the corresponding error — follows from a general property of exponential family GLMs.</p>
+</section>
+<section id="glms-in-neuroscience">
+<h2>GLMs in neuroscience<a class="headerlink" href="#glms-in-neuroscience" title="Permalink to this headline">#</a></h2>
+<p>Generalized linear models are central tools in systems neuroscience. Work by <span id="id3">Paninski [<a class="reference internal" href="99_references.html#id64" title="Liam Paninski. Maximum likelihood estimation of cascade point-process neural encoding models. Network: Computation in Neural Systems, 15(4):243–262, 2004.">2004</a>]</span>, <span id="id4">Truccolo <em>et al.</em> [<a class="reference internal" href="99_references.html#id65" title="Wilson Truccolo, Uri T Eden, Matthew R Fellows, John P Donoghue, and Emery N Brown. A point process framework for relating neural spiking activity to spiking history, neural ensemble, and extrinsic covariate effects. Journal of neurophysiology, 93(2):1074–1089, 2005.">2005</a>]</span>, and <span id="id5">Pillow <em>et al.</em> [<a class="reference internal" href="99_references.html#id59" title="Jonathan W Pillow, Jonathon Shlens, Liam Paninski, Alexander Sher, Alan M Litke, EJ Chichilnisky, and Eero P Simoncelli. Spatio-temporal correlations and visual signalling in a complete neuronal population. Nature, 454(7207):995–999, 2008.">2008</a>]</span> laid the theoretical foundations for much of the experimental work that followed.</p>
+<ul class="simple">
+<li><p><span id="id6">Park <em>et al.</em> [<a class="reference internal" href="99_references.html#id66" title="Il Memming Park, Miriam LR Meister, Alexander C Huk, and Jonathan W Pillow. Encoding and decoding in parietal cortex during sensorimotor decision-making. Nature neuroscience, 17(10):1395–1403, 2014.">2014</a>]</span>, <span id="id7">Yates <em>et al.</em> [<a class="reference internal" href="99_references.html#id67" title="Jacob L Yates, Il Memming Park, Leor N Katz, Jonathan W Pillow, and Alexander C Huk. Functional dissection of signal and noise in MT and LIP during decision-making. Nature neuroscience, 20(9):1285–1292, 2017.">2017</a>]</span> applied GLMs to characterize heterogeneous responses in multi-neuronal spike train recordings from lateral intraparietal cortex (LIP) during decision making.</p></li>
+<li><p><span id="id8">Hardcastle <em>et al.</em> [<a class="reference internal" href="99_references.html#id68" title="Kiah Hardcastle, Niru Maheswaranathan, Surya Ganguli, and Lisa M Giocomo. A multiplexed, heterogeneous, and adaptive code for navigation in medial entorhinal cortex. Neuron, 94(2):375–387, 2017.">2017</a>]</span> applied a similar analysis to characterize functional cell types in medial entorhinal cortex (MEC), finding grid cells, border cells, and much more.</p></li>
+<li><p><span id="id9">Vidne <em>et al.</em> [<a class="reference internal" href="99_references.html#id69" title="Michael Vidne, Yashar Ahmadian, Jonathon Shlens, Jonathan W Pillow, Jayant Kulkarni, Alan M Litke, EJ Chichilnisky, Eero Simoncelli, and Liam Paninski. Modeling the impact of common noise inputs on the network activity of retinal ganglion cells. Journal of computational neuroscience, 33:97–121, 2012.">2012</a>]</span> characterized the responses of retinal ganglion cells, allowing for correlated noise processes, and <span id="id10">Freeman <em>et al.</em> [<a class="reference internal" href="99_references.html#id70" title="Jeremy Freeman, Greg D Field, Peter H Li, Martin Greschner, Deborah E Gunning, Keith Mathieson, Alexander Sher, Alan M Litke, Liam Paninski, Eero P Simoncelli, and others. Mapping nonlinear receptive field structure in primate retina at single cone resolution. Elife, 4:e05241, 2015.">2015</a>]</span> further refined the model to include common inputs from bipolar cells. <span id="id11">McIntosh <em>et al.</em> [<a class="reference internal" href="99_references.html#id60" title="Lane McIntosh, Niru Maheswaranathan, Aran Nayebi, Surya Ganguli, and Stephen Baccus. Deep learning models of the retinal response to natural scenes. Advances in Neural Information Processing Systems, 2016.">2016</a>]</span> framed these models as convolutional neural networks, which we will study in lab.</p></li>
+<li><p>On the methodological side, much work has gone into fitting these models at scale <span id="id12">[<a class="reference internal" href="99_references.html#id71" title="Alexandro D Ramirez and Liam Paninski. Fast inference in generalized linear models via expected log-likelihoods. Journal of computational neuroscience, 36:215–234, 2014.">Ramirez and Paninski, 2014</a>, <a class="reference internal" href="99_references.html#id72" title="David Zoltowski and Jonathan W Pillow. Scaling the Poisson glm to massive neural datasets through polynomial approximations. Advances in neural information processing systems, 2018.">Zoltowski and Pillow, 2018</a>]</span>, extending the models with structured prior distributions <span id="id13">[<a class="reference internal" href="99_references.html#id73" title="Scott Linderman, Ryan P Adams, and Jonathan W Pillow. Bayesian latent structure discovery from multi-neuron recordings. Advances in neural information processing systems, 2016.">Linderman <em>et al.</em>, 2016</a>]</span>, making them more biophysically realistic <span id="id14">[<a class="reference internal" href="99_references.html#id75" title="Kenneth W Latimer, Fred Rieke, and Jonathan W Pillow. Inferring synaptic inputs from spikes with a conductance-based neural encoding model. Elife, 8:e47012, 2019.">Latimer <em>et al.</em>, 2019</a>]</span>, and understanding the extent of spiking responses that GLMs can capture <span id="id15">[<a class="reference internal" href="99_references.html#id74" title="Alison I Weber and Jonathan W Pillow. Capturing the dynamical repertoire of single neurons with generalized linear models. Neural computation, 29(12):3260–3289, 2017.">Weber and Pillow, 2017</a>]</span>.</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -536,7 +768,7 @@ y_{t,n} \sim \mathrm{Po}(f(\mathbf{w}_n^\top \boldsymbol{\phi}_t) \cdot \Delta)
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./lectures"
         },
         predefinedOutput: true
