@@ -8,6 +8,7 @@ parts:
     - file: labs/01_spike_sorting.ipynb
     - file: labs/02_calcium_imaging.ipynb
     - file: labs/03_pose_tracking.ipynb
+    - file: labs/04_glms.ipynb
 
   - caption: Foundations
     chapters:
