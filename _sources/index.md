@@ -50,10 +50,10 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 | Date        | Type       | Topic |
 | ----------- | ---------- | ----- |
 | Mon, Feb 6  | Lecture 9  | [Summary statistics](lectures/08_summary_stats.ipynb) and [GLMs](lectures/09_glm.ipynb) {Download}`[slides]<lectures/pdf/08_encoding.pdf>`
-| Wed, Feb 8  | Lecture 10 | Encoding models of neural spike trains
-| Fri, Feb 10 | Lab 4      | DeepRetina from scratch
-| Mon, Feb 13 | Lecture 11 | Bayesian decoding of neural spike trains
-| Wed, Feb 15 | Lecture 12 | Unsupervised modeling with latent variable models
+| Wed, Feb 8  | Lecture 10 | [GLMs](lectures/09_glm.ipynb) {Download}`[slides]<lectures/pdf/08_encoding.pdf>`
+| Fri, Feb 10 | **Lab 4**      | [**Generalized linear models**](labs/04_glms.ipynb)
+| Mon, Feb 13 | Lecture 11 | [Poisson processes](lectures/10_poisson_processes.ipynb)
+| Wed, Feb 15 | Lecture 12 | Bayesian decoding of neural spike trains
 | Fri, Feb 17 | Lab 5      | Decoding movement from neural data
 
 ### Unit III: Unsupervised models of neural and behavioral data

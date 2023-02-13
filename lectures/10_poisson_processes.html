@@ -402,8 +402,18 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#poisson-superposition-theorem">
-   Poisson superposition theorem
+  <a class="reference internal nav-link" href="#maximum-likelihood-estimation-for-hawkes-processes">
+   Maximum likelihood estimation for Hawkes processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#poisson-superposition-and-thinning">
+   Poisson superposition and thinning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hawkes-processes-as-cascades-of-poisson-processes">
+   Hawkes processes as cascades of Poisson processes
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -486,8 +496,18 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#poisson-superposition-theorem">
-   Poisson superposition theorem
+  <a class="reference internal nav-link" href="#maximum-likelihood-estimation-for-hawkes-processes">
+   Maximum likelihood estimation for Hawkes processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#poisson-superposition-and-thinning">
+   Poisson superposition and thinning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hawkes-processes-as-cascades-of-poisson-processes">
+   Hawkes processes as cascades of Poisson processes
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -761,14 +781,115 @@ f(s) = \mathrm{Exp}(s; \tau^{-1}) = \tau^{-1} e^{-s / \tau}.
 <p>The spectral radius of a matrix is the maximum absolute value of its eigenvalues. Since <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> is a non-negative, real-valued matrix, the <a class="reference external" href="https://en.wikipedia.org/wiki/Perron%E2%80%93Frobenius_theorem"><strong>Perron-Frobenius theorem</strong></a> says that the maximum eigenvalue is real-valued and non-negative.</p>
 </div>
 </section>
-<section id="poisson-superposition-theorem">
-<h2>Poisson superposition theorem<a class="headerlink" href="#poisson-superposition-theorem" title="Permalink to this headline">#</a></h2>
+<section id="maximum-likelihood-estimation-for-hawkes-processes">
+<h2>Maximum likelihood estimation for Hawkes processes<a class="headerlink" href="#maximum-likelihood-estimation-for-hawkes-processes" title="Permalink to this headline">#</a></h2>
+<p>The likelhood of a Hawkes process is the same as that of a Poisson process, but with the conditional intensity instead. Consider the univariate case (the multivariate Hawkes process follows the same form),</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+p(\{t_n\}_{n=1}^N; \theta) &amp;= 
+\exp \bigg\{-\int_0^T \lambda(t \mid \mathcal{H}_t; \theta) \, \mathrm{d} t\bigg\} 
+\prod_{n=1}^N \lambda(t_n \mid \mathcal{H}_{t_n}; \theta),
+\end{aligned}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta = (\lambda_0, w)\)</span> are the two parameters.</p>
+<p>For Hawkes processes, the integral can be simplified,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+\int_0^T \lambda(t \mid \mathcal{H}_t; \theta) \, \mathrm{d} t
+&amp;= \lambda_0 T + \sum_{n=1}^N w \int_{t_n}^T f(t - t_n) \, \mathrm{d}t.
+\end{aligned}
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(f\)</span> has bounded support or decays quickly to zero — e.g., when <span class="math notranslate nohighlight">\(f(s) = \mathrm{Exp}(s; \tau^{-1})\)</span> the density is close to zero after delays greater than a few time constants <span class="math notranslate nohighlight">\(\tau\)</span> — then we can approximate the integral as,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+\int_0^T \lambda(t \mid \mathcal{H}_t; \theta) \, \mathrm{d} t
+&amp;\approx \lambda_0 T + w N.
+\end{aligned}
+\]</div>
+<p>Maximum likelihood estimation boils down to a convex optimization problem: minize the negative log likelihood, which is convex and easy to evaluate, subject to nonnegativity constraints. This problem is straightforward to solve with CVXPy, for example.</p>
+</section>
+<section id="poisson-superposition-and-thinning">
+<h2>Poisson superposition and thinning<a class="headerlink" href="#poisson-superposition-and-thinning" title="Permalink to this headline">#</a></h2>
+<p>Just like the sum of independent Poisson random variables, the <strong>superposition</strong> of two independent Poisson proesses is another Poisson process. If,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\{t_{0,n}\}_{n=1}^{N_0} &amp;\sim \mathrm{PP}(\lambda_0(t)) \\
+\{t_{1,n}\}_{n=1}^{N_1} &amp;\sim \mathrm{PP}(\lambda_1(t)) 
+\end{aligned}
+\end{split}\]</div>
+<p>are two independent Poisson processes, then there superposition is a Poisson process as well,</p>
+<div class="math notranslate nohighlight">
+\[
+\{t_{0,n}\}_{n=1}^{N_0} \cup \{t_{1,n}\}_{n=1}^{N_1} \sim \mathrm{PP}(\lambda_0(t) + \lambda_1(t)).
+\]</div>
+<p>Likewise, if a Poisson process intensity is a sum of non-negative functions, we can use <strong>Poisson thinning</strong> to separate the points into indepedent Processes. Suppose</p>
+<div class="math notranslate nohighlight">
+\[
+\{t_n\}_{n=1}^N \sim \mathrm{PP}(\lambda_0(t) + \lambda_1(t)).
+\]</div>
+<p>Introduce independent binary variables,</p>
+<div class="math notranslate nohighlight">
+\[
+z_n \sim \mathrm{Bern}\left( \frac{\lambda_1(t_n)}{\lambda_0(t_n) + \lambda_1(t_n)} \right)
+\]</div>
+<p>to separate the events. Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\{t_n: z_n = 0\} &amp;\sim \mathrm{PP}(\lambda_0(t)) \\
+\{t_n: z_n = 1\} &amp;\sim \mathrm{PP}(\lambda_1(t)) 
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="hawkes-processes-as-cascades-of-poisson-processes">
+<h2>Hawkes processes as cascades of Poisson processes<a class="headerlink" href="#hawkes-processes-as-cascades-of-poisson-processes" title="Permalink to this headline">#</a></h2>
+<p>We can use Poisson superposition and thinning to reinterpret the Hawkes process as a cascade of Poisson processes. Note that the conditional intensity of a Hawkes process is the sum of non-negative intensity functions: a homogeneous background rate plus weighted impulse responses. An equivalent way to sample the Hawkes process is to sample points from independent Poisson processes for each term in the intensity function.</p>
+<ol>
+<li><p>First, sample points from the background process,</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{T}_0 = \{t_{0}\}_{n=1}^{N_0} \sim \mathrm{PP}(\lambda_0)\]</div>
+</li>
+<li><p>Then, for each point <span class="math notranslate nohighlight">\(t_n \in \mathcal{T}_0\)</span>, sample new points from its a Poisson process with its impulse response,</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{T}_n = \{t_{n'}\}_{n'=1}^{N_n} \sim \mathrm{PP}(w f(t - t_n))\]</div>
+</li>
+<li><p>Repeat this process recursively for each newly sampled point.</p></li>
+<li><p>Return the union of all induced points <span class="math notranslate nohighlight">\(\cup \mathcal{T}_n\)</span>.</p></li>
+</ol>
+<p>From this perspective, we can view the Hawkes process as a <strong>cascade of Poisson processes</strong>. Each point can spawn a new generation of <strong>child</strong> points.</p>
+<p>This perspective also sheds light on the weights. When the impulse response is normalized, we can think of the weight as the <em>expected number of children</em>. If the expected number of children is greater than 1, then the process above becomes unstable and may not halt.</p>
+<p>Finally, we can use this perspective to formulate the Hawkes process as a latent variable model. Each point has a latent <strong>parent</strong> — either the background or a preceding poitn &amp;mdash. If we knew the parents, the Hawkes process would decompose into independent Poisson processes. We can leverage this formulation to do efficient Bayesian inference in Hawkes processes <span id="id2">[<a class="reference internal" href="99_references.html#id77" title="Scott Linderman and Ryan Adams. Discovering latent network structure in point process data. In International conference on machine learning, 1413–1421. PMLR, 2014.">Linderman and Adams, 2014</a>]</span>.</p>
 </section>
 <section id="nonlinear-hawkes-processes">
 <h2>Nonlinear Hawkes processes<a class="headerlink" href="#nonlinear-hawkes-processes" title="Permalink to this headline">#</a></h2>
+<p>A limitation of Hawkes processes is that they are <strong>purely excitatory</strong>. If the weights were negative, the intensity function could be negative as well, and that would be an invalid point process.</p>
+<p>One way around this is via <strong>nonlinear Hawkes processes</strong>, where the intensity function is,</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda(t \mid \mathcal{H}_t) = g \left( w_0 + \sum_{t_n \in \mathcal{H}_t} w \, f(t - t_n) \right),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(g: \mathbb{R} \mapsto \mathbb{R}_+\)</span> is a rectifying nonlinearity. This is essentially th continuous-time analog of the GLMs from the preceding chapter. Unfortunately, many of the nice properties of regular Hawkes processes are lost in this formulation:</p>
+<ul class="simple">
+<li><p>The integrated intensity does not have a simpled closed form solution.</p></li>
+<li><p>The process can no longer be viewed as a superposition.</p></li>
+</ul>
+<p>Still, we can approximate the log likelihood with numerical quadrature methods, and in some cases we can use fancy augmentation schemes to perform Bayesian inference <span id="id3">[<a class="reference internal" href="99_references.html#id78" title="Feng Zhou, Zhidong Li, Xuhui Fan, Yang Wang, Arcot Sowmya, and Fang Chen. Scalable inference for nonparametric Hawkes process using Pó$ lya-gamma augmentation. arXiv preprint arXiv:1910.13052, 2019.">Zhou <em>et al.</em>, 2019</a>]</span>.</p>
 </section>
 <section id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Point processes are stochastic processes that produce discrete sets of points.  They are fundamental tools for modeling neural spike trains, where the points are spike times.</p></li>
+<li><p>The Poisson process is the fundamental point process from which more complex models are constructed.</p></li>
+<li><p>There are many ways to sample a Poisson process. We showed two: the “two-stage” approach of sampling the number of points and then their times; and the “interval” approach of repeatedly sampling inter-spike intervals.</p></li>
+<li><p>Both approaches led to the same expression for the Poisson process likelihood, which is a concave function of the intensity.</p></li>
+<li><p>However, the same simplifying assumptions that make Poisson processes so mathematically elegant also limit their utility for modeling data with dependencies. Renewal processes and Hawkes processes extend the Poisson process, without completely sacrificing tractability.</p></li>
+<li><p>Finally, we saw how Hawkes processes can be viewed as cascades of Poisson processes thanks to the Poisson superposition and thinning principles.</p></li>
+</ul>
+<p>To learn more about Poisson processes, the definitive reference is <span id="id4">Kingman [<a class="reference internal" href="99_references.html#id79" title="John Frank Charles Kingman. Poisson processes. Volume 3. Clarendon Press, 1992.">1992</a>]</span>.</p>
 </section>
 </section>
 
