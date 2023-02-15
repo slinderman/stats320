@@ -17,7 +17,7 @@ You should be comfortable with basic probability (STATS 116) as well as multivar
 
 ## Logistics
 - **Time:** MWF 11:30am-12:20pm
-- **Location:** 380-380Y
+- **Location:** MW in 380-380Y, F in Turing Auditorium (Polya Hall)
 - **Grading:** Credit or letter grade
 - **Components:** Lectures on Mon/Wed, in-class labs on Fri
 - **Office Hours:**
