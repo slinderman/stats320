@@ -52,8 +52,8 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 | Mon, Feb 6  | Lecture 9  | [Summary statistics](lectures/08_summary_stats.ipynb) and [GLMs](lectures/09_glm.ipynb) {Download}`[slides]<lectures/pdf/08_encoding.pdf>`
 | Wed, Feb 8  | Lecture 10 | [GLMs](lectures/09_glm.ipynb) {Download}`[slides]<lectures/pdf/08_encoding.pdf>`
 | Fri, Feb 10 | **Lab 4**      | [**Generalized linear models**](labs/04_glms.ipynb)
-| Mon, Feb 13 | Lecture 11 | [Poisson processes](lectures/10_poisson_processes.ipynb)
-| Wed, Feb 15 | Lecture 12 | Bayesian decoding of neural spike trains
+| Mon, Feb 13 | Lecture 11 | [Poisson processes](lectures/10_poisson_processes.ipynb) {Download}`[slides]<lectures/pdf/09_poisson_processes.pdf>`
+| Wed, Feb 15 | Lecture 12 | Bayesian decoding of neural spike trains {Download}`[slides]<lectures/pdf/10_decoding.pdf>`
 | Fri, Feb 17 | Lab 5      | Decoding movement from neural data
 
 ### Unit III: Unsupervised models of neural and behavioral data
@@ -62,7 +62,7 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 | Mon, Feb 20 | Pres. Day  | _No class_
 | Wed, Feb 22 | Lecture 13 | Hidden Markov models (HMMs)
 | Fri, Feb 24 | Lab 6      | MoSeq from scratch
-| Mon, Feb 27 | Lecture 14 | Poisson linear dynamical systems
+| Mon, Feb 27 | Lecture 14 | Poisson linear dynamical systems <br> **Final project proposal due**
 | Wed, Mar 1  | Lecture 15 | Switching linear dynamical systems (SLDS)
 | Fri, Mar 3  | Lab 7 (not graded) | SLDS from scratch
 | Mon, Mar 6  | Lecture 16 | Variational Autoencoders (VAEs)
@@ -70,7 +70,7 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 | Fri, Mar 10 | Lab 8 (not graded) | LFADS from scratch
 | Mon, Mar 13 | Guest Lec. | [Russ Poldrack](https://poldrack.github.io/) (topic TBD)
 | Wed, Mar 15 | Lecture 19 | Current research
-| Fri, Mar 17 | Presentations | Project presentations (ideally 11:20-1:20pm, with lunch provided)
+| Fri, Mar 17 | Presentations | Project presentations **11:20-1:20pm, with lunch provided**
 
 ## Labs
 - You will work start the labs in class on Fridays, so attendance is required. (If you are sick or have a one-time conflict, please let me know as soon as possible.)
@@ -81,8 +81,9 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 
 ## Final project
 
-- You will work on the final project in teams of 2-3 people.
+- You will work on the final project in teams of 2-3 people (you choose your team!)
 - You must use real neural or behavioral data. We will provide links to suggested datasets, or if you are an experimentalist, you can use your own!
+- A project proposal will be due **Monday, Feb 27 at 11:30am.**
 - The final report will be due **Friday, Mar 24 at 11:30am.**
 
 ## Grading
