@@ -946,13 +946,7 @@ title="Print to PDF"
 </div>
 <section id="load-the-data">
 <h3>Load the data<a class="headerlink" href="#load-the-data" title="Permalink to this headline">#</a></h3>
-<p>We have preprocessed the data into training, validation, and test dictionaries. Each dictionary contains the following keys:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">spikes</span></code> a (<span class="math notranslate nohighlight">\(L \times T \times 96\)</span>) array of spike counts for each of the 96 channels where <span class="math notranslate nohighlight">\(L\)</span> is the number of trials and <span class="math notranslate nohighlight">\(T\)</span> is the number of 25ms time bins per trial</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code> a (<span class="math notranslate nohighlight">\(L \times T \times 2\)</span>) array of cursor positions</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">velocity</span></code> a (<span class="math notranslate nohighlight">\(L \times T \times 2\)</span>) array of estimated cursor velocities</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">condition</span></code> a length <span class="math notranslate nohighlight">\(L\)</span> tensor containing integers <span class="math notranslate nohighlight">\(0,\ldots,8\)</span> specifying the reaching condition (i.e. starting point and target)</p></li>
-</ul>
+<p>We have preprocessed the data into training, validation, and test dictionaries. We’ll wrap them in <code class="docutils literal notranslate"><span class="pre">ReachDataset</span></code> objects below, but first we do a bit of preprocessing to account for delays between spikes and movement.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget<span class="w"> </span>-nc<span class="w"> </span>https://www.dropbox.com/s/gu58kxqfye6ewcl/lab5_data.pt
@@ -1076,6 +1070,21 @@ lab5_data.pt        100%[===================&gt;]   6.37M  35.4MB/s    in 0.2s
 </div>
 </div>
 </div>
+<p>Each dataset object contains the following fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">spikes</span></code> a (<span class="math notranslate nohighlight">\(L \times T \times 96\)</span>) array of spike counts for each of the 96 channels where <span class="math notranslate nohighlight">\(L\)</span> is the number of trials and <span class="math notranslate nohighlight">\(T\)</span> is the number of 25ms time bins per trial</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code> a (<span class="math notranslate nohighlight">\(L \times T \times 2\)</span>) array of cursor positions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">velocity</span></code> a (<span class="math notranslate nohighlight">\(L \times T \times 2\)</span>) array of estimated cursor velocities</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">condition</span></code> a length <span class="math notranslate nohighlight">\(L\)</span> tensor containing integers <span class="math notranslate nohighlight">\(0,\ldots,8\)</span> specifying the reaching condition (i.e. starting point and target)</p></li>
+</ul>
+<p>The dataset is also iterable. For example,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">trial</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>    <span class="c1"># Returns a Trial dataclass for trial 0</span>
+<span class="n">trial</span><span class="o">.</span><span class="n">spikes</span>                <span class="c1"># (T, 96) tensor of spikes</span>
+<span class="n">trial</span><span class="o">.</span><span class="n">position</span>              <span class="c1"># (T, 2) tensor of positions</span>
+<span class="n">trial</span><span class="o">.</span><span class="n">velocity</span>              <span class="c1"># (T, 2) tensor of velocities</span>
+<span class="n">trial</span><span class="o">.</span><span class="n">condition</span>             <span class="c1"># (int) condition id</span>
+</pre></div>
+</div>
 </section>
 <section id="plot-the-spike-counts-and-position-velocity-times-for-a-single-trial">
 <h3>Plot the spike counts and position/velocity times for a single trial<a class="headerlink" href="#plot-the-spike-counts-and-position-velocity-times-for-a-single-trial" title="Permalink to this headline">#</a></h3>
@@ -1106,7 +1115,7 @@ lab5_data.pt        100%[===================&gt;]   6.37M  35.4MB/s    in 0.2s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/05_decoding_13_0.png" src="../_images/05_decoding_13_0.png" />
+<img alt="../_images/05_decoding_14_0.png" src="../_images/05_decoding_14_0.png" />
 </div>
 </div>
 </section>
@@ -1130,7 +1139,7 @@ lab5_data.pt        100%[===================&gt;]   6.37M  35.4MB/s    in 0.2s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/05_decoding_15_0.png" src="../_images/05_decoding_15_0.png" />
+<img alt="../_images/05_decoding_16_0.png" src="../_images/05_decoding_16_0.png" />
 </div>
 </div>
 </section>
@@ -1382,7 +1391,7 @@ p(\mathbf{x}_i \mid \mathbf{y}_i)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/05_decoding_26_0.png" src="../_images/05_decoding_26_0.png" />
+<img alt="../_images/05_decoding_27_0.png" src="../_images/05_decoding_27_0.png" />
 </div>
 </div>
 </section>
@@ -1591,7 +1600,7 @@ p(\mathbf{x}_i \mid \mathbf{y}_i)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/05_decoding_39_0.png" src="../_images/05_decoding_39_0.png" />
+<img alt="../_images/05_decoding_40_0.png" src="../_images/05_decoding_40_0.png" />
 </div>
 </div>
 </section>
@@ -1756,7 +1765,7 @@ p(\mathbf{x}_i \mid \mathbf{y}_i)
 {"model_id": "3ab5e721a7ac4c5581a848b728ea04fc", "version_major": 2, "version_minor": 0}
 </script><script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "3f38c9cac0874654ad5b3d30bbd06b98", "version_major": 2, "version_minor": 0}
-</script><img alt="../_images/05_decoding_46_3.png" src="../_images/05_decoding_46_3.png" />
+</script><img alt="../_images/05_decoding_47_3.png" src="../_images/05_decoding_47_3.png" />
 </div>
 </div>
 </section>
@@ -1770,7 +1779,7 @@ p(\mathbf{x}_i \mid \mathbf{y}_i)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/05_decoding_48_0.png" src="../_images/05_decoding_48_0.png" />
+<img alt="../_images/05_decoding_49_0.png" src="../_images/05_decoding_49_0.png" />
 </div>
 </div>
 </section>
@@ -1811,7 +1820,7 @@ p(\mathbf{x}_i \mid \mathbf{y}_i)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/05_decoding_50_0.png" src="../_images/05_decoding_50_0.png" />
+<img alt="../_images/05_decoding_51_0.png" src="../_images/05_decoding_51_0.png" />
 </div>
 </div>
 </section>
