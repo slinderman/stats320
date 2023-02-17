@@ -9,6 +9,7 @@ parts:
     - file: labs/02_calcium_imaging.ipynb
     - file: labs/03_pose_tracking.ipynb
     - file: labs/04_glms.ipynb
+    - file: labs/05_decoding.ipynb
 
   - caption: Foundations
     chapters:

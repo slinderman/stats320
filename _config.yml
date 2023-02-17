@@ -9,6 +9,7 @@ execute:
     - '02_calcium_imaging.ipynb'
     - '03_pose_tracking.ipynb'
     - '04_glms.ipynb'
+    - '05_decoding.ipynb'
 only_build_toc_files: true
 
 # Add a bibtex file so that we can create citations
