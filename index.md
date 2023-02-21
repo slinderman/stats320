@@ -53,7 +53,7 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 | Wed, Feb 8  | Lecture 10 | [GLMs](lectures/09_glm.ipynb) {Download}`[slides]<lectures/pdf/08_encoding.pdf>`
 | Fri, Feb 10 | **Lab 4**      | [**Generalized linear models**](labs/04_glms.ipynb)
 | Mon, Feb 13 | Lecture 11 | [Poisson processes](lectures/10_poisson_processes.ipynb) {Download}`[slides]<lectures/pdf/09_poisson_processes.pdf>`
-| Wed, Feb 15 | Lecture 12 | Bayesian decoding of neural spike trains {Download}`[slides]<lectures/pdf/10_decoding.pdf>`
+| Wed, Feb 15 | Lecture 12 | [Bayesian decoding of neural spike trains](lectures/11_decoding.ipynb) {Download}`[slides]<lectures/pdf/10_decoding.pdf>`
 | Fri, Feb 17 | **Lab 5**      | [**Bayesian decoding**](labs/05_decoding.ipynb)
 
 ### Unit III: Unsupervised models of neural and behavioral data
