@@ -669,7 +669,7 @@ p(\mathbf{x}_{1:T} \mid \mathbf{y}_{1:T})
 \end{split}\]</div>
 <p>where</p>
 <ul class="simple">
-<li><p>The diagonal blocks of the precision matrix are <span class="math notranslate nohighlight">\(\mathbf{J}_{tt} = \mathbf{Q}^{-1} + \mathbf{A}^\top \mathbf{Q}^{-1} \mathbf{A}\)</span> (except for <span class="math notranslate nohighlight">\(\mathbf{J}_{11}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{J}_{TT}\)</span>).</p></li>
+<li><p>The diagonal blocks of the precision matrix are <span class="math notranslate nohighlight">\(\mathbf{J}_{tt} = \mathbf{Q}^{-1} + \mathbf{A}^\top \mathbf{Q}^{-1} \mathbf{A} + \mathbf{C}^\top \mathbf{R}^{-1} \mathbf{C}\)</span> (except for <span class="math notranslate nohighlight">\(\mathbf{J}_{11}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{J}_{TT}\)</span>).</p></li>
 <li><p>The lower diagonal blocks are <span class="math notranslate nohighlight">\(\mathbf{J}_{t,t-1} = - \mathbf{Q}^{-1} \mathbf{A}\)</span></p></li>
 <li><p>The precision-weighted mean blocks are <span class="math notranslate nohighlight">\(\mathbf{h}_{t} = \mathbf{C}^\top \mathbf{R}^{-1} (\mathbf{y}_t - \mathbf{d})\)</span></p></li>
 </ul>
