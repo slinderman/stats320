@@ -60,9 +60,9 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 | Date        | Type       | Topic |
 | ----------- | ---------- | ----- |
 | Mon, Feb 20 | Pres. Day  | _No class_
-| Wed, Feb 22 | Lecture 13 | Hidden Markov models (HMMs)
+| Wed, Feb 22 | Lecture 13 | EM, Mixture Models, and Hidden Markov models (HMMs)  {Download}`[slides]<lectures/pdf/11_hmms.pdf>`
 | Fri, Feb 24 | Lab 6      | MoSeq from scratch
-| Mon, Feb 27 | Lecture 14 | Poisson linear dynamical systems <br> **Final project proposal due**
+| Mon, Feb 27 | Lecture 14 | More HMMs <br> **Final project proposal due**
 | Wed, Mar 1  | Lecture 15 | Switching linear dynamical systems (SLDS)
 | Fri, Mar 3  | Lab 7 (not graded) | SLDS from scratch
 | Mon, Mar 6  | Lecture 16 | Variational Autoencoders (VAEs)
