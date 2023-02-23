@@ -1,0 +1,861 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Mixture Models and the EM Algorithm &#8212; Machine Learning Methods for Neural Data Analysis</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="References" href="99_references.html" />
+    <link rel="prev" title="Decoding Models" href="11_decoding.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning Methods for Neural Data Analysis</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Labs
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/00_pytorch_primer.html">
+   Lab 0: PyTorch Primer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/01_spike_sorting.html">
+   Lab 1: Spike Sorting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/02_calcium_imaging.html">
+   Lab 2: Calcium Deconvolution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/03_pose_tracking.html">
+   Lab 3: Markerless Pose Tracking
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/04_glms.html">
+   Lab 4: Generalized Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/05_decoding.html">
+   Lab 5: Bayesian Decoding
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_probabilistic_modeling.html">
+   Probabilistic Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_neurobio.html">
+   Basic Neurobiology
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Unit I: Signal Extraction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_simple_spike_sorting.html">
+   Simple Spike Sorting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_deconv_spike_sorting.html">
+   Spike Sorting by Deconvolution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_calcium_imaging.html">
+   Demixing Calcium Imaging Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_pose_tracking.html">
+   Markerless Pose Tracking
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Unit II: Encoding &amp; Decoding
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_summary_stats.html">
+   Summary Statistics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_glm.html">
+   Generalized Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_poisson_processes.html">
+   Poisson Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_decoding.html">
+   Decoding Models
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Unit III: Unsupervised Learning
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Mixture Models and the EM Algorithm
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="99_references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/slinderman/stats320/blob/winter2023/lectures/12_mixtures_em.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/lectures/12_mixtures_em.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gaussian-mixture-models">
+   Gaussian mixture models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-estimation-and-k-means">
+   MAP estimation and K-means
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#expectation-maximization-em">
+   Expectation-Maximization (EM)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-evidence-lower-bound-elbo">
+   The Evidence Lower Bound (ELBO)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#em-and-coordinate-ascent">
+   EM and coordinate ascent
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exponential-family-mixtures">
+   Exponential family mixtures
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stochastic-em">
+   Stochastic EM
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Mixture Models and the EM Algorithm</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gaussian-mixture-models">
+   Gaussian mixture models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-estimation-and-k-means">
+   MAP estimation and K-means
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#expectation-maximization-em">
+   Expectation-Maximization (EM)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-evidence-lower-bound-elbo">
+   The Evidence Lower Bound (ELBO)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#em-and-coordinate-ascent">
+   EM and coordinate ascent
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exponential-family-mixtures">
+   Exponential family mixtures
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stochastic-em">
+   Stochastic EM
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="mixture-models-and-the-em-algorithm">
+<h1>Mixture Models and the EM Algorithm<a class="headerlink" href="#mixture-models-and-the-em-algorithm" title="Permalink to this headline">#</a></h1>
+<p>Unit II was all about <em>supervised</em> learning problems. Both encoding and decoding involve predicting one signal from another: neural firing rates given stimuli, or behavioral outputs given neural activity. Now we turn our attention to <em>unsupervised</em> learning problems. Given measurements of neural activity or behavior, we aim to find latent variables — cluster, factors, etc. — that can explain the data.</p>
+<p>Unsupervised learning has many applications in neuroscience. First and foremost, it’s a means of <strong>dimensionality reduction</strong>. Latent variables offer a compressed representation of high-dimensional neural spike trains or behavioral videos. Low dimensional representations can aid in <strong>visualization</strong> as well as <strong>hypothesis generation</strong>.</p>
+<p>We encountered a few examples of unsupervised learning in Unit I. Spike sorting and calcium deconvolution were both unsupervised problems: the spike times and templates were a low dimensional representation of a high dimensional voltage trace or video.</p>
+<p>Unsupervised learning is all about <strong>constraints</strong>. We need to set some boundaries on what types of latent variables we are looking for. I like to think of constraints in terms of the five D’s</p>
+<ul class="simple">
+<li><p><strong>Dimensionality</strong>: how many latent clusters, factors, etc.?</p></li>
+<li><p><strong>Domain</strong>: are the latent variables discrete, continuous, bounded, sparse, etc.?</p></li>
+<li><p><strong>Dynamics</strong>: how do the latent variables change over time?</p></li>
+<li><p><strong>Dependencies</strong>: how do the latent variables relate to the observed data?</p></li>
+<li><p><strong>Distribution</strong>: do we have prior knowledge about the variables’ probability?</p></li>
+</ul>
+<p>This are certainly not an exhaustive list of the types of constraints, but it covers many bases. Thinking in terms of constraints allows us to organize many commonly used models.</p>
+<section id="gaussian-mixture-models">
+<h2>Gaussian mixture models<a class="headerlink" href="#gaussian-mixture-models" title="Permalink to this headline">#</a></h2>
+<p>Let’s start with a simple and canonical example: the <strong>Gaussian mixture model (GMM)</strong>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{x}_t \in \mathbb{R}^D\)</span> denote the <span class="math notranslate nohighlight">\(t\)</span>-th observation. Let <span class="math notranslate nohighlight">\(z_t \in \{1, \ldots, K\}\)</span> ￼ denote the discrete latent state (aka cluster assignment) of that data point.</p>
+<p>Assume each observation is independently drawn according to the following model:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+z_t &amp;\sim \mathrm{Cat}(\boldsymbol{\pi}) \\
+\mathbf{x}_t &amp;\sim \mathcal{N}(\boldsymbol{\mu}_{z_t}, \boldsymbol{\Sigma}_{z_t}) 
+\end{align*}
+\end{split}\]</div>
+<p>￼
+The parameters include the prior probabilities of the cluster assignments, <span class="math notranslate nohighlight">\(\boldsymbol{\pi} \in \Delta_K\)</span>, and the conditional mean and variance of each cluster, <span class="math notranslate nohighlight">\(\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k\)</span>. Let <span class="math notranslate nohighlight">\(\boldsymbol{\theta} = \{\boldsymbol{\pi}, \{\boldsymbol{\mu}, \boldsymbol{\Sigma}\}_{k=1}^K\}\)</span> denote the set of all parameters.</p>
+<p>The joint probability is,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+p(\mathbf{z}_{1:T}, \mathbf{x}_{1:T}; \boldsymbol{\theta})
+&amp;= \prod_{t=1}^T \mathrm{Cat}(z_t; \boldsymbol{\pi}) \, \mathcal{N}(\mathbf{x}_t; \boldsymbol{\mu}_{z_t}, \boldsymbol{\Sigma}_{z_t})
+\end{align*}
+\]</div>
+</section>
+<section id="map-estimation-and-k-means">
+<h2>MAP estimation and K-means<a class="headerlink" href="#map-estimation-and-k-means" title="Permalink to this headline">#</a></h2>
+<p>In <a class="reference internal" href="02_probabilistic_modeling.html"><span class="doc std std-doc">Chapter 2</span></a>, we fit this type of model using MAP estimation,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{z}_{1:T}^\star, \boldsymbol{\theta}^\star =
+\mathrm{arg}\,\mathrm{max} \; p(\mathbf{z}_{1:T}, \mathbf{x}_{1:T}; \boldsymbol{\theta})
+\]</div>
+<p>We solved for the MAP estimate by <strong>coordinate ascent</strong>. For the GMM, the coordinates updates are,</p>
+<ol>
+<li><p>For each data point <span class="math notranslate nohighlight">\(t=1,\ldots, T\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    z_t = \mathrm{arg}\,\max_k \;  \pi_k \, \mathcal{N}(\mathbf{x}_t \mid \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)
+    \]</div>
+</li>
+<li><p>For each cluster <span class="math notranslate nohighlight">\(k=1,\ldots, K\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{align*}
+    T_k &amp;= \sum_{t=1}^T \mathbb{I}[z_t = k] \\
+    \boldsymbol{\mu}_k &amp;= \frac{1}{T_k} \sum_{t=1}^T \mathbb{I}[z_t = k] \, \mathbf{x}_t \\
+    \boldsymbol{\Sigma}_k &amp;= \frac{1}{T_k} \sum_{t=1}^T \mathbb{I}[z_t = k] \, (\mathbf{x}_t - \boldsymbol{\mu}_k) (\mathbf{x}_t - \boldsymbol{\mu}_k)^\top
+    \end{align*}
+    \end{split}\]</div>
+</li>
+</ol>
+<p>In words, we set the cluster means and covariances equal to the same means and covariances of the data points assigned to that cluster. If we were to fix <span class="math notranslate nohighlight">\(\boldsymbol{\Sigma}_k = \mathbf{I}\)</span> for all clusters, this algorithm would be equivalent to <strong>K-means clustering</strong>.</p>
+</section>
+<section id="expectation-maximization-em">
+<h2>Expectation-Maximization (EM)<a class="headerlink" href="#expectation-maximization-em" title="Permalink to this headline">#</a></h2>
+<p>MAP estimation gives us a <strong>point estimate</strong> of the latent variables and parameters.
+However, point estimates can lead to an overly optimistic view of the model.
+Specifically, MAP estimation found the <strong>best assignment</strong> of latent, which may not reflect how well samples from the model match the observed data.</p>
+<p>Ideally, we would like to find parameters that maximize the <strong>marginal likelihood</strong>, aka the <strong>model evidence</strong>,</p>
+<div class="math notranslate nohighlight">
+\[
+p(\mathbf{x}_{1:T}; \boldsymbol{\theta}) = 
+\int p(\mathbf{x}_{1:T}, \mathbf{z}_{1:T}; \boldsymbol{\theta}) \, \mathrm{d} z_1 \cdots \mathrm{d} z_T.
+\]</div>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p>For discrete latent variable models, the integral becomes a sum.</p>
+</div>
+<p>Once we have those parameters, we can compute the <strong>posterior distribution</strong> over latent variables,</p>
+<div class="math notranslate nohighlight">
+\[
+p(\mathbf{z}_{1:T} \mid \mathbf{x}_{1:T}; \boldsymbol{\theta}).
+\]</div>
+<p>The <strong>expectation-maximization (EM)</strong> algorithm does exactly that: it finds a local maximum of the marginal likelihood via an iterative algorithm very similar to the MAP estimation algorithm above. The key difference is that instead of using <strong>hard assignments</strong> of data points to the most likely cluser, we use <strong>soft assignments</strong> of data points based on their posterior probabilities.</p>
+<ol>
+<li><p>For each data point <span class="math notranslate nohighlight">\(t=1,\ldots, T\)</span> and cluster <span class="math notranslate nohighlight">\(k=1,\ldots, K\)</span>, set:</p>
+<div class="math notranslate nohighlight">
+\[
+    q_{t,k} = p(z_t = k \mid \mathbf{x}_t; \boldsymbol{\theta}) =  \frac{\pi_k \, \mathcal{N}(\mathbf{x}_t \mid \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)}{\sum_{j=1}^K \pi_j \, \mathcal{N}(\mathbf{x}_t \mid \boldsymbol{\mu}_j, \boldsymbol{\Sigma}_j)}
+    \]</div>
+</li>
+<li><p>For each cluster <span class="math notranslate nohighlight">\(k=1,\ldots, K\)</span>, update the parameters as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{align*}
+    T_k &amp;= \sum_{t=1}^T q_{t,k} \\
+    \boldsymbol{\mu}_k &amp;= \frac{1}{T_k} \sum_{t=1}^T q_{t,k} \, \mathbf{x}_t \\
+    \boldsymbol{\Sigma}_k &amp;= \frac{1}{T_k} \sum_{t=1}^T q_{t,k} \, (\mathbf{x}_t - \boldsymbol{\mu}_k) (\mathbf{x}_t - \boldsymbol{\mu}_k)^\top
+    \end{align*}
+    \end{split}\]</div>
+</li>
+</ol>
+<p>The posterior probabilities <span class="math notranslate nohighlight">\(q_{t,k}\)</span> are sometimes called the <strong>responsibilities</strong>. When we update the parameters, we take a <strong>weighted average</strong> of all data points based on these responsibilities.</p>
+</section>
+<section id="the-evidence-lower-bound-elbo">
+<h2>The Evidence Lower Bound (ELBO)<a class="headerlink" href="#the-evidence-lower-bound-elbo" title="Permalink to this headline">#</a></h2>
+<p>Why does EM work? We can view it as coordinate ascent on the <strong>evidence lower bound (ELBO)</strong>. First, let’s rewrite the log marginal likelihood as the log of an expectation,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\log p(\mathbf{x}; \boldsymbol{\theta}) 
+&amp;= \log \int p(\mathbf{x}, \mathbf{z}; \boldsymbol{\theta}) \, \mathrm{d}\mathbf{z} \\
+&amp;= \log \int \frac{q(\mathbf{z})}{q(\mathbf{z})} p(\mathbf{x}, \mathbf{z}; \boldsymbol{\theta}) \, \mathrm{d}\mathbf{z} \\
+&amp;= \log \mathbb{E}_{q(\mathbf{z})} \left[ \frac{p(\mathbf{x}, \mathbf{z}; \boldsymbol{\theta})}{q(\mathbf{z})}  \right]
+\end{align*}
+\end{split}\]</div>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p>We dropped the subscripts on <span class="math notranslate nohighlight">\(\mathbf{x}_{1:T}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{z}_{1:T}\)</span> to be more concise.</p>
+</div>
+<p>This equality holds for any distribution <span class="math notranslate nohighlight">\(q(\mathbf{z})\)</span> as long as <span class="math notranslate nohighlight">\(p\)</span> is <a class="reference external" href="https://en.wikipedia.org/wiki/Absolute_continuity#Absolute_continuity_of_measures">absolutely continuous</a> with respect to <span class="math notranslate nohighlight">\(q\)</span>. We call <span class="math notranslate nohighlight">\(q(\mathbf{z})\)</span> the <strong>variational posterior.</strong></p>
+<p>Since log is a concave function, <strong>Jensen’s inequality</strong> says that swapping the order of the log and the expectation gives a lower bound on the log marginal likelihood,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\log p(\mathbf{x}; \boldsymbol{\theta}) 
+\geq \mathbb{E}_{q(\mathbf{z})} \left[ \log p(\mathbf{x}, z; \boldsymbol{\theta}) - \log q(z)  \right] 
+\triangleq \mathcal{L}[q, \boldsymbol{\theta}]
+\end{align*}
+\]</div>
+<div class="admonition-jensen-s-inequality admonition">
+<p class="admonition-title">Jensen’s inequality</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Jensen%27s_inequality"><strong>Jensen’s inequality</strong></a> relates convex functions of expectations to expectations of convex functions.  If <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is a random variable and <span class="math notranslate nohighlight">\(f\)</span> is a <strong>convex function</strong>,</p>
+<div class="math notranslate nohighlight">
+\[
+f(\mathbb{E}[\mathbf{x}]) \leq \mathbb{E}[f(\mathbf{x})]
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is a <strong>concave function</strong>, the inequality is reversed.</p>
+</div>
+<p>The functional <span class="math notranslate nohighlight">\(\mathcal{L}[q, \boldsymbol{\theta}]\)</span> is called evidence lower bound, a.k.a. the ELBO.</p>
+</section>
+<section id="em-and-coordinate-ascent">
+<h2>EM and coordinate ascent<a class="headerlink" href="#em-and-coordinate-ascent" title="Permalink to this headline">#</a></h2>
+<p>We can view the EM algorithm as coordinate ascent on the ELBO.</p>
+<ol>
+<li><p><strong>M-step:</strong> Update the parameters,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{align*}
+    \boldsymbol{\theta} &amp;= \mathrm{arg}\,\mathrm{max}_{\boldsymbol{\theta}} \; \mathcal{L}[q, \boldsymbol{\theta}] \\
+    &amp;= \mathrm{arg}\,\mathrm{max}_{\boldsymbol{\theta}} \; \mathbb{E}_{q(z)}[ \log p(x, z, \boldsymbol{\theta})].
+    \end{align*}
+    \end{split}\]</div>
+<p>That is, maximize the <strong>expected log joint probability</strong>.</p>
+</li>
+<li><p><strong>E-step</strong>: Update the variational posterior by setting it equal to the posterior,</p>
+<div class="math notranslate nohighlight">
+\[
+    q(\mathbf{z}) = p(\mathbf{z} \mid \mathbf{x}; \boldsymbol{\theta}).
+    \]</div>
+<p>To see why this maximizes the ELBO for fixed <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>, note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{align*}
+    q(\mathbf{z}) &amp;= \mathrm{arg}\,\mathrm{max}_q \; \mathcal{L}[q, \boldsymbol{\theta}] \\
+    &amp;= \mathrm{arg}\,\mathrm{max}_q \; \mathbb{E}_{q(\mathbf{z})} \left[ \frac{\log p(\mathbf{x}, \mathbf{z}, \boldsymbol{\theta})}{q(\mathbf{\mathbf{z}})} \right] \\
+    &amp;= \mathrm{arg}\,\mathrm{min}_q \; \mathrm{KL}\left(q(\mathbf{\mathbf{z}}) \, \| \, p(\mathbf{z} \mid \mathbf{x}, \boldsymbol{\theta}) \right) \\
+    &amp;= p(\mathbf{z} \mid \mathbf{x}, \boldsymbol{\theta})
+    \end{align*}
+    \end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathrm{KL}(q \| p)\)</span> denotes the <a class="reference external" href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence"><strong>Kullback-Leibler divergence</strong></a> from <span class="math notranslate nohighlight">\(q\)</span> to <span class="math notranslate nohighlight">\(p\)</span>. The divergence is non-negative and zero iff <span class="math notranslate nohighlight">\(q = p\)</span>. Thus, maximizing the ELBO wrt <span class="math notranslate nohighlight">\(q\)</span> amounts to setting the variational posterior equal to the true posterior.</p>
+</li>
+</ol>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p>The ELBO is tight after the E-step. Substituting <span class="math notranslate nohighlight">\(q(\mathbf{z}) = p(\mathbf{z} \mid \mathbf{x}; \boldsymbol{\theta})\)</span> into the ELBO,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\mathcal{L}[q, \boldsymbol{\theta}] 
+&amp;= \mathbb{E}_{p(\mathbf{z} \mid \mathbf{x}, \boldsymbol{\theta})} \left[ \log \frac{p(\mathbf{x}, \mathbf{z}, \boldsymbol{\theta})}{p(\mathbf{z} \mid \mathbf{x}, \boldsymbol{\theta})} \right] \\
+&amp;= \mathbb{E}_{p(\mathbf{z} \mid \mathbf{x}, \boldsymbol{\theta})} \left[ \log p(\mathbf{x}, \boldsymbol{\theta}) \right] \\
+&amp;= \log p(\mathbf{x}, \boldsymbol{\theta})
+\end{align*}
+\end{split}\]</div>
+</div>
+<p>Iterating between the E- and M-steps converges to a local optimum of the ELBO. Since after each E-step the ELBO is tight, the local optimum of the ELBO must also be a local optimum of the log marginal likelihood.</p>
+</section>
+<section id="exponential-family-mixtures">
+<h2>Exponential family mixtures<a class="headerlink" href="#exponential-family-mixtures" title="Permalink to this headline">#</a></h2>
+<p>So far we’ve focused on Gaussian mixture models. Now let’s consider the more general case of <strong>exponential family mixture models</strong> for which,</p>
+<div class="math notranslate nohighlight">
+\[
+p(\mathbf{x}_n \mid z_n = k; \boldsymbol{\eta}) 
+= h(\mathbf{x}_n) \exp \left\{\langle t(\mathbf{x}_n), \boldsymbol{\eta}_k \rangle - A(\boldsymbol{\eta}_k) \right\}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\eta} = \{\boldsymbol{\eta}_k\}_{k=1}^K\)</span> is the set of <em>natural parameters</em>, <span class="math notranslate nohighlight">\(t(\mathbf{x}_n)\)</span> are the <em>sufficient statistics</em>, and <span class="math notranslate nohighlight">\(A(\boldsymbol{\eta}_k)\)</span> is the <em>log normalizer</em>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>We have switched to indexing data points by <span class="math notranslate nohighlight">\(n\)</span> instead of <span class="math notranslate nohighlight">\(t\)</span> to avoid confusion with the sufficient statistic <span class="math notranslate nohighlight">\(t\)</span>. Furthermore, we are assuming that all <span class="math notranslate nohighlight">\(K\)</span> components of the mixture model belong to the same exponential family (and hence have the same sufficient statistics, log normalizer, baes measure, etc.).</p>
+</div>
+<p>Under this model, the E-step reduces to computing the responsibilities,</p>
+<div class="math notranslate nohighlight">
+\[
+q_{n,k} = p(z_n = k \mid \mathbf{x}_n; \boldsymbol{\eta})
+= \frac{\pi_k \, \exp \left\{\langle t(\mathbf{x}_n), \boldsymbol{\eta}_k \rangle - A(\boldsymbol{\eta}_k) \right\}}{{\sum_{j=1}^K \pi_j \, \exp \left\{\langle t(\mathbf{x}_n), \boldsymbol{\eta}_j \rangle - A(\boldsymbol{\eta}_j) \right\}}}
+\]</div>
+<p>As a function of the parameters <span class="math notranslate nohighlight">\(\boldsymbol{\eta}_k\)</span>, the ELBO is,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\mathcal{L}(q, \boldsymbol{\eta})  
+&amp;= \mathbb{E}_{q(\mathbf{z})}[\log p(\mathbf{x}, \mathbf{z}; \boldsymbol{\eta})] + c\\
+&amp;= \sum_{n=1}^N q_{n,k} \, \log p(\mathbf{x}_n \mid z_n = k; \boldsymbol{\eta}) + c \\
+&amp;= \sum_{n=1}^N q_{n,k} \left[ \langle t(\mathbf{x}_n), \boldsymbol{\eta}_k \rangle - A(\boldsymbol{\eta}_k) \right] + c \\
+&amp;= \langle \mathbf{t}_k, \boldsymbol{\eta}_k \rangle - N_k A(\boldsymbol{\eta}_k) + c
+\end{align*}
+\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\mathbf{t}_k &amp;= \sum_{n=1}^N q_{n,k} \, t(\mathbf{x}_n) \\
+N_k &amp;= \sum_{n=1}^N q_{n,k}.
+\end{align*}
+\end{split}\]</div>
+<p>Taking derivatives and setting to zero yields,</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\eta}_k = [A']^{-1}(\mathbf{t}_k / N_k)
+\]</div>
+<p>Recall that <span class="math notranslate nohighlight">\(A'\)</span> is the moment generating funtion: derivatives of the log normalizer yield expected sufficient statistics. Assuming the exponential family is minimal, the inverse of moment generating function is well-defined, and the optimal natural parameters are those for which the expected sufficient statistics match the weighted average sufficient stastics, <span class="math notranslate nohighlight">\(\mathbf{t}_k / N_k\)</span>.</p>
+<div class="admonition-normalized-sufficient-statistics admonition">
+<p class="admonition-title">Normalized sufficient statistics</p>
+<p>Note that M-step is invariant to rescaling the ELBO. We could have multiplied <span class="math notranslate nohighlight">\(\mathcal{L}(q, \boldsymbol{\eta})\)</span> by a positive constant and the optimal <span class="math notranslate nohighlight">\(\boldsymbol{\eta}_k\)</span> would remain the same. For example, we could normalize the statistics by the size of the dataset,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\overline{\mathbf{t}}_k &amp;= \frac{\mathbf{t}_k}{N} \\
+\overline{N}_k &amp;= \frac{N_k}{N}
+\end{align*}
+\end{split}\]</div>
+<p>Then <span class="math notranslate nohighlight">\(\boldsymbol{\eta}_k = [A']^{-1}(\mathbf{t}_k / N_k) = [A']^{-1}(\overline{\mathbf{t}}_k / \overline{N}_k)\)</span> is unchanged. Working with normalized sufficient statistics like these can be more numerically stable, especially for very large datasets.</p>
+</div>
+</section>
+<section id="stochastic-em">
+<h2>Stochastic EM<a class="headerlink" href="#stochastic-em" title="Permalink to this headline">#</a></h2>
+<p>Finally, the EM algorithm presented above is a <strong>batch</strong> algorithm. The M-step involves aggregating sufficient statistics from the entire dataset. For very large datasets, it is more efficient to do an M-step after each <strong>mini-batch</strong> of data. That is how <strong>stochastic EM</strong> works.</p>
+<p>The key idea is to maintain a running estimate of the sufficient statistics. Assume we have <span class="math notranslate nohighlight">\(N\)</span> data points equally divided into <span class="math notranslate nohighlight">\(M\)</span> mini-batches, each of size <span class="math notranslate nohighlight">\(\tfrac{N}{M}\)</span>. Let <span class="math notranslate nohighlight">\(\overline{t}_k^{(m)}\)</span> and <span class="math notranslate nohighlight">\(\overline{N}_k^{(m)}\)</span> be the average statistics and responsibilities computed on the <span class="math notranslate nohighlight">\(m\)</span>-th mini-batch. (They are normalized by summing over the mini-batch and then dividing by its size, <span class="math notranslate nohighlight">\(\tfrac{N}{M}\)</span>.)</p>
+<p>In stochastic EM, we keep a running estimate of the normalized statistics,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\overline{\mathbf{t}}_k \leftarrow (1-\alpha) \overline{\mathbf{t}}_k + \alpha  \overline{\mathbf{t}}_k^{(m)} \\
+\overline{N}_k \leftarrow (1-\alpha) \overline{N}_k + \alpha \overline{N}_k^{(m)} 
+\end{align*}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> is the <strong>step size</strong>.  After each mini-batch, we update our parameters by setting,</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\eta}_k = [A']^{-1}(\overline{\mathbf{t}}_k / \overline{N}_k).
+\]</div>
+<p>To ensure convergence, we decay the learning rate according to a <strong>schedule</strong>, starting with <span class="math notranslate nohighlight">\(\alpha = 1\)</span> and slowly decaying it after each mini-batch.</p>
+<p>One sweep through the entire set of <span class="math notranslate nohighlight">\(M\)</span> mini-batches — i.e., a sweep through the whole dataset — is called an <strong>epoch</strong>. Since stochastic EM updates parameters once per mini-batch as opposed to once per epoch, as in standard EM, the parameter estimates often converge in many fewer epochs.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
+<p>This chapter introduced unsupervised learning methods using latent variables.</p>
+<ul class="simple">
+<li><p>We started with the Gaussian mixture model and recalled the coordinate ascent algorithm for MAP estimation, which is very similar to K-means.</p></li>
+<li><p>Then we introduced the expectation-maximization algorithm and saw that for GMMs, it nicely parallels the MAP estimation algorithm. However, it yields parameters that maximize the marginal likelihood instead of the joint.</p></li>
+<li><p>We derived EM as coordinate ascent on the evidence lower bound (ELBO). This view will generalize to more complex models in subsequent chapters.</p></li>
+<li><p>Finally, we considered the more general class of exponential family mixture models and derived a stochastic EM algorithm that operates on running estimates of the expected sufficient statistics.</p></li>
+</ul>
+<p>Next time, we’ll consider <strong>sequential</strong> latent variable models called hidden Markov models (HMMs).</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="11_decoding.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Decoding Models</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="99_references.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">References</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Scott Linderman<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
