@@ -30,6 +30,10 @@ parts:
     - file: lectures/10_poisson_processes.ipynb
     - file: lectures/11_decoding.ipynb
 
+  - caption: "Unit III: Unsupervised Learning"
+    chapters:
+    - file: lectures/12_mixtures_em.ipynb
+
   - caption: References
     chapters:
     - file: lectures/99_references.md
