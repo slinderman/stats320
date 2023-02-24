@@ -10,6 +10,7 @@ parts:
     - file: labs/03_pose_tracking.ipynb
     - file: labs/04_glms.ipynb
     - file: labs/05_decoding.ipynb
+    - file: labs/06_arhmm.ipynb
 
   - caption: Foundations
     chapters:
