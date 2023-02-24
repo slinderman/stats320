@@ -146,6 +146,11 @@ const thebe_selector_output = ".output, .cell_output"
    Lab 5: Bayesian Decoding
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../labs/06_arhmm.html">
+   Lab 6: Autoregressive HMMs
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -436,6 +441,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#stochastic-em">
    Stochastic EM
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stochastic-em-for-gmm">
+     Stochastic EM for GMM
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#conclusion">
@@ -495,6 +507,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#stochastic-em">
    Stochastic EM
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stochastic-em-for-gmm">
+     Stochastic EM for GMM
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#conclusion">
@@ -778,6 +797,85 @@ N_k &amp;= \sum_{n=1}^N q_{n,k}.
 \]</div>
 <p>To ensure convergence, we decay the learning rate according to a <strong>schedule</strong>, starting with <span class="math notranslate nohighlight">\(\alpha = 1\)</span> and slowly decaying it toward zero after each mini-batch.</p>
 <p>One sweep through the entire set of <span class="math notranslate nohighlight">\(M\)</span> mini-batches — i.e., a sweep through the whole dataset — is called an <strong>epoch</strong>. Since stochastic EM updates parameters once per mini-batch as opposed to once per epoch, as in standard EM, the parameter estimates often converge in many fewer epochs.</p>
+<section id="stochastic-em-for-gmm">
+<h3>Stochastic EM for GMM<a class="headerlink" href="#stochastic-em-for-gmm" title="Permalink to this headline">#</a></h3>
+<p>Let’s consider the special case of the Gaussian mixture model and derive the stochastic EM algorithm. The Gaussian probability can be written in exponential family form as,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+p(\mathbf{x}_n \mid \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k) 
+&amp;= (2 \pi)^{-\frac{D}{2}} |\boldsymbol{\Sigma}_k|^{-\frac{1}{2}} \exp \left\{-\frac{1}{2} (\mathbf{x}_n - \boldsymbol{\mu}_k)^\top \boldsymbol{\Sigma}^{-1} (\mathbf{x}_n - \boldsymbol{\mu}_k) \right\} \\
+&amp;= (2 \pi)^{-\frac{D}{2}} \exp \left\{\langle \mathbf{x}_n, \boldsymbol{\Sigma}_k^{-1} \boldsymbol{\mu}_k \rangle + \langle \mathbf{x}_n \mathbf{x}_n^\top, -\tfrac{1}{2}  \boldsymbol{\Sigma}_k^{-1} \rangle  -\frac{1}{2} \boldsymbol{\mu}^\top \boldsymbol{\Sigma}_k^{-1} \boldsymbol{\mu}_k -\frac{1}{2} \log |\boldsymbol{\Sigma}_k|  \right\} \\
+&amp;= h(\mathbf{x}_n) \exp \left\{\langle t_1(\mathbf{x}_n), \boldsymbol{\Sigma}_k^{-1} \boldsymbol{\mu}_k \rangle + \langle t_2(\mathbf{x}_n), -\tfrac{1}{2} \boldsymbol{\Sigma}_k^{-1} \rangle - A(\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k) \right\}
+\end{align*}
+\end{split}\]</div>
+<p>where the sufficient statistics are</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+t_1(\mathbf{x}_n) &amp;= \mathbf{x}_n &amp;
+t_2(\mathbf{x}_n) &amp;= \mathbf{x}_n \mathbf{x}_n^\top 
+\end{align*}
+\]</div>
+<p>and the log normalizer is</p>
+<div class="math notranslate nohighlight">
+\[
+A(\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k) = \frac{1}{2} \boldsymbol{\mu}^\top \boldsymbol{\Sigma}_k^{-1} \boldsymbol{\mu}_k + \frac{1}{2} \log |\boldsymbol{\Sigma}_k| 
+\]</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Natural parameters
+We could write this log probability in terms of its natural parameters <span class="math notranslate nohighlight">\(\boldsymbol{\eta}_{k,1} = \boldsymbol{\Sigma}_k^{-1} \boldsymbol{\mu}_k\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{\eta}_{k,2} = \boldsymbol{\Sigma}_k^{-1}\)</span>, but since we ultimately want the standard parameters anyway, let’s just leave it in this form.</p>
+</div>
+<p>In the M-step of stochastic EM, we need to maximize the ELBO with respect to <span class="math notranslate nohighlight">\(\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k\)</span>. The ELBO is a weighted sum of log probabilities, which is of the form,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\mathcal{L}(q, \boldsymbol{\theta})
+&amp;= \langle \overline{\mathbf{t}}_{k,1}, \boldsymbol{\Sigma}_k^{-1} \boldsymbol{\mu}_k \rangle + \langle \overline{\mathbf{t}}_{k,2}, -\tfrac{1}{2} \boldsymbol{\Sigma}_k^{-1} \rangle - \overline{N}_k A(\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k) 
+\end{align*}
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\overline{\mathbf{t}}_{k,1} &amp;= \frac{1}{N} \sum_{n=1}^N q_{n,k} \, \mathbf{x}_n  &amp;
+\overline{\mathbf{t}}_{k,2} &amp;= \frac{1}{N} \sum_{n=1}^N q_{n,k} \, \mathbf{x}_n \mathbf{x}_n^\top  &amp;
+\overline{N}_{k} &amp;= \frac{1}{N} \sum_{n=1}^N q_{n,k}
+\end{align*}
+\]</div>
+<p>Taking the derivative with respect to <span class="math notranslate nohighlight">\(\boldsymbol{\mu}_k\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla_{\boldsymbol{\mu}_k} \mathcal{L}(q, \boldsymbol{\theta})
+= \boldsymbol{\Sigma}_k^{-1} \overline{\mathbf{t}}_{k,1} - \overline{N}_{k} \boldsymbol{\Sigma}_k^{-1} \boldsymbol{\mu}_k
+\]</div>
+<p>Setting to zero and solving for the mean yields,</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\mu}_k = \overline{\mathbf{t}}_{k,1} / \overline{N}_{k}.
+\]</div>
+<p>Substituting this into the ELBO yields,</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+\mathcal{L}(q, \boldsymbol{\theta})
+&amp;= \frac{1}{2}  \langle\overline{\mathbf{t}}_{k,1} \overline{\mathbf{t}}_{k,1}^\top / \overline{N}_{k} - \overline{\mathbf{t}}_{k,2}, \boldsymbol{\Sigma}_k^{-1} \rangle - \frac{1}{2} \overline{N}_k \log |\boldsymbol{\Sigma}_k |
+\end{align*}
+\]</div>
+<p>Taking the derivative with respect to <span class="math notranslate nohighlight">\(\boldsymbol{\Sigma}_k^{-1}\)</span> yields,</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla_{\boldsymbol{\Sigma}_k^{-1}} \mathcal{L}(q, \boldsymbol{\theta})
+= \frac{1}{2} \left( \frac{\overline{\mathbf{t}}_{k,1} \overline{\mathbf{t}}_{k,1}^\top}{\overline{N}_{k}} - \overline{\mathbf{t}}_{k,2} \right) + \frac{1}{2} \overline{N}_k \boldsymbol{\Sigma}_k
+\]</div>
+<p>Then solving for <span class="math notranslate nohighlight">\(\boldsymbol{\Sigma}_k\)</span> gives,</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\Sigma}_k
+= \frac{1}{\overline{N}_k} \left( \overline{\mathbf{t}}_{k,2} -  \frac{\overline{\mathbf{t}}_{k,1} \overline{\mathbf{t}}_{k,1}^\top}{\overline{N}_{k}} \right).
+\]</div>
+</section>
 </section>
 <section id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
