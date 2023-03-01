@@ -1,48 +1,56 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Lab 3: Markerless Pose Tracking &#8212; Machine Learning Methods for Neural Data Analysis</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=4ec06e9971c5264fbd345897d5258098f11cc577" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=8bf782fb4ee92b3d3646425e50f299c4e1fd152d"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,56 +60,492 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'labs/03_pose_tracking';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Lab 4: Generalized Linear Models" href="04_glms.html" />
     <link rel="prev" title="Lab 2: Calcium Deconvolution" href="02_calcium_imaging.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
 
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
     
-    <div class="container-fluid" id="banner"></div>
-
     
+  
 
-    <div class="container-xl">
-      <div class="row">
+
+<a class="navbar-brand logo" href="../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+    <p class="title logo__title">Machine Learning Methods for Neural Data Analysis</p>
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="00_pytorch_primer.html">
+                        Lab 0: PyTorch Primer
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="01_spike_sorting.html">
+                        Lab 1: Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="02_calcium_imaging.html">
+                        Lab 2: Calcium Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Lab 3: Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="04_glms.html">
+                        Lab 4: Generalized Linear Models
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="05_decoding.html">
+                        Lab 5: Bayesian Decoding
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="06_arhmm.html">
+                        Lab 6: Autoregressive HMMs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/02_probabilistic_modeling.html">
+                        Probabilistic Modeling
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/03_neurobio.html">
+                        Basic Neurobiology
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/04_simple_spike_sorting.html">
+                        Simple Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/05_deconv_spike_sorting.html">
+                        Spike Sorting by Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/06_calcium_imaging.html">
+                        Demixing Calcium Imaging Data
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/07_pose_tracking.html">
+                        Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/08_summary_stats.html">
+                        Summary Statistics
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/09_glm.html">
+                        Generalized Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/10_poisson_processes.html">
+                        Poisson Processes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/11_decoding.html">
+                        Decoding Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/12_mixtures_em.html">
+                        Mixture Models and the EM Algorithm
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/99_references.html">
+                        References
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
       
       
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
       
-      <h1 class="site-logo" id="site-title">Machine Learning Methods for Neural Data Analysis</h1>
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
       
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="00_pytorch_primer.html">
+                        Lab 0: PyTorch Primer
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="01_spike_sorting.html">
+                        Lab 1: Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="02_calcium_imaging.html">
+                        Lab 2: Calcium Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Lab 3: Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="04_glms.html">
+                        Lab 4: Generalized Linear Models
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="05_decoding.html">
+                        Lab 5: Bayesian Decoding
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="06_arhmm.html">
+                        Lab 6: Autoregressive HMMs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/02_probabilistic_modeling.html">
+                        Probabilistic Modeling
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/03_neurobio.html">
+                        Basic Neurobiology
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/04_simple_spike_sorting.html">
+                        Simple Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/05_deconv_spike_sorting.html">
+                        Spike Sorting by Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/06_calcium_imaging.html">
+                        Demixing Calcium Imaging Data
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/07_pose_tracking.html">
+                        Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/08_summary_stats.html">
+                        Summary Statistics
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/09_glm.html">
+                        Generalized Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/10_poisson_processes.html">
+                        Poisson Processes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/11_decoding.html">
+                        Decoding Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/12_mixtures_em.html">
+                        Mixture Models and the EM Algorithm
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../lectures/99_references.html">
+                        References
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+  
+
+
+<a class="navbar-brand logo" href="../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+    <p class="title logo__title">Machine Learning Methods for Neural Data Analysis</p>
+  
+</a>
+    </div>
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -110,694 +554,372 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Labs
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Labs</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="00_pytorch_primer.html">
-   Lab 0: PyTorch Primer
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01_spike_sorting.html">
-   Lab 1: Spike Sorting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_calcium_imaging.html">
-   Lab 2: Calcium Deconvolution
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Lab 3: Markerless Pose Tracking
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_glms.html">
-   Lab 4: Generalized Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_decoding.html">
-   Lab 5: Bayesian Decoding
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_arhmm.html">
-   Lab 6: Autoregressive HMMs
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="00_pytorch_primer.html">Lab 0: PyTorch Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_spike_sorting.html">Lab 1: Spike Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_calcium_imaging.html">Lab 2: Calcium Deconvolution</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 3: Markerless Pose Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_glms.html">Lab 4: Generalized Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_decoding.html">Lab 5: Bayesian Decoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_arhmm.html">Lab 6: Autoregressive HMMs</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Foundations
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../lectures/02_probabilistic_modeling.html">
-   Probabilistic Modeling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../lectures/03_neurobio.html">
-   Basic Neurobiology
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/02_probabilistic_modeling.html">Probabilistic Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/03_neurobio.html">Basic Neurobiology</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unit I: Signal Extraction
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unit I: Signal Extraction</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../lectures/04_simple_spike_sorting.html">
-   Simple Spike Sorting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../lectures/05_deconv_spike_sorting.html">
-   Spike Sorting by Deconvolution
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../lectures/06_calcium_imaging.html">
-   Demixing Calcium Imaging Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../lectures/07_pose_tracking.html">
-   Markerless Pose Tracking
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/04_simple_spike_sorting.html">Simple Spike Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/05_deconv_spike_sorting.html">Spike Sorting by Deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/06_calcium_imaging.html">Demixing Calcium Imaging Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/07_pose_tracking.html">Markerless Pose Tracking</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unit II: Encoding &amp; Decoding
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unit II: Encoding &amp; Decoding</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../lectures/08_summary_stats.html">
-   Summary Statistics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../lectures/09_glm.html">
-   Generalized Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../lectures/10_poisson_processes.html">
-   Poisson Processes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../lectures/11_decoding.html">
-   Decoding Models
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/08_summary_stats.html">Summary Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/09_glm.html">Generalized Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/10_poisson_processes.html">Poisson Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/11_decoding.html">Decoding Models</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unit III: Unsupervised Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unit III: Unsupervised Learning</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../lectures/12_mixtures_em.html">
-   Mixture Models and the EM Algorithm
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/12_mixtures_em.html">Mixture Models and the EM Algorithm</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  References
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../lectures/99_references.html">
-   References
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../lectures/99_references.html">References</a></li>
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
+</nav>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
+  </div>
+  
 
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
 
-          
+  
+  <div id="rtd-footer-container"></div>
 
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
+      </div>
+      <main id="main-content" class="bd-main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
 
 
 
 <div class="col py-1 d-flex header-article-main">
     <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
+        <label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" data-toggle="tooltip" data-placement="right" title="Toggle primary sidebar">
+            <span class="fa-solid fa-bars"></span>
+        </label>
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://colab.research.google.com/github/slinderman/stats320/blob/winter2023/labs/03_pose_tracking.ipynb"
-   class="headerbtn"
+  <ul class="dropdown-menu">
+      <li><a href="https://colab.research.google.com/github/slinderman/stats320/blob/winter2023/labs/03_pose_tracking.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
 title="Launch on Colab"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Colab</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</a>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
+  class="btn btn-sm"
   data-toggle="tooltip"
 data-placement="bottom"
 title="Fullscreen mode"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/labs/03_pose_tracking.ipynb"
-   class="headerbtn"
+  <ul class="dropdown-menu">
+      <li><a href="../_sources/labs/03_pose_tracking.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
 title="Download source file"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
-
-      </li>
+</a>
       
       <li>
-        
 <button onclick="printPdf(this)"
-  class="headerbtn"
+  class="btn btn-sm dropdown-item"
   data-toggle="tooltip"
 data-placement="left"
 title="Print to PDF"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file-pdf"></i>
   </span>
-<span class="headerbtn__text-container">.pdf</span>
+<span class="btn__text-container">.pdf</span>
 </button>
-
-      </li>
+</a>
       
-    </ul>
-  </div>
+  </ul>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary" data-toggle="tooltip" data-placement="left" title="Toggle secondary sidebar">
+            <span class="fa-solid fa-list"></span>
+        </label>
     </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setup">
-   Setup
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-the-data">
-     Load the data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#helper-functions">
-     Helper functions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-a-few-training-examples">
-     Plot a few training examples
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#play-the-test-movie">
-     Play the test movie
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#part-1-groundwork-for-fitting-models">
-   Part 1: Groundwork for fitting models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#make-a-pytorch-dataset-class-for-keypoint-data">
-     Make a PyTorch Dataset class for keypoint data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#define-transformations-to-apply-to-each-datapoint">
-     Define transformations to apply to each datapoint
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-1a-implement-a-downsampling-transformation">
-     Problem 1a: Implement a Downsampling transformation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-1b-implement-a-transformation-to-dilate-the-targets">
-     Problem 1b: Implement a transformation to dilate the targets
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-1c-initialize-datasets-for-the-training-validation-and-test-data">
-     Problem 1c: Initialize datasets for the training, validation, and test data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-1d-comment-this-function-for-training-pytorch-models">
-     Problem 1d: Comment this function for training Pytorch models
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#part-2-implement-basic-pose-tracking-with-a-cnn">
-   Part 2: Implement basic pose tracking with a CNN
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-2a-implement-the-basic-model">
-     Problem 2a: Implement the basic model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#instantiate-the-model-and-move-it-to-the-gpu">
-     Instantiate the model and move it to the GPU
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-2b-plot-model-predictions">
-     Problem 2b: Plot model predictions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-2c-math-log-sum-exp-trick">
-     Problem 2c [Math] Log-sum-exp trick
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-2d-implement-the-bernoulli-loss">
-     Problem 2d: Implement the Bernoulli loss
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#train-the-basic-model">
-     Train the basic model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#look-at-model-outputs">
-     Look at model outputs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-2e-short-answer-interpret-the-inferred-weights">
-     Problem 2e [Short Answer]: Interpret the inferred weights
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#make-a-movie-of-the-predictions-on-the-test-data">
-     Make a movie of the predictions on the test data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#part-3-transfer-learning-from-a-pretrained-resnet">
-   Part 3: Transfer learning from a pretrained ResNet
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-3a-implement-the-resnet-model">
-     Problem 3a: Implement the resnet model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#instantiate-the-resnet-model">
-     Instantiate the resnet model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-3b-plot-the-resnet-features-after-each-bottleneck-layer">
-     Problem 3b: Plot the resnet features after each bottleneck layer
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-3c-short-answer-discuss-the-pros-cons-of-number-of-layers">
-     Problem 3c [Short Answer]: Discuss the pros/cons of number of layers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#train-the-resnet-model">
-     Train the resnet model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-the-resnet-predictions">
-     Plot the resnet predictions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#make-a-movie-of-the-predictions-on-test-data">
-     Make a movie of the predictions on test data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#part-4-model-comparison">
-   Part 4: Model comparison
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-4a-grid-search">
-     Problem 4a: Grid search
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-4b-short-answer-discussion">
-     Problem 4b [Short Answer]: Discussion
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#submission-instructions">
-   Submission instructions
-  </a>
- </li>
-</ul>
-
-    </nav>
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Lab 3: Markerless Pose Tracking</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setup">
-   Setup
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-the-data">
-     Load the data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#helper-functions">
-     Helper functions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-a-few-training-examples">
-     Plot a few training examples
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#play-the-test-movie">
-     Play the test movie
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#part-1-groundwork-for-fitting-models">
-   Part 1: Groundwork for fitting models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#make-a-pytorch-dataset-class-for-keypoint-data">
-     Make a PyTorch Dataset class for keypoint data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#define-transformations-to-apply-to-each-datapoint">
-     Define transformations to apply to each datapoint
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-1a-implement-a-downsampling-transformation">
-     Problem 1a: Implement a Downsampling transformation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-1b-implement-a-transformation-to-dilate-the-targets">
-     Problem 1b: Implement a transformation to dilate the targets
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-1c-initialize-datasets-for-the-training-validation-and-test-data">
-     Problem 1c: Initialize datasets for the training, validation, and test data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-1d-comment-this-function-for-training-pytorch-models">
-     Problem 1d: Comment this function for training Pytorch models
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#part-2-implement-basic-pose-tracking-with-a-cnn">
-   Part 2: Implement basic pose tracking with a CNN
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-2a-implement-the-basic-model">
-     Problem 2a: Implement the basic model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#instantiate-the-model-and-move-it-to-the-gpu">
-     Instantiate the model and move it to the GPU
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-2b-plot-model-predictions">
-     Problem 2b: Plot model predictions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-2c-math-log-sum-exp-trick">
-     Problem 2c [Math] Log-sum-exp trick
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-2d-implement-the-bernoulli-loss">
-     Problem 2d: Implement the Bernoulli loss
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#train-the-basic-model">
-     Train the basic model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#look-at-model-outputs">
-     Look at model outputs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-2e-short-answer-interpret-the-inferred-weights">
-     Problem 2e [Short Answer]: Interpret the inferred weights
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#make-a-movie-of-the-predictions-on-the-test-data">
-     Make a movie of the predictions on the test data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#part-3-transfer-learning-from-a-pretrained-resnet">
-   Part 3: Transfer learning from a pretrained ResNet
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-3a-implement-the-resnet-model">
-     Problem 3a: Implement the resnet model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#instantiate-the-resnet-model">
-     Instantiate the resnet model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-3b-plot-the-resnet-features-after-each-bottleneck-layer">
-     Problem 3b: Plot the resnet features after each bottleneck layer
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-3c-short-answer-discuss-the-pros-cons-of-number-of-layers">
-     Problem 3c [Short Answer]: Discuss the pros/cons of number of layers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#train-the-resnet-model">
-     Train the resnet model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-the-resnet-predictions">
-     Plot the resnet predictions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#make-a-movie-of-the-predictions-on-test-data">
-     Make a movie of the predictions on test data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#part-4-model-comparison">
-   Part 4: Model comparison
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-4a-grid-search">
-     Problem 4a: Grid search
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-4b-short-answer-discussion">
-     Problem 4b [Short Answer]: Discussion
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#submission-instructions">
-   Submission instructions
-  </a>
- </li>
-</ul>
-
-                        </nav>
-                    </div>
-                </div>
             </div>
-            <main id="main-content" role="main">
-                
-              <div>
-                
+            
+            
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab 3: Markerless Pose Tracking</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-the-data">
+     Load the data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#helper-functions">
+     Helper functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-a-few-training-examples">
+     Plot a few training examples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#play-the-test-movie">
+     Play the test movie
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-1-groundwork-for-fitting-models">
+   Part 1: Groundwork for fitting models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#make-a-pytorch-dataset-class-for-keypoint-data">
+     Make a PyTorch Dataset class for keypoint data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-transformations-to-apply-to-each-datapoint">
+     Define transformations to apply to each datapoint
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-1a-implement-a-downsampling-transformation">
+     Problem 1a: Implement a Downsampling transformation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-1b-implement-a-transformation-to-dilate-the-targets">
+     Problem 1b: Implement a transformation to dilate the targets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-1c-initialize-datasets-for-the-training-validation-and-test-data">
+     Problem 1c: Initialize datasets for the training, validation, and test data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-1d-comment-this-function-for-training-pytorch-models">
+     Problem 1d: Comment this function for training Pytorch models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-2-implement-basic-pose-tracking-with-a-cnn">
+   Part 2: Implement basic pose tracking with a CNN
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-2a-implement-the-basic-model">
+     Problem 2a: Implement the basic model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#instantiate-the-model-and-move-it-to-the-gpu">
+     Instantiate the model and move it to the GPU
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-2b-plot-model-predictions">
+     Problem 2b: Plot model predictions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-2c-math-log-sum-exp-trick">
+     Problem 2c [Math] Log-sum-exp trick
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-2d-implement-the-bernoulli-loss">
+     Problem 2d: Implement the Bernoulli loss
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#train-the-basic-model">
+     Train the basic model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#look-at-model-outputs">
+     Look at model outputs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-2e-short-answer-interpret-the-inferred-weights">
+     Problem 2e [Short Answer]: Interpret the inferred weights
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#make-a-movie-of-the-predictions-on-the-test-data">
+     Make a movie of the predictions on the test data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-3-transfer-learning-from-a-pretrained-resnet">
+   Part 3: Transfer learning from a pretrained ResNet
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-3a-implement-the-resnet-model">
+     Problem 3a: Implement the resnet model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#instantiate-the-resnet-model">
+     Instantiate the resnet model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-3b-plot-the-resnet-features-after-each-bottleneck-layer">
+     Problem 3b: Plot the resnet features after each bottleneck layer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-3c-short-answer-discuss-the-pros-cons-of-number-of-layers">
+     Problem 3c [Short Answer]: Discuss the pros/cons of number of layers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#train-the-resnet-model">
+     Train the resnet model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-resnet-predictions">
+     Plot the resnet predictions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#make-a-movie-of-the-predictions-on-test-data">
+     Make a movie of the predictions on test data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-4-model-comparison">
+   Part 4: Model comparison
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-4a-grid-search">
+     Problem 4a: Grid search
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-4b-short-answer-discussion">
+     Problem 4b [Short Answer]: Discussion
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submission-instructions">
+   Submission instructions
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+            <article class="bd-article" role="main">
+              
   <section class="tex2jax_ignore mathjax_ignore" id="lab-3-markerless-pose-tracking">
-<h1>Lab 3: Markerless Pose Tracking<a class="headerlink" href="#lab-3-markerless-pose-tracking" title="Permalink to this headline">#</a></h1>
+<h1>Lab 3: Markerless Pose Tracking<a class="headerlink" href="#lab-3-markerless-pose-tracking" title="Permalink to this heading">#</a></h1>
 <p><strong>STATS320: Machine Learning Methods for Neural Data Analysis</strong></p>
 <p><em>Stanford University. Winter, 2023.</em></p>
 <hr class="docutils" />
@@ -809,7 +931,7 @@ title="Print to PDF"
 <p>We’ll start with a simpler approach and build a CNN that frames pose tracking as a logistic regression problem. We convolve the input image with a template for each keypoint to get log-odds, and then pass them through the logistic function to get probabilities of the keypoints being present at each pixel.</p>
 <p>The simple model forms a baseline for our deep neural network. We’ll download a pretrained resnet50 and re-route an intermediate layer to obtain features for pose tracking. We’ll skip some of the bells and whistles of DLC and just train a simple linear classifier on top of these features. As you’ll see, the simple CNN makes for a pretty strong baseline. We’ll see if we can eek out some improvement with the resnet!</p>
 <section id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -844,19 +966,25 @@ title="Print to PDF"
 </div>
 </div>
 <section id="load-the-data">
-<h3>Load the data<a class="headerlink" href="#load-the-data" title="Permalink to this headline">#</a></h3>
+<h3>Load the data<a class="headerlink" href="#load-the-data" title="Permalink to this heading">#</a></h3>
 <p>The dataset was downloaded from the <a class="reference external" href="https://github.com/DeepLabCut/DeepLabCut/">DeepLabCut github repo</a> and lightly preprocessed with <a class="reference external" href="https://colab.research.google.com/drive/1-1MTX16Azx-lYr4ivzxxWwQvJXs4YKrM?usp=sharing">this notebook</a>.</p>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget<span class="w"> </span>-nc<span class="w"> </span>https://www.dropbox.com/s/08yqnn4tpwviv6t/lab3_data.pt
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File ‘lab3_data.pt’ already there; not retrieving.
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -876,8 +1004,13 @@ title="Print to PDF"
 </div>
 </section>
 <section id="helper-functions">
-<h3>Helper functions<a class="headerlink" href="#helper-functions" title="Permalink to this headline">#</a></h3>
+<h3>Helper functions<a class="headerlink" href="#helper-functions" title="Permalink to this heading">#</a></h3>
 <div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title </span>
 <span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">LinearSegmentedColormap</span>
@@ -1109,10 +1242,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 </section>
 <section id="plot-a-few-training-examples">
-<h3>Plot a few training examples<a class="headerlink" href="#plot-a-few-training-examples" title="Permalink to this headline">#</a></h3>
+<h3>Plot a few training examples<a class="headerlink" href="#plot-a-few-training-examples" title="Permalink to this heading">#</a></h3>
 <p>Each example consists of an image and a set of binary masks, one for each keypoint. To create the masks, we first made a one-hot matrix with a 1 at the position of the keypoint. Then we performed a <a class="reference external" href="https://en.wikipedia.org/wiki/Dilation_(morphology)#Binary_dilation">binary dilation</a> to make that target and make it visible in these plots. We’ll do the same thing when we train the models below: a larger target offers some room for error in the pose tracking models and makes them easier to train.</p>
 <p>Notice a few things:</p>
 <ul class="simple">
@@ -1132,16 +1266,16 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_pose_tracking_9_0.png" src="../_images/03_pose_tracking_9_0.png" />
-<img alt="../_images/03_pose_tracking_9_1.png" src="../_images/03_pose_tracking_9_1.png" />
-<img alt="../_images/03_pose_tracking_9_2.png" src="../_images/03_pose_tracking_9_2.png" />
-<img alt="../_images/03_pose_tracking_9_3.png" src="../_images/03_pose_tracking_9_3.png" />
-<img alt="../_images/03_pose_tracking_9_4.png" src="../_images/03_pose_tracking_9_4.png" />
+<img alt="../_images/a5098ccd9e32e7e6129c40003b0161030780dce41d149afbd82c7b1f0be47532.png" src="../_images/a5098ccd9e32e7e6129c40003b0161030780dce41d149afbd82c7b1f0be47532.png" />
+<img alt="../_images/8ee3e565eefefa1c82fe84fc51b42d422c5b0269f8f66b49570f6ecf02dc9a39.png" src="../_images/8ee3e565eefefa1c82fe84fc51b42d422c5b0269f8f66b49570f6ecf02dc9a39.png" />
+<img alt="../_images/e7d1c0f22380f02a6e00db3a2706b178e237cc4578c8c20e00de778a68c0b21e.png" src="../_images/e7d1c0f22380f02a6e00db3a2706b178e237cc4578c8c20e00de778a68c0b21e.png" />
+<img alt="../_images/d40c0294baf6bb25215827d9e7727349f4e6eb710ae3e1e341546398217984a1.png" src="../_images/d40c0294baf6bb25215827d9e7727349f4e6eb710ae3e1e341546398217984a1.png" />
+<img alt="../_images/38f6db51a4f5e5e59698a3252c66967c431ddd6e022ae4ed7ce0f6d4d87b5148.png" src="../_images/38f6db51a4f5e5e59698a3252c66967c431ddd6e022ae4ed7ce0f6d4d87b5148.png" />
 </div>
 </div>
 </section>
 <section id="play-the-test-movie">
-<h3>Play the test movie<a class="headerlink" href="#play-the-test-movie" title="Permalink to this headline">#</a></h3>
+<h3>Play the test movie<a class="headerlink" href="#play-the-test-movie" title="Permalink to this heading">#</a></h3>
 <p>We’ll test the models on this 8 second clip of the mouse reaching for a joystick and licking a spout. Here, all the frames are ordered and the same size, so it makes sense to show a movie.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1161,10 +1295,10 @@ title="Print to PDF"
 </section>
 </section>
 <section id="part-1-groundwork-for-fitting-models">
-<h2>Part 1: Groundwork for fitting models<a class="headerlink" href="#part-1-groundwork-for-fitting-models" title="Permalink to this headline">#</a></h2>
+<h2>Part 1: Groundwork for fitting models<a class="headerlink" href="#part-1-groundwork-for-fitting-models" title="Permalink to this heading">#</a></h2>
 <p>Before writing the PyTorch models, let’s first lay some groundwork for model fitting and evaluation. One of the nice features of PyTorch is its data loading framework. We’ll first write a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> class for loading and preprocessing the keypoint data. Then we’ll write a generic function for training models via stochastic gradient descent. These will come in handy in Parts 2 and 3 of the lab.</p>
 <section id="make-a-pytorch-dataset-class-for-keypoint-data">
-<h3>Make a PyTorch Dataset class for keypoint data<a class="headerlink" href="#make-a-pytorch-dataset-class-for-keypoint-data" title="Permalink to this headline">#</a></h3>
+<h3>Make a PyTorch Dataset class for keypoint data<a class="headerlink" href="#make-a-pytorch-dataset-class-for-keypoint-data" title="Permalink to this heading">#</a></h3>
 <p>We follow the <a class="reference external" href="https://pytorch.org/tutorials/beginner/data_loading_tutorial.html">PyTorch data loading tutorial</a> to make a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> object for this data. As the comments below say, the dataset is a lightweight wrapper that implements the <code class="docutils literal notranslate"><span class="pre">iterable</span></code> interface. It has a <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> function that returns requested datapoints (typically we request just one at a time).  Each datapoint is packaged into a dictionary with an <code class="docutils literal notranslate"><span class="pre">image</span></code> key and a <code class="docutils literal notranslate"><span class="pre">targets</span></code> key, which contain <span class="math notranslate nohighlight">\(\mathbf{X}_n\)</span> and <span class="math notranslate nohighlight">\(\mathbf{Y}_n\)</span> in the notation above.</p>
 <p>Notes:</p>
 <ul class="simple">
@@ -1244,10 +1378,10 @@ title="Print to PDF"
 </div>
 </section>
 <section id="define-transformations-to-apply-to-each-datapoint">
-<h3>Define transformations to apply to each datapoint<a class="headerlink" href="#define-transformations-to-apply-to-each-datapoint" title="Permalink to this headline">#</a></h3>
+<h3>Define transformations to apply to each datapoint<a class="headerlink" href="#define-transformations-to-apply-to-each-datapoint" title="Permalink to this heading">#</a></h3>
 <p>As you see above, the getter in the <code class="docutils literal notranslate"><span class="pre">KeypointDataset</span></code> object can apply a sequence of transformations. Here we’ll define four such transformations. Each is an object with a <code class="docutils literal notranslate"><span class="pre">__call__</span></code> function, which takes as input a datapoint and outputs a transformed datapoint. As above, the datapoints are dictionaries with an <code class="docutils literal notranslate"><span class="pre">image</span></code> key and a <code class="docutils literal notranslate"><span class="pre">targets</span></code> key.</p>
 <p>We’ll implement the first two transformations for you, so you can see how they work. The first two are:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Transpose the <code class="docutils literal notranslate"><span class="pre">image</span></code> axes to be channels x height x width, as expected by PyTorch, and then move <code class="docutils literal notranslate"><span class="pre">image</span></code> and <code class="docutils literal notranslate"><span class="pre">targets</span></code> to to the GPU.</p></li>
 <li><p>Normalize the color channels of the image so that they have the mean and standard deviation expected by pretrained PyTorch models.</p></li>
 </ol>
@@ -1284,7 +1418,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="problem-1a-implement-a-downsampling-transformation">
-<h3>Problem 1a: Implement a Downsampling transformation<a class="headerlink" href="#problem-1a-implement-a-downsampling-transformation" title="Permalink to this headline">#</a></h3>
+<h3>Problem 1a: Implement a Downsampling transformation<a class="headerlink" href="#problem-1a-implement-a-downsampling-transformation" title="Permalink to this heading">#</a></h3>
 <p>Write a transformation object called <code class="docutils literal notranslate"><span class="pre">Downsample</span></code> that downsamples the image and target by a specified factor. This will make our code run faster, albeit with slightly lower precision.</p>
 <p>You may need to consult the documentation in <a class="reference external" href="https://pytorch.org/docs/stable/nn.functional.html"><code class="docutils literal notranslate"><span class="pre">torch.nn.functional</span></code></a>, which is imported as <code class="docutils literal notranslate"><span class="pre">F</span></code> below.</p>
 <div class="cell docutils container">
@@ -1349,7 +1483,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="problem-1b-implement-a-transformation-to-dilate-the-targets">
-<h3>Problem 1b: Implement a transformation to dilate the targets<a class="headerlink" href="#problem-1b-implement-a-transformation-to-dilate-the-targets" title="Permalink to this headline">#</a></h3>
+<h3>Problem 1b: Implement a transformation to dilate the targets<a class="headerlink" href="#problem-1b-implement-a-transformation-to-dilate-the-targets" title="Permalink to this heading">#</a></h3>
 <p>Dilate the targets to make them a bit bigger. This offers more positive examples for our model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1412,9 +1546,9 @@ title="Print to PDF"
 </div>
 </section>
 <section id="problem-1c-initialize-datasets-for-the-training-validation-and-test-data">
-<h3>Problem 1c: Initialize datasets for the training, validation, and test data<a class="headerlink" href="#problem-1c-initialize-datasets-for-the-training-validation-and-test-data" title="Permalink to this headline">#</a></h3>
+<h3>Problem 1c: Initialize datasets for the training, validation, and test data<a class="headerlink" href="#problem-1c-initialize-datasets-for-the-training-validation-and-test-data" title="Permalink to this heading">#</a></h3>
 <p>Make <code class="docutils literal notranslate"><span class="pre">KeypointDataset</span></code> objects for the training, validation, and test data. In all cases, apply the following (ordered) set of transformations:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Convert the tensors and move them to the GPU with <code class="docutils literal notranslate"><span class="pre">Transpose</span></code></p></li>
 <li><p>Normalize the color channels with <code class="docutils literal notranslate"><span class="pre">Normalize</span></code></p></li>
 <li><p>Downsample the images (and targets) by a factor of 2 with <code class="docutils literal notranslate"><span class="pre">Downsample</span></code>. This will speed up all your analyses at the cost of a little lower resolution.</p></li>
@@ -1456,16 +1590,16 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_pose_tracking_22_0.png" src="../_images/03_pose_tracking_22_0.png" />
-<img alt="../_images/03_pose_tracking_22_1.png" src="../_images/03_pose_tracking_22_1.png" />
-<img alt="../_images/03_pose_tracking_22_2.png" src="../_images/03_pose_tracking_22_2.png" />
-<img alt="../_images/03_pose_tracking_22_3.png" src="../_images/03_pose_tracking_22_3.png" />
-<img alt="../_images/03_pose_tracking_22_4.png" src="../_images/03_pose_tracking_22_4.png" />
+<img alt="../_images/5f692feb4cdbd6c9a27c0ed5bd11b6d5b636002307f68b057c3339c8a66a4f0d.png" src="../_images/5f692feb4cdbd6c9a27c0ed5bd11b6d5b636002307f68b057c3339c8a66a4f0d.png" />
+<img alt="../_images/ce80e1c105a8ba9958448b2ad927952933450eb3b2bf224ae3cd052723316adb.png" src="../_images/ce80e1c105a8ba9958448b2ad927952933450eb3b2bf224ae3cd052723316adb.png" />
+<img alt="../_images/48fa68446ce389b7569fc01e23f9d8f17b89a704fd09c55804c553b356d31206.png" src="../_images/48fa68446ce389b7569fc01e23f9d8f17b89a704fd09c55804c553b356d31206.png" />
+<img alt="../_images/94e5b6c8ce1ce7380b0d8e192846bea6c01535b7cb46ad42210acda24ac0546f.png" src="../_images/94e5b6c8ce1ce7380b0d8e192846bea6c01535b7cb46ad42210acda24ac0546f.png" />
+<img alt="../_images/1dd1eca1306fdb7fb9078f3f513dbb35f8b9ad6c39d7d3e28176277a775c0833.png" src="../_images/1dd1eca1306fdb7fb9078f3f513dbb35f8b9ad6c39d7d3e28176277a775c0833.png" />
 </div>
 </div>
 </section>
 <section id="problem-1d-comment-this-function-for-training-pytorch-models">
-<h3>Problem 1d: Comment this function for training Pytorch models<a class="headerlink" href="#problem-1d-comment-this-function-for-training-pytorch-models" title="Permalink to this headline">#</a></h3>
+<h3>Problem 1d: Comment this function for training Pytorch models<a class="headerlink" href="#problem-1d-comment-this-function-for-training-pytorch-models" title="Permalink to this heading">#</a></h3>
 <p>We’ve written a generic model training function following <a class="reference external" href="https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html">this example</a>.</p>
 <p><strong>The code is written. You just have to write comments for this function.</strong></p>
 <div class="cell docutils container">
@@ -1539,7 +1673,7 @@ title="Print to PDF"
 </section>
 </section>
 <section id="part-2-implement-basic-pose-tracking-with-a-cnn">
-<h2>Part 2: Implement basic pose tracking with a CNN<a class="headerlink" href="#part-2-implement-basic-pose-tracking-with-a-cnn" title="Permalink to this headline">#</a></h2>
+<h2>Part 2: Implement basic pose tracking with a CNN<a class="headerlink" href="#part-2-implement-basic-pose-tracking-with-a-cnn" title="Permalink to this heading">#</a></h2>
 <p>Our “basic model” will use a CNN to implement a template matching/logistic regression model.</p>
 <p>First, notation: let</p>
 <ul class="simple">
@@ -1576,11 +1710,11 @@ A few practical issues should be mentioned:</p>
 <li><p>Likewise, our basic model will operate on grayscale images by taking the mean over the color channels.</p></li>
 </ul>
 <section id="problem-2a-implement-the-basic-model">
-<h3>Problem 2a: Implement the basic model<a class="headerlink" href="#problem-2a-implement-the-basic-model" title="Permalink to this headline">#</a></h3>
+<h3>Problem 2a: Implement the basic model<a class="headerlink" href="#problem-2a-implement-the-basic-model" title="Permalink to this heading">#</a></h3>
 <p>A PyTorch model inherits from <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>. It has trainable parameters, which are encapsulated in its class variables. For example, the <code class="docutils literal notranslate"><span class="pre">BasicPoseTracker</span></code> model below has a <code class="docutils literal notranslate"><span class="pre">self.final_conv</span></code> class variable, which is an instance of <code class="docutils literal notranslate"><span class="pre">nn.Conv2d</span></code>, an object that implements a 2D convolution. (We’ve said this before, but remember convolutions in deep learning are cross-correlations in the real world.) The <code class="docutils literal notranslate"><span class="pre">Conv2d</span></code> object has inside of it a set of parameters, which the training algorithm above will modify, in place, via stochastic gradient descent. In particular, the <code class="docutils literal notranslate"><span class="pre">Conv2d</span></code> object has a stack of weights and a set of biases, one for each keypoint.</p>
 <p>PyTorch models implement a <code class="docutils literal notranslate"><span class="pre">forward</span></code> function, which takes an input and produces an output. Here, the input is a batch of images <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">x</span> <span class="pre">3</span> <span class="pre">x</span> <span class="pre">P_H</span> <span class="pre">x</span> <span class="pre">P_W</span></code>, but really the batch will just be shape <code class="docutils literal notranslate"><span class="pre">1</span></code> since different images may be different sizes. The output will be a <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">x</span> <span class="pre">K</span> <span class="pre">x</span> <span class="pre">P_H</span> <span class="pre">x</span> <span class="pre">P_W</span></code> set of log-odds, or “logits,” one for each image, keypoint, and pixel.</p>
 <p>In the basic model, the <code class="docutils literal notranslate"><span class="pre">foward</span></code> function should perform the following operations:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Convert the image to grayscale by taking the mean over the color axis to produce a <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">x</span> <span class="pre">1</span> <span class="pre">x</span> <span class="pre">P_H</span> <span class="pre">x</span> <span class="pre">P_W</span></code> output.</p></li>
 <li><p>Downsample by the downsampling factor specified in the constructor. We’ll allow fractional downsampling, which is best implemented with the <code class="docutils literal notranslate"><span class="pre">F.interpolate</span></code> function.</p></li>
 <li><p>Apply the convolution to the downsampled image to get logits for each keypoint.</p></li>
@@ -1663,7 +1797,7 @@ A few practical issues should be mentioned:</p>
 </div>
 </section>
 <section id="instantiate-the-model-and-move-it-to-the-gpu">
-<h3>Instantiate the model and move it to the GPU<a class="headerlink" href="#instantiate-the-model-and-move-it-to-the-gpu" title="Permalink to this headline">#</a></h3>
+<h3>Instantiate the model and move it to the GPU<a class="headerlink" href="#instantiate-the-model-and-move-it-to-the-gpu" title="Permalink to this heading">#</a></h3>
 <p>Fix the random seed so the weights will be reproducible.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1681,7 +1815,7 @@ A few practical issues should be mentioned:</p>
 </div>
 </section>
 <section id="problem-2b-plot-model-predictions">
-<h3>Problem 2b: Plot model predictions<a class="headerlink" href="#problem-2b-plot-model-predictions" title="Permalink to this headline">#</a></h3>
+<h3>Problem 2b: Plot model predictions<a class="headerlink" href="#problem-2b-plot-model-predictions" title="Permalink to this heading">#</a></h3>
 <p>Write a function to compute the keypoint probabilities output by the model.</p>
 <p>Since the constructor initialized the <code class="docutils literal notranslate"><span class="pre">Conv2d</span></code> layer with random weights, the initial predictions should be terrible.</p>
 <div class="cell docutils container">
@@ -1712,12 +1846,12 @@ A few practical issues should be mentioned:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_pose_tracking_31_0.png" src="../_images/03_pose_tracking_31_0.png" />
+<img alt="../_images/2c8b7880d3e6d64ec8edd8999544b2e56264fb792c32f7c39e1ebf7844b93e24.png" src="../_images/2c8b7880d3e6d64ec8edd8999544b2e56264fb792c32f7c39e1ebf7844b93e24.png" />
 </div>
 </div>
 </section>
 <section id="problem-2c-math-log-sum-exp-trick">
-<h3>Problem 2c [Math] Log-sum-exp trick<a class="headerlink" href="#problem-2c-math-log-sum-exp-trick" title="Permalink to this headline">#</a></h3>
+<h3>Problem 2c [Math] Log-sum-exp trick<a class="headerlink" href="#problem-2c-math-log-sum-exp-trick" title="Permalink to this heading">#</a></h3>
 <p>The log likelihood contains terms of the form,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1734,7 +1868,7 @@ m + \log (e^{-m} + e^{a - m})
 <p><em>Your answer here</em></p>
 </section>
 <section id="problem-2d-implement-the-bernoulli-loss">
-<h3>Problem 2d: Implement the Bernoulli loss<a class="headerlink" href="#problem-2d-implement-the-bernoulli-loss" title="Permalink to this headline">#</a></h3>
+<h3>Problem 2d: Implement the Bernoulli loss<a class="headerlink" href="#problem-2d-implement-the-bernoulli-loss" title="Permalink to this heading">#</a></h3>
 <p>Implement the <code class="docutils literal notranslate"><span class="pre">bernoulli_loss</span></code> function below. It should return the average negative log likelihood over all keypoints and pixels. I.e.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1778,7 +1912,7 @@ m + \log (e^{-m} + e^{a - m})
 </div>
 </section>
 <section id="train-the-basic-model">
-<h3>Train the basic model<a class="headerlink" href="#train-the-basic-model" title="Permalink to this headline">#</a></h3>
+<h3>Train the basic model<a class="headerlink" href="#train-the-basic-model" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train the basic model</span>
@@ -1809,14 +1943,12 @@ m + \log (e^{-m} + e^{a - m})
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "8aab7c1a1cbf4022a8a9962e41f575b1", "version_major": 2, "version_minor": 0}
-</script><img alt="../_images/03_pose_tracking_37_1.png" src="../_images/03_pose_tracking_37_1.png" />
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "8aab7c1a1cbf4022a8a9962e41f575b1", "version_major": 2, "version_minor": 0}</script><img alt="../_images/5911307b4c186c275ad80f4a841b8a5c52122d0715db71e4a920114a4f131273.png" src="../_images/5911307b4c186c275ad80f4a841b8a5c52122d0715db71e4a920114a4f131273.png" />
 </div>
 </div>
 </section>
 <section id="look-at-model-outputs">
-<h3>Look at model outputs<a class="headerlink" href="#look-at-model-outputs" title="Permalink to this headline">#</a></h3>
+<h3>Look at model outputs<a class="headerlink" href="#look-at-model-outputs" title="Permalink to this heading">#</a></h3>
 <p>Try the model on the same training image as above. If it’s working, you should see the keypoint probabilities are close to one (yellow) at the keypoint and zero (blue) elsewhere.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1825,7 +1957,7 @@ m + \log (e^{-m} + e^{a - m})
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_pose_tracking_39_0.png" src="../_images/03_pose_tracking_39_0.png" />
+<img alt="../_images/6ee12ba82d3eb39baa7191278add0bcc18ee9b77af4bb4974d45d0ec84deb9e3.png" src="../_images/6ee12ba82d3eb39baa7191278add0bcc18ee9b77af4bb4974d45d0ec84deb9e3.png" />
 </div>
 </div>
 <p>Now plot the inferred weights. These are the <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span>’s that the logistic regression convolves with the images.</p>
@@ -1836,18 +1968,18 @@ m + \log (e^{-m} + e^{a - m})
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_pose_tracking_41_0.png" src="../_images/03_pose_tracking_41_0.png" />
+<img alt="../_images/586ccf6cd95f2ffa838a785311e70613b8cbd67bb0d049fed035a3df0ad9779d.png" src="../_images/586ccf6cd95f2ffa838a785311e70613b8cbd67bb0d049fed035a3df0ad9779d.png" />
 </div>
 </div>
 </section>
 <section id="problem-2e-short-answer-interpret-the-inferred-weights">
-<h3>Problem 2e [Short Answer]: Interpret the inferred weights<a class="headerlink" href="#problem-2e-short-answer-interpret-the-inferred-weights" title="Permalink to this headline">#</a></h3>
+<h3>Problem 2e [Short Answer]: Interpret the inferred weights<a class="headerlink" href="#problem-2e-short-answer-interpret-the-inferred-weights" title="Permalink to this heading">#</a></h3>
 <p>The probabilities are derived from the learned weights, plotted above. Are they interpretable and/or expected?</p>
 <hr class="docutils" />
 <p><em>Your answer here</em></p>
 </section>
 <section id="make-a-movie-of-the-predictions-on-the-test-data">
-<h3>Make a movie of the predictions on the test data<a class="headerlink" href="#make-a-movie-of-the-predictions-on-the-test-data" title="Permalink to this headline">#</a></h3>
+<h3>Make a movie of the predictions on the test data<a class="headerlink" href="#make-a-movie-of-the-predictions-on-the-test-data" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract probabilities for each frame</span>
@@ -1863,9 +1995,7 @@ m + \log (e^{-m} + e^{a - m})
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "68f8c872a9774f859bbf603af3a8d6d9", "version_major": 2, "version_minor": 0}
-</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Preparing animation. This may take a minute...
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "68f8c872a9774f859bbf603af3a8d6d9", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Preparing animation. This may take a minute...
 </pre></div>
 </div>
 <div class="output text_html"><video controls>
@@ -1876,7 +2006,7 @@ m + \log (e^{-m} + e^{a - m})
 </section>
 </section>
 <section id="part-3-transfer-learning-from-a-pretrained-resnet">
-<h2>Part 3: Transfer learning from a pretrained ResNet<a class="headerlink" href="#part-3-transfer-learning-from-a-pretrained-resnet" title="Permalink to this headline">#</a></h2>
+<h2>Part 3: Transfer learning from a pretrained ResNet<a class="headerlink" href="#part-3-transfer-learning-from-a-pretrained-resnet" title="Permalink to this heading">#</a></h2>
 <p>Now we’ll download a pretrained residual network from PyTorch’s model zoo and hijack its intermediate layer features to predict keypoint locations.  This is called <strong>transfer learning</strong>: using a model trained for a different purpose (here, image classification) as the basis for a new task (here, keypoint detection).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1919,7 +2049,7 @@ m + \log (e^{-m} + e^{a - m})
 </div>
 <p>We’ll write our own torch <code class="docutils literal notranslate"><span class="pre">Module</span></code> that freezes the weights of the pretrained ResNet and then learns to predict binary presence or absence of a keypoint at each pixel.</p>
 <section id="problem-3a-implement-the-resnet-model">
-<h3>Problem 3a: Implement the resnet model<a class="headerlink" href="#problem-3a-implement-the-resnet-model" title="Permalink to this headline">#</a></h3>
+<h3>Problem 3a: Implement the resnet model<a class="headerlink" href="#problem-3a-implement-the-resnet-model" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">init_layer_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;conv1&#39;</span><span class="p">,</span> <span class="s1">&#39;bn1&#39;</span><span class="p">,</span> <span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="s1">&#39;maxpool&#39;</span><span class="p">]</span>
@@ -1994,7 +2124,7 @@ m + \log (e^{-m} + e^{a - m})
 </div>
 </section>
 <section id="instantiate-the-resnet-model">
-<h3>Instantiate the resnet model<a class="headerlink" href="#instantiate-the-resnet-model" title="Permalink to this headline">#</a></h3>
+<h3>Instantiate the resnet model<a class="headerlink" href="#instantiate-the-resnet-model" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the resnet pose model</span>
@@ -2010,12 +2140,12 @@ m + \log (e^{-m} + e^{a - m})
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_pose_tracking_52_0.png" src="../_images/03_pose_tracking_52_0.png" />
+<img alt="../_images/3f4fcdfd352f54862fa2eabcefb4dffa17e589fced33dd219c4580a65713cc6a.png" src="../_images/3f4fcdfd352f54862fa2eabcefb4dffa17e589fced33dd219c4580a65713cc6a.png" />
 </div>
 </div>
 </section>
 <section id="problem-3b-plot-the-resnet-features-after-each-bottleneck-layer">
-<h3>Problem 3b: Plot the resnet features after each bottleneck layer<a class="headerlink" href="#problem-3b-plot-the-resnet-features-after-each-bottleneck-layer" title="Permalink to this headline">#</a></h3>
+<h3>Problem 3b: Plot the resnet features after each bottleneck layer<a class="headerlink" href="#problem-3b-plot-the-resnet-features-after-each-bottleneck-layer" title="Permalink to this heading">#</a></h3>
 <p>First, write a function to compute the model predictions after a specified number of bottleneck layers. Then plot a few of the features for each layer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2056,21 +2186,21 @@ m + \log (e^{-m} + e^{a - m})
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_pose_tracking_54_0.png" src="../_images/03_pose_tracking_54_0.png" />
-<img alt="../_images/03_pose_tracking_54_1.png" src="../_images/03_pose_tracking_54_1.png" />
-<img alt="../_images/03_pose_tracking_54_2.png" src="../_images/03_pose_tracking_54_2.png" />
-<img alt="../_images/03_pose_tracking_54_3.png" src="../_images/03_pose_tracking_54_3.png" />
+<img alt="../_images/6ed3f18613c22867d2c5c5ccfcb6e4072c6ecafa1afe259a31de935caec3abe4.png" src="../_images/6ed3f18613c22867d2c5c5ccfcb6e4072c6ecafa1afe259a31de935caec3abe4.png" />
+<img alt="../_images/f9a5b7ccafd15132d914a8231e6095efa413cf92f0a34f6b0415ae0ebb092c08.png" src="../_images/f9a5b7ccafd15132d914a8231e6095efa413cf92f0a34f6b0415ae0ebb092c08.png" />
+<img alt="../_images/a5970a6b18f194fcd922529272a5c19e7e501d364270b37fb5ad87bad42c8a46.png" src="../_images/a5970a6b18f194fcd922529272a5c19e7e501d364270b37fb5ad87bad42c8a46.png" />
+<img alt="../_images/2443f1f5d60eafeb669a4dcecc211cc6b92b005918f243de47e39f6993981f1b.png" src="../_images/2443f1f5d60eafeb669a4dcecc211cc6b92b005918f243de47e39f6993981f1b.png" />
 </div>
 </div>
 </section>
 <section id="problem-3c-short-answer-discuss-the-pros-cons-of-number-of-layers">
-<h3>Problem 3c [Short Answer]: Discuss the pros/cons of number of layers<a class="headerlink" href="#problem-3c-short-answer-discuss-the-pros-cons-of-number-of-layers" title="Permalink to this headline">#</a></h3>
+<h3>Problem 3c [Short Answer]: Discuss the pros/cons of number of layers<a class="headerlink" href="#problem-3c-short-answer-discuss-the-pros-cons-of-number-of-layers" title="Permalink to this heading">#</a></h3>
 <p>When predicting keypoints, we could take the output of the model after any one of the layers. Discuss the considerations the pros and cons of deeper vs shallower layers.</p>
 <hr class="docutils" />
 <p><em>Your answer here</em></p>
 </section>
 <section id="train-the-resnet-model">
-<h3>Train the resnet model<a class="headerlink" href="#train-the-resnet-model" title="Permalink to this headline">#</a></h3>
+<h3>Train the resnet model<a class="headerlink" href="#train-the-resnet-model" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_losses</span><span class="p">,</span> <span class="n">val_losses</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">resnet_model</span><span class="p">,</span> 
@@ -2100,14 +2230,12 @@ m + \log (e^{-m} + e^{a - m})
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "4b3338910d9541abbf077308a2c69ba6", "version_major": 2, "version_minor": 0}
-</script><img alt="../_images/03_pose_tracking_58_1.png" src="../_images/03_pose_tracking_58_1.png" />
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "4b3338910d9541abbf077308a2c69ba6", "version_major": 2, "version_minor": 0}</script><img alt="../_images/5f99e4473a1647e60fc1927e0fd379a6b73104b49632973199a37df84e78a59b.png" src="../_images/5f99e4473a1647e60fc1927e0fd379a6b73104b49632973199a37df84e78a59b.png" />
 </div>
 </div>
 </section>
 <section id="plot-the-resnet-predictions">
-<h3>Plot the resnet predictions<a class="headerlink" href="#plot-the-resnet-predictions" title="Permalink to this headline">#</a></h3>
+<h3>Plot the resnet predictions<a class="headerlink" href="#plot-the-resnet-predictions" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_model_predictions</span><span class="p">(</span><span class="n">resnet_model</span><span class="p">,</span> <span class="n">train_dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -2115,12 +2243,12 @@ m + \log (e^{-m} + e^{a - m})
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_pose_tracking_60_0.png" src="../_images/03_pose_tracking_60_0.png" />
+<img alt="../_images/264e9f067a6f01f9b51b109abf701ababae814ecaef62c5087618d9cef8d388a.png" src="../_images/264e9f067a6f01f9b51b109abf701ababae814ecaef62c5087618d9cef8d388a.png" />
 </div>
 </div>
 </section>
 <section id="make-a-movie-of-the-predictions-on-test-data">
-<h3>Make a movie of the predictions on test data<a class="headerlink" href="#make-a-movie-of-the-predictions-on-test-data" title="Permalink to this headline">#</a></h3>
+<h3>Make a movie of the predictions on test data<a class="headerlink" href="#make-a-movie-of-the-predictions-on-test-data" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract probabilities for each frame</span>
@@ -2136,9 +2264,7 @@ m + \log (e^{-m} + e^{a - m})
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "d4b6b6c7288847fb9f74a6413cc51c74", "version_major": 2, "version_minor": 0}
-</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Preparing animation. This may take a minute...
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d4b6b6c7288847fb9f74a6413cc51c74", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Preparing animation. This may take a minute...
 </pre></div>
 </div>
 <div class="output text_html"><video controls>
@@ -2149,9 +2275,9 @@ m + \log (e^{-m} + e^{a - m})
 </section>
 </section>
 <section id="part-4-model-comparison">
-<h2>Part 4: Model comparison<a class="headerlink" href="#part-4-model-comparison" title="Permalink to this headline">#</a></h2>
+<h2>Part 4: Model comparison<a class="headerlink" href="#part-4-model-comparison" title="Permalink to this heading">#</a></h2>
 <section id="problem-4a-grid-search">
-<h3>Problem 4a: Grid search<a class="headerlink" href="#problem-4a-grid-search" title="Permalink to this headline">#</a></h3>
+<h3>Problem 4a: Grid search<a class="headerlink" href="#problem-4a-grid-search" title="Permalink to this heading">#</a></h3>
 <p>So far, you’ve trained models for only one set of hyperparameters. In practice, you would perofrm a grid search over these hyperparameters to see if you can find better settings.</p>
 <p>You could optimize many hyperparameters, but for this problem, you’ll focus on just one hyperparameter per model”</p>
 <p>For the <strong>basic model</strong> (from Part 2), fix the <code class="docutils literal notranslate"><span class="pre">patch_size</span></code> to 51 (a bit smaller than used above) and sweep over the <code class="docutils literal notranslate"><span class="pre">downsampling</span></code> factor. Plot the validation loss as a function of the <code class="docutils literal notranslate"><span class="pre">downsampling</span></code> factor.</p>
@@ -2166,7 +2292,7 @@ m + \log (e^{-m} + e^{a - m})
 </div>
 </section>
 <section id="problem-4b-short-answer-discussion">
-<h3>Problem 4b [Short Answer]: Discussion<a class="headerlink" href="#problem-4b-short-answer-discussion" title="Permalink to this headline">#</a></h3>
+<h3>Problem 4b [Short Answer]: Discussion<a class="headerlink" href="#problem-4b-short-answer-discussion" title="Permalink to this heading">#</a></h3>
 <p>Summarize your results and discuss their implications. In your discussion, address the following prompts:</p>
 <ul class="simple">
 <li><p>Was there anything surprising about your results?</p></li>
@@ -2178,7 +2304,7 @@ m + \log (e^{-m} + e^{a - m})
 </section>
 </section>
 <section id="submission-instructions">
-<h2>Submission instructions<a class="headerlink" href="#submission-instructions" title="Permalink to this headline">#</a></h2>
+<h2>Submission instructions<a class="headerlink" href="#submission-instructions" title="Permalink to this heading">#</a></h2>
 <p><strong>Formatting:</strong> check that your code does not exceed 80 characters in line width. You can set <em>Tools → Settings → Editor → Vertical ruler column</em> to 80 to see when you’ve exceeded the limit.</p>
 <p>Download your notebook in .ipynb format and use the following commands to convert it to PDF.</p>
 <p><strong>Option 1 (best case): ipynb → pdf</strong> Run the following command to convert to a PDF:</p>
@@ -2231,50 +2357,280 @@ m + \log (e^{-m} + e^{a - m})
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
-              
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
+            </article>
+            
+
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="02_calcium_imaging.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Lab 2: Calcium Deconvolution</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="04_glms.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 4: Generalized Linear Models</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
+  <a class='left-prev' id="prev-link" href="02_calcium_imaging.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Lab 2: Calcium Deconvolution</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="04_glms.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Lab 4: Generalized Linear Models</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
 </div>
             </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
   
-    By Scott Linderman<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-the-data">
+     Load the data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#helper-functions">
+     Helper functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-a-few-training-examples">
+     Plot a few training examples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#play-the-test-movie">
+     Play the test movie
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-1-groundwork-for-fitting-models">
+   Part 1: Groundwork for fitting models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#make-a-pytorch-dataset-class-for-keypoint-data">
+     Make a PyTorch Dataset class for keypoint data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-transformations-to-apply-to-each-datapoint">
+     Define transformations to apply to each datapoint
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-1a-implement-a-downsampling-transformation">
+     Problem 1a: Implement a Downsampling transformation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-1b-implement-a-transformation-to-dilate-the-targets">
+     Problem 1b: Implement a transformation to dilate the targets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-1c-initialize-datasets-for-the-training-validation-and-test-data">
+     Problem 1c: Initialize datasets for the training, validation, and test data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-1d-comment-this-function-for-training-pytorch-models">
+     Problem 1d: Comment this function for training Pytorch models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-2-implement-basic-pose-tracking-with-a-cnn">
+   Part 2: Implement basic pose tracking with a CNN
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-2a-implement-the-basic-model">
+     Problem 2a: Implement the basic model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#instantiate-the-model-and-move-it-to-the-gpu">
+     Instantiate the model and move it to the GPU
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-2b-plot-model-predictions">
+     Problem 2b: Plot model predictions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-2c-math-log-sum-exp-trick">
+     Problem 2c [Math] Log-sum-exp trick
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-2d-implement-the-bernoulli-loss">
+     Problem 2d: Implement the Bernoulli loss
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#train-the-basic-model">
+     Train the basic model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#look-at-model-outputs">
+     Look at model outputs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-2e-short-answer-interpret-the-inferred-weights">
+     Problem 2e [Short Answer]: Interpret the inferred weights
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#make-a-movie-of-the-predictions-on-the-test-data">
+     Make a movie of the predictions on the test data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-3-transfer-learning-from-a-pretrained-resnet">
+   Part 3: Transfer learning from a pretrained ResNet
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-3a-implement-the-resnet-model">
+     Problem 3a: Implement the resnet model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#instantiate-the-resnet-model">
+     Instantiate the resnet model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-3b-plot-the-resnet-features-after-each-bottleneck-layer">
+     Problem 3b: Plot the resnet features after each bottleneck layer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-3c-short-answer-discuss-the-pros-cons-of-number-of-layers">
+     Problem 3c [Short Answer]: Discuss the pros/cons of number of layers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#train-the-resnet-model">
+     Train the resnet model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-resnet-predictions">
+     Plot the resnet predictions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#make-a-movie-of-the-predictions-on-test-data">
+     Make a movie of the predictions on test data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#part-4-model-comparison">
+   Part 4: Model comparison
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-4a-grid-search">
+     Problem 4a: Grid search
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-4b-short-answer-discussion">
+     Problem 4b [Short Answer]: Discussion
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submission-instructions">
+   Submission instructions
+  </a>
+ </li>
+</ul>
+
+</nav>
 </div>
 
-
-      </div>
-    </div>
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+<div class="bd-footer-content__inner container">
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Scott Linderman
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2022.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+Last updated on None.<br>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </div>
+        </footer>
+        
+
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
 
   </body>
 </html>

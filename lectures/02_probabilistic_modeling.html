@@ -1,48 +1,56 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Probabilistic Modeling &#8212; Machine Learning Methods for Neural Data Analysis</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=4ec06e9971c5264fbd345897d5258098f11cc577" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=8bf782fb4ee92b3d3646425e50f299c4e1fd152d"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,56 +60,492 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/02_probabilistic_modeling';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Basic Neurobiology" href="03_neurobio.html" />
     <link rel="prev" title="Lab 6: Autoregressive HMMs" href="../labs/06_arhmm.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
 
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
     
-    <div class="container-fluid" id="banner"></div>
-
     
+  
 
-    <div class="container-xl">
-      <div class="row">
+
+<a class="navbar-brand logo" href="../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+    <p class="title logo__title">Machine Learning Methods for Neural Data Analysis</p>
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/00_pytorch_primer.html">
+                        Lab 0: PyTorch Primer
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/01_spike_sorting.html">
+                        Lab 1: Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/02_calcium_imaging.html">
+                        Lab 2: Calcium Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/03_pose_tracking.html">
+                        Lab 3: Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/04_glms.html">
+                        Lab 4: Generalized Linear Models
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/05_decoding.html">
+                        Lab 5: Bayesian Decoding
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/06_arhmm.html">
+                        Lab 6: Autoregressive HMMs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Probabilistic Modeling
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="03_neurobio.html">
+                        Basic Neurobiology
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="04_simple_spike_sorting.html">
+                        Simple Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="05_deconv_spike_sorting.html">
+                        Spike Sorting by Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="06_calcium_imaging.html">
+                        Demixing Calcium Imaging Data
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="07_pose_tracking.html">
+                        Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="08_summary_stats.html">
+                        Summary Statistics
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="09_glm.html">
+                        Generalized Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="10_poisson_processes.html">
+                        Poisson Processes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="11_decoding.html">
+                        Decoding Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="12_mixtures_em.html">
+                        Mixture Models and the EM Algorithm
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="99_references.html">
+                        References
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
       
       
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
       
-      <h1 class="site-logo" id="site-title">Machine Learning Methods for Neural Data Analysis</h1>
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
       
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/00_pytorch_primer.html">
+                        Lab 0: PyTorch Primer
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/01_spike_sorting.html">
+                        Lab 1: Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/02_calcium_imaging.html">
+                        Lab 2: Calcium Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/03_pose_tracking.html">
+                        Lab 3: Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/04_glms.html">
+                        Lab 4: Generalized Linear Models
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/05_decoding.html">
+                        Lab 5: Bayesian Decoding
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/06_arhmm.html">
+                        Lab 6: Autoregressive HMMs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Probabilistic Modeling
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="03_neurobio.html">
+                        Basic Neurobiology
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="04_simple_spike_sorting.html">
+                        Simple Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="05_deconv_spike_sorting.html">
+                        Spike Sorting by Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="06_calcium_imaging.html">
+                        Demixing Calcium Imaging Data
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="07_pose_tracking.html">
+                        Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="08_summary_stats.html">
+                        Summary Statistics
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="09_glm.html">
+                        Generalized Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="10_poisson_processes.html">
+                        Poisson Processes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="11_decoding.html">
+                        Decoding Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="12_mixtures_em.html">
+                        Mixture Models and the EM Algorithm
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="99_references.html">
+                        References
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+  
+
+
+<a class="navbar-brand logo" href="../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+    <p class="title logo__title">Machine Learning Methods for Neural Data Analysis</p>
+  
+</a>
+    </div>
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -110,512 +554,281 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Labs
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Labs</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/00_pytorch_primer.html">
-   Lab 0: PyTorch Primer
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/01_spike_sorting.html">
-   Lab 1: Spike Sorting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/02_calcium_imaging.html">
-   Lab 2: Calcium Deconvolution
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/03_pose_tracking.html">
-   Lab 3: Markerless Pose Tracking
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/04_glms.html">
-   Lab 4: Generalized Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/05_decoding.html">
-   Lab 5: Bayesian Decoding
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/06_arhmm.html">
-   Lab 6: Autoregressive HMMs
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/00_pytorch_primer.html">Lab 0: PyTorch Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/01_spike_sorting.html">Lab 1: Spike Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/02_calcium_imaging.html">Lab 2: Calcium Deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/03_pose_tracking.html">Lab 3: Markerless Pose Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/04_glms.html">Lab 4: Generalized Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/05_decoding.html">Lab 5: Bayesian Decoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/06_arhmm.html">Lab 6: Autoregressive HMMs</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Foundations
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Probabilistic Modeling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_neurobio.html">
-   Basic Neurobiology
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Probabilistic Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_neurobio.html">Basic Neurobiology</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unit I: Signal Extraction
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unit I: Signal Extraction</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="04_simple_spike_sorting.html">
-   Simple Spike Sorting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_deconv_spike_sorting.html">
-   Spike Sorting by Deconvolution
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_calcium_imaging.html">
-   Demixing Calcium Imaging Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07_pose_tracking.html">
-   Markerless Pose Tracking
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="04_simple_spike_sorting.html">Simple Spike Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_deconv_spike_sorting.html">Spike Sorting by Deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_calcium_imaging.html">Demixing Calcium Imaging Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_pose_tracking.html">Markerless Pose Tracking</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unit II: Encoding &amp; Decoding
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unit II: Encoding &amp; Decoding</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="08_summary_stats.html">
-   Summary Statistics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_glm.html">
-   Generalized Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10_poisson_processes.html">
-   Poisson Processes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_decoding.html">
-   Decoding Models
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="08_summary_stats.html">Summary Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_glm.html">Generalized Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_poisson_processes.html">Poisson Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_decoding.html">Decoding Models</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unit III: Unsupervised Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unit III: Unsupervised Learning</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="12_mixtures_em.html">
-   Mixture Models and the EM Algorithm
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="12_mixtures_em.html">Mixture Models and the EM Algorithm</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  References
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="99_references.html">
-   References
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="99_references.html">References</a></li>
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
+</nav>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
+  </div>
+  
 
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
 
-          
+  
+  <div id="rtd-footer-container"></div>
 
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
+      </div>
+      <main id="main-content" class="bd-main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
 
 
 
 <div class="col py-1 d-flex header-article-main">
     <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
+        <label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" data-toggle="tooltip" data-placement="right" title="Toggle primary sidebar">
+            <span class="fa-solid fa-bars"></span>
+        </label>
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://colab.research.google.com/github/slinderman/stats320/blob/winter2023/lectures/02_probabilistic_modeling.ipynb"
-   class="headerbtn"
+  <ul class="dropdown-menu">
+      <li><a href="https://colab.research.google.com/github/slinderman/stats320/blob/winter2023/lectures/02_probabilistic_modeling.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
 title="Launch on Colab"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Colab</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</a>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
+  class="btn btn-sm"
   data-toggle="tooltip"
 data-placement="bottom"
 title="Fullscreen mode"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/lectures/02_probabilistic_modeling.ipynb"
-   class="headerbtn"
+  <ul class="dropdown-menu">
+      <li><a href="../_sources/lectures/02_probabilistic_modeling.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
 title="Download source file"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
-
-      </li>
+</a>
       
       <li>
-        
 <button onclick="printPdf(this)"
-  class="headerbtn"
+  class="btn btn-sm dropdown-item"
   data-toggle="tooltip"
 data-placement="left"
 title="Print to PDF"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file-pdf"></i>
   </span>
-<span class="headerbtn__text-container">.pdf</span>
+<span class="btn__text-container">.pdf</span>
 </button>
-
-      </li>
+</a>
       
-    </ul>
-  </div>
+  </ul>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary" data-toggle="tooltip" data-placement="left" title="Toggle secondary sidebar">
+            <span class="fa-solid fa-list"></span>
+        </label>
     </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#simple-example">
-   Simple example
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sampling-from-a-poisson-distribution">
-   Sampling from a Poisson distribution
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-a-poisson-distribution">
-   Fitting a Poisson distribution
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#solving-for-the-mle">
-   Solving for the MLE
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#adding-a-prior-distribution">
-   Adding a prior distribution
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sampling-from-a-gamma-distribution">
-   Sampling from a gamma distribution
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-a-poisson-distribution-with-a-gamma-prior">
-   Fitting a Poisson distribution with a gamma prior
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bayesian-inference">
-   Bayesian inference
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#maximum-a-posteriori-inference">
-   Maximum
-   <em>
-    a posteriori
-   </em>
-   inference
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conjugate-priors">
-   Conjugate priors
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#solving-for-the-map-estimate">
-   Solving for the MAP estimate
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#map-estimation-in-our-simulated-example">
-   MAP estimation in our simulated example
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mixture-models-and-latent-variables">
-   Mixture models and latent variables
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sampling-a-poisson-mixture-model">
-   Sampling a Poisson mixture model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-a-mixture-model-by-coordinate-ascent">
-   Fitting a mixture model by coordinate ascent
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conclusion">
-   Conclusion
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#further-reading">
-   Further Reading
-  </a>
- </li>
-</ul>
-
-    </nav>
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Probabilistic Modeling</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#simple-example">
-   Simple example
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sampling-from-a-poisson-distribution">
-   Sampling from a Poisson distribution
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-a-poisson-distribution">
-   Fitting a Poisson distribution
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#solving-for-the-mle">
-   Solving for the MLE
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#adding-a-prior-distribution">
-   Adding a prior distribution
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sampling-from-a-gamma-distribution">
-   Sampling from a gamma distribution
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-a-poisson-distribution-with-a-gamma-prior">
-   Fitting a Poisson distribution with a gamma prior
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bayesian-inference">
-   Bayesian inference
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#maximum-a-posteriori-inference">
-   Maximum
-   <em>
-    a posteriori
-   </em>
-   inference
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conjugate-priors">
-   Conjugate priors
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#solving-for-the-map-estimate">
-   Solving for the MAP estimate
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#map-estimation-in-our-simulated-example">
-   MAP estimation in our simulated example
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mixture-models-and-latent-variables">
-   Mixture models and latent variables
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sampling-a-poisson-mixture-model">
-   Sampling a Poisson mixture model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-a-mixture-model-by-coordinate-ascent">
-   Fitting a mixture model by coordinate ascent
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conclusion">
-   Conclusion
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#further-reading">
-   Further Reading
-  </a>
- </li>
-</ul>
-
-                        </nav>
-                    </div>
-                </div>
             </div>
-            <main id="main-content" role="main">
-                
-              <div>
-                
+            
+            
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Probabilistic Modeling</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-example">
+   Simple example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-from-a-poisson-distribution">
+   Sampling from a Poisson distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-a-poisson-distribution">
+   Fitting a Poisson distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-for-the-mle">
+   Solving for the MLE
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-a-prior-distribution">
+   Adding a prior distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-from-a-gamma-distribution">
+   Sampling from a gamma distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-a-poisson-distribution-with-a-gamma-prior">
+   Fitting a Poisson distribution with a gamma prior
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-inference">
+   Bayesian inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-a-posteriori-inference">
+   Maximum
+   <em>
+    a posteriori
+   </em>
+   inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conjugate-priors">
+   Conjugate priors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-for-the-map-estimate">
+   Solving for the MAP estimate
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-estimation-in-our-simulated-example">
+   MAP estimation in our simulated example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mixture-models-and-latent-variables">
+   Mixture models and latent variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-a-poisson-mixture-model">
+   Sampling a Poisson mixture model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-a-mixture-model-by-coordinate-ascent">
+   Fitting a mixture model by coordinate ascent
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-reading">
+   Further Reading
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+            <article class="bd-article" role="main">
+              
   <section class="tex2jax_ignore mathjax_ignore" id="probabilistic-modeling">
-<h1>Probabilistic Modeling<a class="headerlink" href="#probabilistic-modeling" title="Permalink to this headline">#</a></h1>
+<h1>Probabilistic Modeling<a class="headerlink" href="#probabilistic-modeling" title="Permalink to this heading">#</a></h1>
 <p>Probabilistic models are distributions over data.
 The shape of the distribution is determine by model <strong>parameters</strong>.
 Our goal to <strong>estimate</strong> or <strong>infer</strong> those parameters from observed data.</p>
@@ -623,7 +836,7 @@ Our goal to <strong>estimate</strong> or <strong>infer</strong> those parameters
 However, our models will still be composed of just a handful of basic building blocks, and our central goal of parameter estimation and inference remains the same.</p>
 <p>Slides for this chapter can be downloaded <a class="reference download internal" download="" href="../_downloads/5dd281d54149572dad40c5c89b45b45f/lecture02.pdf"><code class="xref download docutils literal notranslate"><span class="pre">here</span></code></a>.</p>
 <section id="simple-example">
-<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline">#</a></h2>
+<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this heading">#</a></h2>
 <p>For example, let <span class="math notranslate nohighlight">\(x_t \in \mathbb{N}_0\)</span> denote the number of spikes a neuron fires in time bin <span class="math notranslate nohighlight">\(t\)</span>. One of the simplest (and yet surprisingly not bad) models of neural spike counts is the <a class="reference external" href="https://en.wikipedia.org/wiki/Poisson_distribution"><strong>Poisson distribution</strong></a> with rate <span class="math notranslate nohighlight">\(\lambda \in \mathbb{R}_+\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[x_t \sim \mathrm{Pois}(\lambda).\]</div>
@@ -645,9 +858,14 @@ However, our models will still be composed of just a handful of basic building b
 </div>
 </section>
 <section id="sampling-from-a-poisson-distribution">
-<h2>Sampling from a Poisson distribution<a class="headerlink" href="#sampling-from-a-poisson-distribution" title="Permalink to this headline">#</a></h2>
+<h2>Sampling from a Poisson distribution<a class="headerlink" href="#sampling-from-a-poisson-distribution" title="Permalink to this heading">#</a></h2>
 <p>Expand the code below to see how to sample a Poisson distribution using the <code class="docutils literal notranslate"><span class="pre">torch.distributions.Poisson</span></code> object in <a class="reference external" href="https://pytorch.org/docs/stable/">PyTorch</a>. The code plots the empirical distribution of 1000 independent samples from the Poisson distribution alongside the Poisson pmf.</p>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch.distributions</span> <span class="kn">import</span> <span class="n">Poisson</span>
@@ -668,13 +886,18 @@ However, our models will still be composed of just a handful of basic building b
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/02_probabilistic_modeling_4_0.png" src="../_images/02_probabilistic_modeling_4_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.9.16/x64/lib/python3.9/site-packages/tqdm/auto.py:22: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+</pre></div>
+</div>
+<img alt="../_images/0668e6281747bb38ef956010be694636455f443dc02556eb3861cbcc5f66e8bb.png" src="../_images/0668e6281747bb38ef956010be694636455f443dc02556eb3861cbcc5f66e8bb.png" />
 </div>
 </div>
 </section>
 <section id="fitting-a-poisson-distribution">
-<h2>Fitting a Poisson distribution<a class="headerlink" href="#fitting-a-poisson-distribution" title="Permalink to this headline">#</a></h2>
+<h2>Fitting a Poisson distribution<a class="headerlink" href="#fitting-a-poisson-distribution" title="Permalink to this heading">#</a></h2>
 <p>Now suppose you observe the empirical spike counts sampled above (i.e. the blue histogram) and you want to estimate the rate <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{x} = (x_1, \ldots, x_T)\)</span> denote the vector of spike counts.</p>
 <p>Since the simulated spike counts are <strong>independent</strong> random variables, their <strong>joint probability</strong> is a product of Poisson pmf’s,</p>
@@ -695,7 +918,7 @@ p(\mathbf{x}; \lambda)
 <p>This is called <strong>maximum likelihood estimation</strong>, and <span class="math notranslate nohighlight">\(\lambda_{\mathsf{MLE}}\)</span> is called the <strong>maximum likelihood estimate (MLE)</strong>.</p>
 </section>
 <section id="solving-for-the-mle">
-<h2>Solving for the MLE<a class="headerlink" href="#solving-for-the-mle" title="Permalink to this headline">#</a></h2>
+<h2>Solving for the MLE<a class="headerlink" href="#solving-for-the-mle" title="Permalink to this heading">#</a></h2>
 <p>In this simple model, we can derive a closed form expression for the MLE.</p>
 <p>First, note that maximizing <span class="math notranslate nohighlight">\(p(\mathbf{x}; \lambda)\)</span> is the same as maximizing <span class="math notranslate nohighlight">\(\log p(\mathbf{x}; \lambda)\)</span>, since the log is a concave function.</p>
 <p>Taking logs of both sides, we find</p>
@@ -723,7 +946,7 @@ p(\mathbf{x}; \lambda)
 <p>In other words, the MLE is just the mean of the empirical spike counts, which seems sensible!</p>
 </section>
 <section id="adding-a-prior-distribution">
-<h2>Adding a prior distribution<a class="headerlink" href="#adding-a-prior-distribution" title="Permalink to this headline">#</a></h2>
+<h2>Adding a prior distribution<a class="headerlink" href="#adding-a-prior-distribution" title="Permalink to this heading">#</a></h2>
 <p>Maximum likelihood estimation finds the rate that maximizes the probability of the observed spike counts, but it doesn’t take into account any prior information.</p>
 <p>For example, this may not be the first neuron you’ve ever encountered. Maybe, based on your experience, you have a sense for the distribution of neural firing rates. That knowledge can be encoded in a <strong>prior distribution</strong>.</p>
 <p>One common choice of prior on rates is the <a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_distribution"><strong>gamma distribution</strong></a>,</p>
@@ -753,13 +976,18 @@ p(\mathbf{x}; \lambda)
 </div>
 </section>
 <section id="sampling-from-a-gamma-distribution">
-<h2>Sampling from a gamma distribution<a class="headerlink" href="#sampling-from-a-gamma-distribution" title="Permalink to this headline">#</a></h2>
+<h2>Sampling from a gamma distribution<a class="headerlink" href="#sampling-from-a-gamma-distribution" title="Permalink to this heading">#</a></h2>
 <p>Expand the code below to see how to sample a gamma distribution using the <a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#gamma"><code class="docutils literal notranslate"><span class="pre">torch.distributions.Gamma</span></code></a> object. The code plots the empirical distribution of 1000 independent samples from the gamma distribution, binned into 25 evenly sized bins. It overlays the gamma pdf for comparison.</p>
 <p>In words, we might say this particular gamma distribution conveys a prior belief that</p>
 <blockquote>
 <div><p><em>Firing rates are usually around 10 spikes/time bin with standard deviation of around 3 spikes/time bin.</em></p>
 </div></blockquote>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch.distributions</span> <span class="kn">import</span> <span class="n">Gamma</span>
@@ -782,13 +1010,14 @@ p(\mathbf{x}; \lambda)
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/02_probabilistic_modeling_9_0.png" src="../_images/02_probabilistic_modeling_9_0.png" />
+<img alt="../_images/d19dd3d039ffa8130ec3b7d202608ad96acea19015fea342b570c3b12d0c0a72.png" src="../_images/d19dd3d039ffa8130ec3b7d202608ad96acea19015fea342b570c3b12d0c0a72.png" />
 </div>
 </div>
 </section>
 <section id="fitting-a-poisson-distribution-with-a-gamma-prior">
-<h2>Fitting a Poisson distribution with a gamma prior<a class="headerlink" href="#fitting-a-poisson-distribution-with-a-gamma-prior" title="Permalink to this headline">#</a></h2>
+<h2>Fitting a Poisson distribution with a gamma prior<a class="headerlink" href="#fitting-a-poisson-distribution-with-a-gamma-prior" title="Permalink to this heading">#</a></h2>
 <p>When we add in the prior distribution on <span class="math notranslate nohighlight">\(\lambda\)</span>, it becomes a random variable too. Now we have to consider the <strong>joint distribution</strong> of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\lambda\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -834,7 +1063,7 @@ Technically, we use the bar when we are writing a <strong>conditional distributi
 </div>
 </section>
 <section id="bayesian-inference">
-<h2>Bayesian inference<a class="headerlink" href="#bayesian-inference" title="Permalink to this headline">#</a></h2>
+<h2>Bayesian inference<a class="headerlink" href="#bayesian-inference" title="Permalink to this heading">#</a></h2>
 <p>What does it mean to “fit” the rate of a Poisson distribution under a gamma prior? Formally, we perform <strong>Bayesian inference</strong>.</p>
 <p>We want to compute the <strong>posterior distribution</strong> of the rate <span class="math notranslate nohighlight">\(\lambda\)</span> <em>given</em> the observed spike counts <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (and the prior parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>, which are assumed fixed),</p>
 <div class="math notranslate nohighlight">
@@ -853,7 +1082,7 @@ p(\lambda \mid \mathbf{x}) \propto p(\mathbf{x}, \lambda).
 \]</div>
 </section>
 <section id="maximum-a-posteriori-inference">
-<h2>Maximum <em>a posteriori</em> inference<a class="headerlink" href="#maximum-a-posteriori-inference" title="Permalink to this headline">#</a></h2>
+<h2>Maximum <em>a posteriori</em> inference<a class="headerlink" href="#maximum-a-posteriori-inference" title="Permalink to this heading">#</a></h2>
 <p>A simple summary of the posterior distribution is its <strong>mode</strong> — the point(s) where the pdf is maximized,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -871,7 +1100,7 @@ p(\lambda \mid \mathbf{x}) \propto p(\mathbf{x}, \lambda).
 </div>
 </section>
 <section id="conjugate-priors">
-<h2>Conjugate priors<a class="headerlink" href="#conjugate-priors" title="Permalink to this headline">#</a></h2>
+<h2>Conjugate priors<a class="headerlink" href="#conjugate-priors" title="Permalink to this heading">#</a></h2>
 <p>Now let’s go back and expand the Poisson pmf and the gamma pdf in the joint distribution,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -903,7 +1132,7 @@ p(\lambda \mid \mathbf{x})
 <p>Thus, the posterior distribution is a gamma distribution, just like the prior! For this reason, we say the gamma is a <a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_prior"><strong>conjugate prior</strong></a> for the rate of the Poisson distribution.</p>
 </section>
 <section id="solving-for-the-map-estimate">
-<h2>Solving for the MAP estimate<a class="headerlink" href="#solving-for-the-map-estimate" title="Permalink to this headline">#</a></h2>
+<h2>Solving for the MAP estimate<a class="headerlink" href="#solving-for-the-map-estimate" title="Permalink to this heading">#</a></h2>
 <p>How do we solve for the MAP estimate, <span class="math notranslate nohighlight">\(\lambda_{\mathsf{MAP}} = \text{arg max} \; p(\lambda \mid \mathbf{x})\)</span>?</p>
 <p>Now that you know the posterior is a gamma distribution, you can expand its pdf, take the log, take the derivative wrt <span class="math notranslate nohighlight">\(\lambda\)</span>, set it to zero and solve.</p>
 <p>Or you can just go to the Wikipedia page on the <a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_distribution">gamma distribution</a> and see that its mode is</p>
@@ -918,7 +1147,7 @@ p(\lambda \mid \mathbf{x})
 </div>
 </section>
 <section id="map-estimation-in-our-simulated-example">
-<h2>MAP estimation in our simulated example<a class="headerlink" href="#map-estimation-in-our-simulated-example" title="Permalink to this headline">#</a></h2>
+<h2>MAP estimation in our simulated example<a class="headerlink" href="#map-estimation-in-our-simulated-example" title="Permalink to this heading">#</a></h2>
 <p>Take the simulated data from above. What is the MAP estimate of the rate given the observed spike counts and the prior, and how does it compare to the MLE? We have…</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -934,8 +1163,8 @@ p(\lambda \mid \mathbf{x})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: tensor(5.0120)
-MAP: tensor(5.0160)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: tensor(5.0280)
+MAP: tensor(5.0320)
 </pre></div>
 </div>
 </div>
@@ -949,7 +1178,7 @@ MAP: tensor(5.0160)
 </div>
 </section>
 <section id="mixture-models-and-latent-variables">
-<h2>Mixture models and latent variables<a class="headerlink" href="#mixture-models-and-latent-variables" title="Permalink to this headline">#</a></h2>
+<h2>Mixture models and latent variables<a class="headerlink" href="#mixture-models-and-latent-variables" title="Permalink to this heading">#</a></h2>
 <figure class="align-default" id="up-down">
 <img alt="../_images/up_down.png" src="../_images/up_down.png" />
 <figcaption>
@@ -981,9 +1210,14 @@ p(x_t \mid \boldsymbol{\lambda})
 </div>
 </section>
 <section id="sampling-a-poisson-mixture-model">
-<h2>Sampling a Poisson mixture model<a class="headerlink" href="#sampling-a-poisson-mixture-model" title="Permalink to this headline">#</a></h2>
+<h2>Sampling a Poisson mixture model<a class="headerlink" href="#sampling-a-poisson-mixture-model" title="Permalink to this heading">#</a></h2>
 <p>Let’s draw samples from the mixture model, like we did above for the single Poisson distribution.</p>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torch.distributions</span> <span class="kn">import</span> <span class="n">Poisson</span><span class="p">,</span> <span class="n">Categorical</span>
@@ -1017,8 +1251,9 @@ p(x_t \mid \boldsymbol{\lambda})
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/02_probabilistic_modeling_20_0.png" src="../_images/02_probabilistic_modeling_20_0.png" />
+<img alt="../_images/000ebc2147783a62cc9820f4b9e44c96058431c1d186433a8f89c5e8de26923f.png" src="../_images/000ebc2147783a62cc9820f4b9e44c96058431c1d186433a8f89c5e8de26923f.png" />
 </div>
 </div>
 <p>With this model, we can capture <strong>multimodal</strong> firing rate distributions.</p>
@@ -1028,7 +1263,7 @@ p(x_t \mid \boldsymbol{\lambda})
 </div>
 </section>
 <section id="fitting-a-mixture-model-by-coordinate-ascent">
-<h2>Fitting a mixture model by coordinate ascent<a class="headerlink" href="#fitting-a-mixture-model-by-coordinate-ascent" title="Permalink to this headline">#</a></h2>
+<h2>Fitting a mixture model by coordinate ascent<a class="headerlink" href="#fitting-a-mixture-model-by-coordinate-ascent" title="Permalink to this heading">#</a></h2>
 <p>Conceptually, fitting the mixture model is no different than fitting the the simple Poisson model above.</p>
 <p>We will perform MAP estimation to find,</p>
 <div class="math notranslate nohighlight">
@@ -1090,7 +1325,7 @@ z_t \sim \mathrm{Cat}([\pi_0, \pi_1])
 </div>
 </section>
 <section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
 <p>This chapter introduced the basics of probabilistic modeling:</p>
 <ul class="simple">
 <li><p>We encountered 3 common distributions: Poisson, gamma, and categorical.</p></li>
@@ -1102,7 +1337,7 @@ z_t \sim \mathrm{Cat}([\pi_0, \pi_1])
 <p>Next time, we’ll apply these concepts to our first real neural data analysis problem: spike sorting electrophysiological recordings.</p>
 </section>
 <section id="further-reading">
-<h2>Further Reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">#</a></h2>
+<h2>Further Reading<a class="headerlink" href="#further-reading" title="Permalink to this heading">#</a></h2>
 <p>There are many great references on probabilistic modeling. I like:</p>
 <ul class="simple">
 <li><p>Ch 2.1 and 2.2 of <span id="id1">[<a class="reference internal" href="99_references.html#id2" title="Kevin P. Murphy. Probabilistic Machine Learning: Advanced Topics. MIT Press, 2023. URL: http://probml.github.io/book2.">Murphy, 2023</a>]</span></p></li>
@@ -1131,50 +1366,189 @@ z_t \sim \mathrm{Cat}([\pi_0, \pi_1])
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
-              
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
+            </article>
+            
+
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../labs/06_arhmm.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Lab 6: Autoregressive HMMs</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="03_neurobio.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Basic Neurobiology</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
+  <a class='left-prev' id="prev-link" href="../labs/06_arhmm.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Lab 6: Autoregressive HMMs</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="03_neurobio.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Basic Neurobiology</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
 </div>
             </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
   
-    By Scott Linderman<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-example">
+   Simple example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-from-a-poisson-distribution">
+   Sampling from a Poisson distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-a-poisson-distribution">
+   Fitting a Poisson distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-for-the-mle">
+   Solving for the MLE
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-a-prior-distribution">
+   Adding a prior distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-from-a-gamma-distribution">
+   Sampling from a gamma distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-a-poisson-distribution-with-a-gamma-prior">
+   Fitting a Poisson distribution with a gamma prior
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-inference">
+   Bayesian inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-a-posteriori-inference">
+   Maximum
+   <em>
+    a posteriori
+   </em>
+   inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conjugate-priors">
+   Conjugate priors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-for-the-map-estimate">
+   Solving for the MAP estimate
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-estimation-in-our-simulated-example">
+   MAP estimation in our simulated example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mixture-models-and-latent-variables">
+   Mixture models and latent variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-a-poisson-mixture-model">
+   Sampling a Poisson mixture model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-a-mixture-model-by-coordinate-ascent">
+   Fitting a mixture model by coordinate ascent
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-reading">
+   Further Reading
+  </a>
+ </li>
+</ul>
+
+</nav>
 </div>
 
-
-      </div>
-    </div>
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+<div class="bd-footer-content__inner container">
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Scott Linderman
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2022.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+Last updated on None.<br>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </div>
+        </footer>
+        
+
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
 
   </body>
 </html>

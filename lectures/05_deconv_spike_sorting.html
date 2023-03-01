@@ -1,48 +1,56 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Spike Sorting by Deconvolution &#8212; Machine Learning Methods for Neural Data Analysis</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=4ec06e9971c5264fbd345897d5258098f11cc577" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=8bf782fb4ee92b3d3646425e50f299c4e1fd152d"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,56 +60,492 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/05_deconv_spike_sorting';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Demixing Calcium Imaging Data" href="06_calcium_imaging.html" />
     <link rel="prev" title="Simple Spike Sorting" href="04_simple_spike_sorting.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
 
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
     
-    <div class="container-fluid" id="banner"></div>
-
     
+  
 
-    <div class="container-xl">
-      <div class="row">
+
+<a class="navbar-brand logo" href="../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+    <p class="title logo__title">Machine Learning Methods for Neural Data Analysis</p>
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/00_pytorch_primer.html">
+                        Lab 0: PyTorch Primer
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/01_spike_sorting.html">
+                        Lab 1: Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/02_calcium_imaging.html">
+                        Lab 2: Calcium Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/03_pose_tracking.html">
+                        Lab 3: Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/04_glms.html">
+                        Lab 4: Generalized Linear Models
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/05_decoding.html">
+                        Lab 5: Bayesian Decoding
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/06_arhmm.html">
+                        Lab 6: Autoregressive HMMs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="02_probabilistic_modeling.html">
+                        Probabilistic Modeling
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="03_neurobio.html">
+                        Basic Neurobiology
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="04_simple_spike_sorting.html">
+                        Simple Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Spike Sorting by Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="06_calcium_imaging.html">
+                        Demixing Calcium Imaging Data
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="07_pose_tracking.html">
+                        Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="08_summary_stats.html">
+                        Summary Statistics
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="09_glm.html">
+                        Generalized Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="10_poisson_processes.html">
+                        Poisson Processes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="11_decoding.html">
+                        Decoding Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="12_mixtures_em.html">
+                        Mixture Models and the EM Algorithm
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="99_references.html">
+                        References
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
       
       
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
       
-      <h1 class="site-logo" id="site-title">Machine Learning Methods for Neural Data Analysis</h1>
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
       
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/00_pytorch_primer.html">
+                        Lab 0: PyTorch Primer
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/01_spike_sorting.html">
+                        Lab 1: Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/02_calcium_imaging.html">
+                        Lab 2: Calcium Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/03_pose_tracking.html">
+                        Lab 3: Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/04_glms.html">
+                        Lab 4: Generalized Linear Models
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/05_decoding.html">
+                        Lab 5: Bayesian Decoding
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/06_arhmm.html">
+                        Lab 6: Autoregressive HMMs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="02_probabilistic_modeling.html">
+                        Probabilistic Modeling
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="03_neurobio.html">
+                        Basic Neurobiology
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="04_simple_spike_sorting.html">
+                        Simple Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Spike Sorting by Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="06_calcium_imaging.html">
+                        Demixing Calcium Imaging Data
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="07_pose_tracking.html">
+                        Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="08_summary_stats.html">
+                        Summary Statistics
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="09_glm.html">
+                        Generalized Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="10_poisson_processes.html">
+                        Poisson Processes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="11_decoding.html">
+                        Decoding Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="12_mixtures_em.html">
+                        Mixture Models and the EM Algorithm
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="99_references.html">
+                        References
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+  
+
+
+<a class="navbar-brand logo" href="../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+    <p class="title logo__title">Machine Learning Methods for Neural Data Analysis</p>
+  
+</a>
+    </div>
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -110,525 +554,290 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Labs
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Labs</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/00_pytorch_primer.html">
-   Lab 0: PyTorch Primer
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/01_spike_sorting.html">
-   Lab 1: Spike Sorting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/02_calcium_imaging.html">
-   Lab 2: Calcium Deconvolution
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/03_pose_tracking.html">
-   Lab 3: Markerless Pose Tracking
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/04_glms.html">
-   Lab 4: Generalized Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/05_decoding.html">
-   Lab 5: Bayesian Decoding
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/06_arhmm.html">
-   Lab 6: Autoregressive HMMs
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/00_pytorch_primer.html">Lab 0: PyTorch Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/01_spike_sorting.html">Lab 1: Spike Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/02_calcium_imaging.html">Lab 2: Calcium Deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/03_pose_tracking.html">Lab 3: Markerless Pose Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/04_glms.html">Lab 4: Generalized Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/05_decoding.html">Lab 5: Bayesian Decoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/06_arhmm.html">Lab 6: Autoregressive HMMs</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Foundations
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="02_probabilistic_modeling.html">
-   Probabilistic Modeling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_neurobio.html">
-   Basic Neurobiology
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="02_probabilistic_modeling.html">Probabilistic Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_neurobio.html">Basic Neurobiology</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unit I: Signal Extraction
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unit I: Signal Extraction</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="04_simple_spike_sorting.html">
-   Simple Spike Sorting
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Spike Sorting by Deconvolution
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_calcium_imaging.html">
-   Demixing Calcium Imaging Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07_pose_tracking.html">
-   Markerless Pose Tracking
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="04_simple_spike_sorting.html">Simple Spike Sorting</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Spike Sorting by Deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_calcium_imaging.html">Demixing Calcium Imaging Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_pose_tracking.html">Markerless Pose Tracking</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unit II: Encoding &amp; Decoding
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unit II: Encoding &amp; Decoding</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="08_summary_stats.html">
-   Summary Statistics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_glm.html">
-   Generalized Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10_poisson_processes.html">
-   Poisson Processes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_decoding.html">
-   Decoding Models
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="08_summary_stats.html">Summary Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_glm.html">Generalized Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_poisson_processes.html">Poisson Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_decoding.html">Decoding Models</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unit III: Unsupervised Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unit III: Unsupervised Learning</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="12_mixtures_em.html">
-   Mixture Models and the EM Algorithm
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="12_mixtures_em.html">Mixture Models and the EM Algorithm</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  References
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="99_references.html">
-   References
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="99_references.html">References</a></li>
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
+</nav>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
+  </div>
+  
 
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
 
-          
+  
+  <div id="rtd-footer-container"></div>
 
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
+      </div>
+      <main id="main-content" class="bd-main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
 
 
 
 <div class="col py-1 d-flex header-article-main">
     <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
+        <label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" data-toggle="tooltip" data-placement="right" title="Toggle primary sidebar">
+            <span class="fa-solid fa-bars"></span>
+        </label>
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://colab.research.google.com/github/slinderman/stats320/blob/winter2023/lectures/05_deconv_spike_sorting.ipynb"
-   class="headerbtn"
+  <ul class="dropdown-menu">
+      <li><a href="https://colab.research.google.com/github/slinderman/stats320/blob/winter2023/lectures/05_deconv_spike_sorting.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
 title="Launch on Colab"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Colab</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</a>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
+  class="btn btn-sm"
   data-toggle="tooltip"
 data-placement="bottom"
 title="Fullscreen mode"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/lectures/05_deconv_spike_sorting.ipynb"
-   class="headerbtn"
+  <ul class="dropdown-menu">
+      <li><a href="../_sources/lectures/05_deconv_spike_sorting.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
 title="Download source file"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
-
-      </li>
+</a>
       
       <li>
-        
 <button onclick="printPdf(this)"
-  class="headerbtn"
+  class="btn btn-sm dropdown-item"
   data-toggle="tooltip"
 data-placement="left"
 title="Print to PDF"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file-pdf"></i>
   </span>
-<span class="headerbtn__text-container">.pdf</span>
+<span class="btn__text-container">.pdf</span>
 </button>
-
-      </li>
+</a>
       
-    </ul>
-  </div>
+  </ul>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary" data-toggle="tooltip" data-placement="left" title="Toggle secondary sidebar">
+            <span class="fa-solid fa-list"></span>
+        </label>
     </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#convolutional-model">
-   Convolutional model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#convolution-and-cross-correlation">
-   Convolution and cross-correlation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#scale-invariance-through-the-waveform-prior">
-   Scale invariance through the waveform prior
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-frobenius-norm-and-the-svd">
-   The Frobenius norm and the SVD
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#constraining-the-rank-of-of-the-waveform-matrices">
-   Constraining the rank of of the waveform matrices
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#maximum-a-posteriori-map-estimation">
-   Maximum
-   <em>
-    a posteriori
-   </em>
-   (MAP) estimation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#optimizing-the-amplitudes">
-   Optimizing the amplitudes
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-linear-term">
-     The linear term
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-quadratic-term">
-     The quadratic term
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#finishing-the-optimization">
-     Finishing the optimization
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#optimizing-the-waveforms">
-   Optimizing the waveforms
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solving-the-optimization">
-     Solving the optimization
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#more-efficient-computation">
-   More efficient computation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#preprocessing">
-   Preprocessing
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#post-processing">
-   Post processing
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conclusion">
-   Conclusion
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#further-reading">
-   Further reading
-  </a>
- </li>
-</ul>
-
-    </nav>
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Spike Sorting by Deconvolution</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#convolutional-model">
-   Convolutional model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#convolution-and-cross-correlation">
-   Convolution and cross-correlation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#scale-invariance-through-the-waveform-prior">
-   Scale invariance through the waveform prior
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-frobenius-norm-and-the-svd">
-   The Frobenius norm and the SVD
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#constraining-the-rank-of-of-the-waveform-matrices">
-   Constraining the rank of of the waveform matrices
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#maximum-a-posteriori-map-estimation">
-   Maximum
-   <em>
-    a posteriori
-   </em>
-   (MAP) estimation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#optimizing-the-amplitudes">
-   Optimizing the amplitudes
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-linear-term">
-     The linear term
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-quadratic-term">
-     The quadratic term
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#finishing-the-optimization">
-     Finishing the optimization
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#optimizing-the-waveforms">
-   Optimizing the waveforms
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solving-the-optimization">
-     Solving the optimization
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#more-efficient-computation">
-   More efficient computation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#preprocessing">
-   Preprocessing
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#post-processing">
-   Post processing
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conclusion">
-   Conclusion
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#further-reading">
-   Further reading
-  </a>
- </li>
-</ul>
-
-                        </nav>
-                    </div>
-                </div>
             </div>
-            <main id="main-content" role="main">
-                
-              <div>
-                
+            
+            
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Spike Sorting by Deconvolution</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolutional-model">
+   Convolutional model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolution-and-cross-correlation">
+   Convolution and cross-correlation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scale-invariance-through-the-waveform-prior">
+   Scale invariance through the waveform prior
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-frobenius-norm-and-the-svd">
+   The Frobenius norm and the SVD
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constraining-the-rank-of-of-the-waveform-matrices">
+   Constraining the rank of of the waveform matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-a-posteriori-map-estimation">
+   Maximum
+   <em>
+    a posteriori
+   </em>
+   (MAP) estimation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimizing-the-amplitudes">
+   Optimizing the amplitudes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-linear-term">
+     The linear term
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-quadratic-term">
+     The quadratic term
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finishing-the-optimization">
+     Finishing the optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimizing-the-waveforms">
+   Optimizing the waveforms
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solving-the-optimization">
+     Solving the optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-efficient-computation">
+   More efficient computation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preprocessing">
+   Preprocessing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#post-processing">
+   Post processing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-reading">
+   Further reading
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+            <article class="bd-article" role="main">
+              
   <section class="tex2jax_ignore mathjax_ignore" id="spike-sorting-by-deconvolution">
-<h1>Spike Sorting by Deconvolution<a class="headerlink" href="#spike-sorting-by-deconvolution" title="Permalink to this headline">#</a></h1>
+<h1>Spike Sorting by Deconvolution<a class="headerlink" href="#spike-sorting-by-deconvolution" title="Permalink to this heading">#</a></h1>
 <p>The last chapter framed spike sorting as a matrix factorization problem — specifically, a <em>semi-nonnegative matrix factorization (semi-NMF)</em> problem.  However, that model only makes sense under the simplifying assumption that the raw voltage is downsampled to <span class="math notranslate nohighlight">\(\sim\)</span> 500Hz.
 Otherwise, spike waveforms would be spread over many time bins.</p>
 <p>In this chapter we’ll relax that assumption and develop a more realistic model using <em>convolutional</em> matrix factorization. This model is inspired by Kilosort, a state-of-the-art spike sorting algorithm <span id="id1">[<a class="reference internal" href="99_references.html#id19" title="Marius Pachitariu, Shashwat Sridhar, and Carsen Stringer. Solving the spike sorting problem with kilosort. bioRxiv, 2023.">Pachitariu <em>et al.</em>, 2023</a>]</span>.</p>
 <section id="convolutional-model">
-<h2>Convolutional model<a class="headerlink" href="#convolutional-model" title="Permalink to this headline">#</a></h2>
+<h2>Convolutional model<a class="headerlink" href="#convolutional-model" title="Permalink to this heading">#</a></h2>
 <p>Like before, let <span class="math notranslate nohighlight">\(x_{n,t}\)</span> denote the voltage on channel <span class="math notranslate nohighlight">\(c\)</span> and time sample <span class="math notranslate nohighlight">\(t\)</span>, but now consider the data at its native resolution of around 30 kHz (i.e. voltage is sampled every <span class="math notranslate nohighlight">\(\sim 0.03\)</span> ms. At this sampling frequency, a spike waveform typically at least 60-90 time steps.</p>
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{W}_k \in \mathbb{R}^{N \times D}\)</span> denote a <strong>waveform</strong>. In this model, it is a <strong>matrix</strong> for each neuron, where <span class="math notranslate nohighlight">\(D\)</span> denotes the number of time steps that a spike waveform persists in the voltage recording.</p>
 <p>Let <span class="math notranslate nohighlight">\(w_{k,n,d}\)</span> denote the entries of waveform <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span>, and let <span class="math notranslate nohighlight">\(\mathbf{W} = \{\mathbf{W}_k\}_{k=1}^K\)</span> be shorthand for the set of waveforms for all <span class="math notranslate nohighlight">\(K\)</span> neurons. Let <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}_+^{T \times K}\)</span> denote the matrix of spike amplitudes, as before. Now, <span class="math notranslate nohighlight">\(a_{k,t} = 1\)</span> denotes the <strong>start</strong> of a unit-amplitude spike with waveform <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
@@ -645,7 +854,7 @@ p(\mathbf{X} \mid \mathbf{W}, \mathbf{A})
 <p>where <span class="math notranslate nohighlight">\(\circledast\)</span> denotes the discrete time <strong>convolution</strong>.</p>
 </section>
 <section id="convolution-and-cross-correlation">
-<h2>Convolution and cross-correlation<a class="headerlink" href="#convolution-and-cross-correlation" title="Permalink to this headline">#</a></h2>
+<h2>Convolution and cross-correlation<a class="headerlink" href="#convolution-and-cross-correlation" title="Permalink to this heading">#</a></h2>
 <p>The discrete time <strong>convolution</strong> of a signal <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> with a filter <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> is defined as</p>
 <div class="math notranslate nohighlight">
 \[
@@ -670,7 +879,7 @@ p(\mathbf{X} \mid \mathbf{W}, \mathbf{A})
 </div>
 </section>
 <section id="scale-invariance-through-the-waveform-prior">
-<h2>Scale invariance through the waveform prior<a class="headerlink" href="#scale-invariance-through-the-waveform-prior" title="Permalink to this headline">#</a></h2>
+<h2>Scale invariance through the waveform prior<a class="headerlink" href="#scale-invariance-through-the-waveform-prior" title="Permalink to this heading">#</a></h2>
 <p>Just like before, there is a scale invariance between <span class="math notranslate nohighlight">\(\mathbf{a}_k\)</span> and <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span>. Last chapter, we placed constrained the waveform vector <span class="math notranslate nohighlight">\(\mathbf{w}_k \in \mathbb{R}^N\)</span> to have unit <em>Euclidean</em> (<span class="math notranslate nohighlight">\(\ell_2\)</span>) norm. Now that the waveforms are matrices <span class="math notranslate nohighlight">\(\mathbf{W}_k \in \mathbb{R}^{N \times D}\)</span>, the natural generalization is to constrain the <em>Frobenius</em> norm of the waveforms,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -678,9 +887,9 @@ p(\mathbf{X} \mid \mathbf{W}, \mathbf{A})
 \]</div>
 </section>
 <section id="the-frobenius-norm-and-the-svd">
-<h2>The Frobenius norm and the SVD<a class="headerlink" href="#the-frobenius-norm-and-the-svd" title="Permalink to this headline">#</a></h2>
+<h2>The Frobenius norm and the SVD<a class="headerlink" href="#the-frobenius-norm-and-the-svd" title="Permalink to this heading">#</a></h2>
 <p>The Frobenius norm can be rewritten in many ways.</p>
-<ol>
+<ol class="arabic">
 <li><p>It is equal to the Euclidean (<span class="math notranslate nohighlight">\(\ell_2\)</span>) norm of the <em>vectorized</em> matrix,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -728,10 +937,10 @@ p(\mathbf{X} \mid \mathbf{W}, \mathbf{A})
 </div>
 </section>
 <section id="constraining-the-rank-of-of-the-waveform-matrices">
-<h2>Constraining the rank of of the waveform matrices<a class="headerlink" href="#constraining-the-rank-of-of-the-waveform-matrices" title="Permalink to this headline">#</a></h2>
+<h2>Constraining the rank of of the waveform matrices<a class="headerlink" href="#constraining-the-rank-of-of-the-waveform-matrices" title="Permalink to this heading">#</a></h2>
 <p>Thinking of the Frobenius norm constraint in terms of a constraint on the singular values leads to a natural extension. Rather than just constraining the norm, <em>constrain the rank</em> of the waveform matrices as well.</p>
 <p>There are at least two reasons why this is sensible:</p>
-<ol>
+<ol class="arabic">
 <li><p>Manually identified spike waveforms are well approximated as outer product of a <strong>spatial footprint</strong> <span class="math notranslate nohighlight">\(\mathbf{u}_k \in \mathbb{S}_{N-1}\)</span> and a <strong>temporal profile</strong> <span class="math notranslate nohighlight">\(\mathbf{v}_k \in \mathbb{S}_{D-1}\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -759,7 +968,7 @@ p(\mathbf{X} \mid \mathbf{W}, \mathbf{A})
 <p>We will use the same exponential prior on the amplitudes as in the previous chapter.</p>
 </section>
 <section id="maximum-a-posteriori-map-estimation">
-<h2>Maximum <em>a posteriori</em> (MAP) estimation<a class="headerlink" href="#maximum-a-posteriori-map-estimation" title="Permalink to this headline">#</a></h2>
+<h2>Maximum <em>a posteriori</em> (MAP) estimation<a class="headerlink" href="#maximum-a-posteriori-map-estimation" title="Permalink to this heading">#</a></h2>
 <p>Like before, we will fit the model by using coordinate ascent to maximize the posterior probability, which is proportional to the joint probability. Again, that will entail updating the amplitudes given the waveforms, and then the waveforms given the amplitudes. When updating the parameters for neuron <span class="math notranslate nohighlight">\(k\)</span>, the solutions will depend on the residual,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -772,7 +981,7 @@ p(\mathbf{X} \mid \mathbf{W}, \mathbf{A})
 </div>
 </section>
 <section id="optimizing-the-amplitudes">
-<h2>Optimizing the amplitudes<a class="headerlink" href="#optimizing-the-amplitudes" title="Permalink to this headline">#</a></h2>
+<h2>Optimizing the amplitudes<a class="headerlink" href="#optimizing-the-amplitudes" title="Permalink to this heading">#</a></h2>
 <p>As a function of the waveform <span class="math notranslate nohighlight">\(\mathbf{a}_k\)</span> for neuron <span class="math notranslate nohighlight">\(k\)</span>, the log joint probability is,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -784,7 +993,7 @@ p(\mathbf{X} \mid \mathbf{W}, \mathbf{A})
 \end{align*}
 \end{split}\]</div>
 <section id="the-linear-term">
-<h3>The linear term<a class="headerlink" href="#the-linear-term" title="Permalink to this headline">#</a></h3>
+<h3>The linear term<a class="headerlink" href="#the-linear-term" title="Permalink to this heading">#</a></h3>
 <p>Lets start by unpacking the linear term,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -804,7 +1013,7 @@ p(\mathbf{X} \mid \mathbf{W}, \mathbf{A})
 </div>
 </section>
 <section id="the-quadratic-term">
-<h3>The quadratic term<a class="headerlink" href="#the-quadratic-term" title="Permalink to this headline">#</a></h3>
+<h3>The quadratic term<a class="headerlink" href="#the-quadratic-term" title="Permalink to this heading">#</a></h3>
 <p>Now unpack the quadratic term,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -832,7 +1041,7 @@ p(\mathbf{X} \mid \mathbf{W}, \mathbf{A})
 <p>just like in the previous chapter.</p>
 </section>
 <section id="finishing-the-optimization">
-<h3>Finishing the optimization<a class="headerlink" href="#finishing-the-optimization" title="Permalink to this headline">#</a></h3>
+<h3>Finishing the optimization<a class="headerlink" href="#finishing-the-optimization" title="Permalink to this heading">#</a></h3>
 <p>We have once again reduced the coordinate update for the amplitudes to solving a bunch of independent, scalar, quadratic optimization problems subject to non-negativity constraints. For <span class="math notranslate nohighlight">\(a_{k,t}\)</span>, the problem reduces to,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -860,7 +1069,7 @@ a_{k,t}^\star = \max \left\{ 0, \, [\mathbf{R} \star \mathbf{W}]_t - \lambda \si
 </section>
 </section>
 <section id="optimizing-the-waveforms">
-<h2>Optimizing the waveforms<a class="headerlink" href="#optimizing-the-waveforms" title="Permalink to this headline">#</a></h2>
+<h2>Optimizing the waveforms<a class="headerlink" href="#optimizing-the-waveforms" title="Permalink to this heading">#</a></h2>
 <p>As a function of the waveform <span class="math notranslate nohighlight">\(\mathbf{W}_k\)</span> for neuron <span class="math notranslate nohighlight">\(k\)</span>, the log joint probability is,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -891,7 +1100,7 @@ r_{n,t} &amp; \ldots &amp; r_{n,t+D}
 \end{split}\]</div>
 <p>This is analogous to the norm-constrained optimization problem for vector waveforms from the previous chapter!</p>
 <section id="solving-the-optimization">
-<h3>Solving the optimization<a class="headerlink" href="#solving-the-optimization" title="Permalink to this headline">#</a></h3>
+<h3>Solving the optimization<a class="headerlink" href="#solving-the-optimization" title="Permalink to this heading">#</a></h3>
 <p>We want to maximize this log joint probability over the space of low-rank, unit-norm matrices <span class="math notranslate nohighlight">\(\mathbb{S}_R^{N,D}\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -942,7 +1151,7 @@ f(\mathbf{W}) = \sum_{r=1}^R s_r \tilde{s}_r = \langle \mathbf{s}_{:R}, \tilde{\
 </section>
 </section>
 <section id="more-efficient-computation">
-<h2>More efficient computation<a class="headerlink" href="#more-efficient-computation" title="Permalink to this headline">#</a></h2>
+<h2>More efficient computation<a class="headerlink" href="#more-efficient-computation" title="Permalink to this heading">#</a></h2>
 <p>Recall that a key term in the amplitude updates was the cross-correlation of the residual and the waveforms. We can compute that more efficiently by leveraging the fact that the waveforms are low rank,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -959,9 +1168,9 @@ f(\mathbf{W}) = \sum_{r=1}^R s_r \tilde{s}_r = \langle \mathbf{s}_{:R}, \tilde{\
 In particular, when <span class="math notranslate nohighlight">\(R=1\)</span>, it reduces to a 1-dimensional cross-correlation of the projected residual <span class="math notranslate nohighlight">\(\mathbf{u}_k^\top \mathbf{R}\)</span> and the waveform’s temporal profile <span class="math notranslate nohighlight">\(\mathbf{v}_k\)</span>. This can yield a huge performance boost!</p>
 </section>
 <section id="preprocessing">
-<h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">#</a></h2>
+<h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this heading">#</a></h2>
 <p>In practice, the raw voltage recordings are lightly preprocessed to create the matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Sometimes electrical recordings have artifacts from the environment in which the recording is performed or from nearby electronics. One step toward reducing these artifacts is <strong>common average referencing</strong>, where we first subtract the mean across time, then subtract the median across channels.</p></li>
 <li><p>Spikes and the resulting EAPs are only a few milliseconds long. Real voltage recordings also have slower signals like local field potentials (LFPs), which have time scales of 3ms to 500ms. Since we are interested in spikes, we typically <strong>bandpass filter</strong> each channel <span class="math notranslate nohighlight">\(\mathbf{x}_{n} = (x_{n,1}, \ldots, x_{n,t})\)</span> to focus on content in the [300 Hz, 2000 Hz] frequency range; i.e. signals that vary over 0.5 to 3 ms.</p></li>
 <li><p>In many recordings, especially those from freely moving animals, the electrode may move slightly over time. This movement results in <strong>drift</strong> of the spike waveforms. State-of-the-art spike sorting software like Kilosort <span id="id2">[<a class="reference internal" href="99_references.html#id19" title="Marius Pachitariu, Shashwat Sridhar, and Carsen Stringer. Solving the spike sorting problem with kilosort. bioRxiv, 2023.">Pachitariu <em>et al.</em>, 2023</a>]</span> tries to correct for drift in preprocessing.</p></li>
@@ -970,12 +1179,12 @@ In particular, when <span class="math notranslate nohighlight">\(R=1\)</span>, i
 </ol>
 </section>
 <section id="post-processing">
-<h2>Post processing<a class="headerlink" href="#post-processing" title="Permalink to this headline">#</a></h2>
+<h2>Post processing<a class="headerlink" href="#post-processing" title="Permalink to this heading">#</a></h2>
 <p>The waveforms extracted by convolutional semi-NMF usually still need a bit of post-processing. For example, sometimes the model finds two waveforms for the same neuron. Alternatively, it may assign two neurons to the same waveform if their spike timing is highly correlated.</p>
 <p>These types of errors can be addressed with a post-processing step to split or merge clusters. This step is not unique to spike sorting — it’s a common postprocessing step in many unsupervised clustering analyses. For spike sorting, we can bring extra domain knowledge to bear on the problem. For example, we expect the spatial footprints to be localized, and we expect the temporal profiles to have a single downward deflection. Modern libraries incorporate checks like these into the postprocessing steps.</p>
 </section>
 <section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
 <p>This chapter extended the previous one by allowing waveforms that extend in time. The generalized model is a form of <strong>convolutional semi-NMF</strong>. Along the way, we picked up some new skills:</p>
 <ul class="simple">
 <li><p><strong>Convolution and Cross-Correlation:</strong> the building blocks of many machine learning models, and we’ll return to them multiple times in this course.</p></li>
@@ -986,7 +1195,7 @@ In particular, when <span class="math notranslate nohighlight">\(R=1\)</span>, i
 <p>Next time, we’ll consider an analogous problem for working with calcium imaging data. Many of the models and tools we’ve developed will transfer.</p>
 </section>
 <section id="further-reading">
-<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">#</a></h2>
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this heading">#</a></h2>
 <p>The algorithm presented in this chapter is similar to Kilosort <span id="id3">[<a class="reference internal" href="99_references.html#id18" title="Marius Pachitariu, Nicholas Steinmetz, Shabnam Kadir, Matteo Carandini, and others. Kilosort: realtime spike-sorting for extracellular electrophysiology with hundreds of channels. BioRxiv, pages 061481, 2016.">Pachitariu <em>et al.</em>, 2016</a>, <a class="reference internal" href="99_references.html#id7" title="Nicholas A Steinmetz, Cagatay Aydin, Anna Lebedeva, Michael Okun, Marius Pachitariu, Marius Bauza, Maxime Beau, Jai Bhagat, Claudia Böhm, Martijn Broux, and others. Neuropixels 2.0: A miniaturized high-density probe for stable, long-term brain recordings. Science, 372(6539):eabf4588, 2021.">Steinmetz <em>et al.</em>, 2021</a>]</span>. The exact algorithms employed by Kilosort change from version to version, but the convolutional generative model is central. Complete details of Kilosort and the differences from one version to the next can be found in <span id="id4">Pachitariu <em>et al.</em> [<a class="reference internal" href="99_references.html#id19" title="Marius Pachitariu, Shashwat Sridhar, and Carsen Stringer. Solving the spike sorting problem with kilosort. bioRxiv, 2023.">2023</a>]</span>.</p>
 <p>Of course, there are other spike sorting algorithms and implementations as well, like YASS <span id="id5">[<a class="reference internal" href="99_references.html#id20" title="JinHyung Lee, Catalin Mitelut, Hooshmand Shokri, Ian Kinsella, Nishchal Dethe, Shenghao Wu, Kevin Li, Eduardo B Reyes, Denis Turcu, Eleanor Batty, and others. YASS: Yet another spike sorter applied to large-scale multi-electrode array recordings in primate retina. bioRxiv, 2020.">Lee <em>et al.</em>, 2020</a>]</span> and MountainSort <span id="id6">[<a class="reference internal" href="99_references.html#id21" title="Jason E Chung, Jeremy F Magland, Alex H Barnett, Vanessa M Tolosa, Angela C Tooker, Kye Y Lee, Kedar G Shah, Sarah H Felix, Loren M Frank, and Leslie F Greengard. A fully automated approach to spike sorting. Neuron, 95(6):1381–1394, 2017.">Chung <em>et al.</em>, 2017</a>]</span>. Each has its own unique aspects, and it is interesting to compare and contrast different methods. For Neuropixels users, Kilosort appears to be the go-to method.</p>
 <p>Is spike sorting really necessary though? For some questions of interest, like population decoding or state space analysis, it may not be. For example, <span id="id7">Deng <em>et al.</em> [<a class="reference internal" href="99_references.html#id22" title="Xinyi Deng, Daniel F Liu, Kenneth Kay, Loren M Frank, and Uri T Eden. Clusterless decoding of position from multiunit activity using a marked point process filter. Neural computation, 27(7):1438–1460, 2015.">2015</a>]</span> showed improved performance using a “clusterless” decoding approach that uses extracted spike waveforms but does not try to assign them neuron labels. Similarly, <span id="id8">Trautmann <em>et al.</em> [<a class="reference internal" href="99_references.html#id23" title="Eric M Trautmann, Sergey D Stavisky, Subhaneil Lahiri, Katherine C Ames, Matthew T Kaufman, Daniel J O’Shea, Saurabh Vyas, Xulu Sun, Stephen I Ryu, Surya Ganguli, and others. Accurate estimation of neural population dynamics without spike sorting. Neuron, 103(2):292–308, 2019.">2019</a>]</span> showed that you can identify low dimensional states and dynamics from electrophysiological recordings without spike sorting. However, if your scientific objectives involve understanding individual neurons’ coding properties, then spike sorting is a necessary step.</p>
@@ -1013,50 +1222,193 @@ In particular, when <span class="math notranslate nohighlight">\(R=1\)</span>, i
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
-              
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
+            </article>
+            
+
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="04_simple_spike_sorting.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Simple Spike Sorting</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="06_calcium_imaging.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Demixing Calcium Imaging Data</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
+  <a class='left-prev' id="prev-link" href="04_simple_spike_sorting.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Simple Spike Sorting</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="06_calcium_imaging.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Demixing Calcium Imaging Data</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
 </div>
             </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
   
-    By Scott Linderman<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolutional-model">
+   Convolutional model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolution-and-cross-correlation">
+   Convolution and cross-correlation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scale-invariance-through-the-waveform-prior">
+   Scale invariance through the waveform prior
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-frobenius-norm-and-the-svd">
+   The Frobenius norm and the SVD
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constraining-the-rank-of-of-the-waveform-matrices">
+   Constraining the rank of of the waveform matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-a-posteriori-map-estimation">
+   Maximum
+   <em>
+    a posteriori
+   </em>
+   (MAP) estimation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimizing-the-amplitudes">
+   Optimizing the amplitudes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-linear-term">
+     The linear term
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-quadratic-term">
+     The quadratic term
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finishing-the-optimization">
+     Finishing the optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimizing-the-waveforms">
+   Optimizing the waveforms
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solving-the-optimization">
+     Solving the optimization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-efficient-computation">
+   More efficient computation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preprocessing">
+   Preprocessing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#post-processing">
+   Post processing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-reading">
+   Further reading
+  </a>
+ </li>
+</ul>
+
+</nav>
 </div>
 
-
-      </div>
-    </div>
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+<div class="bd-footer-content__inner container">
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Scott Linderman
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2022.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+Last updated on None.<br>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </div>
+        </footer>
+        
+
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
 
   </body>
 </html>

@@ -1,48 +1,56 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Poisson Processes &#8212; Machine Learning Methods for Neural Data Analysis</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=4ec06e9971c5264fbd345897d5258098f11cc577" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=8bf782fb4ee92b3d3646425e50f299c4e1fd152d"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,56 +60,492 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/10_poisson_processes';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Decoding Models" href="11_decoding.html" />
     <link rel="prev" title="Generalized Linear Models" href="09_glm.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
 
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
     
-    <div class="container-fluid" id="banner"></div>
-
     
+  
 
-    <div class="container-xl">
-      <div class="row">
+
+<a class="navbar-brand logo" href="../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+    <p class="title logo__title">Machine Learning Methods for Neural Data Analysis</p>
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/00_pytorch_primer.html">
+                        Lab 0: PyTorch Primer
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/01_spike_sorting.html">
+                        Lab 1: Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/02_calcium_imaging.html">
+                        Lab 2: Calcium Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/03_pose_tracking.html">
+                        Lab 3: Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/04_glms.html">
+                        Lab 4: Generalized Linear Models
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/05_decoding.html">
+                        Lab 5: Bayesian Decoding
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/06_arhmm.html">
+                        Lab 6: Autoregressive HMMs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="02_probabilistic_modeling.html">
+                        Probabilistic Modeling
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="03_neurobio.html">
+                        Basic Neurobiology
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="04_simple_spike_sorting.html">
+                        Simple Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="05_deconv_spike_sorting.html">
+                        Spike Sorting by Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="06_calcium_imaging.html">
+                        Demixing Calcium Imaging Data
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="07_pose_tracking.html">
+                        Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="08_summary_stats.html">
+                        Summary Statistics
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="09_glm.html">
+                        Generalized Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Poisson Processes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="11_decoding.html">
+                        Decoding Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="12_mixtures_em.html">
+                        Mixture Models and the EM Algorithm
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="99_references.html">
+                        References
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
       
       
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
       
-      <h1 class="site-logo" id="site-title">Machine Learning Methods for Neural Data Analysis</h1>
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
       
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/00_pytorch_primer.html">
+                        Lab 0: PyTorch Primer
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/01_spike_sorting.html">
+                        Lab 1: Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/02_calcium_imaging.html">
+                        Lab 2: Calcium Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/03_pose_tracking.html">
+                        Lab 3: Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/04_glms.html">
+                        Lab 4: Generalized Linear Models
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/05_decoding.html">
+                        Lab 5: Bayesian Decoding
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/06_arhmm.html">
+                        Lab 6: Autoregressive HMMs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="02_probabilistic_modeling.html">
+                        Probabilistic Modeling
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="03_neurobio.html">
+                        Basic Neurobiology
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="04_simple_spike_sorting.html">
+                        Simple Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="05_deconv_spike_sorting.html">
+                        Spike Sorting by Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="06_calcium_imaging.html">
+                        Demixing Calcium Imaging Data
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="07_pose_tracking.html">
+                        Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="08_summary_stats.html">
+                        Summary Statistics
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="09_glm.html">
+                        Generalized Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Poisson Processes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="11_decoding.html">
+                        Decoding Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="12_mixtures_em.html">
+                        Mixture Models and the EM Algorithm
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="99_references.html">
+                        References
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+  
+
+
+<a class="navbar-brand logo" href="../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+    <p class="title logo__title">Machine Learning Methods for Neural Data Analysis</p>
+  
+</a>
+    </div>
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -110,455 +554,241 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Labs
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Labs</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/00_pytorch_primer.html">
-   Lab 0: PyTorch Primer
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/01_spike_sorting.html">
-   Lab 1: Spike Sorting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/02_calcium_imaging.html">
-   Lab 2: Calcium Deconvolution
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/03_pose_tracking.html">
-   Lab 3: Markerless Pose Tracking
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/04_glms.html">
-   Lab 4: Generalized Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/05_decoding.html">
-   Lab 5: Bayesian Decoding
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/06_arhmm.html">
-   Lab 6: Autoregressive HMMs
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/00_pytorch_primer.html">Lab 0: PyTorch Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/01_spike_sorting.html">Lab 1: Spike Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/02_calcium_imaging.html">Lab 2: Calcium Deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/03_pose_tracking.html">Lab 3: Markerless Pose Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/04_glms.html">Lab 4: Generalized Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/05_decoding.html">Lab 5: Bayesian Decoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/06_arhmm.html">Lab 6: Autoregressive HMMs</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Foundations
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="02_probabilistic_modeling.html">
-   Probabilistic Modeling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_neurobio.html">
-   Basic Neurobiology
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="02_probabilistic_modeling.html">Probabilistic Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_neurobio.html">Basic Neurobiology</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unit I: Signal Extraction
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unit I: Signal Extraction</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="04_simple_spike_sorting.html">
-   Simple Spike Sorting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_deconv_spike_sorting.html">
-   Spike Sorting by Deconvolution
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_calcium_imaging.html">
-   Demixing Calcium Imaging Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07_pose_tracking.html">
-   Markerless Pose Tracking
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="04_simple_spike_sorting.html">Simple Spike Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_deconv_spike_sorting.html">Spike Sorting by Deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_calcium_imaging.html">Demixing Calcium Imaging Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_pose_tracking.html">Markerless Pose Tracking</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unit II: Encoding &amp; Decoding
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unit II: Encoding &amp; Decoding</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="08_summary_stats.html">
-   Summary Statistics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_glm.html">
-   Generalized Linear Models
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Poisson Processes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_decoding.html">
-   Decoding Models
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="08_summary_stats.html">Summary Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_glm.html">Generalized Linear Models</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Poisson Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_decoding.html">Decoding Models</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unit III: Unsupervised Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unit III: Unsupervised Learning</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="12_mixtures_em.html">
-   Mixture Models and the EM Algorithm
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="12_mixtures_em.html">Mixture Models and the EM Algorithm</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  References
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="99_references.html">
-   References
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="99_references.html">References</a></li>
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
+</nav>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
+  </div>
+  
 
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
 
-          
+  
+  <div id="rtd-footer-container"></div>
 
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
+      </div>
+      <main id="main-content" class="bd-main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
 
 
 
 <div class="col py-1 d-flex header-article-main">
     <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
+        <label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" data-toggle="tooltip" data-placement="right" title="Toggle primary sidebar">
+            <span class="fa-solid fa-bars"></span>
+        </label>
     </div>
     <div class="header-article__right">
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
+  class="btn btn-sm"
   data-toggle="tooltip"
 data-placement="bottom"
 title="Fullscreen mode"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/lectures/10_poisson_processes.ipynb"
-   class="headerbtn"
+  <ul class="dropdown-menu">
+      <li><a href="../_sources/lectures/10_poisson_processes.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
 title="Download source file"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
-
-      </li>
+</a>
       
       <li>
-        
 <button onclick="printPdf(this)"
-  class="headerbtn"
+  class="btn btn-sm dropdown-item"
   data-toggle="tooltip"
 data-placement="left"
 title="Print to PDF"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file-pdf"></i>
   </span>
-<span class="headerbtn__text-container">.pdf</span>
+<span class="btn__text-container">.pdf</span>
 </button>
-
-      </li>
+</a>
       
-    </ul>
-  </div>
+  </ul>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary" data-toggle="tooltip" data-placement="left" title="Toggle secondary sidebar">
+            <span class="fa-solid fa-list"></span>
+        </label>
     </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#definition">
-   Definition
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sampling-a-poisson-process">
-   Sampling a Poisson process
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interval-distribution">
-   Interval distribution
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#poisson-process-likelihood">
-   Poisson process likelihood
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#maximum-likelihood-estimation">
-   Maximum likelihood estimation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#limit-of-the-discrete-time-model">
-   Limit of the discrete-time model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#renewal-processes">
-   Renewal processes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conditional-intensity-functions">
-   Conditional intensity functions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#hawkes-processes">
-   Hawkes processes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#multivariate-hawkes-processes">
-   Multivariate Hawkes processes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#maximum-likelihood-estimation-for-hawkes-processes">
-   Maximum likelihood estimation for Hawkes processes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#poisson-superposition-and-thinning">
-   Poisson superposition and thinning
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#hawkes-processes-as-cascades-of-poisson-processes">
-   Hawkes processes as cascades of Poisson processes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#nonlinear-hawkes-processes">
-   Nonlinear Hawkes processes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conclusion">
-   Conclusion
-  </a>
- </li>
-</ul>
-
-    </nav>
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Poisson Processes</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#definition">
-   Definition
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sampling-a-poisson-process">
-   Sampling a Poisson process
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interval-distribution">
-   Interval distribution
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#poisson-process-likelihood">
-   Poisson process likelihood
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#maximum-likelihood-estimation">
-   Maximum likelihood estimation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#limit-of-the-discrete-time-model">
-   Limit of the discrete-time model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#renewal-processes">
-   Renewal processes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conditional-intensity-functions">
-   Conditional intensity functions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#hawkes-processes">
-   Hawkes processes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#multivariate-hawkes-processes">
-   Multivariate Hawkes processes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#maximum-likelihood-estimation-for-hawkes-processes">
-   Maximum likelihood estimation for Hawkes processes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#poisson-superposition-and-thinning">
-   Poisson superposition and thinning
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#hawkes-processes-as-cascades-of-poisson-processes">
-   Hawkes processes as cascades of Poisson processes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#nonlinear-hawkes-processes">
-   Nonlinear Hawkes processes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conclusion">
-   Conclusion
-  </a>
- </li>
-</ul>
-
-                        </nav>
-                    </div>
-                </div>
             </div>
-            <main id="main-content" role="main">
-                
-              <div>
-                
+            
+            
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Poisson Processes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   Definition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-a-poisson-process">
+   Sampling a Poisson process
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interval-distribution">
+   Interval distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#poisson-process-likelihood">
+   Poisson process likelihood
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-likelihood-estimation">
+   Maximum likelihood estimation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#limit-of-the-discrete-time-model">
+   Limit of the discrete-time model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#renewal-processes">
+   Renewal processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conditional-intensity-functions">
+   Conditional intensity functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hawkes-processes">
+   Hawkes processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multivariate-hawkes-processes">
+   Multivariate Hawkes processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-likelihood-estimation-for-hawkes-processes">
+   Maximum likelihood estimation for Hawkes processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#poisson-superposition-and-thinning">
+   Poisson superposition and thinning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hawkes-processes-as-cascades-of-poisson-processes">
+   Hawkes processes as cascades of Poisson processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nonlinear-hawkes-processes">
+   Nonlinear Hawkes processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+            <article class="bd-article" role="main">
+              
   <section class="tex2jax_ignore mathjax_ignore" id="poisson-processes">
-<h1>Poisson Processes<a class="headerlink" href="#poisson-processes" title="Permalink to this headline">#</a></h1>
+<h1>Poisson Processes<a class="headerlink" href="#poisson-processes" title="Permalink to this heading">#</a></h1>
 <p>The preceding chapter discussed Poisson GLMs for neural spike counts. Changing notation slightly, we had,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -567,11 +797,11 @@ y_{i} \sim \mathrm{Po}(\lambda_i \Delta )
 <p>where <span class="math notranslate nohighlight">\(y_i \in \mathbb{N}_0\)</span> denotes the number of spikes in the <span class="math notranslate nohighlight">\(i\)</span>-th time bin, <span class="math notranslate nohighlight">\(\lambda_i \in \mathbb{R}_+\)</span> is the firing rate (in spikes/second), and <span class="math notranslate nohighlight">\(\Delta \in \mathbb{R}_+\)</span> is the bin width (in seconds).</p>
 <p>What happens if we take the bin width to zero? Then all but a finite number of bins will have zero counts, and we can instead represent the data as an unordered set of <strong>spike times</strong> <span class="math notranslate nohighlight">\(\{t_n\}_{n=1}^N \subset [0, T)\)</span>. Instead of a vector of Poisson-distributed spike counts, we can model the spike times as a realization of a <strong>Poisson process</strong>.</p>
 <section id="definition">
-<h2>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
+<h2>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h2>
 <p>A Poisson process is a <strong>stochastic process</strong> that generates sets of points, like the set of spike times above. It is defined by an intensity function or <strong>firing rate</strong>, <span class="math notranslate nohighlight">\(\lambda(t): [0, T) \mapsto \mathbb{R}_+\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(N(\mathcal{A}) = |\{n: t_n \in \mathcal{A}\}|\)</span> denote the number of points in the set <span class="math notranslate nohighlight">\(\mathcal{A} \subseteq [0,T)\)</span>. For example, an interval <span class="math notranslate nohighlight">\(\mathcal{A} = [a_0, a_1)\)</span>. Let <span class="math notranslate nohighlight">\(N(t)\)</span> be shorthand for <span class="math notranslate nohighlight">\(N([0,t))\)</span> that denotes the <strong>counting function</strong>, which specifies the number of points up to time <span class="math notranslate nohighlight">\(t\)</span>. Assume <span class="math notranslate nohighlight">\(N(0) = 0\)</span>.</p>
 <p>A Poisson process has two defining properties:</p>
-<ol>
+<ol class="arabic">
 <li><p>The number of points in an interval is <strong>Poisson distributed</strong> with expectation given by the integrated intensity function,</p>
 <div class="math notranslate nohighlight">
 \[N(\mathcal{A}) \sim \mathrm{Po}\left( \int_{\mathcal{A}} \lambda(t) \, \mathrm{d}t\right).\]</div>
@@ -585,7 +815,7 @@ y_{i} \sim \mathrm{Po}(\lambda_i \Delta )
 <p>A <strong>homogeneous</strong> Poisson process has a constant intensity function, <span class="math notranslate nohighlight">\(\lambda(t) \equiv \lambda\)</span>. Otherwise, the process is called <strong>inhomogeneous</strong>.</p>
 </section>
 <section id="sampling-a-poisson-process">
-<h2>Sampling a Poisson process<a class="headerlink" href="#sampling-a-poisson-process" title="Permalink to this headline">#</a></h2>
+<h2>Sampling a Poisson process<a class="headerlink" href="#sampling-a-poisson-process" title="Permalink to this heading">#</a></h2>
 <p>The two properties above imply a method for sampling a Poisson process. First, sample the total number of points from its Poisson distribution,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -599,7 +829,7 @@ t_n \overset{\text{iid}}{\sim} \frac{\lambda(t)}{\int_0^T \lambda(t) \, \mathrm{
 <p>to obtain the unordered set <span class="math notranslate nohighlight">\(\{t_n\}_{n=1}^N\)</span>.</p>
 </section>
 <section id="interval-distribution">
-<h2>Interval distribution<a class="headerlink" href="#interval-distribution" title="Permalink to this headline">#</a></h2>
+<h2>Interval distribution<a class="headerlink" href="#interval-distribution" title="Permalink to this heading">#</a></h2>
 <p>For a homogeneous Poisson process, the expected number of points is <span class="math notranslate nohighlight">\(\mathbb{E}[N] = \lambda T\)</span>, and the locations are independently sampled according to a uniform distribution over <span class="math notranslate nohighlight">\([0, T)\)</span>.  The <strong>intervals</strong> between points, <span class="math notranslate nohighlight">\(\delta_n = t_{(n)} - t_{(n-1)}\)</span>, where <span class="math notranslate nohighlight">\(t_{(n)}\)</span> is the <span class="math notranslate nohighlight">\(n\)</span>-th spike time in the <em>ordered</em> set, are <strong>exponential random variables</strong>,</p>
 <div class="math notranslate nohighlight">
 \[\delta_{n} \overset{\text{iid}}{\sim} \mathrm{Exp}(\lambda).\]</div>
@@ -616,7 +846,7 @@ t_n \overset{\text{iid}}{\sim} \frac{\lambda(t)}{\int_0^T \lambda(t) \, \mathrm{
 </div>
 </section>
 <section id="poisson-process-likelihood">
-<h2>Poisson process likelihood<a class="headerlink" href="#poisson-process-likelihood" title="Permalink to this headline">#</a></h2>
+<h2>Poisson process likelihood<a class="headerlink" href="#poisson-process-likelihood" title="Permalink to this heading">#</a></h2>
 <p>From the two-step sampling procedure above, we can derive the likelihood of a set of points under a Poisson process,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -653,7 +883,7 @@ p(\{t_n\}_{n=1}^N; \lambda)
 </div>
 </section>
 <section id="maximum-likelihood-estimation">
-<h2>Maximum likelihood estimation<a class="headerlink" href="#maximum-likelihood-estimation" title="Permalink to this headline">#</a></h2>
+<h2>Maximum likelihood estimation<a class="headerlink" href="#maximum-likelihood-estimation" title="Permalink to this heading">#</a></h2>
 <p>In practice, we often want to estimate the intensity function from data. For example, we may assume the intensity function has a parametric form, <span class="math notranslate nohighlight">\(\lambda(t; \theta)\)</span>, with parameters <span class="math notranslate nohighlight">\(\theta\)</span>. We could estimate the parameters by maximum likelihood estimation, using the Poisson process likelihood above. Note that the likelihood is a concave function of <span class="math notranslate nohighlight">\(\lambda\)</span>, making it amenable to optimization.</p>
 <p>The challenge is the integrated intensity in the exponent. For many models, there is no closed-form solution for the integral. For temporal point processes like the ones considered in this chapter, this is simply a one-dimensional integral. We can approximate it using numerical quadrature rules, as long as we can evaluate <span class="math notranslate nohighlight">\(\lambda(t; \theta)\)</span> for any <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>Some classes of models do afford closed-form integration. For example, consider a model of the intensity as a weighted sum of basis functions,</p>
@@ -676,7 +906,7 @@ p(\{t_n\}_{n=1}^N; \lambda)
 <p>we obtain a piecewise-constant model for the intensity function. This brings us back to the discrete-time model for spike counts from the last chapter.</p>
 </section>
 <section id="limit-of-the-discrete-time-model">
-<h2>Limit of the discrete-time model<a class="headerlink" href="#limit-of-the-discrete-time-model" title="Permalink to this headline">#</a></h2>
+<h2>Limit of the discrete-time model<a class="headerlink" href="#limit-of-the-discrete-time-model" title="Permalink to this heading">#</a></h2>
 <p>We can arrive at a Poisson process by taking a limit of the discrete-time model for spike counts. Intuitively, think of discrete time model as a Poisson process with <strong>piecewise constant intensity</strong>,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -744,7 +974,7 @@ p(\{t_n\}_{n=1}^N; \lambda)
 </div>
 </section>
 <section id="renewal-processes">
-<h2>Renewal processes<a class="headerlink" href="#renewal-processes" title="Permalink to this headline">#</a></h2>
+<h2>Renewal processes<a class="headerlink" href="#renewal-processes" title="Permalink to this heading">#</a></h2>
 <p>Let’s return to the interval distribution above. As we saw, under a Poisson process the intervals are exponentially distributed. This isn’t a very realistic model for neural spike trains because neurons have refractory periods.</p>
 <p><strong>Renewal processes</strong> are a more general class of models that explicitly model the interval distribution. Again, let <span class="math notranslate nohighlight">\(\{\delta_n\}_{n=1}^N\)</span> denote the intervals between the points <span class="math notranslate nohighlight">\(\{t_n\}_{n=1}^N\)</span>. In a renewal process,</p>
 <div class="math notranslate nohighlight">
@@ -759,7 +989,7 @@ p(\{t_n\}_{n=1}^N; \lambda)
 </div>
 </section>
 <section id="conditional-intensity-functions">
-<h2>Conditional intensity functions<a class="headerlink" href="#conditional-intensity-functions" title="Permalink to this headline">#</a></h2>
+<h2>Conditional intensity functions<a class="headerlink" href="#conditional-intensity-functions" title="Permalink to this heading">#</a></h2>
 <p>So far we have treated the intensity as simply a function of time. Of course, the intensity could also be modeled as a function of external stimuli or covariates, <span class="math notranslate nohighlight">\(\mathbf{x}(t)\)</span>. For example, the stimulus could be incorporated into the basis function model described above.</p>
 <p>To incorporate direct interactions between the points themselves, we need to generalize our model via a <strong>conditional intensity function</strong>,</p>
 <div class="math notranslate nohighlight">
@@ -770,7 +1000,7 @@ p(\{t_n\}_{n=1}^N; \lambda)
 <p>Given the history, the process behaves like a Poisson process. However, as soon as a new point occurs, the intensity function changes to account for it. Intuitively, this allows us to construct continuous time analogs of discrete time autoregressive models.</p>
 </section>
 <section id="hawkes-processes">
-<h2>Hawkes processes<a class="headerlink" href="#hawkes-processes" title="Permalink to this headline">#</a></h2>
+<h2>Hawkes processes<a class="headerlink" href="#hawkes-processes" title="Permalink to this heading">#</a></h2>
 <p>Perhaps the canonical example of a point process with conditional dependencies is the Hawkes process <span id="id1">[<a class="reference internal" href="99_references.html#id76" title="Alan G Hawkes. Spectra of some self-exciting and mutually exciting point processes. Biometrika, 58(1):83–90, 1971.">Hawkes, 1971</a>]</span>. It is defined by its conditional intensity function,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -790,7 +1020,7 @@ f(s) = \mathrm{Exp}(s; \tau^{-1}) = \tau^{-1} e^{-s / \tau}.
 <p>When <span class="math notranslate nohighlight">\(w=0\)</span>, we recover the standard Poisson process with rate <span class="math notranslate nohighlight">\(\lambda_0\)</span>, but as <span class="math notranslate nohighlight">\(w\)</span> increases the self-excitation produces bursts of spikes and a larger stationary rate.</p>
 </section>
 <section id="multivariate-hawkes-processes">
-<h2>Multivariate Hawkes processes<a class="headerlink" href="#multivariate-hawkes-processes" title="Permalink to this headline">#</a></h2>
+<h2>Multivariate Hawkes processes<a class="headerlink" href="#multivariate-hawkes-processes" title="Permalink to this heading">#</a></h2>
 <p>Now let’s generalize the Hawkes process to multiple interacting point processes. Let <span class="math notranslate nohighlight">\(M\)</span> denote the number of processes — e.g., the number of neurons in a multi-neuronal spike train recording — and let <span class="math notranslate nohighlight">\(\lambda_m(t \mid \mathcal{H}_t)\)</span> denote the conditional intensity function for the <span class="math notranslate nohighlight">\(m\)</span>-th process. Let <span class="math notranslate nohighlight">\(\mathcal{H}_{t,m}\)</span> denote the history of events on process <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(\mathcal{H}_t = \{\mathcal{H}_{t,m}\}_{m=1}^M\)</span> denote the combined history of all processes.</p>
 <p>The multivariate Hawkes process has conditional intensities,</p>
 <div class="math notranslate nohighlight">
@@ -809,7 +1039,7 @@ f(s) = \mathrm{Exp}(s; \tau^{-1}) = \tau^{-1} e^{-s / \tau}.
 </div>
 </section>
 <section id="maximum-likelihood-estimation-for-hawkes-processes">
-<h2>Maximum likelihood estimation for Hawkes processes<a class="headerlink" href="#maximum-likelihood-estimation-for-hawkes-processes" title="Permalink to this headline">#</a></h2>
+<h2>Maximum likelihood estimation for Hawkes processes<a class="headerlink" href="#maximum-likelihood-estimation-for-hawkes-processes" title="Permalink to this heading">#</a></h2>
 <p>The likelhood of a Hawkes process is the same as that of a Poisson process, but with the conditional intensity instead. Consider the univariate case (the multivariate Hawkes process follows the same form),</p>
 <div class="math notranslate nohighlight">
 \[
@@ -839,7 +1069,7 @@ p(\{t_n\}_{n=1}^N; \theta) &amp;=
 <p>Maximum likelihood estimation boils down to a convex optimization problem: minize the negative log likelihood, which is convex and easy to evaluate, subject to nonnegativity constraints. This problem is straightforward to solve with CVXPy, for example.</p>
 </section>
 <section id="poisson-superposition-and-thinning">
-<h2>Poisson superposition and thinning<a class="headerlink" href="#poisson-superposition-and-thinning" title="Permalink to this headline">#</a></h2>
+<h2>Poisson superposition and thinning<a class="headerlink" href="#poisson-superposition-and-thinning" title="Permalink to this heading">#</a></h2>
 <p>Just like the sum of independent Poisson random variables, the <strong>superposition</strong> of two independent Poisson proesses is another Poisson process. If,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -873,9 +1103,9 @@ z_n \sim \mathrm{Bern}\left( \frac{\lambda_1(t_n)}{\lambda_0(t_n) + \lambda_1(t_
 \end{split}\]</div>
 </section>
 <section id="hawkes-processes-as-cascades-of-poisson-processes">
-<h2>Hawkes processes as cascades of Poisson processes<a class="headerlink" href="#hawkes-processes-as-cascades-of-poisson-processes" title="Permalink to this headline">#</a></h2>
+<h2>Hawkes processes as cascades of Poisson processes<a class="headerlink" href="#hawkes-processes-as-cascades-of-poisson-processes" title="Permalink to this heading">#</a></h2>
 <p>We can use Poisson superposition and thinning to reinterpret the Hawkes process as a cascade of Poisson processes. Note that the conditional intensity of a Hawkes process is the sum of non-negative intensity functions: a homogeneous background rate plus weighted impulse responses. An equivalent way to sample the Hawkes process is to sample points from independent Poisson processes for each term in the intensity function.</p>
-<ol>
+<ol class="arabic">
 <li><p>First, sample points from the background process,</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{T}_0 = \{t_{0}\}_{n=1}^{N_0} \sim \mathrm{PP}(\lambda_0)\]</div>
@@ -892,7 +1122,7 @@ z_n \sim \mathrm{Bern}\left( \frac{\lambda_1(t_n)}{\lambda_0(t_n) + \lambda_1(t_
 <p>Finally, we can use this perspective to formulate the Hawkes process as a latent variable model. Each point has a latent <strong>parent</strong> — either the background or a preceding poitn &amp;mdash. If we knew the parents, the Hawkes process would decompose into independent Poisson processes. We can leverage this formulation to do efficient Bayesian inference in Hawkes processes <span id="id2">[<a class="reference internal" href="99_references.html#id77" title="Scott Linderman and Ryan Adams. Discovering latent network structure in point process data. In International conference on machine learning, 1413–1421. PMLR, 2014.">Linderman and Adams, 2014</a>]</span>.</p>
 </section>
 <section id="nonlinear-hawkes-processes">
-<h2>Nonlinear Hawkes processes<a class="headerlink" href="#nonlinear-hawkes-processes" title="Permalink to this headline">#</a></h2>
+<h2>Nonlinear Hawkes processes<a class="headerlink" href="#nonlinear-hawkes-processes" title="Permalink to this heading">#</a></h2>
 <p>A limitation of Hawkes processes is that they are <strong>purely excitatory</strong>. If the weights were negative, the intensity function could be negative as well, and that would be an invalid point process.</p>
 <p>One way around this is via <strong>nonlinear Hawkes processes</strong>, where the intensity function is,</p>
 <div class="math notranslate nohighlight">
@@ -907,7 +1137,7 @@ z_n \sim \mathrm{Bern}\left( \frac{\lambda_1(t_n)}{\lambda_0(t_n) + \lambda_1(t_
 <p>Still, we can approximate the log likelihood with numerical quadrature methods, and in some cases we can use fancy augmentation schemes to perform Bayesian inference <span id="id3">[<a class="reference internal" href="99_references.html#id78" title="Feng Zhou, Zhidong Li, Xuhui Fan, Yang Wang, Arcot Sowmya, and Fang Chen. Scalable inference for nonparametric Hawkes process using Pó$ lya-gamma augmentation. arXiv preprint arXiv:1910.13052, 2019.">Zhou <em>et al.</em>, 2019</a>]</span>.</p>
 </section>
 <section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Point processes are stochastic processes that produce discrete sets of points.  They are fundamental tools for modeling neural spike trains, where the points are spike times.</p></li>
 <li><p>The Poisson process is the fundamental point process from which more complex models are constructed.</p></li>
@@ -940,50 +1170,175 @@ z_n \sim \mathrm{Bern}\left( \frac{\lambda_1(t_n)}{\lambda_0(t_n) + \lambda_1(t_
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
-              
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
+            </article>
+            
+
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="09_glm.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Generalized Linear Models</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="11_decoding.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Decoding Models</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
+  <a class='left-prev' id="prev-link" href="09_glm.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Generalized Linear Models</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="11_decoding.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Decoding Models</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
 </div>
             </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
   
-    By Scott Linderman<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   Definition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-a-poisson-process">
+   Sampling a Poisson process
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interval-distribution">
+   Interval distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#poisson-process-likelihood">
+   Poisson process likelihood
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-likelihood-estimation">
+   Maximum likelihood estimation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#limit-of-the-discrete-time-model">
+   Limit of the discrete-time model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#renewal-processes">
+   Renewal processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conditional-intensity-functions">
+   Conditional intensity functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hawkes-processes">
+   Hawkes processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multivariate-hawkes-processes">
+   Multivariate Hawkes processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-likelihood-estimation-for-hawkes-processes">
+   Maximum likelihood estimation for Hawkes processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#poisson-superposition-and-thinning">
+   Poisson superposition and thinning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hawkes-processes-as-cascades-of-poisson-processes">
+   Hawkes processes as cascades of Poisson processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nonlinear-hawkes-processes">
+   Nonlinear Hawkes processes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+</nav>
 </div>
 
-
-      </div>
-    </div>
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+<div class="bd-footer-content__inner container">
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Scott Linderman
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2022.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+Last updated on None.<br>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </div>
+        </footer>
+        
+
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
 
   </body>
 </html>

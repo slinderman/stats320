@@ -63,7 +63,7 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 | Wed, Feb 22 | Lecture 13 | [Mixture Models, EM](lectures/12_mixtures_em.ipynb) and Hidden Markov models (HMMs)  {Download}`[slides]<lectures/pdf/11_hmms.pdf>`
 | Fri, Feb 24 | Lab 6      | MoSeq from scratch
 | Mon, Feb 27 | Lecture 14 | More HMMs {Download}`[slides]<lectures/pdf/12_hmm_continued.pdf>` <br> **Final project proposal due**
-| Wed, Mar 1  | Lecture 15 | Switching linear dynamical systems (SLDS)
+| Wed, Mar 1  | Lecture 15 | Switching linear dynamical systems (SLDS) {Download}`[slides]<lectures/pdf/13_slds.pdf>`
 | Fri, Mar 3  | Lab 7 (not graded) | SLDS from scratch
 | Mon, Mar 6  | Lecture 16 | Variational Autoencoders (VAEs)
 | Wed, Mar 8  | Lecture 17 | Sequential VAEs

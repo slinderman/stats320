@@ -1,48 +1,56 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Markerless Pose Tracking &#8212; Machine Learning Methods for Neural Data Analysis</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=4ec06e9971c5264fbd345897d5258098f11cc577" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=8bf782fb4ee92b3d3646425e50f299c4e1fd152d"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,56 +60,492 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/07_pose_tracking';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Summary Statistics" href="08_summary_stats.html" />
     <link rel="prev" title="Demixing Calcium Imaging Data" href="06_calcium_imaging.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
 
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
     
-    <div class="container-fluid" id="banner"></div>
-
     
+  
 
-    <div class="container-xl">
-      <div class="row">
+
+<a class="navbar-brand logo" href="../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+    <p class="title logo__title">Machine Learning Methods for Neural Data Analysis</p>
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/00_pytorch_primer.html">
+                        Lab 0: PyTorch Primer
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/01_spike_sorting.html">
+                        Lab 1: Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/02_calcium_imaging.html">
+                        Lab 2: Calcium Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/03_pose_tracking.html">
+                        Lab 3: Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/04_glms.html">
+                        Lab 4: Generalized Linear Models
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/05_decoding.html">
+                        Lab 5: Bayesian Decoding
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/06_arhmm.html">
+                        Lab 6: Autoregressive HMMs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="02_probabilistic_modeling.html">
+                        Probabilistic Modeling
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="03_neurobio.html">
+                        Basic Neurobiology
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="04_simple_spike_sorting.html">
+                        Simple Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="05_deconv_spike_sorting.html">
+                        Spike Sorting by Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="06_calcium_imaging.html">
+                        Demixing Calcium Imaging Data
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="08_summary_stats.html">
+                        Summary Statistics
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="09_glm.html">
+                        Generalized Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="10_poisson_processes.html">
+                        Poisson Processes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="11_decoding.html">
+                        Decoding Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="12_mixtures_em.html">
+                        Mixture Models and the EM Algorithm
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="99_references.html">
+                        References
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
       
       
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
       
-      <h1 class="site-logo" id="site-title">Machine Learning Methods for Neural Data Analysis</h1>
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
       
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/00_pytorch_primer.html">
+                        Lab 0: PyTorch Primer
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/01_spike_sorting.html">
+                        Lab 1: Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/02_calcium_imaging.html">
+                        Lab 2: Calcium Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/03_pose_tracking.html">
+                        Lab 3: Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/04_glms.html">
+                        Lab 4: Generalized Linear Models
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/05_decoding.html">
+                        Lab 5: Bayesian Decoding
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/06_arhmm.html">
+                        Lab 6: Autoregressive HMMs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="02_probabilistic_modeling.html">
+                        Probabilistic Modeling
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="03_neurobio.html">
+                        Basic Neurobiology
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="04_simple_spike_sorting.html">
+                        Simple Spike Sorting
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="05_deconv_spike_sorting.html">
+                        Spike Sorting by Deconvolution
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="06_calcium_imaging.html">
+                        Demixing Calcium Imaging Data
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        Markerless Pose Tracking
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="08_summary_stats.html">
+                        Summary Statistics
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="09_glm.html">
+                        Generalized Linear Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="10_poisson_processes.html">
+                        Poisson Processes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="11_decoding.html">
+                        Decoding Models
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="12_mixtures_em.html">
+                        Mixture Models and the EM Algorithm
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="99_references.html">
+                        References
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item">
+  
+
+
+<a class="navbar-brand logo" href="../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+    <p class="title logo__title">Machine Learning Methods for Neural Data Analysis</p>
+  
+</a>
+    </div>
+    <div class="sidebar-start-items__item">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -110,546 +554,301 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Labs
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Labs</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/00_pytorch_primer.html">
-   Lab 0: PyTorch Primer
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/01_spike_sorting.html">
-   Lab 1: Spike Sorting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/02_calcium_imaging.html">
-   Lab 2: Calcium Deconvolution
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/03_pose_tracking.html">
-   Lab 3: Markerless Pose Tracking
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/04_glms.html">
-   Lab 4: Generalized Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/05_decoding.html">
-   Lab 5: Bayesian Decoding
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/06_arhmm.html">
-   Lab 6: Autoregressive HMMs
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/00_pytorch_primer.html">Lab 0: PyTorch Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/01_spike_sorting.html">Lab 1: Spike Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/02_calcium_imaging.html">Lab 2: Calcium Deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/03_pose_tracking.html">Lab 3: Markerless Pose Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/04_glms.html">Lab 4: Generalized Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/05_decoding.html">Lab 5: Bayesian Decoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/06_arhmm.html">Lab 6: Autoregressive HMMs</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Foundations
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="02_probabilistic_modeling.html">
-   Probabilistic Modeling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_neurobio.html">
-   Basic Neurobiology
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="02_probabilistic_modeling.html">Probabilistic Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_neurobio.html">Basic Neurobiology</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unit I: Signal Extraction
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unit I: Signal Extraction</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="04_simple_spike_sorting.html">
-   Simple Spike Sorting
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_deconv_spike_sorting.html">
-   Spike Sorting by Deconvolution
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_calcium_imaging.html">
-   Demixing Calcium Imaging Data
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Markerless Pose Tracking
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="04_simple_spike_sorting.html">Simple Spike Sorting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_deconv_spike_sorting.html">Spike Sorting by Deconvolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_calcium_imaging.html">Demixing Calcium Imaging Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Markerless Pose Tracking</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unit II: Encoding &amp; Decoding
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unit II: Encoding &amp; Decoding</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="08_summary_stats.html">
-   Summary Statistics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_glm.html">
-   Generalized Linear Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10_poisson_processes.html">
-   Poisson Processes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_decoding.html">
-   Decoding Models
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="08_summary_stats.html">Summary Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_glm.html">Generalized Linear Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_poisson_processes.html">Poisson Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_decoding.html">Decoding Models</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Unit III: Unsupervised Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Unit III: Unsupervised Learning</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="12_mixtures_em.html">
-   Mixture Models and the EM Algorithm
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="12_mixtures_em.html">Mixture Models and the EM Algorithm</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  References
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="99_references.html">
-   References
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="99_references.html">References</a></li>
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
+</nav>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
+  </div>
+  
 
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
 
-          
+  
+  <div id="rtd-footer-container"></div>
 
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
+      </div>
+      <main id="main-content" class="bd-main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
 
 
 
 <div class="col py-1 d-flex header-article-main">
     <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
+        <label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" data-toggle="tooltip" data-placement="right" title="Toggle primary sidebar">
+            <span class="fa-solid fa-bars"></span>
+        </label>
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://colab.research.google.com/github/slinderman/stats320/blob/winter2023/lectures/07_pose_tracking.ipynb"
-   class="headerbtn"
+  <ul class="dropdown-menu">
+      <li><a href="https://colab.research.google.com/github/slinderman/stats320/blob/winter2023/lectures/07_pose_tracking.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
 title="Launch on Colab"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Colab</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</a>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
+  class="btn btn-sm"
   data-toggle="tooltip"
 data-placement="bottom"
 title="Fullscreen mode"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/lectures/07_pose_tracking.ipynb"
-   class="headerbtn"
+  <ul class="dropdown-menu">
+      <li><a href="../_sources/lectures/07_pose_tracking.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
    data-toggle="tooltip"
 data-placement="left"
 title="Download source file"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
-
-      </li>
+</a>
       
       <li>
-        
 <button onclick="printPdf(this)"
-  class="headerbtn"
+  class="btn btn-sm dropdown-item"
   data-toggle="tooltip"
 data-placement="left"
 title="Print to PDF"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file-pdf"></i>
   </span>
-<span class="headerbtn__text-container">.pdf</span>
+<span class="btn__text-container">.pdf</span>
 </button>
-
-      </li>
+</a>
       
-    </ul>
-  </div>
+  </ul>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary" data-toggle="tooltip" data-placement="left" title="Toggle secondary sidebar">
+            <span class="fa-solid fa-list"></span>
+        </label>
     </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#supervised-learning">
-   Supervised learning
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#logistic-regression">
-   Logistic regression
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#optimization">
-   Optimization
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#setup">
-     Setup
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-gradient-with-respect-to-the-weights">
-     The gradient with respect to the weights
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-negative-log-likelihood-is-convex">
-     The negative log likelihood is convex
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gradient-descent">
-     Gradient descent
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#newton-s-method">
-     Newton’s method
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#iteratively-reweighted-least-squares-irls">
-     Iteratively reweighted least squares (IRLS)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#computational-complexity">
-     Computational complexity
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#scaling-up">
-     Scaling up
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pose-tracking-with-convolutional-neural-networks-cnns">
-   Pose tracking with convolutional neural networks (CNNs)
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convolutional-neural-networks">
-     Convolutional neural networks
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#working-with-minimal-labeled-data">
-     Working with minimal labeled data.
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-learning">
-     Transfer learning
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#structured-prediction">
-   Structured prediction
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#d-triangulation">
-     3D Triangulation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conclusion">
-   Conclusion
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#further-reading">
-     Further reading
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Markerless Pose Tracking</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#supervised-learning">
-   Supervised learning
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#logistic-regression">
-   Logistic regression
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#optimization">
-   Optimization
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#setup">
-     Setup
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-gradient-with-respect-to-the-weights">
-     The gradient with respect to the weights
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-negative-log-likelihood-is-convex">
-     The negative log likelihood is convex
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gradient-descent">
-     Gradient descent
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#newton-s-method">
-     Newton’s method
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#iteratively-reweighted-least-squares-irls">
-     Iteratively reweighted least squares (IRLS)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#computational-complexity">
-     Computational complexity
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#scaling-up">
-     Scaling up
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pose-tracking-with-convolutional-neural-networks-cnns">
-   Pose tracking with convolutional neural networks (CNNs)
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convolutional-neural-networks">
-     Convolutional neural networks
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#working-with-minimal-labeled-data">
-     Working with minimal labeled data.
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-learning">
-     Transfer learning
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#structured-prediction">
-   Structured prediction
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#d-triangulation">
-     3D Triangulation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#conclusion">
-   Conclusion
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#further-reading">
-     Further reading
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-                        </nav>
-                    </div>
-                </div>
             </div>
-            <main id="main-content" role="main">
-                
-              <div>
-                
+            
+            
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Markerless Pose Tracking</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#supervised-learning">
+   Supervised learning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logistic-regression">
+   Logistic regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimization">
+   Optimization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setup">
+     Setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-gradient-with-respect-to-the-weights">
+     The gradient with respect to the weights
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-negative-log-likelihood-is-convex">
+     The negative log likelihood is convex
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gradient-descent">
+     Gradient descent
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#newton-s-method">
+     Newton’s method
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iteratively-reweighted-least-squares-irls">
+     Iteratively reweighted least squares (IRLS)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computational-complexity">
+     Computational complexity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scaling-up">
+     Scaling up
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pose-tracking-with-convolutional-neural-networks-cnns">
+   Pose tracking with convolutional neural networks (CNNs)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convolutional-neural-networks">
+     Convolutional neural networks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#working-with-minimal-labeled-data">
+     Working with minimal labeled data.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-learning">
+     Transfer learning
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structured-prediction">
+   Structured prediction
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-triangulation">
+     3D Triangulation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#further-reading">
+     Further reading
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+            <article class="bd-article" role="main">
+              
   <section class="tex2jax_ignore mathjax_ignore" id="markerless-pose-tracking">
-<h1>Markerless Pose Tracking<a class="headerlink" href="#markerless-pose-tracking" title="Permalink to this headline">#</a></h1>
+<h1>Markerless Pose Tracking<a class="headerlink" href="#markerless-pose-tracking" title="Permalink to this heading">#</a></h1>
 <p>We’ve talked a lot about extracting neural signals from ephys and ophys measurements, but what comes next? One of the fundamental goals of systems neuroscience is to understand the relationship between neural activity and behavioral outputs. To that end, we need to quantify  and model not only neural activity but animals’ behavior as well.</p>
 <p>The study of natural behavior is called <strong>ethology</strong> <span id="id1">[<a class="reference internal" href="99_references.html#id31" title="N Tinbergen. On aims and methods of ethology. Z. Tierpsychol., 20(4):410–433, 1963.">Tinbergen, 1963</a>]</span>. With advances in deep learning, the field is undergoing a computational revival <span id="id2">[<a class="reference internal" href="99_references.html#id33" title="David J Anderson and Pietro Perona. Toward a science of computational ethology. Neuron, 84(1):18–31, October 2014.">Anderson and Perona, 2014</a>]</span>. The once tedious process of labeling video data to track body posture and annotate behaviors has been largely automated by machine learning methods, which are well-suited to the task <span id="id3">[<a class="reference internal" href="99_references.html#id38" title="Praneet C Bala, Benjamin R Eisenreich, Seng Bum Michael Yoo, Benjamin Y Hayden, Hyun Soo Park, and Jan Zimmermann. Automated markerless pose estimation in freely moving macaques with OpenMonkeyStudio. Nat. Commun., 11(1):4560, September 2020.">Bala <em>et al.</em>, 2020</a>, <a class="reference internal" href="99_references.html#id40" title="Kristin Branson, Alice A Robie, John Bender, Pietro Perona, and Michael H Dickinson. High-throughput ethomics in large groups of drosophila. Nat. Methods, 6(6):451–457, June 2009.">Branson <em>et al.</em>, 2009</a>, <a class="reference internal" href="99_references.html#id36" title="Jacob M Graving, Daniel Chae, Hemal Naik, Liang Li, Benjamin Koger, Blair R Costelloe, and Iain D Couzin. DeepPoseKit, a software toolkit for fast and robust animal pose estimation using deep learning. Elife, October 2019.">Graving <em>et al.</em>, 2019</a>, <a class="reference internal" href="99_references.html#id39" title="Ana S Machado, Dana M Darmohray, João Fayad, Hugo G Marques, and Megan R Carey. A quantitative framework for whole-body coordination reveals specific deficits in freely walking ataxic mice. Elife, October 2015.">Machado <em>et al.</em>, 2015</a>, <a class="reference internal" href="99_references.html#id34" title="Alexander Mathis, Pranav Mamidanna, Kevin M Cury, Taiga Abe, Venkatesh N Murthy, Mackenzie Weygandt Mathis, and Matthias Bethge. DeepLabCut: markerless pose estimation of user-defined body parts with deep learning. Nat. Neurosci., 21(9):1281–1289, August 2018.">Mathis <em>et al.</em>, 2018</a>, <a class="reference internal" href="99_references.html#id35" title="Talmo D Pereira, Nathaniel Tabris, Arie Matsliah, David M Turner, Junyu Li, Shruthi Ravindranath, Eleni S Papadoyannis, Edna Normand, David S Deutsch, Z Yan Wang, and others. SLEAP: A deep learning system for multi-animal pose tracking. Nature methods, 19(4):486–495, 2022.">Pereira <em>et al.</em>, 2022</a>, <a class="reference internal" href="99_references.html#id37" title="Anqi Wu, Estefany Kelly Buchanan, Matthew Whiteway, Michael Schartner, Guido Meijer, Jean-Paul Noel, Erica Rodriguez, Claire Everett, Amy Norovich, Evan Schaffer, and Others. Deep graph pose: a semi-supervised deep graphical model for improved animal pose tracking. Adv. Neural Inf. Process. Syst., 2020.">Wu <em>et al.</em>, 2020</a>]</span>. At the intersection of computational neuroscience and computational ethology is the (predictably named) emerging field of <strong>computational neuroethology</strong> <span id="id4">[<a class="reference internal" href="99_references.html#id32" title="Sandeep Robert Datta, David J Anderson, Kristin Branson, Pietro Perona, and Andrew Leifer. Computational neuroethology: a call to action. Neuron, 104(1):11–24, October 2019.">Datta <em>et al.</em>, 2019</a>]</span>.</p>
 <p>This chapter develops the basic methods underlying most markerless pose tracking systems.  There are a few key ideas. First, we can cast pose tracking — i.e. the task of labeling keypoints of interest in video frames, like an animals paws, snout, and tail, and tracking them over time — as a <strong>supervised learning</strong> problem. Given a few labeled frames, we can train a classifier to predict the keypoint locations in new frames.  Second, such classifiers require surprisingly few training examples, particularly when they are given features from networks that have been pre-trained on similar tasks. For example, deep neural networks trained for image classification on very large datasets like ImageNet may not immediately solve pose tracking problems, but the features they’ve learned for classifying cats and dogs may still be useful for tracking paws and snouts.  Using a neural network trained on one task to jump-start a model for a similar task is called <strong>transfer learning</strong>.</p>
 <p>We’ll start with a simple logistic regression model for pose tracking and show how it can be implemented with a convolutional neural network (CNN). Then we’ll show how the same ideas can be generalized to pre-trained CNNs for image classification, like very deep residual networks <span id="id5">[<a class="reference internal" href="99_references.html#id41" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition, 770–778. openaccess.thecvf.com, 2016.">He <em>et al.</em>, 2016</a>]</span>.</p>
 <section id="supervised-learning">
-<h2>Supervised learning<a class="headerlink" href="#supervised-learning" title="Permalink to this headline">#</a></h2>
+<h2>Supervised learning<a class="headerlink" href="#supervised-learning" title="Permalink to this heading">#</a></h2>
 <p>In supervised learning problems, our data consists of a set of tuples <span class="math notranslate nohighlight">\(\{(\mathbf{x}_n, y_n)\}_{n=1}^N\)</span> where <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span> are the <strong>inputs</strong> and <span class="math notranslate nohighlight">\(y_n\)</span> are the <strong>outputs</strong>. Contrast this with the spike sorting and calcium deconvolution problems, which we framed as unsupervised matrix factorization problems.</p>
 <p>A simple way to frame the pose tracking problem as a supervised learning problem is to chop each image frame into <strong>patches</strong> and then assign each patch a binary <strong>label</strong> to indicate whether or not the patch contains a specific key point (e.g. “left paw”). Then we can train a binary <strong>classifier</strong> to predict the labels given the image patches. Of course, we usually want to track multiple key points at once, and we could simply train separate classifiers for each one. Ideally, the trained classifiers will <strong>generalize</strong> to new image patches from new video frames, giving us predictions about which patches contain which keypoints. Then, in post-processing, we can determine the most likely configuration of key points in future frames, using the classifiers’ predictions.</p>
 <figure class="align-default" id="paw-track">
@@ -661,7 +860,7 @@ This figure was adapted from fig. 1B of <span id="id6">Machado <em>et al.</em> [
 </figure>
 </section>
 <section id="logistic-regression">
-<h2>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">#</a></h2>
+<h2>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{x}_n \in \mathbb{R}^P\)</span> be the <span class="math notranslate nohighlight">\(n\)</span>-th image patch, flattened into a vector of <span class="math notranslate nohighlight">\(P\)</span> pixels. Let <span class="math notranslate nohighlight">\(y_n \in \{0,1\}\)</span> be a binary label specifying whether the key point of interest is present in that frame.</p>
 <p>In <strong>logistic regression</strong>, we model the conditional distribution of the label given the image as,</p>
 <div class="math notranslate nohighlight">
@@ -700,6 +899,11 @@ p(y_n \mid \mathbf{x}_n) = \mathrm{Bern}\big( \sigma(\mathbf{w}^\top \mathbf{x}_
 <p>The derivative is positive (i.e., the logistic function is monotonically increasing) and attains its maximum at <span class="math notranslate nohighlight">\(\sigma'(0) = \tfrac{1}{4}\)</span>.</p>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -716,16 +920,21 @@ p(y_n \mid \mathbf{x}_n) = \mathrm{Bern}\big( \sigma(\mathbf{w}^\top \mathbf{x}_
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/07_pose_tracking_5_0.png" src="../_images/07_pose_tracking_5_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.9.16/x64/lib/python3.9/site-packages/tqdm/auto.py:22: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+</pre></div>
+</div>
+<img alt="../_images/49f98fbe7384ffd98d53bb0aa6b823c5c48f838ace8a8b328e7057a77917a38c.png" src="../_images/49f98fbe7384ffd98d53bb0aa6b823c5c48f838ace8a8b328e7057a77917a38c.png" />
 </div>
 </div>
 </section>
 <section id="optimization">
-<h2>Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">#</a></h2>
+<h2>Optimization<a class="headerlink" href="#optimization" title="Permalink to this heading">#</a></h2>
 <p>Our goal is to estimate the weights <span class="math notranslate nohighlight">\(\mathbf{w}_{\mathsf{MLE}}\)</span> that maximize the log likelihood of the training data, or equivalently minimize the negative log likelihood. Unlike most of the problems we’ve encountered thus far, we won’t have a closed form solution for the weights, even if we try to do coordinate ascent. Instead we’ll have to turn to more general optimization strategies like gradient descent and Newton’s method. This is a good opportunity to introduce a few of these tools and some of the key concepts.</p>
 <section id="setup">
-<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h3>
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h3>
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{X} \in \mathbb{R}^{N \times P}\)</span> denote the matrix of inputs (with rows <span class="math notranslate nohighlight">\(\mathbf{x}_n^\top\)</span>) and <span class="math notranslate nohighlight">\(\mathbf{y} = (y_1, \ldots, y_N) \in \{0,1\}^N\)</span> denote the vector of output labels. The <strong>negative</strong> log likelihood is,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -738,7 +947,7 @@ p(y_n \mid \mathbf{x}_n) = \mathrm{Bern}\big( \sigma(\mathbf{w}^\top \mathbf{x}_
 \end{split}\]</div>
 </section>
 <section id="the-gradient-with-respect-to-the-weights">
-<h3>The gradient with respect to the weights<a class="headerlink" href="#the-gradient-with-respect-to-the-weights" title="Permalink to this headline">#</a></h3>
+<h3>The gradient with respect to the weights<a class="headerlink" href="#the-gradient-with-respect-to-the-weights" title="Permalink to this heading">#</a></h3>
 <p>The gradient with respect to <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -751,7 +960,7 @@ p(y_n \mid \mathbf{x}_n) = \mathrm{Bern}\big( \sigma(\mathbf{w}^\top \mathbf{x}_
 <p>Unfortunately, this is a nonlinear function of <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> (due to the logistic function), and when we set to zero and try to solve for the weights, we find there is no closed-form solution.</p>
 </section>
 <section id="the-negative-log-likelihood-is-convex">
-<h3>The negative log likelihood is convex<a class="headerlink" href="#the-negative-log-likelihood-is-convex" title="Permalink to this headline">#</a></h3>
+<h3>The negative log likelihood is convex<a class="headerlink" href="#the-negative-log-likelihood-is-convex" title="Permalink to this heading">#</a></h3>
 <p>While there may not be a closed-form solution, the problem is not necessarily all that hard to solve. It turns out the negative log likelihood is a <strong>convex function</strong> of the weights — i.e., it looks like an upward facing bowl — so we can solve it with off-the-shelf optimization tools.</p>
 <p>To show that the objective function is convex, it suffices to show that it is twice-differentiable and its <a class="reference external" href="https://en.wikipedia.org/wiki/Hessian_matrix"><strong>Hessian</strong></a> (the matrix of second-order partial derivatives) is positive semi-definite (has eigenvalues <span class="math notranslate nohighlight">\(\geq 0\)</span>).</p>
 <p>The Hessian of the negative log likelihood is,</p>
@@ -770,7 +979,7 @@ p(y_n \mid \mathbf{x}_n) = \mathrm{Bern}\big( \sigma(\mathbf{w}^\top \mathbf{x}_
 </div>
 </section>
 <section id="gradient-descent">
-<h3>Gradient descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">#</a></h3>
+<h3>Gradient descent<a class="headerlink" href="#gradient-descent" title="Permalink to this heading">#</a></h3>
 <p>Since the the negative log likelihood is convex (equivalently, the log likelihood is concave), we have a host of tools at our disposal for maximum likelihood estimation. We don’t need CVXPy to solve this problem (like we did for the previous chapter). Here, we can simply perform <strong>gradient descent</strong>.</p>
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{w}_0\)</span> denote our initial setting of the weights. Gradient descent is an iterative algorithm that produces a sequence of weights <span class="math notranslate nohighlight">\(\mathbf{w}_0, \mathbf{w}_1, \ldots\)</span> that (under certain conditions) converges to a local optimum of the objective. Since the objective is convex, all local optima are global optima. The idea is straightforward, on each iteration we update the weights by taking a step in the direction of the gradient,</p>
 <div class="math notranslate nohighlight">
@@ -786,7 +995,7 @@ p(y_n \mid \mathbf{x}_n) = \mathrm{Bern}\big( \sigma(\mathbf{w}^\top \mathbf{x}_
 </div>
 </section>
 <section id="newton-s-method">
-<h3>Newton’s method<a class="headerlink" href="#newton-s-method" title="Permalink to this headline">#</a></h3>
+<h3>Newton’s method<a class="headerlink" href="#newton-s-method" title="Permalink to this heading">#</a></h3>
 <p>Gradient descent uses first-order information (i.e., the gradient of the objective at the current weights) to determine the descent direction. We can obtain faster convergence rates using <strong>second-order</strong> information (i.e., the Hessian of the objective).</p>
 <p>The idea is to minimize a quadratic approximation of the objective given by a Taylor approximation around the current weights,</p>
 <div class="math notranslate nohighlight">
@@ -815,7 +1024,7 @@ p(y_n \mid \mathbf{x}_n) = \mathrm{Bern}\big( \sigma(\mathbf{w}^\top \mathbf{x}_
 <p>For example, the step-size can be set to <span class="math notranslate nohighlight">\(\alpha_i &lt; 1\)</span> to implement <em>damped</em> Newton’s method, or it can be determined by a backtracking line search.</p>
 </section>
 <section id="iteratively-reweighted-least-squares-irls">
-<h3>Iteratively reweighted least squares (IRLS)<a class="headerlink" href="#iteratively-reweighted-least-squares-irls" title="Permalink to this headline">#</a></h3>
+<h3>Iteratively reweighted least squares (IRLS)<a class="headerlink" href="#iteratively-reweighted-least-squares-irls" title="Permalink to this heading">#</a></h3>
 <p>The weight updates simplify nicely when we substitute in the form of the gradient and Hessian for logistic regression. Note that they can be written in matrix form as,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -847,14 +1056,14 @@ p(y_n \mid \mathbf{x}_n) = \mathrm{Bern}\big( \sigma(\mathbf{w}^\top \mathbf{x}_
 <p>In other words, the standard Newton method update can be viewed as the solution to a <a class="reference external" href="https://en.wikipedia.org/wiki/Weighted_least_squares"><strong>weighted least squares</strong></a> problem with weights <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> and targets <span class="math notranslate nohighlight">\(\tilde{\mathbf{y}}\)</span> that depend on the current weights <span class="math notranslate nohighlight">\(\mathbf{w}_i\)</span>. Viewed this way, we see that Newton’s method for logistic regression is equivalent to an algorithm called <a class="reference external" href="https://en.wikipedia.org/wiki/Iteratively_reweighted_least_squares"><strong>iteratively reweighted least squares (IRLS)</strong></a>.</p>
 </section>
 <section id="computational-complexity">
-<h3>Computational complexity<a class="headerlink" href="#computational-complexity" title="Permalink to this headline">#</a></h3>
+<h3>Computational complexity<a class="headerlink" href="#computational-complexity" title="Permalink to this heading">#</a></h3>
 <div class="tip admonition">
 <p class="admonition-title">Exercise</p>
 <p>Show that the computational complexity of gradient descent is <span class="math notranslate nohighlight">\(\mathcal{O}(NP)\)</span> whereas the complexity of Newton’s method is <span class="math notranslate nohighlight">\(\mathcal{O}(NP^2 + P^3)\)</span>.</p>
 </div>
 </section>
 <section id="scaling-up">
-<h3>Scaling up<a class="headerlink" href="#scaling-up" title="Permalink to this headline">#</a></h3>
+<h3>Scaling up<a class="headerlink" href="#scaling-up" title="Permalink to this heading">#</a></h3>
 <p>Though it converges faster, Newton’s method quickly becomes intractable for large <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(P\)</span>. For large <span class="math notranslate nohighlight">\(N\)</span>, even gradient descent becomes costly. There are a few ways to speed up computation:</p>
 <ul class="simple">
 <li><p><strong>Quasi-Newton methods</strong> like <a class="reference external" href="https://en.wikipedia.org/wiki/BFGS_method"><strong>BFGS</strong></a> replace the exact Hessian with an approximation and side-step the explicit matrix inversion.</p></li>
@@ -865,7 +1074,7 @@ p(y_n \mid \mathbf{x}_n) = \mathrm{Bern}\big( \sigma(\mathbf{w}^\top \mathbf{x}_
 </section>
 </section>
 <section id="pose-tracking-with-convolutional-neural-networks-cnns">
-<h2>Pose tracking with convolutional neural networks (CNNs)<a class="headerlink" href="#pose-tracking-with-convolutional-neural-networks-cnns" title="Permalink to this headline">#</a></h2>
+<h2>Pose tracking with convolutional neural networks (CNNs)<a class="headerlink" href="#pose-tracking-with-convolutional-neural-networks-cnns" title="Permalink to this heading">#</a></h2>
 <p>Remember we started by treating each data point as patch <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span> and a binary label <span class="math notranslate nohighlight">\(y_n\)</span> specifying whether a specific key point (e.g. “left paw”) is present. Of course, in practice we want to classify all the patches in an image in parallel, and we want to predict more than one type of key point.</p>
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{X}_n \in \mathbb{R}^{P_H \times P_W}\)</span> denote the <span class="math notranslate nohighlight">\(n\)</span>-th image and <span class="math notranslate nohighlight">\(\mathbf{Y}_{n,k} \in \{0,1\}^{P_H \times P_W}\)</span> denote the binary mask of where in the <span class="math notranslate nohighlight">\(k\)</span>-th key point is in the <span class="math notranslate nohighlight">\(n\)</span>-th image. Both are <span class="math notranslate nohighlight">\(P_H\)</span> pixels in height and <span class="math notranslate nohighlight">\(P_W\)</span> pixels wide. Assume the patches are <span class="math notranslate nohighlight">\(P_h \times P_w\)</span> in size, with <span class="math notranslate nohighlight">\(P_h &lt; P_H\)</span> and <span class="math notranslate nohighlight">\(P_w &lt; P_W\)</span>.  Finally, ket <span class="math notranslate nohighlight">\(\mathbf{W}_k \in \mathbb{R}^{P_h \times P_w}\)</span> denote the weights for the <span class="math notranslate nohighlight">\(k\)</span>-th key point.</p>
 <p>We can think of each image as having <span class="math notranslate nohighlight">\(P_H \cdot P_W\)</span> patches and corresponding labels, one centered on each pixel. In our simple logistic regression model, each patch’s label is modeled as a conditionally independent Bernoulli random variable,</p>
@@ -887,26 +1096,26 @@ a_{n,k,i,j}
 \end{split}\]</div>
 <p>In fact, the activations for an entire batch of <span class="math notranslate nohighlight">\(N\)</span> images and <span class="math notranslate nohighlight">\(K\)</span> key points (i.e., output channels) can be computed in a single call to <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.functional.conv2d.html"><code class="docutils literal notranslate"><span class="pre">F.conv2d</span></code></a>, with the appropriate padding. In lab, we’ll make use of the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html"><code class="docutils literal notranslate"><span class="pre">torch.nn.Conv2d</span></code></a> class, which encapsulates the weights of a 2D convolution layer and makes it easy to train such models.</p>
 <section id="convolutional-neural-networks">
-<h3>Convolutional neural networks<a class="headerlink" href="#convolutional-neural-networks" title="Permalink to this headline">#</a></h3>
+<h3>Convolutional neural networks<a class="headerlink" href="#convolutional-neural-networks" title="Permalink to this heading">#</a></h3>
 <p>Framed this way, we can view the logistic regression model as a <strong>one-layer convolutional neural network (CNN)</strong>. This view also suggests an obvious direction for improvement. The activations of the logistic regression model are <strong>linear functions</strong> of the pixels. In practice, a good key point detector may need <strong>nonlinear features</strong> of the images. Moreover, the features necessary to predict one keypoint (e.g., the left paw) may be similar to those needed for another (e.g., the right).</p>
 <p>Convolutional neural networks allow both nonlinear feature learning and feature sharing between outputs. The idea is straightforward: stack multiple convolutional layers on top of each other, feeding the output of one as the input to the next.</p>
 <p><strong>Residual networks (ResNets)</strong> enable very deep CNNs to be stably trained by adding <strong>skip connections</strong> whereby the input is fed straight to the output of a layer, thereby allowing the convolution to capture the difference (i.e., residual) between the input and output.</p>
 <p>These notes will not comprehensively cover CNNs and ResNets. Instead, please consult the many great online resources, like <span id="id12">Goodfellow <em>et al.</em> [<a class="reference internal" href="99_references.html#id47" title="Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep Learning. MIT Press, 2016. http://www.deeplearningbook.org.">2016</a>]</span> and the PyTorch <a class="reference external" href="https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html">tutorials</a>.</p>
 </section>
 <section id="working-with-minimal-labeled-data">
-<h3>Working with minimal labeled data.<a class="headerlink" href="#working-with-minimal-labeled-data" title="Permalink to this headline">#</a></h3>
+<h3>Working with minimal labeled data.<a class="headerlink" href="#working-with-minimal-labeled-data" title="Permalink to this heading">#</a></h3>
 <p>While deep neural networks like CNNs and ResNets have the capacity to learn nonlinear mappings from images to key point predictions, they also have many free parameters to train.</p>
 <p>For modern machine learning tasks and benchmarks, these models are trained on millions of labeled images, like the ImageNet dataset for image classification.</p>
 <p>Unfortunately, we don’t (yet) have comparable datasets of labeled images of animals in the lab (however, see <span id="id13">Marshall <em>et al.</em> [<a class="reference internal" href="99_references.html#id48" title="Jesse D Marshall, Diego E Aldarondo, Timothy W Dunn, William L Wang, Gordon J Berman, and Bence P Ölveczky. Continuous whole-body 3d kinematic recordings across the rodent behavioral repertoire. Neuron, 109(3):420–437, 2021.">2021</a>]</span>) Moreover, environments change from one lab to the next, making it challenging to collect one dataset that covers all the bases.</p>
 <p>Ideally, we would like to train a pose tracking model for a specific lab environment using minimal labeled data.</p>
 <p>Modern methods for markerless animal pose tracking take two approaches:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Use a <strong>lightweight architecture</strong> with fewer free parameters, like the modular UNet in SLEAP <span id="id14">[<a class="reference internal" href="99_references.html#id35" title="Talmo D Pereira, Nathaniel Tabris, Arie Matsliah, David M Turner, Junyu Li, Shruthi Ravindranath, Eleni S Papadoyannis, Edna Normand, David S Deutsch, Z Yan Wang, and others. SLEAP: A deep learning system for multi-animal pose tracking. Nature methods, 19(4):486–495, 2022.">Pereira <em>et al.</em>, 2022</a>]</span></p></li>
 <li><p>Use <strong>transfer learning</strong> to adapt the weights of a pre-trained network to the problem of animal pose tracking <span id="id15">[<a class="reference internal" href="99_references.html#id34" title="Alexander Mathis, Pranav Mamidanna, Kevin M Cury, Taiga Abe, Venkatesh N Murthy, Mackenzie Weygandt Mathis, and Matthias Bethge. DeepLabCut: markerless pose estimation of user-defined body parts with deep learning. Nat. Neurosci., 21(9):1281–1289, August 2018.">Mathis <em>et al.</em>, 2018</a>]</span>.</p></li>
 </ol>
 </section>
 <section id="transfer-learning">
-<h3>Transfer learning<a class="headerlink" href="#transfer-learning" title="Permalink to this headline">#</a></h3>
+<h3>Transfer learning<a class="headerlink" href="#transfer-learning" title="Permalink to this heading">#</a></h3>
 <p><strong>Transfer learning</strong> is when you take a model trained for one task (e.g. a ResNet trained for image classification with ImageNet) and adapt it to another task (e.g. classifying key points in behavioral video). If the tasks are similar enough, then it may require new minimal training data to adapt the pre-trained network.</p>
 <p>For example, DeepLabCut <span id="id16">[<a class="reference internal" href="99_references.html#id34" title="Alexander Mathis, Pranav Mamidanna, Kevin M Cury, Taiga Abe, Venkatesh N Murthy, Mackenzie Weygandt Mathis, and Matthias Bethge. DeepLabCut: markerless pose estimation of user-defined body parts with deep learning. Nat. Neurosci., 21(9):1281–1289, August 2018.">Mathis <em>et al.</em>, 2018</a>]</span> originally converted a ResNet-50 (a very deep CNN) trained on ImageNet by rerouting the output of a middle layer to make predictions about key point locations in animal videos.
 We can think of the activations at the middle layer as a highly nonlinear <strong>feature bank</strong> that represents the original image in a form that may be more amenable to key point prediction with simple models.</p>
@@ -915,7 +1124,7 @@ We can think of the activations at the middle layer as a highly nonlinear <stron
 </section>
 </section>
 <section id="structured-prediction">
-<h2>Structured prediction<a class="headerlink" href="#structured-prediction" title="Permalink to this headline">#</a></h2>
+<h2>Structured prediction<a class="headerlink" href="#structured-prediction" title="Permalink to this heading">#</a></h2>
 <p>The output of these CNNs is a map of key point probabilities for each image, key point, and pixel. However, the key points are obviously not independent — knowing where the left elbow is tells you a lot about where the left shoulder is likely to be found. Ideally, we would like to make a unified prediction about the collection of key point locations.</p>
 <p>One way to tackle this problem is with <strong>structured prediction</strong> <span id="id17">[<a class="reference internal" href="99_references.html#id49" title="Pedro F Felzenszwalb and Daniel P Huttenlocher. Pictorial structures for object recognition. International journal of computer vision, 61:55–79, 2005.">Felzenszwalb and Huttenlocher, 2005</a>, <a class="reference internal" href="99_references.html#id50" title="Eldar Insafutdinov, Leonid Pishchulin, Bjoern Andres, Mykhaylo Andriluka, and Bernt Schiele. Deepercut: A deeper, stronger, and faster multi-person pose estimation model. In Computer Vision–ECCV 2016: 14th European Conference, Amsterdam, The Netherlands, October 11-14, 2016, Proceedings, Part VI 14, 34–50. Springer, 2016.">Insafutdinov <em>et al.</em>, 2016</a>]</span>. Let <span class="math notranslate nohighlight">\(\ell_{n,k} \in [0,P_h] \times [0,P_w]\)</span> be a random variable denoting the location of key point <span class="math notranslate nohighlight">\(k\)</span> in image <span class="math notranslate nohighlight">\(n\)</span> (in pixel coordinates). We can represent a joint distribution over the collection of key points <span class="math notranslate nohighlight">\(\boldsymbol{\ell}_n = (\ell_{n,1}, \ldots, \ell_{n,K})\)</span> as a <strong>factor graph</strong>,</p>
 <div class="math notranslate nohighlight">
@@ -929,7 +1138,7 @@ p(\boldsymbol{\ell}_n) &amp;\propto
 <p>where <span class="math notranslate nohighlight">\(f_k\)</span> are called <strong>unary potentials</strong> and <span class="math notranslate nohighlight">\(g_{ij}\)</span> are called <strong>pairwise potentials</strong>. The unary potentials are functions that specify how likely key point <span class="math notranslate nohighlight">\(k\)</span> is to be found at a location <span class="math notranslate nohighlight">\(\ell_{n,k}\)</span> given the observed image <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span>; the pairwise potentials specify how likely the joint configuration of <span class="math notranslate nohighlight">\((\ell_{n,i}, \ell_{n,j})\)</span> is. For example, the pairwise potentials could rule out configurations in which the left elbow is meters away from the left shoulder.</p>
 <p>Note that this joint distribution is <strong>unnomrmalized</strong>. That isn’t a problem for maximuim a posteriori (MAP) estimation of the key point locations, but it does make learning the parameters of the potential functions a bit harder. We’ll come back to this later in the course.</p>
 <section id="d-triangulation">
-<h3>3D Triangulation<a class="headerlink" href="#d-triangulation" title="Permalink to this headline">#</a></h3>
+<h3>3D Triangulation<a class="headerlink" href="#d-triangulation" title="Permalink to this heading">#</a></h3>
 <p>Finally, we have so far focused on finding key points in 2D images, but there is growing interest in tracking 3D pose from multiple camera views.</p>
 <p>One way to solve this problem is by training a CNN that synthesizes multiple 2D views into a 3D representation <span id="id18">[<a class="reference internal" href="99_references.html#id51" title="Timothy W Dunn, Jesse D Marshall, Kyle S Severson, Diego E Aldarondo, David GC Hildebrand, Selmaan N Chettih, William L Wang, Amanda J Gellis, David E Carlson, Dmitriy Aronov, and others. Geometric deep learning enables 3d kinematic profiling across species and environments. Nature methods, 18(5):564–573, 2021.">Dunn <em>et al.</em>, 2021</a>]</span>. Another is to use <strong>triangulation</strong> to infer a 3D key point location from multiple 2D views <span id="id19">[<a class="reference internal" href="99_references.html#id52" title="Pierre Karashchuk, Katie L Rupp, Evyn S Dickinson, Sarah Walling-Bell, Elischa Sanders, Eiman Azim, Bingni W Brunton, and John C Tuthill. Anipose: a toolkit for robust markerless 3d pose estimation. Cell reports, 36(13):109730, 2021.">Karashchuk <em>et al.</em>, 2021</a>, <a class="reference internal" href="99_references.html#id53" title="Tanmay Nath, Alexander Mathis, An Chi Chen, Amir Patel, Matthias Bethge, and Mackenzie Weygandt Mathis. Using deeplabcut for 3d markerless pose estimation across species and behaviors. Nature protocols, 14(7):2152–2176, 2019.">Nath <em>et al.</em>, 2019</a>, <a class="reference internal" href="99_references.html#id54" title="Libby Zhang, Tim Dunn, Jesse Marshall, Bence Olveczky, and Scott Linderman. Animal pose estimation from video data with a hierarchical von Mises-Fisher-Gaussian model. In International Conference on Artificial Intelligence and Statistics, 2800–2808. PMLR, 2021.">Zhang <em>et al.</em>, 2021</a>]</span>.</p>
 <figure class="align-default" id="triangulation">
@@ -953,10 +1162,10 @@ p(\boldsymbol{\ell}_n) &amp;\propto
 </section>
 </section>
 <section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
 <p>This chapter introduced the basics of modern animal pose tracking methods using supervised learning, deep convolutional neural networks, transfer learning, and structured prediction. Many of these techniques will reappear later in the course as we talk about encoding and decoding neural spike trains. In lab, you will practice implementing these techniques and building a simple pose tracker.</p>
 <section id="further-reading">
-<h3>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">#</a></h3>
+<h3>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this heading">#</a></h3>
 <p>As always, there is much more to say on each of the topics covered in this chapter. There is growing work on <strong>semi-supervised</strong> pose tracking to leverage the wealth of unlabeled image frames <span id="id21">[<a class="reference internal" href="99_references.html#id56" title="Matthew R Whiteway, Dan Biderman, Yoni Friedman, Mario Dipoppa, E Kelly Buchanan, Anqi Wu, John Zhou, Niccolò Bonacchi, Nathaniel J Miska, Jean-Paul Noel, and others. Partitioning variability in animal behavioral videos using semi-supervised variational autoencoders. PLoS computational biology, 17(9):e1009439, 2021.">Whiteway <em>et al.</em>, 2021</a>, <a class="reference internal" href="99_references.html#id55" title="Anqi Wu, Estefany Kelly Buchanan, Matthew Whiteway, Michael Schartner, Guido Meijer, Jean-Paul Noel, Erica Rodriguez, Claire Everett, Amy Norovich, Evan Schaffer, and others. Deep Graph Pose: a semi-supervised deep graphical model for improved animal pose tracking. Advances in Neural Information Processing Systems, 33:6040–6052, 2020.">Wu <em>et al.</em>, 2020</a>]</span>. There is still work to be done on multi-animal pose tracking <span id="id22">[<a class="reference internal" href="99_references.html#id57" title="Jessy Lauer, Mu Zhou, Shaokai Ye, William Menegas, Steffen Schneider, Tanmay Nath, Mohammed Mostafizur Rahman, Valentina Di Santo, Daniel Soberanes, Guoping Feng, and others. Multi-animal pose estimation, identification and tracking with deeplabcut. Nature Methods, 19(4):496–504, 2022.">Lauer <em>et al.</em>, 2022</a>, <a class="reference internal" href="99_references.html#id35" title="Talmo D Pereira, Nathaniel Tabris, Arie Matsliah, David M Turner, Junyu Li, Shruthi Ravindranath, Eleni S Papadoyannis, Edna Normand, David S Deutsch, Z Yan Wang, and others. SLEAP: A deep learning system for multi-animal pose tracking. Nature methods, 19(4):486–495, 2022.">Pereira <em>et al.</em>, 2022</a>]</span>, and recent machine learning challenges like <a class="reference external" href="https://sites.google.com/view/mabe22/home">MABe</a> have sought to make progress on these problems. Finally, experimentalists are starting to use these kinds of techniques for <strong>real-time</strong> pose tracking to guide closed-loop optogenetic stimulation of neural circuits <span id="id23">[<a class="reference internal" href="99_references.html#id58" title="Jeffrey E Markowitz, Winthrop F Gillis, Maya Jay, Jeffrey Wood, Ryley W Harris, Robert Cieszkowski, Rebecca Scott, David Brann, Dorothy Koveal, Tomasz Kula, and others. Spontaneous behaviour is structured by reinforcement without explicit reward. Nature, pages 1–10, 2023.">Markowitz <em>et al.</em>, 2023</a>]</span>. While there is still room for methodological improvement, these methods have already transformed the landscape of systems neuroscience.</p>
 </section>
 </section>
@@ -982,50 +1191,203 @@ p(\boldsymbol{\ell}_n) &amp;\propto
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
-              
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
+            </article>
+            
+
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="06_calcium_imaging.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Demixing Calcium Imaging Data</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="08_summary_stats.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Summary Statistics</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
+  <a class='left-prev' id="prev-link" href="06_calcium_imaging.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Demixing Calcium Imaging Data</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="08_summary_stats.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Summary Statistics</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
 </div>
             </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
   
-    By Scott Linderman<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#supervised-learning">
+   Supervised learning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logistic-regression">
+   Logistic regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimization">
+   Optimization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setup">
+     Setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-gradient-with-respect-to-the-weights">
+     The gradient with respect to the weights
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-negative-log-likelihood-is-convex">
+     The negative log likelihood is convex
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gradient-descent">
+     Gradient descent
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#newton-s-method">
+     Newton’s method
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iteratively-reweighted-least-squares-irls">
+     Iteratively reweighted least squares (IRLS)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computational-complexity">
+     Computational complexity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scaling-up">
+     Scaling up
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pose-tracking-with-convolutional-neural-networks-cnns">
+   Pose tracking with convolutional neural networks (CNNs)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convolutional-neural-networks">
+     Convolutional neural networks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#working-with-minimal-labeled-data">
+     Working with minimal labeled data.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-learning">
+     Transfer learning
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structured-prediction">
+   Structured prediction
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-triangulation">
+     3D Triangulation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#further-reading">
+     Further reading
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
 </div>
 
-
-      </div>
-    </div>
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+<div class="bd-footer-content__inner container">
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Scott Linderman
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2022.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+Last updated on None.<br>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </div>
+        </footer>
+        
+
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
 
   </body>
 </html>
