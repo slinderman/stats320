@@ -11,6 +11,7 @@ execute:
     - '04_glms.ipynb'
     - '05_decoding.ipynb'
     - '06_arhmm.ipynb'
+    - '07_slds.ipynb'
 only_build_toc_files: true
 
 # Add a bibtex file so that we can create citations

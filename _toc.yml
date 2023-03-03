@@ -11,6 +11,7 @@ parts:
     - file: labs/04_glms.ipynb
     - file: labs/05_decoding.ipynb
     - file: labs/06_arhmm.ipynb
+    - file: labs/07_slds.ipynb
 
   - caption: Foundations
     chapters:
