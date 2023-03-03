@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Basic Neurobiology" href="03_neurobio.html" />
-    <link rel="prev" title="Lab 6: Autoregressive HMMs" href="../labs/06_arhmm.html" />
+    <link rel="prev" title="Lab 7: Switching LDS" href="../labs/07_slds.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="docsearch:language" content="en">
   </head>
@@ -187,6 +187,13 @@ const thebe_selector_output = ".output, .cell_output"
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="../labs/06_arhmm.html">
                         Lab 6: Autoregressive HMMs
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/07_slds.html">
+                        Lab 7: Switching LDS
                       </a>
                     </li>
                 
@@ -401,6 +408,13 @@ const thebe_selector_output = ".output, .cell_output"
                     </li>
                 
 
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../labs/07_slds.html">
+                        Lab 7: Switching LDS
+                      </a>
+                    </li>
+                
+
                     <li class="nav-item current active">
                       <a class="nav-link nav-internal" href="#">
                         Probabilistic Modeling
@@ -563,6 +577,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../labs/04_glms.html">Lab 4: Generalized Linear Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../labs/05_decoding.html">Lab 5: Bayesian Decoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../labs/06_arhmm.html">Lab 6: Autoregressive HMMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/07_slds.html">Lab 7: Switching LDS</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
 <ul class="current nav bd-sidenav">
@@ -892,7 +907,7 @@ However, our models will still be composed of just a handful of basic building b
   from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
-<img alt="../_images/fb9e3d59f4369246f905dec34313a5f27da522699bfb9a7e4370810511691dcb.png" src="../_images/fb9e3d59f4369246f905dec34313a5f27da522699bfb9a7e4370810511691dcb.png" />
+<img alt="../_images/55bf7f1d77160f75cc43adffc106177b84923bf9825593ceb7c98caffae3d064.png" src="../_images/55bf7f1d77160f75cc43adffc106177b84923bf9825593ceb7c98caffae3d064.png" />
 </div>
 </div>
 </section>
@@ -1012,7 +1027,7 @@ p(\mathbf{x}; \lambda)
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/7fb1cdc78109065b71cd24d31fc0a8bf9999f6d6ee456f64f39be3754891a268.png" src="../_images/7fb1cdc78109065b71cd24d31fc0a8bf9999f6d6ee456f64f39be3754891a268.png" />
+<img alt="../_images/24ec4ad35515555e2b65a6555040341506fe8a9db000b5f303f5f16777f141b5.png" src="../_images/24ec4ad35515555e2b65a6555040341506fe8a9db000b5f303f5f16777f141b5.png" />
 </div>
 </div>
 </section>
@@ -1163,8 +1178,8 @@ p(\lambda \mid \mathbf{x})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: tensor(4.9300)
-MAP: tensor(4.9341)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: tensor(4.9440)
+MAP: tensor(4.9481)
 </pre></div>
 </div>
 </div>
@@ -1253,7 +1268,7 @@ p(x_t \mid \boldsymbol{\lambda})
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/4d535069d8c5aa6e0474dea1150bda7be7c9aa0927007f728f26998ff1d5228e.png" src="../_images/4d535069d8c5aa6e0474dea1150bda7be7c9aa0927007f728f26998ff1d5228e.png" />
+<img alt="../_images/8ab2d20492fd047f3aa88d639c851016e1cbf663ea74cd6628c7fa01d387faf4.png" src="../_images/8ab2d20492fd047f3aa88d639c851016e1cbf663ea74cd6628c7fa01d387faf4.png" />
 </div>
 </div>
 <p>With this model, we can capture <strong>multimodal</strong> firing rate distributions.</p>
@@ -1374,11 +1389,11 @@ z_t \sim \mathrm{Cat}([\pi_0, \pi_1])
             <footer class="bd-footer-article">
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-  <a class='left-prev' id="prev-link" href="../labs/06_arhmm.html" title="previous page">
+  <a class='left-prev' id="prev-link" href="../labs/07_slds.html" title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
           <p class="prev-next-subtitle">previous</p>
-          <p class="prev-next-title">Lab 6: Autoregressive HMMs</p>
+          <p class="prev-next-title">Lab 7: Switching LDS</p>
       </div>
   </a>
   <a class='right-next' id="next-link" href="03_neurobio.html" title="next page">
