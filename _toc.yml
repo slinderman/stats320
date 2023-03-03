@@ -35,6 +35,7 @@ parts:
   - caption: "Unit III: Unsupervised Learning"
     chapters:
     - file: lectures/12_mixtures_em.ipynb
+    - file: lectures/13_hmms.md
 
   - caption: References
     chapters:
