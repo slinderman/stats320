@@ -65,7 +65,7 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 | Mon, Feb 27 | Lecture 14 | More HMMs {Download}`[slides]<lectures/pdf/12_hmm_continued.pdf>` <br> **Final project proposal due**
 | Wed, Mar 1  | Lecture 15 | Switching linear dynamical systems (SLDS) {Download}`[slides]<lectures/pdf/13_slds.pdf>`
 | Fri, Mar 3  | **Lab 7** <br> (not graded) | [Switching linear dynamical systems](labs/07_slds.ipynb)
-| Mon, Mar 6  | Lecture 16 | Variational Autoencoders (VAEs)
+| Mon, Mar 6  | Lecture 16 | Variational Autoencoders (VAEs) {Download}`[slides]<lectures/pdf/14_vaes.pdf>`
 | Wed, Mar 8  | Lecture 17 | Sequential VAEs
 | Fri, Mar 10 | Lab 8 (not graded) | LFADS from scratch
 | Mon, Mar 13 | Guest Lec. | [Russ Poldrack](https://poldrack.github.io/) (topic TBD)
