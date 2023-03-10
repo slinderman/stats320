@@ -12,6 +12,7 @@ parts:
     - file: labs/05_decoding.ipynb
     - file: labs/06_arhmm.ipynb
     - file: labs/07_slds.ipynb
+    - file: labs/08_lfads.ipynb
 
   - caption: Foundations
     chapters:

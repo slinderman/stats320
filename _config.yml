@@ -12,6 +12,7 @@ execute:
     - '05_decoding.ipynb'
     - '06_arhmm.ipynb'
     - '07_slds.ipynb'
+    - '08_lfads.ipynb'
     - 'poldrack_fmri_analysis.ipynb'
 only_build_toc_files: true
 
