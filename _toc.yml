@@ -36,6 +36,7 @@ parts:
     chapters:
     - file: lectures/12_mixtures_em.ipynb
     - file: lectures/13_hmms.md
+    - file: lectures/poldrack_fmri_analysis.ipynb
 
   - caption: References
     chapters:

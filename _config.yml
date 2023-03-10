@@ -12,6 +12,7 @@ execute:
     - '05_decoding.ipynb'
     - '06_arhmm.ipynb'
     - '07_slds.ipynb'
+    - 'poldrack_fmri_analysis.ipynb'
 only_build_toc_files: true
 
 # Add a bibtex file so that we can create citations
