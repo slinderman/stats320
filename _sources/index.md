@@ -67,7 +67,7 @@ The lectures develop the theory behind the methods developed in lab. I've organi
 | Fri, Mar 3  | **Lab 7** <br> (not graded) | [Switching linear dynamical systems](labs/07_slds.ipynb)
 | Mon, Mar 6  | Lecture 16 | Variational Autoencoders (VAEs) {Download}`[slides]<lectures/pdf/14_vaes.pdf>`
 | Wed, Mar 8  | Lecture 17 | Sequential VAEs {Download}`[slides]<lectures/pdf/15_seqvaes.pdf>`
-| Fri, Mar 10 | Lab 8 (not graded) | Sequential VAEs
+| Fri, Mar 10 | **Lab 8** <br> (not graded) | [Sequential VAEs](labs/08_lfads.ipynb)
 | Mon, Mar 13 | Guest Lec. | [Russ Poldrack](https://poldrack.github.io/): [fMRI Data Analysis](lectures/poldrack_fmri_analysis.ipynb)
 | Wed, Mar 15 | Lecture 19 | Current research
 | Fri, Mar 17 | Presentations | Project presentations **11:20-1:20pm, with lunch provided**

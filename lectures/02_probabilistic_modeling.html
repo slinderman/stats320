@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Basic Neurobiology" href="03_neurobio.html" />
-    <link rel="prev" title="Lab 7: Switching LDS" href="../labs/07_slds.html" />
+    <link rel="prev" title="Lab 8: Sequential VAEs" href="../labs/08_lfads.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -162,6 +162,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../labs/05_decoding.html">Lab 5: Bayesian Decoding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../labs/06_arhmm.html">Lab 6: Autoregressive HMMs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../labs/07_slds.html">Lab 7: Switching LDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/08_lfads.html">Lab 8: Sequential VAEs</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
 <ul class="current nav bd-sidenav">
@@ -461,7 +462,7 @@ However, our models will still be composed of just a handful of basic building b
   from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
-<img alt="../_images/329160d955e282eb8f3a867b79f1e91c8165eb2be6967d38c5db56b3ec8e2dea.png" src="../_images/329160d955e282eb8f3a867b79f1e91c8165eb2be6967d38c5db56b3ec8e2dea.png" />
+<img alt="../_images/0fcedcf2d56c597c005238f3a65be65e83a016053aa5c0fec0d44b1da55f0556.png" src="../_images/0fcedcf2d56c597c005238f3a65be65e83a016053aa5c0fec0d44b1da55f0556.png" />
 </div>
 </div>
 </section>
@@ -581,7 +582,7 @@ p(\mathbf{x}; \lambda)
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/02012cbfca92447d42e4a65e0a4b4455ecb12da13f055692c38c6efc873b67c0.png" src="../_images/02012cbfca92447d42e4a65e0a4b4455ecb12da13f055692c38c6efc873b67c0.png" />
+<img alt="../_images/028b820212df4a11942946eee832fc070b1088bf451754a8928c26530873f926.png" src="../_images/028b820212df4a11942946eee832fc070b1088bf451754a8928c26530873f926.png" />
 </div>
 </div>
 </section>
@@ -732,8 +733,8 @@ p(\lambda \mid \mathbf{x})
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: tensor(4.9780)
-MAP: tensor(4.9820)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLE: tensor(4.9420)
+MAP: tensor(4.9461)
 </pre></div>
 </div>
 </div>
@@ -822,7 +823,7 @@ p(x_t \mid \boldsymbol{\lambda})
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/083fcbdf1aff05201dc59a9eea3f0875ec9384b82c30155888faebd7d204677c.png" src="../_images/083fcbdf1aff05201dc59a9eea3f0875ec9384b82c30155888faebd7d204677c.png" />
+<img alt="../_images/51032c58e2a6ea037d5dfa63490ba4b0fe503b860a2067345568f6098523e6a3.png" src="../_images/51032c58e2a6ea037d5dfa63490ba4b0fe503b860a2067345568f6098523e6a3.png" />
 </div>
 </div>
 <p>With this model, we can capture <strong>multimodal</strong> firing rate distributions.</p>
@@ -944,12 +945,12 @@ z_t \sim \mathrm{Cat}([\pi_0, \pi_1])
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../labs/07_slds.html"
+       href="../labs/08_lfads.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Lab 7: Switching LDS</p>
+        <p class="prev-next-title">Lab 8: Sequential VAEs</p>
       </div>
     </a>
     <a class="right-next"
