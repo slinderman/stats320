@@ -3,6 +3,10 @@ name: Publish the book
 on:
   workflow_dispatch:
 
+  push:
+    branches:
+      - winter2023
+
 jobs:
   publish:
     name: Publish
@@ -20,9 +24,9 @@ jobs:
 
       - name: Build the documentation with Sphinx
         run: |
-          pip install -U jupyter-book
+          pip install -r requirements.txt
           jupyter-book build .
-          
+
       - name: Publish the documentation
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
