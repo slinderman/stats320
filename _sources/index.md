@@ -22,7 +22,7 @@ You should be comfortable with basic probability (STATS 116) as well as multivar
 - **Components:** Lectures on Mon/Wed
 - **Office Hours:**
     - Scott: 10:30am-12:00pm Tuesday, Wu Tsai Neurosciences Institute, 2nd floor by the NeuroTheory center
-    - Noah: TBD
+    - Noah: 10am Monday, location TBD
 - This course will have a **final project, not an exam**
 
 ## Book
@@ -33,85 +33,50 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 
 ### Unit I: Extracting Biological Signals from Raw Data
 
-#### Week 1: Spike Sorting
-| Date        | Topic | Reading |
-| ----------- | ----- | ------- |
-| Mon, Mar 31 | Course Overview {Download}`[slides]<lectures/pdf/lecture01.pdf>` | [Basic neurobiology](lectures/03_neurobio) |
-| Wed, Apr 2  | Mixture Models | [Probabilistic modeling](lectures/02_probabilistic_modeling) |
-
-<span style="color:red">**Lab 1: Spike Sorting** _Released Wed, Apr 2; Due Wed, Apr 9 at 11:59pm._</span>
-
-#### Week 2: Calcium Deconvolution
-| Date        | Topic | Reading |
-| ----------- | ----- | ------- |
-| Mon, Apr 7  | Matrix Factorization | |
-| Wed, Apr 9  | Convex Optimization | |
-
-<span style="color:red">**Lab 2: Calcium Deconvolution** _Released Wed, Apr 9; Due Wed, Apr 16 at 11:59pm._</span>
-
-#### Week 3: Markerless Pose Tracking
-| Date        | Topic | Reading |
-| ----------- | ----- | ------- |
-| Mon, Apr 14 | Convolution and Cross-Correlation | | 
-| Wed, Apr 16 | Convolutional Neural Networks (CNNs) | | 
-
-<span style="color:red">**Lab 3: Markerless Pose Tracking** _Released Wed, Apr 16; Due Wed, Apr 23 at 11:59pm._</span>
-
+| Date        | Neuro Topic | ML Topic | Reading | Assignment |
+| ----------- | ------------------ | -------- | ------- | ---------- |
+| Mon, Mar 31 | Course Overview {Download}`[slides]<lectures/pdf/lecture01.pdf>` | | [Basic neurobiology](lectures/03_neurobio) |
+| Wed, Apr 2  | Spike Sorting | Mixture Models | [Probabilistic modeling](lectures/02_probabilistic_modeling) | <span style="color:red">**Lab 1 Out**</span> | 
+| Mon, Apr 7  | Calcium Deconvolution | Matrix Factorization | | | 
+| Wed, Apr 9  | Calcium Deconvolution | Convex Optimization  | | <span style="color:red">**Lab 1 Due** <br> **Lab 2 Out**</span> |
+| Mon, Apr 14 | Markerless Pose Tracking | Convolution and Cross-Correlation | | |
+| Wed, Apr 16 | Markerless Pose Tracking | Convolutional Neural Networks (CNNs) | | <span style="color:red">**Lab 2 Due** <br> **Lab 3 Out**</span> |
 
 ### Unit II: Encoding and Decoding Models for Neural Data
 
-#### Week 4: Predicting Neural Responses with GLMs
-| Date        | Topic | Reading |
-| ----------- | ----- | ------- |
-| Mon, Apr 21 | [Generalized Linear Models (GLMs)]() | | 
-| Wed, Apr 23 | [Poisson Processes]() | |
-
-<span style="color:red">**Lab 4: Generalized Linear Models of Neural Responses** _Released Wed, Apr 23; Due Wed, Apr 30 at 11:59pm._</span>
-
-#### Week 5: Decoding Neural Activity
-| Date        | Topic | Reading |
-| ----------- | ----- | ------- |
-| Mon, Apr 28 | Bayesian Inference | | 
-| Wed, Apr 30 | Markov Chain Monte Carlo (MCMC) | |
-
-<span style="color:red">**Lab 5: Bayesian Decoding of Neural Spike Trains** _Released Wed, Apr 30; Due Wed, May 7 at 11:59pm._</span>
+| Date        | Neuro Topic | ML Topic | Reading | Assignment |
+| ----------- | ------------------ | -------- | ------- | ---------- |
+| Mon, Apr 21 | Neural Encoding | [Generalized Linear Models (GLMs)]() | |  |
+| Wed, Apr 23 | Neural Encoding | [Poisson Processes]() | | <span style="color:red">**Lab 3 Due** <br> **Lab 4 Out**</span> |
+| Mon, Apr 28 | Bayesian Decoding | Bayesian Inference | | |
+| Wed, Apr 30 | Bayesian Decoding | Markov Chain Monte Carlo (MCMC) | | <span style="color:red">**Lab 4 Due** <br> **Lab 5 Out**</span> |
 
 ### Unit III: Unsupervised models of neural and behavioral data
 
-#### Week 6: Segmenting Behavioral Video
-| Date        | Topic | Reading |
-| ----------- | ----- | ------- |
-| Mon, May 5  | Hidden Markov Models (HMMs) | | 
-| Wed, May 7  | Expectation Maximization (EM) | |
-
-<span style="color:red">**Lab 6: Autoregressive HMMs for Behavioral Video** _Released Wed, May 7; Due Wed, May 14 at 11:59pm._</span>
-
-#### Week 7: Modeling Low-Dimensional Neural Dynamics
-
-| Date        | Topic | Reading |
-| ----------- | ----- | ------- |
-| Mon, May 12 | Linear Dynamical Systems (LDS) | |
-| Wed, May 14 | Switching linear dynamical systems (SLDS) | |
-
-<span style="color:red">**Lab 7: State Space Models of Neural Activity** _Released Wed, May 14; Due Wed, May 21 at 11:59pm._</span>
+| Date        | Neuro Topic | ML Topic | Reading | Assignment |
+| ----------- | ------------------ | -------- | ------- | ---------- |
+| Mon, May 5  | Behavioral Segmentation | Hidden Markov Models (HMMs) | | |
+| Wed, May 7  | Behavioral Segmentation | Expectation Maximization (EM) | | <span style="color:red">**Lab 5 Due** <br> **Lab 6 Out**</span> |
+| Mon, May 12 | Neural Dynamics | Linear Dynamical Systems (LDS) | | | 
+| Wed, May 14 | Neural Dynamics | Switching Linear Dynamical Systems (SLDS) | | <span style="color:red">**Lab 6 Due** <br> **Lab 7 Out**</span> |
 
 ### Unit IV: Current Research Topics
 
-| Date        | Topic | Reading |
-| ----------- | ----- | ------- |
-| Mon, May 19 | (Sequential) Variational Autoencoders | | 
-| Wed, May 21 | Gaussian Process State Space Models | | 
-| Mon, May 26 | _Memorial Day, No Class_ |   |
-| Wed, May 28 | (Neuromodulated) Recurrent Neural Networks | |
-| Mon, Jun 2  | Deep State Space Models | |
-| Wed, Jun 4  | Foundation Models for Neuroscience| | 
-
-<span style="color:red">**Final Project** _Due Mon, June 9 at 11:59pm._</span>
+| Date        | Topic | Reading | Assignment |
+| ----------- | ----- | ------- | ---------- |
+| Mon, May 19 | (Sequential) Variational Autoencoders | | | 
+| Wed, May 21 | Gaussian Process State Space Models | | <span style="color:red">**Lab 7 Due**</span> |
+| Mon, May 26 | _Memorial Day, No Class_ | | | | 
+| Wed, May 28 | (Neuromodulated) Recurrent Neural Networks | | |
+| Mon, Jun 2  | Deep State Space Models | | |
+| Wed, Jun 4  | Foundation Models for Neuroscience| | |
+| Mon, Jun 9  | | | <span style="color:red">**Final Project Due**</span> |
 
 ## Labs
 - Each week, you will implement a minimal version of the method we discussed in lecture. These labs will be your assignments.
 - You must work in a **team of two** people. 
 - Lab reports will be submitted via GradeScope.
+- Assignments are due at 11:59pm PT.
 
 ## Final project
 
@@ -119,6 +84,9 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 - You must use real neural or behavioral data. We will provide links to suggested datasets, or if you are an experimentalist, you can use your own.
 - A project proposal will be due **TBD.**
 - The final report will be due **Mon, June 9 at 11:59pm.**
+
+## Late Policy
+We will allow 7 late days to be used as needed throughout the quarter. Since assignments are done in teams of two, both students must have sufficient late days to turn in a late assignment. Unfortunately, we cannot allow late days on the final project.
 
 ## Grading
 - 7 labs: 10% each, total 70%

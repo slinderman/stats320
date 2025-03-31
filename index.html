@@ -325,27 +325,15 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistics">Logistics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#book">Book</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schedule">Schedule</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-i-extracting-biological-signals-from-raw-data">Unit I: Extracting Biological Signals from Raw Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#week-1-spike-sorting">Week 1: Spike Sorting</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#week-2-calcium-deconvolution">Week 2: Calcium Deconvolution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#week-3-markerless-pose-tracking">Week 3: Markerless Pose Tracking</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-ii-encoding-and-decoding-models-for-neural-data">Unit II: Encoding and Decoding Models for Neural Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#week-4-predicting-neural-responses-with-glms">Week 4: Predicting Neural Responses with GLMs</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#week-5-decoding-neural-activity">Week 5: Decoding Neural Activity</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-iii-unsupervised-models-of-neural-and-behavioral-data">Unit III: Unsupervised models of neural and behavioral data</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#week-6-segmenting-behavioral-video">Week 6: Segmenting Behavioral Video</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#week-7-modeling-low-dimensional-neural-dynamics">Week 7: Modeling Low-Dimensional Neural Dynamics</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-i-extracting-biological-signals-from-raw-data">Unit I: Extracting Biological Signals from Raw Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-ii-encoding-and-decoding-models-for-neural-data">Unit II: Encoding and Decoding Models for Neural Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-iii-unsupervised-models-of-neural-and-behavioral-data">Unit III: Unsupervised models of neural and behavioral data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-iv-current-research-topics">Unit IV: Current Research Topics</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#labs">Labs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-project">Final project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#late-policy">Late Policy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading">Grading</a></li>
 </ul>
             </nav>
@@ -384,7 +372,7 @@ Stanford University</p>
 <li><p><strong>Office Hours:</strong></p>
 <ul>
 <li><p>Scott: 10:30am-12:00pm Tuesday, Wu Tsai Neurosciences Institute, 2nd floor by the NeuroTheory center</p></li>
-<li><p>Noah: TBD</p></li>
+<li><p>Noah: 10am Monday, location TBD</p></li>
 </ul>
 </li>
 <li><p>This course will have a <strong>final project, not an exam</strong></p></li>
@@ -399,173 +387,135 @@ Stanford University</p>
 <p>The lectures develop the theory behind the methods developed in the labs (i.e., homework assignments). I’ve organized the course into four units: signal extraction, encoding and decoding, unsupervised modeling, and current research. At the end, you’ll work on a final project in which you will use, explore, or extend the techniques studied in class.</p>
 <section id="unit-i-extracting-biological-signals-from-raw-data">
 <h3>Unit I: Extracting Biological Signals from Raw Data<a class="headerlink" href="#unit-i-extracting-biological-signals-from-raw-data" title="Link to this heading">#</a></h3>
-<section id="week-1-spike-sorting">
-<h4>Week 1: Spike Sorting<a class="headerlink" href="#week-1-spike-sorting" title="Link to this heading">#</a></h4>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Date</p></th>
-<th class="head"><p>Topic</p></th>
+<th class="head"><p>Neuro Topic</p></th>
+<th class="head"><p>ML Topic</p></th>
 <th class="head"><p>Reading</p></th>
+<th class="head"><p>Assignment</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Mon, Mar 31</p></td>
 <td><p>Course Overview <code class="xref download docutils literal notranslate"><span class="pre">[slides]</span></code></p></td>
+<td><p></p></td>
 <td><p><a class="reference internal" href="#lectures/03_neurobio"><span class="xref myst">Basic neurobiology</span></a></p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>Wed, Apr 2</p></td>
+<td><p>Spike Sorting</p></td>
 <td><p>Mixture Models</p></td>
 <td><p><a class="reference internal" href="#lectures/02_probabilistic_modeling"><span class="xref myst">Probabilistic modeling</span></a></p></td>
+<td><p><span style="color:red"><strong>Lab 1 Out</strong></span></p></td>
 </tr>
-</tbody>
-</table>
-</div>
-<p><span style="color:red"><strong>Lab 1: Spike Sorting</strong> <em>Released Wed, Apr 2; Due Wed, Apr 9 at 11:59pm.</em></span></p>
-</section>
-<section id="week-2-calcium-deconvolution">
-<h4>Week 2: Calcium Deconvolution<a class="headerlink" href="#week-2-calcium-deconvolution" title="Link to this heading">#</a></h4>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Date</p></th>
-<th class="head"><p>Topic</p></th>
-<th class="head"><p>Reading</p></th>
-</tr>
-</thead>
-<tbody>
 <tr class="row-even"><td><p>Mon, Apr 7</p></td>
+<td><p>Calcium Deconvolution</p></td>
 <td><p>Matrix Factorization</p></td>
+<td><p></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>Wed, Apr 9</p></td>
+<td><p>Calcium Deconvolution</p></td>
 <td><p>Convex Optimization</p></td>
 <td><p></p></td>
+<td><p><span style="color:red"><strong>Lab 1 Due</strong> <br> <strong>Lab 2 Out</strong></span></p></td>
 </tr>
-</tbody>
-</table>
-</div>
-<p><span style="color:red"><strong>Lab 2: Calcium Deconvolution</strong> <em>Released Wed, Apr 9; Due Wed, Apr 16 at 11:59pm.</em></span></p>
-</section>
-<section id="week-3-markerless-pose-tracking">
-<h4>Week 3: Markerless Pose Tracking<a class="headerlink" href="#week-3-markerless-pose-tracking" title="Link to this heading">#</a></h4>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Date</p></th>
-<th class="head"><p>Topic</p></th>
-<th class="head"><p>Reading</p></th>
-</tr>
-</thead>
-<tbody>
 <tr class="row-even"><td><p>Mon, Apr 14</p></td>
+<td><p>Markerless Pose Tracking</p></td>
 <td><p>Convolution and Cross-Correlation</p></td>
+<td><p></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>Wed, Apr 16</p></td>
+<td><p>Markerless Pose Tracking</p></td>
 <td><p>Convolutional Neural Networks (CNNs)</p></td>
 <td><p></p></td>
+<td><p><span style="color:red"><strong>Lab 2 Due</strong> <br> <strong>Lab 3 Out</strong></span></p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p><span style="color:red"><strong>Lab 3: Markerless Pose Tracking</strong> <em>Released Wed, Apr 16; Due Wed, Apr 23 at 11:59pm.</em></span></p>
-</section>
 </section>
 <section id="unit-ii-encoding-and-decoding-models-for-neural-data">
 <h3>Unit II: Encoding and Decoding Models for Neural Data<a class="headerlink" href="#unit-ii-encoding-and-decoding-models-for-neural-data" title="Link to this heading">#</a></h3>
-<section id="week-4-predicting-neural-responses-with-glms">
-<h4>Week 4: Predicting Neural Responses with GLMs<a class="headerlink" href="#week-4-predicting-neural-responses-with-glms" title="Link to this heading">#</a></h4>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Date</p></th>
-<th class="head"><p>Topic</p></th>
+<th class="head"><p>Neuro Topic</p></th>
+<th class="head"><p>ML Topic</p></th>
 <th class="head"><p>Reading</p></th>
+<th class="head"><p>Assignment</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Mon, Apr 21</p></td>
+<td><p>Neural Encoding</p></td>
 <td><p><a class="reference internal" href="#"><span class="xref myst">Generalized Linear Models (GLMs)</span></a></p></td>
+<td><p></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>Wed, Apr 23</p></td>
+<td><p>Neural Encoding</p></td>
 <td><p><a class="reference internal" href="#"><span class="xref myst">Poisson Processes</span></a></p></td>
 <td><p></p></td>
+<td><p><span style="color:red"><strong>Lab 3 Due</strong> <br> <strong>Lab 4 Out</strong></span></p></td>
 </tr>
-</tbody>
-</table>
-</div>
-<p><span style="color:red"><strong>Lab 4: Generalized Linear Models of Neural Responses</strong> <em>Released Wed, Apr 23; Due Wed, Apr 30 at 11:59pm.</em></span></p>
-</section>
-<section id="week-5-decoding-neural-activity">
-<h4>Week 5: Decoding Neural Activity<a class="headerlink" href="#week-5-decoding-neural-activity" title="Link to this heading">#</a></h4>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Date</p></th>
-<th class="head"><p>Topic</p></th>
-<th class="head"><p>Reading</p></th>
-</tr>
-</thead>
-<tbody>
 <tr class="row-even"><td><p>Mon, Apr 28</p></td>
+<td><p>Bayesian Decoding</p></td>
 <td><p>Bayesian Inference</p></td>
+<td><p></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>Wed, Apr 30</p></td>
+<td><p>Bayesian Decoding</p></td>
 <td><p>Markov Chain Monte Carlo (MCMC)</p></td>
 <td><p></p></td>
+<td><p><span style="color:red"><strong>Lab 4 Due</strong> <br> <strong>Lab 5 Out</strong></span></p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p><span style="color:red"><strong>Lab 5: Bayesian Decoding of Neural Spike Trains</strong> <em>Released Wed, Apr 30; Due Wed, May 7 at 11:59pm.</em></span></p>
-</section>
 </section>
 <section id="unit-iii-unsupervised-models-of-neural-and-behavioral-data">
 <h3>Unit III: Unsupervised models of neural and behavioral data<a class="headerlink" href="#unit-iii-unsupervised-models-of-neural-and-behavioral-data" title="Link to this heading">#</a></h3>
-<section id="week-6-segmenting-behavioral-video">
-<h4>Week 6: Segmenting Behavioral Video<a class="headerlink" href="#week-6-segmenting-behavioral-video" title="Link to this heading">#</a></h4>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Date</p></th>
-<th class="head"><p>Topic</p></th>
+<th class="head"><p>Neuro Topic</p></th>
+<th class="head"><p>ML Topic</p></th>
 <th class="head"><p>Reading</p></th>
+<th class="head"><p>Assignment</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Mon, May 5</p></td>
+<td><p>Behavioral Segmentation</p></td>
 <td><p>Hidden Markov Models (HMMs)</p></td>
+<td><p></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>Wed, May 7</p></td>
+<td><p>Behavioral Segmentation</p></td>
 <td><p>Expectation Maximization (EM)</p></td>
 <td><p></p></td>
+<td><p><span style="color:red"><strong>Lab 5 Due</strong> <br> <strong>Lab 6 Out</strong></span></p></td>
 </tr>
-</tbody>
-</table>
-</div>
-<p><span style="color:red"><strong>Lab 6: Autoregressive HMMs for Behavioral Video</strong> <em>Released Wed, May 7; Due Wed, May 14 at 11:59pm.</em></span></p>
-</section>
-<section id="week-7-modeling-low-dimensional-neural-dynamics">
-<h4>Week 7: Modeling Low-Dimensional Neural Dynamics<a class="headerlink" href="#week-7-modeling-low-dimensional-neural-dynamics" title="Link to this heading">#</a></h4>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Date</p></th>
-<th class="head"><p>Topic</p></th>
-<th class="head"><p>Reading</p></th>
-</tr>
-</thead>
-<tbody>
 <tr class="row-even"><td><p>Mon, May 12</p></td>
+<td><p>Neural Dynamics</p></td>
 <td><p>Linear Dynamical Systems (LDS)</p></td>
+<td><p></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>Wed, May 14</p></td>
-<td><p>Switching linear dynamical systems (SLDS)</p></td>
+<td><p>Neural Dynamics</p></td>
+<td><p>Switching Linear Dynamical Systems (SLDS)</p></td>
 <td><p></p></td>
+<td><p><span style="color:red"><strong>Lab 6 Due</strong> <br> <strong>Lab 7 Out</strong></span></p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p><span style="color:red"><strong>Lab 7: State Space Models of Neural Activity</strong> <em>Released Wed, May 14; Due Wed, May 21 at 11:59pm.</em></span></p>
-</section>
 </section>
 <section id="unit-iv-current-research-topics">
 <h3>Unit IV: Current Research Topics<a class="headerlink" href="#unit-iv-current-research-topics" title="Link to this heading">#</a></h3>
@@ -574,37 +524,48 @@ Stanford University</p>
 <tr class="row-odd"><th class="head"><p>Date</p></th>
 <th class="head"><p>Topic</p></th>
 <th class="head"><p>Reading</p></th>
+<th class="head"><p>Assignment</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Mon, May 19</p></td>
 <td><p>(Sequential) Variational Autoencoders</p></td>
 <td><p></p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>Wed, May 21</p></td>
 <td><p>Gaussian Process State Space Models</p></td>
 <td><p></p></td>
+<td><p><span style="color:red"><strong>Lab 7 Due</strong></span></p></td>
 </tr>
 <tr class="row-even"><td><p>Mon, May 26</p></td>
 <td><p><em>Memorial Day, No Class</em></p></td>
+<td><p></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>Wed, May 28</p></td>
 <td><p>(Neuromodulated) Recurrent Neural Networks</p></td>
 <td><p></p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>Mon, Jun 2</p></td>
 <td><p>Deep State Space Models</p></td>
+<td><p></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>Wed, Jun 4</p></td>
 <td><p>Foundation Models for Neuroscience</p></td>
 <td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Mon, Jun 9</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p><span style="color:red"><strong>Final Project Due</strong></span></p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p><span style="color:red"><strong>Final Project</strong> <em>Due Mon, June 9 at 11:59pm.</em></span></p>
 </section>
 </section>
 <section id="labs">
@@ -613,6 +574,7 @@ Stanford University</p>
 <li><p>Each week, you will implement a minimal version of the method we discussed in lecture. These labs will be your assignments.</p></li>
 <li><p>You must work in a <strong>team of two</strong> people.</p></li>
 <li><p>Lab reports will be submitted via GradeScope.</p></li>
+<li><p>Assignments are due at 11:59pm PT.</p></li>
 </ul>
 </section>
 <section id="final-project">
@@ -623,6 +585,10 @@ Stanford University</p>
 <li><p>A project proposal will be due <strong>TBD.</strong></p></li>
 <li><p>The final report will be due <strong>Mon, June 9 at 11:59pm.</strong></p></li>
 </ul>
+</section>
+<section id="late-policy">
+<h2>Late Policy<a class="headerlink" href="#late-policy" title="Link to this heading">#</a></h2>
+<p>We will allow 7 late days to be used as needed throughout the quarter. Since assignments are done in teams of two, both students must have sufficient late days to turn in a late assignment. Unfortunately, we cannot allow late days on the final project.</p>
 </section>
 <section id="grading">
 <h2>Grading<a class="headerlink" href="#grading" title="Link to this heading">#</a></h2>
@@ -686,27 +652,15 @@ Stanford University</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistics">Logistics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#book">Book</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schedule">Schedule</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-i-extracting-biological-signals-from-raw-data">Unit I: Extracting Biological Signals from Raw Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#week-1-spike-sorting">Week 1: Spike Sorting</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#week-2-calcium-deconvolution">Week 2: Calcium Deconvolution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#week-3-markerless-pose-tracking">Week 3: Markerless Pose Tracking</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-ii-encoding-and-decoding-models-for-neural-data">Unit II: Encoding and Decoding Models for Neural Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#week-4-predicting-neural-responses-with-glms">Week 4: Predicting Neural Responses with GLMs</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#week-5-decoding-neural-activity">Week 5: Decoding Neural Activity</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-iii-unsupervised-models-of-neural-and-behavioral-data">Unit III: Unsupervised models of neural and behavioral data</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#week-6-segmenting-behavioral-video">Week 6: Segmenting Behavioral Video</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#week-7-modeling-low-dimensional-neural-dynamics">Week 7: Modeling Low-Dimensional Neural Dynamics</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-i-extracting-biological-signals-from-raw-data">Unit I: Extracting Biological Signals from Raw Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-ii-encoding-and-decoding-models-for-neural-data">Unit II: Encoding and Decoding Models for Neural Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-iii-unsupervised-models-of-neural-and-behavioral-data">Unit III: Unsupervised models of neural and behavioral data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-iv-current-research-topics">Unit IV: Current Research Topics</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#labs">Labs</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-project">Final project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#late-policy">Late Policy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading">Grading</a></li>
 </ul>
   </nav></div>
