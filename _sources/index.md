@@ -1,12 +1,12 @@
-# Introduction
+# Syllabus
 
 **Welcome to STATS320!**
 
 _This course is cross-listed as STATS220, NBIO220 and CS339N. They are all the same. Enroll in the version that is best for your degree requirements._
 
 **Instructor:** Scott Linderman <br>
-**TAs:** Sifan Liu and Ying Jin <br>
-Winter Quarter, 2022-23 <br>
+**TAs:** Noah Cowan <br>
+Spring Quarter, 2024-25 <br>
 Stanford University
 
 ## Course Description
@@ -16,80 +16,113 @@ With modern high-density electrodes and optical imaging techniques, neuroscienti
 You should be comfortable with basic probability (STATS 116) as well as multivariate calculus and linear algebra. This course will emphasize implementing models and algorithms in Python, so coding proficiency is important. We will have a coding primer in the first week to help get you up to speed if you're coming from R or Matlab.
 
 ## Logistics
-- **Time:** MWF 11:30am-12:20pm
-- **Location:** MW in 380-380Y, F in Turing Auditorium (Polya Hall)
+- **Time:** MW 1:30am-2:20pm
+- **Location:** MW in [STLC115](http://campus-map.stanford.edu/?srch=STLC115)
 - **Grading:** Credit or letter grade
-- **Components:** Lectures on Mon/Wed, in-class labs on Fri
+- **Components:** Lectures on Mon/Wed
 - **Office Hours:**
-    - Sifan: 6:00-7:30pm Tues, Sequoia Hall, Room 207
-    - Scott: 1:30-2:30pm Wed, Wu Tsai Neurosciences Institute, 2nd floor by the NeuroTheory center
-    - Ying: 11:00-12:30pm Thurs, Sequoia Hall, Room 207
+    - Scott: 10:30am-12:00pm Tuesday, Wu Tsai Neurosciences Institute, 2nd floor by the NeuroTheory center
+    - Noah: TBD
 - This course will have a **final project, not an exam**
 
+## Book
+We will use an online textbook called [_Machine Learning Methods for Neural Data Analysis_](https://slinderman.github.io/ml4nd/) that I have been developing for this course over the past few years. It's a work in progress, and I will continue to update it throughout the quarter!
 
 ## Schedule
-The lectures develop the theory behind the methods developed in lab. I've organized the course into three units: signal extraction, encoding and decoding, and unsupervised modeling. At the end, you'll work on a final project in which you will use, explore, or extend the techniques studied in class.
+The lectures develop the theory behind the methods developed in the labs (i.e., homework assignments). I've organized the course into four units: signal extraction, encoding and decoding, unsupervised modeling, and current research. At the end, you'll work on a final project in which you will use, explore, or extend the techniques studied in class.
 
-### Unit I: Extracting biological signals from raw data
-| Date        | Type       | Topic |
-| ----------- | ---------- | ----- |
-| Mon, Jan 9  | Lecture 1  | Course overview {Download}`[slides]<lectures/pdf/lecture01.pdf>`
-| Wed, Jan 11 | Lecture 2  | [Probabilistic modeling](lectures/02_probabilistic_modeling)
-| Fri, Jan 13 | Lecture 3 <br> **Lab 0**  | [Basic neurobiology](lectures/03_neurobio)  <br> [**Python and PyTorch primer**](labs/00_pytorch_primer.ipynb) (not graded)
-| Mon, Jan 16 | MLK Day    | _No class_
-| Wed, Jan 18 | Lecture 4  | [Simple spike sorting](lectures/04_simple_spike_sorting.ipynb) {Download}`[slides]<lectures/pdf/04_spike_sorting.pdf>`
-| Fri, Jan 20 | **Lab 1**  | [**Spike sorting**](labs/01_spike_sorting.ipynb)
-| Mon, Jan 23 | Lecture 5  | [Spike sorting by deconvolution](lectures/05_deconv_spike_sorting.ipynb) {Download}`[slides]<lectures/pdf/05_spike_sorting_deconv.pdf>`
-| Wed, Jan 25 | Lecture 6  | [Demixing and deconvolving calcium imaging data](lectures/06_calcium_imaging.ipynb) {Download}`[slides]<lectures/pdf/06_calcium_imaging.pdf>`
-| Fri, Jan 27 | **Lab 2**  | [**Calcium deconvolution**](labs/02_calcium_imaging.ipynb)
-| Mon, Jan 30 | Lecture 7  | [Markerless pose tracking](lectures/07_pose_tracking.ipynb) {Download}`[slides]<lectures/pdf/07_pose_tracking.pdf>`
-| Wed, Feb 1  | Lecture 8  | [Markerless pose tracking](lectures/07_pose_tracking.ipynb) {Download}`[slides]<lectures/pdf/07_pose_tracking.pdf>`
-| Fri, Feb 3  | **Lab 3**  | [**Markerless pose tracking**](labs/03_pose_tracking.ipynb)
+### Unit I: Extracting Biological Signals from Raw Data
 
-### Unit II: Encoding and decoding models for neural data
-| Date        | Type       | Topic |
-| ----------- | ---------- | ----- |
-| Mon, Feb 6  | Lecture 9  | [Summary statistics](lectures/08_summary_stats.ipynb) and [GLMs](lectures/09_glm.ipynb) {Download}`[slides]<lectures/pdf/08_encoding.pdf>`
-| Wed, Feb 8  | Lecture 10 | [GLMs](lectures/09_glm.ipynb) {Download}`[slides]<lectures/pdf/08_encoding.pdf>`
-| Fri, Feb 10 | **Lab 4**      | [**Generalized linear models**](labs/04_glms.ipynb)
-| Mon, Feb 13 | Lecture 11 | [Poisson processes](lectures/10_poisson_processes.ipynb) {Download}`[slides]<lectures/pdf/09_poisson_processes.pdf>`
-| Wed, Feb 15 | Lecture 12 | [Bayesian decoding of neural spike trains](lectures/11_decoding.ipynb) {Download}`[slides]<lectures/pdf/10_decoding.pdf>`
-| Fri, Feb 17 | **Lab 5**      | [**Bayesian decoding**](labs/05_decoding.ipynb)
+#### Week 1: Spike Sorting
+| Date        | Topic | Reading |
+| ----------- | ----- | ------- |
+| Mon, Mar 31 | Course Overview {Download}`[slides]<lectures/pdf/lecture01.pdf>` | [Basic neurobiology](lectures/03_neurobio) |
+| Wed, Apr 2  | Mixture Models | [Probabilistic modeling](lectures/02_probabilistic_modeling) |
+
+<span style="color:red">**Lab 1: Spike Sorting** _Released Wed, Apr 2; Due Wed, Apr 9 at 11:59pm._</span>
+
+#### Week 2: Calcium Deconvolution
+| Date        | Topic | Reading |
+| ----------- | ----- | ------- |
+| Mon, Apr 7  | Matrix Factorization | |
+| Wed, Apr 9  | Convex Optimization | |
+
+<span style="color:red">**Lab 2: Calcium Deconvolution** _Released Wed, Apr 9; Due Wed, Apr 16 at 11:59pm._</span>
+
+#### Week 3: Markerless Pose Tracking
+| Date        | Topic | Reading |
+| ----------- | ----- | ------- |
+| Mon, Apr 14 | Convolution and Cross-Correlation | | 
+| Wed, Apr 16 | Convolutional Neural Networks (CNNs) | | 
+
+<span style="color:red">**Lab 3: Markerless Pose Tracking** _Released Wed, Apr 16; Due Wed, Apr 23 at 11:59pm._</span>
+
+
+### Unit II: Encoding and Decoding Models for Neural Data
+
+#### Week 4: Predicting Neural Responses with GLMs
+| Date        | Topic | Reading |
+| ----------- | ----- | ------- |
+| Mon, Apr 21 | [Generalized Linear Models (GLMs)]() | | 
+| Wed, Apr 23 | [Poisson Processes]() | |
+
+<span style="color:red">**Lab 4: Generalized Linear Models of Neural Responses** _Released Wed, Apr 23; Due Wed, Apr 30 at 11:59pm._</span>
+
+#### Week 5: Decoding Neural Activity
+| Date        | Topic | Reading |
+| ----------- | ----- | ------- |
+| Mon, Apr 28 | Bayesian Inference | | 
+| Wed, Apr 30 | Markov Chain Monte Carlo (MCMC) | |
+
+<span style="color:red">**Lab 5: Bayesian Decoding of Neural Spike Trains** _Released Wed, Apr 30; Due Wed, May 7 at 11:59pm._</span>
 
 ### Unit III: Unsupervised models of neural and behavioral data
-| Date        | Type       | Topic |
-| ----------- | ---------- | ----- |
-| Mon, Feb 20 | Pres. Day  | _No class_
-| Wed, Feb 22 | Lecture 13 | [Mixture Models, EM](lectures/12_mixtures_em.ipynb) and Hidden Markov models (HMMs)  {Download}`[slides]<lectures/pdf/11_hmms.pdf>`
-| Fri, Feb 24 | **Lab 6**      | [Autoregressive HMMs](labs/06_arhmm.ipynb)
-| Mon, Feb 27 | Lecture 14 | More HMMs {Download}`[slides]<lectures/pdf/12_hmm_continued.pdf>` <br> **Final project proposal due**
-| Wed, Mar 1  | Lecture 15 | Switching linear dynamical systems (SLDS) {Download}`[slides]<lectures/pdf/13_slds.pdf>`
-| Fri, Mar 3  | **Lab 7** <br> (not graded) | [Switching linear dynamical systems](labs/07_slds.ipynb)
-| Mon, Mar 6  | Lecture 16 | Variational Autoencoders (VAEs) {Download}`[slides]<lectures/pdf/14_vaes.pdf>`
-| Wed, Mar 8  | Lecture 17 | Sequential VAEs {Download}`[slides]<lectures/pdf/15_seqvaes.pdf>`
-| Fri, Mar 10 | **Lab 8** <br> (not graded) | [Sequential VAEs](labs/08_lfads.ipynb)
-| Mon, Mar 13 | Guest Lec. | [Russ Poldrack](https://poldrack.github.io/): [fMRI Data Analysis](lectures/poldrack_fmri_analysis.ipynb)
-| Wed, Mar 15 | Lecture 19 | Current research
-| Fri, Mar 17 | Presentations | Project presentations **11:20-1:20pm, with lunch provided**
+
+#### Week 6: Segmenting Behavioral Video
+| Date        | Topic | Reading |
+| ----------- | ----- | ------- |
+| Mon, May 5  | Hidden Markov Models (HMMs) | | 
+| Wed, May 7  | Expectation Maximization (EM) | |
+
+<span style="color:red">**Lab 6: Autoregressive HMMs for Behavioral Video** _Released Wed, May 7; Due Wed, May 14 at 11:59pm._</span>
+
+#### Week 7: Modeling Low-Dimensional Neural Dynamics
+
+| Date        | Topic | Reading |
+| ----------- | ----- | ------- |
+| Mon, May 12 | Linear Dynamical Systems (LDS) | |
+| Wed, May 14 | Switching linear dynamical systems (SLDS) | |
+
+<span style="color:red">**Lab 7: State Space Models of Neural Activity** _Released Wed, May 14; Due Wed, May 21 at 11:59pm._</span>
+
+### Unit IV: Current Research Topics
+
+| Date        | Topic | Reading |
+| ----------- | ----- | ------- |
+| Mon, May 19 | (Sequential) Variational Autoencoders | | 
+| Wed, May 21 | Gaussian Process State Space Models | | 
+| Mon, May 26 | _Memorial Day, No Class_ |   |
+| Wed, May 28 | (Neuromodulated) Recurrent Neural Networks | |
+| Mon, Jun 2  | Deep State Space Models | |
+| Wed, Jun 4  | Foundation Models for Neuroscience| | 
+
+<span style="color:red">**Final Project** _Due Mon, June 9 at 11:59pm._</span>
 
 ## Labs
-- You will work start the labs in class on Fridays, so attendance is required. (If you are sick or have a one-time conflict, please let me know as soon as possible.)
-- You will be automatically assigned to a team of 3 students.
-- The labs will probably take more than one class period to complete. You should find time to work with your teammates outside of class to finish them.
-- The labs are due the following Thursday night at 11:59pm.
+- Each week, you will implement a minimal version of the method we discussed in lecture. These labs will be your assignments.
+- You must work in a **team of two** people. 
 - Lab reports will be submitted via GradeScope.
 
 ## Final project
 
-- You will work on the final project in teams of 2-3 people (you choose your team!)
-- You must use real neural or behavioral data. We will provide links to suggested datasets, or if you are an experimentalist, you can use your own!
-- A project proposal will be due **Monday, Feb 27 at 11:30am.**
-- The final report will be due **Friday, Mar 24 at 11:30am.**
+- You will work on the final project in teams of 2 people (you choose your team!)
+- You must use real neural or behavioral data. We will provide links to suggested datasets, or if you are an experimentalist, you can use your own.
+- A project proposal will be due **TBD.**
+- The final report will be due **Mon, June 9 at 11:59pm.**
 
 ## Grading
-- First 6 labs: 10% each, total 60%
-- Final project presentation: 10%
-- Final project report: 20%
+- 7 labs: 10% each, total 70%
+- Final project: 25%
 - Participation: 5%
 
-*Note: We will work on Labs 7 and 8 in class, but they will not be graded. That way you can focus on final proejcts in March. Your attendance on those days will count toward the class participation grade.*
+**Note: You must do a final project in order to pass.**
