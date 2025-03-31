@@ -1,8 +1,0 @@
-numpy
-scipy
-scikit-learn
-torch
-jupyter-book
-matplotlib
-tqdm
-seaborn
