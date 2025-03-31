@@ -3,17 +3,6 @@ title: Machine Learning Methods for Neural Data Analysis
 author: Scott Linderman
 execute:
   execute_notebooks: force
-  exclude_patterns:
-    - '00_pytorch_primer.ipynb'
-    - '01_spike_sorting.ipynb'
-    - '02_calcium_imaging.ipynb'
-    - '03_pose_tracking.ipynb'
-    - '04_glms.ipynb'
-    - '05_decoding.ipynb'
-    - '06_arhmm.ipynb'
-    - '07_slds.ipynb'
-    - '08_lfads.ipynb'
-    - 'poldrack_fmri_analysis.ipynb'
 only_build_toc_files: true
 
 # Add a bibtex file so that we can create citations
@@ -28,7 +17,7 @@ sphinx:
 # Information about where the book exists on the web
 repository:
   url                       : https://github.com/slinderman/stats320  # Online location of your book
-  branch                    : winter2023  # Which branch of the repository should be used when creating links (optional)
+  branch                    : spring2025  # Which branch of the repository should be used when creating links (optional)
 
 launch_buttons:
   binderhub_url: ""
