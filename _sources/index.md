@@ -16,17 +16,17 @@ With modern high-density electrodes and optical imaging techniques, neuroscienti
 You should be comfortable with basic probability (STATS 116) as well as multivariate calculus and linear algebra. This course will emphasize implementing models and algorithms in Python, so coding proficiency is important. We will have a coding primer in the first week to help get you up to speed if you're coming from R or Matlab.
 
 ## Logistics
-- **Time:** MW 1:30am-2:20pm
+- **Time:** MW 1:30pm-2:20pm
 - **Location:** MW in [STLC115](http://campus-map.stanford.edu/?srch=STLC115)
 - **Grading:** Credit or letter grade
 - **Components:** Lectures on Mon/Wed
 - **Office Hours:**
     - Scott: 10:30am-12:00pm Tuesday, Wu Tsai Neurosciences Institute, 2nd floor by the NeuroTheory center
-    - Noah: 10am Monday, location TBD
+    - Noah: 10am Monday, CoDa room B40
 - This course will have a **final project, not an exam**
 
 ## Book
-We will use an online textbook called [_Machine Learning Methods for Neural Data Analysis_](https://slinderman.github.io/ml4nd/) that I have been developing for this course over the past few years. It's a work in progress, and I will continue to update it throughout the quarter!
+We will use an online textbook that I have been developing over the past few years called [_Machine Learning Methods for Neural Data Analysis_](https://slinderman.github.io/ml4nd/). It's a work in progress, and I will continue to update it throughout the quarter!
 
 ## Schedule
 The lectures develop the theory behind the methods developed in the labs (i.e., homework assignments). I've organized the course into four units: signal extraction, encoding and decoding, unsupervised modeling, and current research. At the end, you'll work on a final project in which you will use, explore, or extend the techniques studied in class.
@@ -35,7 +35,7 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 
 | Date        | Neuro Topic | ML Topic | Reading | Assignment |
 | ----------- | ------------------ | -------- | ------- | ---------- |
-| Mon, Mar 31 | Course Overview {Download}`[slides]<lectures/pdf/lecture01.pdf>` | | [Basic neurobiology](lectures/03_neurobio) |
+| Mon, Mar 31 | Course Overview {Download}`[slides]<slides/pdf/01_intro.pdf>` | | [Basic neurobiology](lectures/03_neurobio) |
 | Wed, Apr 2  | Spike Sorting | Mixture Models | [Probabilistic modeling](lectures/02_probabilistic_modeling) | <span style="color:red">**Lab 1 Out**</span> | 
 | Mon, Apr 7  | Calcium Deconvolution | Matrix Factorization | | | 
 | Wed, Apr 9  | Calcium Deconvolution | Convex Optimization  | | <span style="color:red">**Lab 1 Due** <br> **Lab 2 Out**</span> |
@@ -75,8 +75,9 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 ## Labs
 - Each week, you will implement a minimal version of the method we discussed in lecture. These labs will be your assignments.
 - You must work in a **team of two** people. 
+- There's a **catch**! You may _not_ work with the same person twice. (We will have a discussion forum on Ed to facilitate matching.)
 - Lab reports will be submitted via GradeScope.
-- Assignments are due at 11:59pm PT.
+- All assignments are due at 11:59pm PT on the specified date.
 
 ## Final project
 
