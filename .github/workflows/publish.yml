@@ -5,7 +5,7 @@ on:
 
   push:
     branches:
-      - winter2023
+      - spring2025
 
 jobs:
   publish:
