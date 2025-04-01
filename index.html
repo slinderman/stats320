@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Machine Learning Methods for Neural Data Analysis</title>
+    <title>Syllabus &#8212; Machine Learning Methods for Neural Data Analysis</title>
   
   
   
@@ -169,7 +169,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    <no title>
+                    Syllabus
                 </a>
             </li>
         </ul>
@@ -310,7 +310,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Syllabus</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -319,9 +319,23 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-description">Course Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistics">Logistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#book">Book</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schedule">Schedule</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-i-extracting-biological-signals-from-raw-data">Unit I: Extracting Biological Signals from Raw Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-ii-encoding-and-decoding-models-for-neural-data">Unit II: Encoding and Decoding Models for Neural Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-iii-unsupervised-models-of-neural-and-behavioral-data">Unit III: Unsupervised models of neural and behavioral data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-iv-current-research-topics">Unit IV: Current Research Topics</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#labs">Labs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-project">Final project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#late-policy">Late Policy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading">Grading</a></li>
+</ul>
             </nav>
         </div>
     </div>
@@ -332,7 +346,262 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="syllabus">
+<h1>Syllabus<a class="headerlink" href="#syllabus" title="Link to this heading">#</a></h1>
+<p><strong>Welcome to STATS320!</strong></p>
+<p><em>This course is cross-listed as STATS220, NBIO220 and CS339N. They are all the same. Enroll in the version that is best for your degree requirements.</em></p>
+<p><strong>Instructor:</strong> Scott Linderman <br>
+<strong>TAs:</strong> Noah Cowan <br>
+Spring Quarter, 2024-25 <br>
+Stanford University</p>
+<section id="course-description">
+<h2>Course Description<a class="headerlink" href="#course-description" title="Link to this heading">#</a></h2>
+<p>With modern high-density electrodes and optical imaging techniques, neuroscientists routinely measure the activity of hundreds, if not thousands, of cells simultaneously.  Coupled with high-resolution behavioral measurements, these datasets offer unprecedented opportunities to learn how neural circuits function.  This course will study statistical machine learning methods for analysing such datasets, including: spike sorting and calcium deconvolution techniques for extracting relevant signals from raw data; markerless tracking methods for estimating animal pose in behavioral videos; state space models for analysis of high-dimensional neural and behavioral time-series; point process models of neural spike trains; and deep learning methods for neural encoding and decoding. We will develop the theory behind these models and algorithms and then apply them to real datasets in the in-class coding labs and final project.</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<p>You should be comfortable with basic probability (STATS 116) as well as multivariate calculus and linear algebra. This course will emphasize implementing models and algorithms in Python, so coding proficiency is important. We will have a coding primer in the first week to help get you up to speed if you’re coming from R or Matlab.</p>
+</section>
+<section id="logistics">
+<h2>Logistics<a class="headerlink" href="#logistics" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Time:</strong> MW 1:30pm-2:20pm</p></li>
+<li><p><strong>Location:</strong> MW in <a class="reference external" href="http://campus-map.stanford.edu/?srch=STLC115">STLC115</a></p></li>
+<li><p><strong>Grading:</strong> Credit or letter grade</p></li>
+<li><p><strong>Components:</strong> Lectures on Mon/Wed</p></li>
+<li><p><strong>Office Hours:</strong></p>
+<ul>
+<li><p>Scott: 10:30am-12:00pm Tuesday, Wu Tsai Neurosciences Institute, 2nd floor by the NeuroTheory center</p></li>
+<li><p>Noah: 10am-11:30am Monday, CoDa room B06</p></li>
+</ul>
+</li>
+<li><p>This course will have a <strong>final project, not an exam</strong></p></li>
+</ul>
+</section>
+<section id="book">
+<h2>Book<a class="headerlink" href="#book" title="Link to this heading">#</a></h2>
+<p>We will use an online textbook that I have been developing over the past few years called <a class="reference external" href="https://slinderman.github.io/ml4nd/"><em>Machine Learning Methods for Neural Data Analysis</em></a>. It’s a work in progress, and I will continue to update it throughout the quarter!</p>
+</section>
+<section id="schedule">
+<h2>Schedule<a class="headerlink" href="#schedule" title="Link to this heading">#</a></h2>
+<p>The lectures develop the theory behind the methods developed in the labs (i.e., homework assignments). I’ve organized the course into four units: signal extraction, encoding and decoding, unsupervised modeling, and current research. At the end, you’ll work on a final project in which you will use, explore, or extend the techniques studied in class.</p>
+<section id="unit-i-extracting-biological-signals-from-raw-data">
+<h3>Unit I: Extracting Biological Signals from Raw Data<a class="headerlink" href="#unit-i-extracting-biological-signals-from-raw-data" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Date</p></th>
+<th class="head"><p>Neuro Topic</p></th>
+<th class="head"><p>ML Topic</p></th>
+<th class="head"><p>Reading</p></th>
+<th class="head"><p>Assignment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mon, Mar 31</p></td>
+<td><p>Course Overview <a class="reference download internal" download="" href="_downloads/3e6b34588d18773926f43347f7cd4538/01_intro.pdf"><code class="xref download docutils literal notranslate"><span class="pre">[slides]</span></code></a></p></td>
+<td><p></p></td>
+<td><p><a class="reference external" href="https://slinderman.github.io/ml4nd/chapters/03_neurobio.html">Basic neurobiology</a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Wed, Apr 2</p></td>
+<td><p>Spike Sorting</p></td>
+<td><p>Mixture Models</p></td>
+<td><p><a class="reference external" href="https://slinderman.github.io/ml4nd/chapters/02_probabilistic_modeling.html">Probabilistic modeling</a></p></td>
+<td><p><span style="color:red"><strong>Lab 1 Out</strong></span></p></td>
+</tr>
+<tr class="row-even"><td><p>Mon, Apr 7</p></td>
+<td><p>Calcium Deconvolution</p></td>
+<td><p>Matrix Factorization</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Wed, Apr 9</p></td>
+<td><p>Calcium Deconvolution</p></td>
+<td><p>Convex Optimization</p></td>
+<td><p></p></td>
+<td><p><span style="color:red"><strong>Lab 1 Due</strong> <br> <strong>Lab 2 Out</strong></span></p></td>
+</tr>
+<tr class="row-even"><td><p>Mon, Apr 14</p></td>
+<td><p>Markerless Pose Tracking</p></td>
+<td><p>Convolution and Cross-Correlation</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Wed, Apr 16</p></td>
+<td><p>Markerless Pose Tracking</p></td>
+<td><p>Convolutional Neural Networks (CNNs)</p></td>
+<td><p></p></td>
+<td><p><span style="color:red"><strong>Lab 2 Due</strong> <br> <strong>Lab 3 Out</strong></span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="unit-ii-encoding-and-decoding-models-for-neural-data">
+<h3>Unit II: Encoding and Decoding Models for Neural Data<a class="headerlink" href="#unit-ii-encoding-and-decoding-models-for-neural-data" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Date</p></th>
+<th class="head"><p>Neuro Topic</p></th>
+<th class="head"><p>ML Topic</p></th>
+<th class="head"><p>Reading</p></th>
+<th class="head"><p>Assignment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mon, Apr 21</p></td>
+<td><p>Neural Encoding</p></td>
+<td><p><a class="reference internal" href="#"><span class="xref myst">Generalized Linear Models (GLMs)</span></a></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Wed, Apr 23</p></td>
+<td><p>Neural Encoding</p></td>
+<td><p><a class="reference internal" href="#"><span class="xref myst">Poisson Processes</span></a></p></td>
+<td><p></p></td>
+<td><p><span style="color:red"><strong>Lab 3 Due</strong> <br> <strong>Lab 4 Out</strong></span></p></td>
+</tr>
+<tr class="row-even"><td><p>Mon, Apr 28</p></td>
+<td><p>Bayesian Decoding</p></td>
+<td><p>Bayesian Inference</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Wed, Apr 30</p></td>
+<td><p>Bayesian Decoding</p></td>
+<td><p>Markov Chain Monte Carlo (MCMC)</p></td>
+<td><p></p></td>
+<td><p><span style="color:red"><strong>Lab 4 Due</strong> <br> <strong>Lab 5 Out</strong></span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="unit-iii-unsupervised-models-of-neural-and-behavioral-data">
+<h3>Unit III: Unsupervised models of neural and behavioral data<a class="headerlink" href="#unit-iii-unsupervised-models-of-neural-and-behavioral-data" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Date</p></th>
+<th class="head"><p>Neuro Topic</p></th>
+<th class="head"><p>ML Topic</p></th>
+<th class="head"><p>Reading</p></th>
+<th class="head"><p>Assignment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mon, May 5</p></td>
+<td><p>Behavioral Segmentation</p></td>
+<td><p>Hidden Markov Models (HMMs)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Wed, May 7</p></td>
+<td><p>Behavioral Segmentation</p></td>
+<td><p>Expectation Maximization (EM)</p></td>
+<td><p></p></td>
+<td><p><span style="color:red"><strong>Lab 5 Due</strong> <br> <strong>Lab 6 Out</strong></span></p></td>
+</tr>
+<tr class="row-even"><td><p>Mon, May 12</p></td>
+<td><p>Neural Dynamics</p></td>
+<td><p>Linear Dynamical Systems (LDS)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Wed, May 14</p></td>
+<td><p>Neural Dynamics</p></td>
+<td><p>Switching Linear Dynamical Systems (SLDS)</p></td>
+<td><p></p></td>
+<td><p><span style="color:red"><strong>Lab 6 Due</strong> <br> <strong>Lab 7 Out</strong></span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="unit-iv-current-research-topics">
+<h3>Unit IV: Current Research Topics<a class="headerlink" href="#unit-iv-current-research-topics" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Date</p></th>
+<th class="head"><p>Topic</p></th>
+<th class="head"><p>Reading</p></th>
+<th class="head"><p>Assignment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Mon, May 19</p></td>
+<td><p>(Sequential) Variational Autoencoders</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Wed, May 21</p></td>
+<td><p>Gaussian Process State Space Models</p></td>
+<td><p></p></td>
+<td><p><span style="color:red"><strong>Lab 7 Due</strong></span></p></td>
+</tr>
+<tr class="row-even"><td><p>Mon, May 26</p></td>
+<td><p><em>Memorial Day, No Class</em></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Wed, May 28</p></td>
+<td><p>(Neuromodulated) Recurrent Neural Networks</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Mon, Jun 2</p></td>
+<td><p>Deep State Space Models</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Wed, Jun 4</p></td>
+<td><p>Foundation Models for Neuroscience</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Mon, Jun 9</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p><span style="color:red"><strong>Final Project Due</strong></span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="labs">
+<h2>Labs<a class="headerlink" href="#labs" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Each week, you will implement a minimal version of the method we discussed in lecture. These labs will be your assignments.</p></li>
+<li><p>You must work in a <strong>team of two</strong> people.</p></li>
+<li><p>There’s a <strong>catch</strong>! You may <em>not</em> work with the same person twice. (We will have a discussion forum on Ed to facilitate matching.)</p></li>
+<li><p>Lab reports will be submitted via GradeScope.</p></li>
+<li><p>All assignments are due at 11:59pm PT on the specified date.</p></li>
+</ul>
+</section>
+<section id="final-project">
+<h2>Final project<a class="headerlink" href="#final-project" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>You will work on the final project in teams of 2 people (you choose your team!)</p></li>
+<li><p>You must use real neural or behavioral data. We will provide links to suggested datasets, or if you are an experimentalist, you can use your own.</p></li>
+<li><p>A project proposal will be due <strong>TBD.</strong></p></li>
+<li><p>The final report will be due <strong>Mon, June 9 at 11:59pm.</strong></p></li>
+</ul>
+</section>
+<section id="late-policy">
+<h2>Late Policy<a class="headerlink" href="#late-policy" title="Link to this heading">#</a></h2>
+<p>We will allow 7 late days to be used as needed throughout the quarter. Since assignments are done in teams of two, both students must have sufficient late days to turn in a late assignment. Unfortunately, we cannot allow late days on the final project.</p>
+</section>
+<section id="grading">
+<h2>Grading<a class="headerlink" href="#grading" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>7 labs: 10% each, total 70%</p></li>
+<li><p>Final project: 25%</p></li>
+<li><p>Participation: 5%</p></li>
+</ul>
+<p><strong>Note: You must do a final project in order to pass.</strong></p>
+</section>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -378,9 +647,23 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-description">Course Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistics">Logistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#book">Book</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schedule">Schedule</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-i-extracting-biological-signals-from-raw-data">Unit I: Extracting Biological Signals from Raw Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-ii-encoding-and-decoding-models-for-neural-data">Unit II: Encoding and Decoding Models for Neural Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-iii-unsupervised-models-of-neural-and-behavioral-data">Unit III: Unsupervised models of neural and behavioral data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-iv-current-research-topics">Unit IV: Current Research Topics</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#labs">Labs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-project">Final project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#late-policy">Late Policy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading">Grading</a></li>
+</ul>
   </nav></div>
 
 </div></div>
