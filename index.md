@@ -5,7 +5,7 @@
 _This course is cross-listed as STATS220, NBIO220 and CS339N. They are all the same. Enroll in the version that is best for your degree requirements._
 
 **Instructor:** Scott Linderman <br>
-**TAs:** Noah Cowan <br>
+**TAs:** Noah Cowan and Amber Hu<br>
 Spring Quarter, 2024-25 <br>
 Stanford University
 
@@ -22,7 +22,8 @@ You should be comfortable with basic probability (STATS 116) as well as multivar
 - **Components:** Lectures on Mon/Wed
 - **Office Hours:**
     - Scott: 10:30am-12:00pm Tuesday, Wu Tsai Neurosciences Institute, 2nd floor by the NeuroTheory center
-    - Noah: 10am-11:30am Monday, CoDa room B06
+    - Noah: 10am Monday, CoDa room B40
+    - Amber: 1:30-3pm Friday, CoDa room B40
 - This course will have a **final project, not an exam**
 
 ## Book
@@ -35,8 +36,8 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 
 | Date        | Neuro Topic | ML Topic | Reading | Assignment |
 | ----------- | ------------------ | -------- | ------- | ---------- |
-| Mon, Mar 31 | Course Overview {Download}`[slides]<slides/pdf/01_intro.pdf>` | | [Basic neurobiology](https://slinderman.github.io/ml4nd/chapters/03_neurobio.html) |
-| Wed, Apr 2  | Spike Sorting | Mixture Models | [Probabilistic modeling](https://slinderman.github.io/ml4nd/chapters/02_probabilistic_modeling.html) | <span style="color:red">**Lab 1 Out**</span> | 
+| Mon, Mar 31 | Course Overview {Download}`[slides]<slides/pdf/01_intro.pdf>` | | [Basic neurobiology](https://slinderman.github.io/ml4nd/chapters/03_neurobio.html) <br> [Probabilistic modeling](https://slinderman.github.io/ml4nd/chapters/02_probabilistic_modeling.html)|
+| Wed, Apr 2  | Spike Sorting | Mixture Models | [Spike Sorting by Clustering](https://slinderman.github.io/ml4nd/chapters/04a_spike_sorting_clustering.html) | <span style="color:red">**Lab 1 Out**</span> | 
 | Mon, Apr 7  | Calcium Deconvolution | Matrix Factorization | | | 
 | Wed, Apr 9  | Calcium Deconvolution | Convex Optimization  | | <span style="color:red">**Lab 1 Due** <br> **Lab 2 Out**</span> |
 | Mon, Apr 14 | Markerless Pose Tracking | Convolution and Cross-Correlation | | |
