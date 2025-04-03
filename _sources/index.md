@@ -37,7 +37,7 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 | Date        | Neuro Topic | ML Topic | Reading | Assignment |
 | ----------- | ------------------ | -------- | ------- | ---------- |
 | Mon, Mar 31 | Course Overview {Download}`[slides]<slides/pdf/01_intro.pdf>` | | [Basic neurobiology](https://slinderman.github.io/ml4nd/chapters/03_neurobio.html) <br> [Probabilistic modeling](https://slinderman.github.io/ml4nd/chapters/02_probabilistic_modeling.html)|
-| Wed, Apr 2  | Spike Sorting | Mixture Models | [Spike Sorting by Clustering](https://slinderman.github.io/ml4nd/chapters/04a_spike_sorting_clustering.html) | <span style="color:red">**Lab 1 Out**</span> | 
+| Wed, Apr 2  | Spike Sorting | Mixture Models | [Spike Sorting by Clustering](https://slinderman.github.io/ml4nd/chapters/04a_spike_sorting_clustering.html) | <span style="color:red">[**Lab 1 Out**](https://slinderman.github.io/ml4nd/labs/01a_spike_sorting.html)</span> | 
 | Mon, Apr 7  | Calcium Deconvolution | Matrix Factorization | | | 
 | Wed, Apr 9  | Calcium Deconvolution | Convex Optimization  | | <span style="color:red">**Lab 1 Due** <br> **Lab 2 Out**</span> |
 | Mon, Apr 14 | Markerless Pose Tracking | Convolution and Cross-Correlation | | |
@@ -79,6 +79,10 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 - There's a **catch**! You may _not_ work with the same person twice. (We will have a discussion forum on Ed to facilitate matching.)
 - Lab reports will be submitted via GradeScope.
 - All assignments are due at 11:59pm PT on the specified date.
+
+### Links to Assignments
+
+1. [Lab 1: Spike Sorting by Clustering](https://slinderman.github.io/ml4nd/labs/01a_spike_sorting.html)
 
 ## Final project
 
