@@ -22,7 +22,7 @@ You should be comfortable with basic probability (STATS 116) as well as multivar
 - **Components:** Lectures on Mon/Wed
 - **Office Hours:**
     - Scott: 10:30am-12:00pm Tuesday, Wu Tsai Neurosciences Institute, 2nd floor by the NeuroTheory center
-    - Noah: 10am Monday, CoDa room B40
+    - Noah: 10am-11:30am Monday, CoDa room B06
     - Amber: 1:30-3pm Friday, CoDa room B40
 - This course will have a **final project, not an exam**
 
