@@ -39,7 +39,7 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 | Mon, Mar 31 | Course Overview {Download}`[slides]<slides/pdf/01_intro.pdf>` | | [Basic neurobiology](https://slinderman.github.io/ml4nd/chapters/03_neurobio.html) <br> [Probabilistic modeling](https://slinderman.github.io/ml4nd/chapters/02_probabilistic_modeling.html)|
 | Wed, Apr 2  | Spike Sorting | Mixture Models | [Spike Sorting by Clustering](https://slinderman.github.io/ml4nd/chapters/04a_spike_sorting_clustering.html) | <span style="color:red">[**Lab 1 Out**](https://slinderman.github.io/ml4nd/labs/01a_spike_sorting.html)</span> | 
 | Mon, Apr 7  | Spike Sorting{Download}`[slides]<slides/pdf/05_spike_sorting_deconv.pdf>` | Matrix Factorization | [Spike Sorting by Deconvolution](https://slinderman.github.io/ml4nd/chapters/05_deconv_spike_sorting.html) | | 
-| Wed, Apr 9  | Calcium Deconvolution | Convex Optimization  | | <span style="color:red">**Lab 1 Due** <br> **Lab 2 Out**</span> |
+| Wed, Apr 9  | Calcium Deconvolution{Download}`[slides]<slides/pdf/06_calcium_imaging.pdf>` | Convex Optimization  | [Calcium Deconvolution](https://slinderman.github.io/ml4nd/chapters/06_calcium_imaging.html) | <span style="color:red">**Lab 1 Due** <br> **Lab 2 Out**</span> |
 | Mon, Apr 14 | Markerless Pose Tracking | Convolution and Cross-Correlation | | |
 | Wed, Apr 16 | Markerless Pose Tracking | Convolutional Neural Networks (CNNs) | | <span style="color:red">**Lab 2 Due** <br> **Lab 3 Out**</span> |
 
