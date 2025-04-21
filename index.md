@@ -40,14 +40,14 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 | Wed, Apr 2  | Spike Sorting | Mixture Models | [Spike Sorting by Clustering](https://slinderman.github.io/ml4nd/chapters/04a_spike_sorting_clustering.html) | <span style="color:red">[**Lab 1 Out**](https://slinderman.github.io/ml4nd/labs/01a_spike_sorting.html)</span> | 
 | Mon, Apr 7  | Spike Sorting{Download}`[slides]<slides/pdf/05_spike_sorting_deconv.pdf>` | Matrix Factorization | [Spike Sorting by Deconvolution](https://slinderman.github.io/ml4nd/chapters/05_deconv_spike_sorting.html) | | 
 | Wed, Apr 9  | Calcium Deconvolution{Download}`[slides]<slides/pdf/06_calcium_imaging.pdf>` | Convex Optimization  | [Calcium Deconvolution](https://slinderman.github.io/ml4nd/chapters/06_calcium_imaging.html) | <span style="color:red">**Lab 1 Due** <br> [**Lab 2 Out**](https://slinderman.github.io/ml4nd/labs/02_calcium_imaging.html)</span> |
-| Mon, Apr 14 | Markerless Pose Tracking {Download}`[slides]<slides/pdf/07_pose_tracking.pdf>` | Convolution and Cross-Correlation | | |
-| Wed, Apr 16 | Markerless Pose Tracking | Convolutional Neural Networks (CNNs) | | <span style="color:red">**Lab 2 Due** <br> **Lab 3 Out**</span> |
+| Mon, Apr 14 | Markerless Pose Tracking {Download}`[slides]<slides/pdf/07_pose_tracking.pdf>` | Logistic Regression | [Markerless Pose Tracking](https://slinderman.github.io/ml4nd/chapters/07_pose_tracking.html) | |
+| Wed, Apr 16 | Markerless Pose Tracking {Download}`[slides]<slides/pdf/07_pose_tracking.pdf>`| Convolutional Neural Networks (CNNs) | [Markerless Pose Tracking](https://slinderman.github.io/ml4nd/chapters/07_pose_tracking.html) | <span style="color:red">**Lab 2 Due** <br> [**Lab 3 Out**](https://slinderman.github.io/ml4nd/labs/03_pose_tracking.html)</span> |
 
 ### Unit II: Encoding and Decoding Models for Neural Data
 
 | Date        | Neuro Topic | ML Topic | Reading | Assignment |
 | ----------- | ------------------ | -------- | ------- | ---------- |
-| Mon, Apr 21 | Neural Encoding | [Generalized Linear Models (GLMs)]() | |  |
+| Mon, Apr 21 | Neural Encoding {Download}`[slides]<slides/pdf/08_encoding.pdf>` | Generalized Linear Models (GLMs) | [Summary Statistics](https://slinderman.github.io/ml4nd/chapters/08_summary_stats.html) and [GLMs](https://slinderman.github.io/ml4nd/chapters/09_glm.html) | |
 | Wed, Apr 23 | Neural Encoding | [Poisson Processes]() | | <span style="color:red">**Lab 3 Due** <br> **Lab 4 Out**</span> |
 | Mon, Apr 28 | Bayesian Decoding | Bayesian Inference | | |
 | Wed, Apr 30 | Bayesian Decoding | Markov Chain Monte Carlo (MCMC) | | <span style="color:red">**Lab 4 Due** <br> **Lab 5 Out**</span> |
@@ -84,6 +84,7 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 
 1. [Lab 1: Spike Sorting by Clustering](https://slinderman.github.io/ml4nd/labs/01a_spike_sorting.html). Due Wed, Apr 9 at 11:59pm.
 2. [Lab 2: Calcium Demixing and Deconvolution](https://slinderman.github.io/ml4nd/labs/02_calcium_imaging.html) Due Wed, Apr 16 at 11:59pm.
+3. [Lab 3: Markerless Pose Tracking](https://slinderman.github.io/ml4nd/labs/03_pose_tracking.html) Due Wed, Apr 23 at 11:59pm.
 
 ## Final project
 
