@@ -48,7 +48,7 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 | Date        | Neuro Topic | ML Topic | Reading | Assignment |
 | ----------- | ------------------ | -------- | ------- | ---------- |
 | Mon, Apr 21 | Neural Encoding {Download}`[slides]<slides/pdf/08_encoding.pdf>` | Generalized Linear Models (GLMs) | [Summary Statistics](https://slinderman.github.io/ml4nd/chapters/08_summary_stats.html) and [GLMs](https://slinderman.github.io/ml4nd/chapters/09_glm.html) | |
-| Wed, Apr 23 | Neural Encoding | [Poisson Processes]() | | <span style="color:red">**Lab 3 Due** <br> **Lab 4 Out**</span> |
+| Wed, Apr 23 | Neural Encoding | Poisson Processes | [Poisson Processes](https://slinderman.github.io/ml4nd/chapters/10_poisson_processes.html) | <span style="color:red">**Lab 3 Due** <br> **Lab 4 Out**</span> |
 | Mon, Apr 28 | Bayesian Decoding | Bayesian Inference | | |
 | Wed, Apr 30 | Bayesian Decoding | Markov Chain Monte Carlo (MCMC) | | <span style="color:red">**Lab 4 Due** <br> **Lab 5 Out**</span> |
 
