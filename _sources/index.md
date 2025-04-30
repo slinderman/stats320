@@ -50,7 +50,7 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 | Mon, Apr 21 | Neural Encoding {Download}`[slides]<slides/pdf/08_encoding.pdf>` | Generalized Linear Models (GLMs) | [Summary Statistics](https://slinderman.github.io/ml4nd/chapters/08_summary_stats.html) and [GLMs](https://slinderman.github.io/ml4nd/chapters/09_glm.html) | |
 | Wed, Apr 23 | Neural Encoding | Poisson GLMs |  | <span style="color:red">**Lab 3 Due** <br> **Lab 4 Out**</span> |
 | Mon, Apr 28 | Bayesian Decoding | Poisson Processes{Download}`[slides]<slides/pdf/09_poisson_processes.pdf>` | [Poisson Processes](https://slinderman.github.io/ml4nd/chapters/10_poisson_processes.html) | |
-| Wed, Apr 30 | Bayesian Decoding | Bayesian Inference | | <span style="color:red">**Lab 4 Due** <br> **Lab 5 Out**</span> |
+| Wed, Apr 30 | Bayesian Decoding | Bayesian Inference{Download}`[slides]<slides/pdf/10_decoding.pdf>` | [Bayesian Decoding](https://slinderman.github.io/ml4nd/chapters/11_decoding.html) | <span style="color:red">**Lab 4 Due** <br> **Lab 5 Out**</span> |
 
 ### Unit III: Unsupervised models of neural and behavioral data
 
