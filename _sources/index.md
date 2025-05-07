@@ -56,10 +56,11 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 
 | Date        | Neuro Topic | ML Topic | Reading | Assignment |
 | ----------- | ------------------ | -------- | ------- | ---------- |
-| Mon, May 5  | Behavioral Segmentation | Hidden Markov Models (HMMs) | | |
-| Wed, May 7  | Behavioral Segmentation | Expectation Maximization (EM) | | <span style="color:red">**Lab 5 Due** <br> **Lab 6 Out**</span> |
+| Mon, May 5  | Behavioral Segmentation{Download}`[slides]<slides/pdf/11_hmms.pdf>` | Hidden Markov Models (HMMs) | [HMMs](https://slinderman.github.io/ml4nd/chapters/13_hmms.html) | |
+| Wed, May 7  | Behavioral Segmentation{Download}`[slides]<slides/pdf/12_em.pdf>` | Expectation Maximization (EM) | [HMMs](https://slinderman.github.io/ml4nd/chapters/13_hmms.html) | <span style="color:red">**Lab 5 Due** <br> **Lab 6 Out**</span> |
 | Mon, May 12 | Neural Dynamics | Linear Dynamical Systems (LDS) | | | 
 | Wed, May 14 | Neural Dynamics | Switching Linear Dynamical Systems (SLDS) | | <span style="color:red">**Lab 6 Due** <br> **Lab 7 Out**</span> |
+| Fri, May 16 | &mdash; | &mdash; | | <span style="color:red">**Project Proposal Due**</span> |
 
 ### Unit IV: Current Research Topics
 
@@ -85,12 +86,14 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 1. [Lab 1: Spike Sorting by Clustering](https://slinderman.github.io/ml4nd/labs/01a_spike_sorting.html). Due Wed, Apr 9 at 11:59pm.
 2. [Lab 2: Calcium Demixing and Deconvolution](https://slinderman.github.io/ml4nd/labs/02_calcium_imaging.html) Due Wed, Apr 16 at 11:59pm.
 3. [Lab 3: Markerless Pose Tracking](https://slinderman.github.io/ml4nd/labs/03_pose_tracking.html) Due Wed, Apr 23 at 11:59pm.
+4. [Lab 4: Generalized Linear Models](https://slinderman.github.io/ml4nd/labs/04_glms.html) Due Wed, Apr 30 at 11:59pm.
+5. [Lab 5: Bayesian Decoding](https://slinderman.github.io/ml4nd/labs/05_decoding.html) Due Wed, May 7 at 11:59pm.
 
 ## Final project
 
 - You will work on the final project in teams of 2 people (you choose your team!)
 - You must use real neural or behavioral data. We will provide links to suggested datasets, or if you are an experimentalist, you can use your own.
-- A project proposal will be due **TBD.**
+- A project proposal will be due **Fri, May 16 at 11:59pm.**
 - The final report will be due **Mon, June 9 at 11:59pm.**
 
 ## Late Policy
