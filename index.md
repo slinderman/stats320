@@ -48,16 +48,16 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 | Date        | Neuro Topic | ML Topic | Reading | Assignment |
 | ----------- | ------------------ | -------- | ------- | ---------- |
 | Mon, Apr 21 | Neural Encoding {Download}`[slides]<slides/pdf/08_encoding.pdf>` | Generalized Linear Models (GLMs) | [Summary Statistics](https://slinderman.github.io/ml4nd/chapters/08_summary_stats.html) and [GLMs](https://slinderman.github.io/ml4nd/chapters/09_glm.html) | |
-| Wed, Apr 23 | Neural Encoding | Poisson GLMs |  | <span style="color:red">**Lab 3 Due** <br> **Lab 4 Out**</span> |
+| Wed, Apr 23 | Neural Encoding | Poisson GLMs |  | <span style="color:red">**Lab 3 Due** <br> [**Lab 4 Out**](https://slinderman.github.io/ml4nd/labs/04_glms.html)</span> |
 | Mon, Apr 28 | Bayesian Decoding | Poisson Processes{Download}`[slides]<slides/pdf/09_poisson_processes.pdf>` | [Poisson Processes](https://slinderman.github.io/ml4nd/chapters/10_poisson_processes.html) | |
-| Wed, Apr 30 | Bayesian Decoding | Bayesian Inference{Download}`[slides]<slides/pdf/10_decoding.pdf>` | [Bayesian Decoding](https://slinderman.github.io/ml4nd/chapters/11_decoding.html) | <span style="color:red">**Lab 4 Due** <br> **Lab 5 Out**</span> |
+| Wed, Apr 30 | Bayesian Decoding | Bayesian Inference{Download}`[slides]<slides/pdf/10_decoding.pdf>` | [Bayesian Decoding](https://slinderman.github.io/ml4nd/chapters/11_decoding.html) | <span style="color:red">**Lab 4 Due** <br> [**Lab 5 Out**](https://slinderman.github.io/ml4nd/labs/05_decoding.html)</span> |
 
 ### Unit III: Unsupervised models of neural and behavioral data
 
 | Date        | Neuro Topic | ML Topic | Reading | Assignment |
 | ----------- | ------------------ | -------- | ------- | ---------- |
 | Mon, May 5  | Behavioral Segmentation{Download}`[slides]<slides/pdf/11_hmms.pdf>` | Hidden Markov Models (HMMs) | [HMMs](https://slinderman.github.io/ml4nd/chapters/13_hmms.html) | |
-| Wed, May 7  | Behavioral Segmentation{Download}`[slides]<slides/pdf/12_em.pdf>` | Expectation Maximization (EM) | [HMMs](https://slinderman.github.io/ml4nd/chapters/13_hmms.html) | <span style="color:red">**Lab 5 Due** <br> **Lab 6 Out**</span> |
+| Wed, May 7  | Behavioral Segmentation{Download}`[slides]<slides/pdf/12_em.pdf>` | Expectation Maximization (EM) | [HMMs](https://slinderman.github.io/ml4nd/chapters/13_hmms.html) | <span style="color:red">**Lab 5 Due** <br> [**Lab 6 Out**](https://slinderman.github.io/ml4nd/labs/06_arhmm.html)</span> |
 | Mon, May 12 | Neural Dynamics | Linear Dynamical Systems (LDS) | | | 
 | Wed, May 14 | Neural Dynamics | Switching Linear Dynamical Systems (SLDS) | | <span style="color:red">**Lab 6 Due** <br> **Lab 7 Out**</span> |
 | Fri, May 16 | &mdash; | &mdash; | | <span style="color:red">**Project Proposal Due**</span> |
@@ -70,8 +70,8 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 | Wed, May 21 | Gaussian Process State Space Models | | <span style="color:red">**Lab 7 Due**</span> |
 | Mon, May 26 | _Memorial Day, No Class_ | | | | 
 | Wed, May 28 | (Neuromodulated) Recurrent Neural Networks | | |
-| Mon, Jun 2  | Deep State Space Models | | |
-| Wed, Jun 4  | Foundation Models for Neuroscience| | |
+| Mon, Jun 2  | Foundation Models for Neuroscience | | |
+| Wed, Jun 4  | Wrap Up | | |
 | Mon, Jun 9  | | | <span style="color:red">**Final Project Due**</span> |
 
 ## Labs
@@ -88,6 +88,7 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 3. [Lab 3: Markerless Pose Tracking](https://slinderman.github.io/ml4nd/labs/03_pose_tracking.html) Due Wed, Apr 23 at 11:59pm.
 4. [Lab 4: Generalized Linear Models](https://slinderman.github.io/ml4nd/labs/04_glms.html) Due Wed, Apr 30 at 11:59pm.
 5. [Lab 5: Bayesian Decoding](https://slinderman.github.io/ml4nd/labs/05_decoding.html) Due Wed, May 7 at 11:59pm.
+5. [Lab 6: Autoregressive HMMs](https://slinderman.github.io/ml4nd/labs/06_arhmm.html) Due Wed, May 14 at 11:59pm.
 
 ## Final project
 
