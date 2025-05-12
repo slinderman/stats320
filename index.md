@@ -58,8 +58,8 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 | ----------- | ------------------ | -------- | ------- | ---------- |
 | Mon, May 5  | Behavioral Segmentation{Download}`[slides]<slides/pdf/11_hmms.pdf>` | Hidden Markov Models (HMMs) | [HMMs](https://slinderman.github.io/ml4nd/chapters/13_hmms.html) | |
 | Wed, May 7  | Behavioral Segmentation{Download}`[slides]<slides/pdf/12_em.pdf>` | Expectation Maximization (EM) | [HMMs](https://slinderman.github.io/ml4nd/chapters/13_hmms.html) | <span style="color:red">**Lab 5 Due** <br> [**Lab 6 Out**](https://slinderman.github.io/ml4nd/labs/06_arhmm.html)</span> |
-| Mon, May 12 | Neural Dynamics | Linear Dynamical Systems (LDS) | | | 
-| Wed, May 14 | Neural Dynamics | Switching Linear Dynamical Systems (SLDS) | | <span style="color:red">**Lab 6 Due** <br> **Lab 7 Out**</span> |
+| Mon, May 12 | Neural Dynamics | Switching Linear Dynamical Systems (SLDS){Download}`[slides]<slides/pdf/13_slds_new.pdf>` | | | 
+| Wed, May 14 | Neural Dynamics | Fitting SLDS models | | <span style="color:red">**Lab 6 Due** <br> **Lab 7 Out**</span> |
 | Fri, May 16 | &mdash; | &mdash; | | <span style="color:red">**Project Proposal Due**</span> |
 
 ### Unit IV: Current Research Topics
