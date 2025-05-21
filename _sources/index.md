@@ -66,8 +66,9 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 
 | Date        | Topic | Reading | Assignment |
 | ----------- | ----- | ------- | ---------- |
-| Mon, May 19 | (Sequential) Variational Autoencoders | | | 
-| Wed, May 21 | Gaussian Process State Space Models | | <span style="color:red">**Lab 7 Due**</span> |
+| Mon, May 19 | Variational Inference (VI){Download}`[slides]<slides/pdf/14_vi.pdf>` | [Blei et al. (2018)](https://arxiv.org/abs/1601.00670) | | 
+| Wed, May 21 | Sequential Variational Autoencoders{Download}`[slides]<slides/pdf/15_lfads.pdf>` | [Pandarinath et al. (2018)](https://www.nature.com/articles/s41592-018-0109-9) | |
+| Sat, May 24 | &mdash; | &mdash; | <span style="color:red">**Lab 7 Due**</span> |
 | Mon, May 26 | _Memorial Day, No Class_ | | | | 
 | Wed, May 28 | (Neuromodulated) Recurrent Neural Networks | | |
 | Mon, Jun 2  | Foundation Models for Neuroscience | | |
@@ -88,7 +89,8 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 3. [Lab 3: Markerless Pose Tracking](https://slinderman.github.io/ml4nd/labs/03_pose_tracking.html) Due Wed, Apr 23 at 11:59pm.
 4. [Lab 4: Generalized Linear Models](https://slinderman.github.io/ml4nd/labs/04_glms.html) Due Wed, Apr 30 at 11:59pm.
 5. [Lab 5: Bayesian Decoding](https://slinderman.github.io/ml4nd/labs/05_decoding.html) Due Wed, May 7 at 11:59pm.
-5. [Lab 6: Autoregressive HMMs](https://slinderman.github.io/ml4nd/labs/06_arhmm.html) Due Wed, May 14 at 11:59pm.
+6. [Lab 6: Autoregressive HMMs](https://slinderman.github.io/ml4nd/labs/06_arhmm.html) Due Wed, May 14 at 11:59pm.
+7. [Lab 7: Variational EM](https://slinderman.github.io/ml4nd/labs/07_vem.html) Due Sat, May 24 at 11:59pm.
 
 ## Final project
 
