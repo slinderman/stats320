@@ -70,7 +70,7 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 | Wed, May 21 | Sequential Variational Autoencoders{Download}`[slides]<slides/pdf/15_lfads.pdf>` | [Pandarinath et al. (2018)](https://www.nature.com/articles/s41592-018-0109-9) | |
 | Sat, May 24 | &mdash; | &mdash; | <span style="color:red">**Lab 7 Due**</span> |
 | Mon, May 26 | _Memorial Day, No Class_ | | | | 
-| Wed, May 28 | (Neuromodulated) Recurrent Neural Networks | | |
+| Wed, May 28 | Gaussian Process SLDS Models{Download}`[slides]<slides/pdf/16_gpslds.pdf>` |[Hu et al. (2024)](https://arxiv.org/abs/2408.03330) | |
 | Mon, Jun 2  | Foundation Models for Neuroscience | | |
 | Wed, Jun 4  | Wrap Up | | |
 | Mon, Jun 9  | | | <span style="color:red">**Final Project Due**</span> |
