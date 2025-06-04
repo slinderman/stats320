@@ -72,7 +72,7 @@ The lectures develop the theory behind the methods developed in the labs (i.e., 
 | Mon, May 26 | _Memorial Day, No Class_ | | | | 
 | Wed, May 28 | Gaussian Process SLDS Models{Download}`[slides]<slides/pdf/16_gpslds.pdf>` |[Hu et al. (2024)](https://arxiv.org/abs/2408.03330) | |
 | Mon, Jun 2  | Foundation Models for Neuroscience | | |
-| Wed, Jun 4  | Wrap Up | | |
+| Wed, Jun 4  | Looking back and looking forward{Download}`[slides]<slides/pdf/17_finale.pdf>` | | |
 | Mon, Jun 9  | | | <span style="color:red">**Final Project Due**</span> |
 
 ## Labs
